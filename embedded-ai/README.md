@@ -7,8 +7,9 @@ A three-hour course for future embedded-systems engineers. The teaching language
 - **Interactive presentation:** https://rolln7drktayau.github.io/courses/embedded-ai/
 - **PDF slides:** https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf
 - **Two-page teaching plan:** https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf
+- **Practical assignment and student resources:** https://rolln7drktayau.github.io/courses/embedded-ai/lab/
 
-The main presentation also provides a permanent **PDF** link in its navigation bar.
+The main presentation provides permanent **TD** and **PDF** links in its navigation bar. The `lab/` directory contains the assignment, report instructions and article template, with no instructor implementation or experiment results.
 
 ## Scope
 
@@ -23,6 +24,7 @@ There are 21 primary or official sources, verified on 20 October 2026. Establish
 | `index.html` | Self-contained, offline-capable dynamic presentation |
 | `course.pdf` | 16:9 slides, references and PDF bookmarks |
 | `course-plan.pdf` | A4 schedule, prerequisites and learning outcomes |
+| `lab/` | Student assignment, report documents, Overleaf sources and downloadable materials |
 | `SOURCES.md` | Reading guide, contributions and limitations |
 | `references.json`, `references.bib` | Reference metadata |
 | `source/content.py` | Course text and references |

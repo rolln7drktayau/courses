@@ -1,0 +1,108 @@
+{
+  "student_only": true,
+  "public_file_count": 17,
+  "documents": {
+    "assignment.pdf": {
+      "pages": 13,
+      "author": "Roland Cédric TAYO"
+    },
+    "report-guidelines.pdf": {
+      "pages": 3,
+      "author": "Roland Cédric TAYO"
+    },
+    "article-example.pdf": {
+      "pages": 5,
+      "author": "Roland Cédric TAYO"
+    }
+  },
+  "template_files": [
+    "README.md",
+    "data/illustrative_trace.csv",
+    "draw_architecture.py",
+    "example.tex",
+    "figures/architecture.pdf",
+    "figures/illustrative_signal.pdf",
+    "main.tex",
+    "plot_example.py",
+    "references.bib",
+    "requirements-example.txt"
+  ],
+  "student_archive_files": [
+    "README.md",
+    "article-example.pdf",
+    "article-template.zip",
+    "assignment.pdf",
+    "report-guidelines.pdf"
+  ],
+  "checks": "Explicit file whitelist; nested ZIP integrity; PDF identity; figure-only Python sources.",
+  "files": {
+    "README.md": {
+      "bytes": 4906,
+      "sha256": "073b49133aed53e36be6e552aaa7a65e642936b0ab31a5bfe826a4b31fadbb6e"
+    },
+    "article-example.pdf": {
+      "bytes": 109092,
+      "sha256": "06460d13df65025ab61b3bf682d0eec22ac7f944d43b440e15ff263e45b8cc1c"
+    },
+    "article-template.zip": {
+      "bytes": 34415,
+      "sha256": "1d166d80be6ae69a9ad4eb9bac931cfce02ea6bff2f8a6d42cb42a2ce28e4031"
+    },
+    "article-template/README.md": {
+      "bytes": 2420,
+      "sha256": "7dc2ab10724f6c26bd876555f28723a5dc40d2d7489fc79785f216a4401826f0"
+    },
+    "article-template/data/illustrative_trace.csv": {
+      "bytes": 2272,
+      "sha256": "c479526d686688324d0baf6952015ae601d5738ca29cc76d20fbb4327ef8e03b"
+    },
+    "article-template/draw_architecture.py": {
+      "bytes": 989,
+      "sha256": "f113f3688cb960343c99076c2663a03ebadfd8ffba0766a990d43e2731c8c82f"
+    },
+    "article-template/example.tex": {
+      "bytes": 11422,
+      "sha256": "6fe7abb627cac0aec89ec75392aa8e9de356cb8a7c347be7ae5ee865a32daead"
+    },
+    "article-template/figures/architecture.pdf": {
+      "bytes": 15221,
+      "sha256": "1e1935c3b8973d67c2e45bd93d0ebf745e69ed6107d5539dee3f3c2f62a6b7b5"
+    },
+    "article-template/figures/illustrative_signal.pdf": {
+      "bytes": 16536,
+      "sha256": "faab5afcfdaa018fec6386e7c0bb99c3fe778737832dd13bbc124b25f8206dc1"
+    },
+    "article-template/main.tex": {
+      "bytes": 2842,
+      "sha256": "7da986c343327b0a4092a223b9baed055cb11bd5ff5f6574a1585abe940d7a75"
+    },
+    "article-template/plot_example.py": {
+      "bytes": 901,
+      "sha256": "0b396dba8e98a1c9515258b64ad0a5c3e7e8c058e0b7c0fde3853abeafab142c"
+    },
+    "article-template/references.bib": {
+      "bytes": 1225,
+      "sha256": "484a9934252efcb64ec5828e7c01cc887277c4829e8fe92232b1ba92fb0ba969"
+    },
+    "article-template/requirements-example.txt": {
+      "bytes": 32,
+      "sha256": "176ef972b023269b0593030dccee09164346c9df71bfd89255b8adb3d48e72ab"
+    },
+    "assignment.pdf": {
+      "bytes": 253367,
+      "sha256": "77a8e04d9747388b9007fe9ba3e75b4426ac79198e59aa955249b0bbe537e672"
+    },
+    "index.html": {
+      "bytes": 11173,
+      "sha256": "56db2be77b324d142d5601d482de417590b6931c036c36f39acae85dfc89f976"
+    },
+    "report-guidelines.pdf": {
+      "bytes": 141044,
+      "sha256": "852a02c78cd160cf12f3256b01e083385ef3ee523fdd445c0d67255ada50052b"
+    },
+    "student-materials.zip": {
+      "bytes": 497007,
+      "sha256": "96b4f3c55e188e21635f1c8c63f09e8b194514764cdf943b8705479a8a1a2cd0"
+    }
+  }
+}

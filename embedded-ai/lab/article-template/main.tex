@@ -1,0 +1,46 @@
+\documentclass[preprint,11pt,a4paper]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=black]{hyperref}
+\usepackage{url}
+\makeatletter
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\footnotesize Roland Cédric TAYO --- Teaching manuscript\hfill\thepage}
+  \let\@evenfoot\@oddfoot}
+\makeatother
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\begin{document}
+
+\begin{frontmatter}
+\title{Replace with a precise title about your tested hypothesis}
+\author{First Author, Second Author, Third Author, Fourth Author}
+\address{INEM, Group XX, AI for Embedded Systems, 2026--2027}
+\begin{abstract}
+Replace this text with 120--180 words: problem, hypothesis, method, exact board, measured result and main limitation. Do not invent a result before the experiment. The final PDF must contain no more than 15 pages including references and appendices.
+\end{abstract}
+\begin{keyword}
+Embedded inference \sep forecasting \sep replace with your optimisation
+\end{keyword}
+\end{frontmatter}
+\section{Introduction}
+Explain the local prediction need and the board constraint. State one testable hypothesis.
+\section{Related work}
+Describe the original TSMixer idea~\cite{chen2023tsmixer} and its difference from the reduced TD network. Cite an optimisation source and the target documentation. A separate comparator may use CMSIS-NN~\cite{armcmsis} if appropriate.
+\section{Method}
+Explain data generation, split, training-only normalisation, network and baselines. Define each symbol before using it. Show the implemented change with a diagram or short pseudocode.
+\section{Experimental protocol}
+Give board, clock, compiler, flags, versions, checksums, correctness tolerance, repetitions and timing scope. Explain dispersion and memory methodology.
+\section{Results}
+Insert actual training/validation curves, observed-versus-predicted traces and board reference-versus-variant measurements. Include raw-data paths and the commit for every campaign. Do not reuse the separate example trace as your TD dataset or result.
+\section{Discussion and limitations}
+Explain where the change helps or fails. Distinguish observations from hypotheses. Discuss the synthetic-data limitation and the whole-network effect.
+\section{Conclusion and next experiment}
+Answer the hypothesis and propose one next test with a measurable decision criterion.
+\section*{Reproducibility and contributions}
+Add repository URL, submission tag, commands, manifests, member contributions, reused code and substantial assistant usage. The teacher account to invite on GitHub is \texttt{rolln7drktayau}.
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+\end{document}

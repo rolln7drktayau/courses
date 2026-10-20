@@ -10,6 +10,7 @@ Course materials by **Roland Cédric TAYO**.
 - [Read the PDF](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf)
 - [Read the teaching plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
 - [Browse the course sources](embedded-ai/)
+- [Open the practical assignment and student resources](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
 
 Teaching language: French. Designed for future embedded-systems engineers. The three-hour course includes a ten-minute break, five questions and interactive analytical demonstrations. References and a glossary accompany the core slides.
 
