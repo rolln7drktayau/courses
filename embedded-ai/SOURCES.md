@@ -259,4 +259,3 @@ MLCommons. Documentation consultée en 2026. Méthodologie et résultats officie
 Apport : Lire conjointement qualité, scénario de mesure et configuration matérielle.
 
 Limite : Aucun chiffre de classement en temps réel n’est repris dans ce support.
-

@@ -109,7 +109,7 @@ def build_html():
            'Les prépublications ne sont pas présentées comme un consensus ou un classement de l’état de l’art. Les schémas du cours sont originaux et les données des démonstrations sont analytiques ou illustratives.','']
     for r in REFERENCES:
         lines.extend([f'## {r["id"]} — {r["title"]}',f'{r["authors"]}. {r["year"]}. {r["status"]}.',f'[Source originale]({r["url"]})',f'Apport : {r["takeaway"]}',f'Limite : {r["limit"]}',''])
-    (OUT/'SOURCES.md').write_text('\n\n'.join(lines),encoding='utf-8')
+    (OUT/'SOURCES.md').write_text('\n\n'.join(lines).rstrip()+'\n',encoding='utf-8')
     (OUT/'references.bib').write_text('\n\n'.join('@misc{'+r['id']+',\n  title={'+r['title']+'},\n  author={{'+r['authors']+'}},\n  year={'+(r['year'][:4] if r['year'][:4].isdigit() else 'n.d.')+'},\n  howpublished={'+r['status']+'},\n  url={'+r['url']+'},\n  urldate={2026-10-20},\n  note={Consulted 20 October 2026; date label: '+r['year']+'}\n}' for r in REFERENCES),encoding='utf-8')
     return path,len(sections)
 
