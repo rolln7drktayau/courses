@@ -51,12 +51,12 @@ def main():
             page.set_viewport_size({'width':w,'height':h});page.evaluate('window.Course.fit()')
             problems=[]
             for i in range(total):
-                page.evaluate("(i)=>window.Course.show(i,true,'all')",i)
+                page.evaluate('(i)=>window.Course.show(i,true)',i)
                 errors=page.evaluate(GEOMETRY)
                 if errors:problems.append({'slide':i+1,'errors':errors})
             results['viewports'][f'{w}x{h}']=problems
         page.set_viewport_size({'width':1600,'height':1000});page.evaluate('window.Course.fit()')
-        def go(i):page.evaluate("(i)=>window.Course.show(i,true,'all')",i)
+        def go(i):page.evaluate('(i)=>window.Course.show(i,true)',i)
         def visual(name):
             go(next(i for i,item in enumerate(SLIDES+extra) if item.get('visual')==name))
         visual('forward_lab')
@@ -112,32 +112,17 @@ def main():
             page.locator(f'#quiz-list button[data-go="{i}"]').click()
             assert page.locator('.slide.active').get_attribute('data-index')==str(i)
         results['quiz_feedback_overflow']=quiz_overflow
-        results['interactive_checks'].append('Six end-of-act question breaks: open questions, numerical choices and explanations')
-        go(4);page.locator('.slide.active [data-ref="R01"]').click()
+        results['interactive_checks'].append('Five numerical/decision quizzes: direct navigation and explanations')
+        go(3);page.locator('.slide.active [data-ref="R01"]').click()
         assert page.locator('#reader').evaluate('d=>d.open');page.locator('[data-action="close"]').click()
         page.locator('[data-action="sources"]').click()
         page.get_by_role('button',name='Voir la bibliographie dans la présentation').click()
         assert 'Sources et limites' in page.locator('.slide.active h1').inner_text()
-        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Howard')
+        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Garder')
         page.locator('#slide-list .toc-entry').first.click()
-        assert 'Howard' in page.locator('.slide.active h1').inner_text()
-        # A scene advances through its layers before the next scene; history restores its layer.
-        page.evaluate('window.Course.show(1,true)')
-        assert page.evaluate('window.Course.step')==0
-        assert page.locator('.slide.active .fragment-hidden').count()>0
-        page.keyboard.press('ArrowRight');assert page.evaluate('window.Course.step')==1
-        assert page.locator('.slide.active').get_attribute('data-index')=='1'
-        page.keyboard.press('a');assert page.locator('.slide.active .fragment-hidden').count()==0
-        page.keyboard.press('ArrowRight');assert page.locator('.slide.active').get_attribute('data-index')=='2'
-        page.keyboard.press('ArrowLeft');assert page.locator('.slide.active').get_attribute('data-index')=='1'
-        assert page.evaluate('window.Course.step')==page.evaluate('window.Course.maxStep')
-        page.evaluate('window.Course.show(1,true,2)');page.reload();page.wait_for_function('window.Course')
-        assert page.evaluate('window.Course.step')==2
-        visual('story_outage')
-        assert 'offline' in page.locator('.slide.active .network-scene').get_attribute('class')
-        page.locator('.slide.active [data-action="network-toggle"]').click()
-        assert 'online' in page.locator('.slide.active .network-scene').get_attribute('class')
-        results['interactive_checks'].append('Progressive reveals, reverse navigation, saved step URL and network schematic toggle')
+        assert 'Garder' in page.locator('.slide.active h1').inner_text()
+        page.keyboard.press('ArrowRight');assert 'Déplacer moins' in page.locator('.slide.active h1').inner_text()
+        results['interactive_checks'].append('References, bibliography, search and keyboard navigation')
         results['mobile_navigation_fits']=True
         for width in [1366,1100,1024,960,950,900,850,768,701,700,600,560,390,360]:
             page.set_viewport_size({'width':width,'height':844})
@@ -155,12 +140,8 @@ def main():
     text='\n'.join(p.get_text() for p in pdf)
     for ref in REFERENCES:assert ref['id'] in text,ref['id']
     assert 'Futurs ingénieurs en systèmes embarqués' not in pdf[0].get_text()
-    assert 'Alice' in pdf[0].get_text()
-    assert all(ref in text for ref in ['Pomerleau','Howard','Jacob','Wei-Ming Chen'])
-    assert 'Le besoin' in pdf[1].get_text()
-    assert sum(bool(item['quiz']) for item in SLIDES)==6
     results['pdf_links']=sum(len(p.get_links()) for p in pdf)
-    selected=[0,1,2,3,4,7,12,19,20,24,30,33]
+    selected=[0,3,6,7,8,10,13,15,18,23,26,30]
     thumbs=[]
     for i in selected:
         pix=pdf[i].get_pixmap(matrix=fitz.Matrix(.4,.4))

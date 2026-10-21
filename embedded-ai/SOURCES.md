@@ -266,7 +266,7 @@ Limite : Aucun chiffre de classement en temps réel n’est repris dans ce suppo
 
 SRI International. 1966–1972. Histoire du projet · organisme concepteur.
 
-[Source originale](https://www.sri.com/press/story/75-years-of-innovation-shakey-the-robot/)
+[Source originale](https://www.sri.com/hoi/shakey-the-robot/)
 
 Apport : Faire percevoir un environnement et planifier des actions à un robot mobile.
 

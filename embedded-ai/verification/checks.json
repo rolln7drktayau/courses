@@ -1,5 +1,5 @@
 {
-  "oral_slides": 35,
+  "oral_slides": 32,
   "annexes": 21,
   "minutes": 180,
   "references": 23,
@@ -19,12 +19,12 @@
     "INT8 symmetric example uses scale 1/127",
     "Amdahl boundary cases and initial 1.11x verified",
     "Live browser benchmark: 7 alternating pairs, equal sums, positive times and downloadable raw CSV",
-    "Six end-of-act question breaks: open questions, numerical choices and explanations",
-    "Progressive reveals, reverse navigation, saved step URL and network schematic toggle"
+    "Five numerical/decision quizzes: direct navigation and explanations",
+    "References, bibliography, search and keyboard navigation"
   ],
   "browser_benchmark_rows": 14,
   "quiz_feedback_overflow": [],
   "mobile_navigation_fits": true,
-  "pdf_pages": 56,
+  "pdf_pages": 53,
   "pdf_links": 54
 }
