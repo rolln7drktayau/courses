@@ -3,15 +3,19 @@ from pathlib import Path
 import json
 import zipfile
 import fitz
+from content import CORE_COUNT
+from build_course import build_appendices
 
 ROOT=Path(__file__).resolve().parents[1]
 checks=json.loads((ROOT/'verification'/'checks.json').read_text(encoding='utf-8'))
-assert checks['minutes']==180 and checks['oral_slides']==44
+assert checks['minutes']==180 and checks['oral_slides']==CORE_COUNT
+_,extra=build_appendices()
+page_count=CORE_COUNT+len(extra)
 assert not any(checks['viewports'].values()),checks['viewports']
 assert not checks['console_errors'] and not checks['external_requests']
 assert not checks['quiz_feedback_overflow']
-assert checks['pdf_pages']==54
-for name,count in [('course.pdf',54),('course-plan.pdf',2)]:
+assert checks['pdf_pages']==page_count
+for name,count in [('course.pdf',page_count),('course-plan.pdf',2)]:
     with fitz.open(ROOT/name) as doc:
         assert len(doc)==count
         assert doc.metadata['author']=='Roland Cédric TAYO'

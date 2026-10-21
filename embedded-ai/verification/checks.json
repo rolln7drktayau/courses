@@ -1,6 +1,6 @@
 {
-  "oral_slides": 44,
-  "annexes": 10,
+  "oral_slides": 32,
+  "annexes": 21,
   "minutes": 180,
   "references": 23,
   "viewports": {
@@ -13,16 +13,18 @@
   "console_errors": [],
   "external_requests": [],
   "interactive_checks": [
-    "KV: 4096 tokens -> 64 Mio in stated example",
-    "Weight-only quantisation leaves SRAM example unchanged",
-    "INT8 symmetric quantisation step = 1/127",
-    "Global speedup: 20%/2x -> 1.11x; 100%/10x -> 10x; 0% -> 1x",
-    "Five quizzes: feedback and correct answers available",
-    "Sources, searchable contents and keyboard navigation",
-    "All five quizzes accessible directly through Plan & questions"
+    "Complete network: initial output 1.5; x1=3 gives 4.5",
+    "One-weight gradient step reduces loss; a large step increases it",
+    "Weight-only quantisation leaves stated SRAM example unchanged",
+    "INT8 symmetric example uses scale 1/127",
+    "Amdahl boundary cases and initial 1.11x verified",
+    "Live browser benchmark: 7 alternating pairs, equal sums, positive times and downloadable raw CSV",
+    "Five numerical/decision quizzes: direct navigation and explanations",
+    "References, bibliography, search and keyboard navigation"
   ],
+  "browser_benchmark_rows": 14,
   "quiz_feedback_overflow": [],
   "mobile_navigation_fits": true,
-  "pdf_pages": 54,
-  "pdf_links": 59
+  "pdf_pages": 53,
+  "pdf_links": 53
 }

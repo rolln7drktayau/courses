@@ -41,7 +41,45 @@ def cells(x,y,rows,cols,size=28,active=(),zeros=False):
 
 def draw(name):
     z=''
-    if name in {'hero','closing'}:
+    if name=='tiny_network':
+        for x,ys,labels in [(95,[150,335],['x₁','x₂']),(365,[150,335],['h₁','h₂']),(645,[242],['ŷ'])]:
+            for y,label in zip(ys,labels):z+=circle(x,y,41,label)
+        for y in [150,335]:
+            for h in [150,335]:z+=arrow(140,y,317,h)
+        for h in [150,335]:z+=arrow(410,h,597,242)
+        z+=text(95,65,'ENTRÉES',22)+text(365,65,'ReLU',22,TEAL)+text(645,65,'SORTIE',22)
+        z+=text(380,415,'6 poids + 3 biais = 9 paramètres',25,TEAL)
+        z+=text(380,459,'2 × 2 + 2 × 1 = 6 MAC, biais exclus',24)
+    elif name=='forward_lab':
+        return '''<div class="interactive-panel forward-lab"><div class="micro-label">INFÉRENCE · POIDS FIXES</div><label>x₁ <output data-forward-value="x1">1</output><input aria-label="Entrée x1" data-forward="x1" type="range" min="-1" max="3" step="0.25" value="1"></label><label>x₂ <output data-forward-value="x2">2</output><input aria-label="Entrée x2" data-forward="x2" type="range" min="-1" max="3" step="0.25" value="2"></label><div class="forward-values"><span>h₁ <b data-forward-value="h1">0</b></span><span>h₂ <b data-forward-value="h2">1,5</b></span></div><div class="big-result small-result"><span>ŷ =</span><output data-forward-value="y">1,5</output></div><p class="caption">h₁, h₂ : activations après ReLU. Les biais sont nuls ici ; aucun poids ne change.</p></div>'''
+    elif name=='learning_step':
+        return '''<div class="interactive-panel learning-lab"><div class="micro-label">UNE CORRECTION · UN SEUL POIDS</div><label>Pas η <output data-learning-value="eta">0,1</output><input aria-label="Pas d’apprentissage" data-learning="eta" type="range" min="0.01" max="1" step="0.01" value="0.1"></label><div class="learning-grid"><div><span>Poids après correction</span><strong data-learning-value="w">1,15</strong></div><div><span>Nouvelle sortie ŷ</span><strong data-learning-value="y">1,725</strong></div><div><span>Perte avant</span><strong>0,25</strong></div><div><span>Perte après</span><strong data-learning-value="loss">0,075625</strong></div></div><p class="caption" data-learning-value="verdict">La perte diminue sur cet exemple.</p><p class="caption">h₂ = 1,5 et cible c = 2 sont fixes. Une correction n’est pas un entraînement complet.</p></div>'''
+    elif name=='td_bridge':
+        z+=cells(130,70,3,16,24)
+        z+=text(380,40,'3 variables × 16 instants = 48 valeurs',24)
+        z+=arrow(380,180,380,228)
+        z+=node(160,240,440,100,'Mélanger instants et variables','Réseau à écrire dans le TD',PALE)
+        z+=arrow(380,348,380,385)
+        z+=text(380,427,'Prédire la prochaine valeur',28,TEAL)
+        z+=text(380,472,'PC : apprendre · carte : inférer et mesurer',22,MUTED)
+    elif name=='families':
+        for i,(label,sub) in enumerate([('CONVOLUTION','Un motif local réutilisé'),('RÉCURRENCE','Un état transmis dans le temps'),('ATTENTION','Des relations calculées selon l’entrée')]):
+            z+=node(35,25+i*145,690,115,label,sub,PALE if i==0 else 'white')
+    elif name=='placement_precise':
+        for i,(label,sub) in enumerate([('DANS L’OBJET','Capteur → modèle local → action'),('PASSERELLE DE PROXIMITÉ','Objet → liaison locale → calcul'),('SERVEUR DISTANT','Objet → réseau → calcul distant')]):
+            z+=node(25,28+i*140,705,113,label,sub,PALE if i==0 else 'white')
+    elif name=='hardware_precise':
+        for x,label,sub in [(20,'MICROCONTRÔLEUR','Application dédiée'),(395,'SYSTÈME LINUX','Exemple : Raspberry Pi')]:
+            z+=rect(x,45,345,330,'white')+text(x+172,90,label,23,TEAL,weight=650)
+            z+=node(x+30,122,285,80,'CPU')
+            z+=text(x+172,248,'Flash + SRAM' if x==20 else 'RAM + stockage',24)
+            z+=text(x+172,297,'Périphériques' if x==20 else 'OS + périphériques',23)
+            z+=text(x+172,347,sub,19,MUTED)
+        z+=text(380,440,'NPU / GPU : accélérateurs éventuels du système',23,TEAL)
+        z+=text(380,479,'Vérifier le matériel réellement présent sur votre carte.',20,MUTED)
+    elif name=='benchmark_lab':
+        return '''<div class="interactive-panel benchmark-lab"><div class="micro-label">NAVIGATEUR ACTUEL · SOMME DE 4 096 VALEURS</div><div class="benchmark-actions"><button class="demo-button" data-action="benchmark">Mesurer ici</button><button class="demo-button" data-action="benchmark-csv" disabled>Exporter CSV</button></div><p class="benchmark-status" role="status">Pas encore mesuré. Aucune durée préremplie.</p><table class="benchmark-table"><thead><tr><th>Par somme</th><th>Médiane</th><th>Min–max</th></tr></thead><tbody><tr><th>Boucle</th><td data-bench="loop">—</td><td data-bench="loop-range">—</td></tr><tr><th>reduce</th><td data-bench="reduce">—</td><td data-bench="reduce-range">—</td></tr></tbody></table><p class="caption">Résultat vérifié avant et après. Données : Float64Array, 32 Kio ; ceci n’est pas un pic RAM système.</p><p class="caption">Les mesures varient avec le navigateur et sa charge. Aucune énergie ni durée sur carte n’est déduite.</p></div>'''
+    elif name in {'hero','closing'}:
         dark=name=='hero';color='#9ae5d9' if dark else TEAL;ink='#e5f0f3' if dark else INK
         for k in range(7):
             y=100+k*45
@@ -56,11 +94,11 @@ def draw(name):
         z+=text(380,318,'Données · Modèle · Système',17,color)
         z+=text(380,454,'Le service réel fixe le budget.',24,ink)
     elif name=='route':
-        labels=[('01','Pour qui et pour quoi ?','Besoin et histoire · 27 min'),('02','Pourquoi une IA ?','Briques du modèle · 40 min'),('03','Pourquoi à bord ?','Budgets · 30 min + pause 10 min'),('04','Comment la faire tenir ?','Optimisation · 32 min'),('05','Comment lui faire confiance ?','Déploiement et recherche · 41 min')]
+        labels=[('01','Pour qui ?','Besoin et histoire · 20 min'),('02','Comment apprend-elle ?','Un réseau complet · 35 min'),('03','Comment l’embarquer ?','Déploiement et coûts · 30 min'),('04','Comment l’alléger ?','Deux leviers · 35 min'),('05','Quelle preuve ?','Enquête + décision · 50 min')]
         for i,(n,label,t) in enumerate(labels):
             y=18+i*80;z+=circle(58,y+29,26,n)+text(108,y+23,label,26,anchor='start',weight=650)+text(108,y+53,t,20,MUTED,anchor='start')
             if i<4:z+=path(f'M58,{y+57} V{y+77}',LINE)
-        z+=text(380,465,'Quiz : diapositives 8 · 18 · 25 · 34 · 43',21,TEAL)
+        z+=text(380,465,'Quiz : 6 · 13 · 19 · 26 · 31 · pause : 10 min',21,TEAL)
     elif name=='human_need':
         z+=circle(110,115,36,'',fill=PALE)
         z+=path('M50,235 V205 Q110,155 170,205 V235',TEAL)

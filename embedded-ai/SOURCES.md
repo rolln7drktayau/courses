@@ -2,7 +2,7 @@
 
 
 
-Roland Cédric TAYO — consultation et vérification : 20 octobre 2026.
+Roland Cédric TAYO — références scientifiques et documentation. Sources pédagogiques : TEACHING-DESIGN.md.
 
 
 
