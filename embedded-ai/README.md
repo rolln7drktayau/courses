@@ -1,81 +1,62 @@
-# Embedded AI — From requirements to evidence
+# Alice wants to take her AI along — Embedded AI
 
-**Author: Roland Cédric TAYO** — INEM, 2026–2027.
+**Roland Cédric TAYO — INEM.** Teaching language: French.
 
-A three-hour course for future embedded-systems engineers. The teaching language is **French**; the repository directory and technical source organisation use English names.
+- [Narrative presentation](https://rolln7drktayau.github.io/courses/embedded-ai/)
+- [PDF slides](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf)
+- [Two-page course plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
+- [Assignment and student resources](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
 
-- **Guided course-building workshop:** https://rolln7drktayau.github.io/courses/embedded-ai/workshop/
-- **Interactive presentation:** https://rolln7drktayau.github.io/courses/embedded-ai/
-- **PDF slides:** https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf
-- **Two-page teaching plan:** https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf
-- **Practical assignment and student resources:** https://rolln7drktayau.github.io/courses/embedded-ai/lab/
+## A story in six acts
 
-The main presentation provides permanent **TD** and **PDF** links in its navigation bar. **Ressources** opens the course sources, student assignment files, article-template sources and bibliography. The `lab/` directory contains the assignment, report instructions and article template, with no instructor implementation or experiment results.
+35 main scenes, 180 minutes including a ten-minute break and six end-of-act question breaks. Twenty-one optional slides provide architectural extensions, research reading, scientific references, a glossary and reasoned answers. The presentation is a three-hour synthesis within the wider 14-hour lecture / 14-hour practical module. The collaborative workshop is outside the current course path.
 
-## Scope
+1. A human need: Alice wants a voice-controlled lamp; variable inputs motivate comparing rules and learning. SRI's Shakey and Pomerleau's ALVINN provide historical context.
+2. Open the model: trace a complete 2 → 2 → 1 numeric network, an error, one gradient step and independent evaluation.
+3. The connection fails: distinguish service dependence, onboard inference, nearby gateways and deployment from PC.
+4. The box is too small: count working memory, then encounter MobileNets and integer quantisation.
+5. It fits, but it waits: data movement, MCUNet co-design, deadlines, energy and Amdahl's law.
+6. Alice asks for evidence: real browser observations, robustness, a bounded research question, current directions and a justified design choice.
 
-32 core slides; **180 minutes including a ten-minute break**, the five quizzes and class discussion. This synthesis introduces the broader **14-hour lecture / 14-hour practical module**. It is not the entire module. Twenty-one optional slides provide architectural extensions, research reading, references, a glossary and quiz explanations.
+Question breaks: scenes **6, 11, 16, 23, 29 and 34**. Each combines open questions with a choice or calculation and an explanation after answering.
 
-The main path follows one complete 2 → 2 → 1 teaching network, then deployment, resource budgets, two optimisation levers and experimental evidence. The assignment uses its own reduced Mixer; the teaching network and browser experiment are independent examples, not the assignment solution.
+## Fiction, history and evidence
 
-There are 23 primary or official scientific sources. Established publications, preprints and documentation are labelled separately. Pedagogical references from MIT, Harvard and Carnegie Mellon and the choices drawn from them are documented in [TEACHING-DESIGN.md](TEACHING-DESIGN.md). Diagrams are original.
+Alice and her dialogue are fictional. Researcher names and contributions are documented in the 23 scientific/official references. Their name cards are not invented historical portraits or quotations. Original SVG stage art provides a recurring character, device and obstacles. The narrative mechanism is inspired by the author's own ADARE presentation: situation before definition, progressive reveal, then technical generalisation. No assets or manuscript from that PDF are redistributed.
 
-## Concrete interactions
+The numeric toy is a regression example, not a voice recogniser or the assignment's reduced Mixer. The network-link button changes a logical diagram; it contacts no server. The live array-sum experiment actually measures the current JavaScript browser with seven alternating pairs and raw CSV export; no Pi/MCU time or energy is inferred. Memory budgets and the final classification decision table are explicitly fictional. No instructor solution, trained assignment weights or solved project results are published.
 
-- Change the teaching network inputs and observe hidden activations and output.
-- Change a one-weight learning rate; see both error reduction and overshoot.
-- Change weight representation and distinguish Flash from working SRAM.
-- Observe quantisation error and global speedup with analytical examples.
-- Run two array-sum implementations **in the current browser**: verify equal results, warm up, alternate seven paired campaigns, inspect median/min/max and download all 14 timing rows as CSV. No result is prefilled, and none is labelled as Raspberry Pi or MCU performance.
+## Present and read
 
-Core quizzes are at slides **6, 13, 19, 26 and 31**. They require an architecture, parameter/MAC count, peak-RAM calculation, global-time calculation and a justified system decision. The final multicriteria table is explicitly fictitious. The assignment is a regression task and uses different quality metrics.
+- Right arrow / Page Down / Space: reveal the next layer, then advance.
+- Left arrow / Page Up: return one layer, then the previous completed scene.
+- **A** or **Tout montrer**: reveal the complete current scene.
+- **T** / **Histoire & questions**: searchable scenes, six acts and direct question links.
+- **D**: explanatory detail. **F**: fullscreen. Animations can be disabled; reduced-motion preferences are respected.
 
+The URL preserves scene and reveal step. The offline HTML needs no external scripts or fonts. The PDF shows every scene fully revealed and includes question explanations in appendices. Interactions and actual timing export require HTML. Essential formulas and limitations remain visible in the scene; the detail dialog provides supplementary context.
 
-## Files
+## Sources and build
 
-| Path | Purpose |
+| File | Role |
 |---|---|
-| `index.html` | Self-contained, offline-capable dynamic presentation |
-| `course.pdf` | 16:9 slides, references and PDF bookmarks |
-| `course-plan.pdf` | A4 schedule, prerequisites and learning outcomes |
-| `lab/` | Student assignment, report documents, Overleaf sources and downloadable materials |
-| `SOURCES.md` | Scientific reading guide, contributions and limitations |
-| `TEACHING-DESIGN.md` | Learning path and educational references |
-| `references.json`, `references.bib` | Reference metadata |
-| `source/content.py` | Course text and references |
-| `source/diagrams.py` | Original SVG diagrams |
-| `source/course.css`, `source/course.js` | Layout, navigation, quizzes and analytical demonstrations |
-| `source/build_course.py` | Rebuild the public HTML and PDFs |
-| `source/audit_course.py` | Layout, navigation and arithmetic checks |
-| `verification/checks.json` | Results of local automated checks |
+| `source/content.py` | Six acts, dialogue, questions and scientific references |
+| `source/story_art.py` | Original staged SVG artwork and fictional Alice |
+| `source/diagrams.py` | Quantitative figures and interactive panels |
+| `source/course.js`, `source/course.css` | Reveals, navigation, questions and visual layout |
+| `SOURCES.md`, `references.json`, `references.bib` | Reading guide and citations |
+| `TEACHING-DESIGN.md` | Scope and educational choices |
+| `verification/checks.json` | Browser, numerical and PDF checks |
+| `lab/` | Official assignment and student-only materials |
 
-## Navigation
-
-Arrow keys / Page Up / Page Down / Space navigate. `T` or **Plan & questions** opens the five guiding questions, direct links to all five quizzes and searchable contents, `D` opens further explanations and `F` toggles fullscreen. Animations can be disabled, and the system reduced-motion preference is respected. The course itself needs no remote script, font or telemetry. Opening article links needs Internet.
-
-## Rebuild
-
-From this directory:
+From this folder, install `source/requirements.txt` and a Playwright Chromium or local Chrome, then run:
 
 ```sh
-python -m pip install -r source/requirements.txt
-python -m playwright install chromium
 python source/build_course.py
 python source/audit_course.py
+python source/audit_lab.py
 ```
 
-The browser audit checks every core and optional slide, numerical interactions, all quiz explanations, the live timing/CSV experiment and navigation. The build uses an installed Chrome on Windows when available, or Playwright Chromium otherwise. Students only need a browser or PDF reader, not these build dependencies.
+The course generator creates HTML and both PDFs. The audit checks geometry, reveal navigation, numerical interactions, all six question answers, actual timing/CSV export and printable content. GitHub Pages serves `main` at the existing URL. Keep rebuilt HTML, PDFs and sources together.
 
-## Publication
-
-GitHub Pages publishes the repository root from `main`; `.nojekyll` disables Jekyll processing. Commit the rebuilt HTML and PDFs together. Relative links keep the presentation and PDF under the same project path. No instructor solution or private TD artefact is included in this directory.
-
-The materials were prepared with AI assistance, followed by the documented reference, mathematical and browser checks. The PDF contains the initial numerical examples and quiz explanations; browser interactions and raw timing export require the HTML. Third-party papers are linked, not redistributed. No blanket licence is asserted here for those papers.
-
-## Active workshop route
-
-[workshop/](workshop/) provides a 210-minute guided inquiry for about 35 students in seven teams of five, with an optional 420-minute full-day extension. Students calculate a common case, investigate balanced complementary questions, challenge evidence and assemble their own course from exported JSON files. Individual exit questions check transfer beyond the team's topic.
-
-The page supports local drafts, group JSON/Markdown export and manual assembly of seven chapters as HTML/Markdown or printable PDF. It has no backend or cross-device synchronisation. The download bundle contains the reference presentation for offline consultation, student worksheets, illustrative data and a blank evidence-repository template. The private facilitation guide and the instructor's project solution are outside the repository.
-
-Use the workshop instead of adding it on top of the three-hour presentation. Rebuild public workshop documents with `python source/build_workshop.py` after rebuilding the presentation; verify with `python source/audit_workshop.py`.
+Prepared with AI assistance and checked with the documented source, arithmetic and browser audits. Third-party research is linked, not redistributed.

@@ -40,6 +40,9 @@ def cells(x,y,rows,cols,size=28,active=(),zeros=False):
     return z
 
 def draw(name):
+    if name.startswith('story_'):
+        from story_art import draw_story
+        return draw_story(name)
     z=''
     if name=='tiny_network':
         for x,ys,labels in [(95,[150,335],['x₁','x₂']),(365,[150,335],['h₁','h₂']),(645,[242],['ŷ'])]:

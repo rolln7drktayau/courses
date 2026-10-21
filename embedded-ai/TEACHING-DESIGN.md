@@ -1,45 +1,31 @@
-# Learning design and educational references
+# Narrative learning design
 
-Roland Cédric TAYO · INEM · Updated 21 October 2026.
+Roland Cédric TAYO — INEM — 21 October 2026.
 
-## Purpose and limits
+The narrative draws on the author's ADARE presentation: start with a fictional person and a concrete situation; reveal conflicting needs; introduce the technical concept only when it answers an obstacle. One scene gains visual layers, rather than becoming several duplicated PDF slides.
 
-The 180-minute synthesis introduces a 14-hour lecture / 14-hour practical module. The practical project continues with independent work. Core objectives are observable: explain a complete inference, distinguish training from deployment, calculate resource budgets, verify an optimisation and defend reproducible evidence.
+## The learning path
 
-## Published educational references
+| Act | Time | Obstacle | Evidence of understanding |
+|---|---|---|---|
+| I | 0–25 min | A variable real-world input | Compare rule/learning and identify what must be tested |
+| II | 25–55 min | A model that must be understood | Trace a prediction, parameters and learning step |
+| III | 55–80 min | A failed connection | Place inference against two explicit requirements |
+| Break | 80–90 min | Ten minutes included | — |
+| IV | 90–120 min | A model and application that do not fit | Calculate peak SRAM and distinguish storage |
+| V | 120–145 min | Time, data movement and battery constraints | Calculate global gain and distinguish energy evidence |
+| VI | 145–180 min | A result requiring scrutiny | Explain measurements, failure cases and a constrained design choice |
 
-These are sources of educational ideas, not a ranking or an assertion of equivalent coverage.
+Six question breaks conclude the acts. They combine open discussion, hand calculations or system decisions, and revealed explanations. They do not require a separate collaborative workshop. The prior workshop remains outside the current teaching path.
 
-- [MIT 6.5940 — TinyML and Efficient AI Computing, Fall 2026](https://hanlab.mit.edu/courses/2026-fall-65940): explicit prior ML/architecture knowledge, extended efficiency topics, labs and a final project. Adaptation here: learn the prerequisites, perform bounded experiments and separate advanced reading from the short common path.
-- [Harvard — Deploying TinyML](https://pll.harvard.edu/course/deploying-tinyml): programming and deploying a complete application on a physical microcontroller. Adaptation here: make the PC-to-device chain visible before discussing optimisation. No specific commercial kit is imposed by these slides.
-- [Carnegie Mellon — 18-444 Embedded Machine Learning](https://courses.apps.ece.cmu.edu/18444): neural architectures, training, model downsizing and constrained microcontroller inference. Adaptation here: connect model structure to deployment and its measured constraints.
+## Scientific integrity
 
-The slides, diagrams and examples in this repository are original. The source courses have different durations and prerequisites; their topic lists are not compressed into a three-hour claim of mastery.
+Alice is fictional and researchers receive documented contributions, never fabricated quotations or portraits. Historical name cards give years and ideas with limits. The toy numerical network does not recognise speech. Architecture diagrams are conceptual; a button changes the network-availability assumption without claiming an actual outage experiment. The browser benchmark measures only its current platform. No device timing, energy or trained-model quality is fabricated.
 
-## Main path
+The voice example and the later Mixer regression assignment share an engineering process, not an identical architecture or dataset. Students must implement and evaluate their own project; neither solved firmware nor trained project weights is supplied. An unsuccessful optimisation may still support a rigorous conclusion.
 
-| Time | Activity | Evidence |
-|---|---|---|
-| 0–20 min | Human need, historical obstacles, computation placement | Justify a local architecture against two requirements |
-| 20–55 min | A complete 2 → 2 → 1 network and the project bridge | Trace an output, a loss and a gradient step; count parameters and MAC |
-| 55–85 min | Deployment and resource budgets | Explain PC/device equivalence and calculate peak SRAM |
-| 85–95 min | Break | Ten minutes included |
-| 95–130 min | Quantisation, data reuse and browser timing | Verify outputs, compare raw observations and calculate global gain |
-| 130–160 min | Hypotheses, reliability, Git/CI and a research paper | Specify controls, failure cases and provenance |
-| 160–180 min | Constrained design decision and outcomes | Justify a choice and propose a test that could disprove it |
+## Educational references
 
-## Honest examples and research
+The course retains the application-to-deployment continuity seen in [Harvard Deploying TinyML](https://pll.harvard.edu/course/deploying-tinyml) and [CMU 18-444](https://courses.apps.ece.cmu.edu/18444), while [MIT 6.5940](https://hanlab.mit.edu/courses/2026-fall-65940) motivates keeping advanced efficiency topics outside a short common path. Those courses have different durations and prerequisites; no claim of equivalent coverage or measured learning improvement is made.
 
-The toy network has nine parameters. Its given numbers are illustrative, not a trained checkpoint of the project. One learning demonstration updates only one output weight with hidden values fixed; the assignment requires the full specified gradients.
-
-The live micro-experiment compares a JavaScript loop and `reduce` on the same deterministic 4,096-value Float64Array. It checks correctness, warms up, uses a common measured batch size, alternates seven paired campaigns and exports raw observations. It measures only the current browser. It does not infer energy, MCU cycles or Raspberry Pi timings, and it provides no optimised projection implementation for the assignment.
-
-The final decision table is fictional and independent of the regression project. Its observed p95 is not a worst-case guarantee. Learning to experiment and explaining a negative result are assessed; an accepted publication or a novel speed record is not promised.
-
-The 21 optional slides keep convolution, recurrence, attention, KV-cache details, compression and current research available without requiring their presentation within the core time. The PDF displays initial examples and quiz explanations; interactions and CSV export require HTML.
-
-## Guided course-building route
-
-The workshop at `workshop/` is a 210-minute alternative opening, not an additional three-hour lecture. Seven teams share a common case before separate inquiries. Rotating roles, directed peer review, short teach-backs, all-topic notes and an unaided individual check address the risk that only one student or one topic is understood. The teacher facilitates and validates; importing a JSON file does not certify it.
-
-Freeman et al. (2014), Cornell's group-work design guidance and CMU Eberly's small-group recommendations inform the choice; see `workshop/SOURCES.md`. Those sources support the approach in general, not a claimed measured learning gain for this new workshop. Local facilitation notes are kept outside the public repository.
+The 180-minute synthesis introduces the broader 14-hour lecture / 14-hour practical module. Further sessions and the project develop full gradients, implementation, device deployment and research practice.

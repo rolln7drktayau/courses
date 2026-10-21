@@ -1,4 +1,4 @@
-"""A three-hour embedded-AI learning path and optional research reading."""
+"""Narrative course: fictional Alice, documented researchers, six acts and questions."""
 REFERENCES = [{'id': 'R01',
   'authors': 'Dean Pomerleau',
   'year': '1989',
@@ -175,7 +175,7 @@ REFERENCES = [{'id': 'R01',
   'year': '1966–1972',
   'title': 'Shakey the Robot',
   'status': 'Histoire du projet · organisme concepteur',
-  'url': 'https://www.sri.com/hoi/shakey-the-robot/',
+  'url': 'https://www.sri.com/press/story/75-years-of-innovation-shakey-the-robot/',
   'takeaway': 'Faire percevoir un environnement et planifier des actions à un robot mobile.',
   'limit': 'Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord.'},
  {'id': 'R23',
@@ -189,213 +189,206 @@ REFERENCES = [{'id': 'R01',
            'ne signifie pas automatiquement sûr.'}]
 
 SLIDES=[]
-def slide(ch,title,lead,points,visual,minutes,refs=(),detail='',kind='',quiz=None,task=''):
-    SLIDES.append(dict(chapter=ch,title=title,lead=lead,points=points,visual=visual,minutes=minutes,
-                       refs=list(refs),detail=detail,kind=kind,quiz=quiz,task=task))
+def scene(act,title,lead,points,visual,minutes,quote='',refs=(),detail='',kind='',quiz=None,questions=(),task=''):
+    SLIDES.append(dict(chapter=act,title=title,lead=lead,points=points,visual=visual,minutes=minutes,
+                       quote=quote,refs=list(refs),detail=detail,kind=kind,quiz=quiz,
+                       questions=list(questions),task=task))
 
-# 20 minutes: a service, its history and the placement decision.
-slide('01 · Partir du besoin','Une IA utile.\nUn appareil qui tient ses promesses.',
-      'IA pour les systèmes embarqués · Du besoin à la preuve · 3 heures',[], 'hero',2,kind='hero',
-      detail='Un cours de synthèse qui ouvre le module de 14 h de cours et 14 h de TD. Le projet et les approfondissements poursuivent le travail ; trois heures seules ne suffisent pas à maîtriser toute la discipline.')
-slide('01 · Partir du besoin','Cinq questions.\nUn parcours à construire.',
-      'Ce cours ouvre le module de 14 h de cours et 14 h de TD ; les quiz sont inclus dans les 3 heures.',
-      ['<b>Pour qui ?</b> Définir un service utile.', '<b>Comment apprend-elle ?</b> Suivre un petit réseau complet.',
-       '<b>Comment l’embarquer ?</b> Déployer et compter ses coûts.', '<b>Comment l’alléger ?</b> Tester deux leviers concrets.',
-       '<b>Quelle preuve ?</b> Mesurer, diagnostiquer et décider.'], 'route',3,kind='guide',
-      detail='Prérequis : fonctions, boucles, tableaux, vecteurs, dérivées simples et notions CPU/mémoire. Plan & questions donne accès aux cinq quiz et aux annexes. Une annexe approfondit ; elle n’ajoute pas de durée au parcours oral.')
-slide('01 · Partir du besoin','Une personne veut agir\nsans utiliser ses mains.',
-      'Exemple : allumer une lampe en disant « lumière », même sans Internet.',
-      ['<b>Utilité :</b> une commande accessible quand les mains sont occupées.',
-       '<b>Difficulté :</b> les voix et le bruit varient ; le son n’est jamais identique.',
-       '<b>Choix :</b> un interrupteur suffit parfois ; la voix doit apporter une aide réelle.'], 'human_need',3,
-      detail='L’exemple de la lampe motive le besoin ; il n’impose aucun achat audio pour le TD. L’IA peut aider à reconnaître des variations difficiles à écrire comme des règles. La commande manuelle et le refus d’une entrée inconnue restent à concevoir.')
-slide('01 · Partir du besoin','L’histoire : un obstacle,\nune réponse, une limite.',
-      'Le besoin de percevoir et d’agir précède la possibilité de calculer dans une petite puce.',
-      ['<b>SRI · Shakey, 1966–1972 :</b> percevoir et planifier ; le calcul reste déporté.',
-       '<b>Pomerleau · ALVINN, 1989 :</b> apprendre à suivre une route, sous conditions.',
-       '<b>Howard et al. · MobileNets, 2017 :</b> réduire le coût de la vision mobile.'], 'history1',4,refs=['R22','R01','R02'],
-      detail='Shakey est un repère d’IA en interaction avec le monde physique, pas un exemple de TinyML. ALVINN ne démontre pas une autonomie générale. MobileNets allège une famille de réseaux. La suite du défi est de tenir un budget sur la cible et de rester fiable hors laboratoire ; il n’existe pas un inventeur unique de ce besoin.')
-slide('01 · Partir du besoin','Dans l’objet, à proximité\nou sur un serveur ?',
-      'Le lieu du calcul est un choix d’architecture, pas une obligation de tout rendre local.',
-      ['<b>Dans l’objet :</b> l’inférence fonctionne à bord ; sa mémoire et son énergie sont limitées.',
-       '<b>À proximité :</b> une passerelle traite les données ; la liaison locale reste nécessaire.',
-       '<b>À distance :</b> davantage de ressources, mais transmission et dépendance réseau.'], 'placement_precise',3,refs=['R23'],
-      detail='Edge désigne un calcul proche des données : il n’est pas toujours dans l’objet lui-même. Une architecture hybride partage les fonctions. Le local peut réduire les échanges ; il ne garantit ni économie d’énergie ni confidentialité sans validation de la chaîne entière.')
-slide('01 · Partir du besoin','Quiz 1 / 5 · Où placer\nla reconnaissance ?',
-      'La lampe doit répondre hors connexion Internet. L’audio ne doit pas quitter l’objet.',[], 'quiz',5,kind='quiz',
-      task='Dessinez le trajet du son jusqu’à la lampe. Puis justifiez votre choix.',
-      quiz=dict(options=['Reconnaître dans l’objet ; télécharger des mises à jour quand le réseau revient.',
-                         'Reconnaître sur une passerelle Wi-Fi dans la maison, sans envoyer au cloud.',
-                         'Envoyer seulement des extraits audio au serveur pour limiter le trafic.'],correct=0,
-                answer='La première architecture respecte les deux exigences. Une passerelle éviterait le cloud mais ferait sortir l’audio de l’objet. Le réseau peut servir aux mises à jour sans être requis pour chaque commande.'),
-      detail='Le choix serait différent si la confidentialité autorisait une passerelle locale. Il faut distinguer absence d’Internet, présence d’un réseau local et absence de tout réseau. Prévoir une commande manuelle et le rejet des entrées non reconnues.')
+# Act I — 25 minutes. Fiction motivates each concept; historical claims are sourced.
+scene('I · Un besoin humain','Alice veut emporter\nson IA.',
+      'IA pour les systèmes embarqués · Une histoire en six actes · 3 heures',[], 'story_cover',2,
+      quote='« Et si mon appareil pouvait m’aider, même loin d’un serveur ? »',kind='hero',
+      detail='Alice est fictive. Les épisodes de recherche sont documentés ; aucune parole inventée n’est attribuée aux chercheurs. Les schémas sont des illustrations ; le réseau numérique jouet ne reconnaît pas la voix. Flèche droite : révéler, puis avancer ; A : tout montrer ; T : plan et questions.')
+scene('I · Un besoin humain','Les mains occupées.\nUne lampe à allumer.',
+      'Avant le modèle, une personne attend un service.',
+      ['<b>Le besoin :</b> agir sans utiliser ses mains.', '<b>Une option :</b> reconnaître le mot « lumière ».', '<b>À vérifier :</b> est-ce plus utile qu’un bouton ou une règle ?'], 'story_request',3,
+      quote='« Je veux allumer cette lampe sans poser ce que je porte. »',
+      detail='La scène donne une raison d’envisager une commande vocale, pas une obligation d’utiliser une IA. Un bouton accessible ou une autre interface peut mieux convenir. Le besoin inclut les conditions d’usage et les conséquences d’une erreur.')
+scene('I · Un besoin humain','Le même mot.\nJamais exactement le même son.',
+      'Alice essaie de comparer les sons à un enregistrement unique.',
+      ['<b>Les variations :</b> voix, rythme, distance et bruit.', '<b>La difficulté :</b> écrire toutes les formes possibles à la main.', '<b>L’idée :</b> apprendre une relation à partir d’exemples, puis la tester.'], 'story_voices',4,
+      quote='« Mon appareil comprend ma voix… mais pas celle de mon voisin. »',
+      detail='Les courbes de son sont illustratives. Pour un système vocal réel, microphone, échantillonnage et prétraitement transforment le son en caractéristiques. Un réseau n’entend pas un mot comme une personne ; il calcule à partir de nombres. Des exemples variés ne remplacent pas une évaluation indépendante.')
+scene('I · Un besoin humain','Bien avant Alice :\nfaire agir une machine.',
+      '1966–1972 · SRI · Shakey perçoit une pièce et planifie des actions.',
+      ['<b>Le besoin :</b> relier observation, raisonnement et déplacement.', '<b>La réponse :</b> capteurs, représentation et planification.', '<b>La limite :</b> agir dans le monde ne signifie pas tout calculer à bord.'], 'story_shakey',4,refs=['R22'],
+      quote='« Une machine peut agir… mais où est son calcul ? »',
+      detail='Shakey est un projet collectif de SRI de 1966 à 1972, avec du calcul déporté. Ce n’est ni un réseau profond moderne ni un exemple de TinyML. Il sert de repère historique pour le besoin de percevoir et d’agir ; l’histoire de l’IA embarquée n’a pas un inventeur unique.')
+scene('I · Un besoin humain','1989 · Dean Pomerleau\nfait apprendre une direction.',
+      'ALVINN : des observations de la route deviennent une direction à suivre.',
+      ['<b>Obstacle :</b> relier des images variables à une sortie utile.', '<b>Idée :</b> ajuster les poids d’un réseau sur des exemples.', '<b>Limite :</b> des tests réussis sous conditions, pas une conduite autonome générale.'], 'story_alvinn',5,refs=['R01'],
+      quote='« Notre tâche est différente, mais cette idée peut nous servir. »',
+      detail='ALVINN est un réseau à trois couches étudié par Dean Pomerleau ; l’article décrit caméra, télémétrie laser et suivi de route, avec entraînement sur des images simulées. Alice ne réutilise pas ce réseau pour la voix : le lien est le principe d’une relation apprise entre observation et sortie.')
+scene('I · Un besoin humain','Questions 1 / 6 · Pourquoi\nenvisager un apprentissage ?',
+      'La même commande présente des sons différents selon les personnes et le bruit.',[], 'quiz',7,kind='quiz',
+      task='Expliquez ce qui varie avant de choisir. Une IA reste une option à comparer.',
+      questions=['Une règle ou un bouton pourrait-il suffire ?', 'Quelles personnes et quels bruits faut-il inclure dans le test ?'],
+      quiz=dict(options=['Un réseau peut apprendre des régularités ; il faut vérifier sa qualité sur des exemples distincts.', 'Un réseau rend inutile la définition du service et du coût des erreurs.', 'Un seul enregistrement suffit dès que le réseau a beaucoup de paramètres.'],correct=0,answer='L’apprentissage peut aider à traiter des variations, à condition de disposer de données et d’un test crédibles. Le choix final peut rester une règle ou une autre interface.'),
+      detail='Une bonne justification nomme le service, les variations, les erreurs possibles et une alternative simple. Les exemples de test ne doivent pas être les exemples utilisés pour régler le modèle.')
 
-# 35 minutes: one complete network, then the connection to the assignment.
-slide('02 · Comprendre un réseau','Un petit réseau complet,\navant les grandes architectures.',
-      'Exemple pédagogique : 2 entrées → 2 neurones cachés → 1 sortie. Ce n’est pas le réseau du TD.',
-      ['<b>Couche :</b> des coefficients multiplient les entrées, puis des biais sont ajoutés.',
-       '<b>Activation ReLU :</b> max(0, z) ; elle permet une relation non linéaire.',
-       '<b>Sortie :</b> une valeur prédite ; 9 paramètres et 6 multiplications-accumulations.'], 'tiny_network',5,
-      detail='Les deux couches ont chacune des poids et des biais. La couche cachée possède 4 poids et 2 biais ; la sortie possède 2 poids et 1 biais. Un MAC multiplie puis accumule ; les ajouts des biais sont comptés séparément. Un réseau uniquement linéaire ne gagne pas de non-linéarité par simple empilement.')
-slide('02 · Comprendre un réseau','Faire traverser des nombres\nau réseau.',
-      'Modifier une entrée change les activations et la prédiction. Les poids restent fixes.',
-      ['<b>Entrées :</b> x₁ = 1 et x₂ = 2 au départ ; les biais valent zéro.',
-       '<b>Cachée :</b> h₁ = max(0, x₁ − x₂) ; h₂ = max(0, 0,5x₁ + 0,5x₂).',
-       '<b>Sortie :</b> ŷ = 2h₁ + h₂ ; au départ, ŷ = 1,5.'], 'forward_lab',6,
-      detail='x désigne une entrée, h une activation cachée et ŷ la sortie prédite. Les biais valent zéro dans cet exemple, mais font partie des 9 paramètres. Les valeurs sont choisies pour expliquer un calcul, sans prétendre représenter un entraînement réel. L’inférence applique ces recettes sans ajuster les poids.')
-slide('02 · Comprendre un réseau','Apprendre : mesurer l’erreur,\npuis corriger un poids.',
-      'Exemple limité à un poids de sortie w ; tous les autres paramètres restent fixes.',
-      ['<b>Cible c = 2 :</b> la perte L = (ŷ − c)² vaut 0,25 au départ.',
-       '<b>Gradient :</b> ∂L/∂w = 2(ŷ − c)h₂ = −1,5 ; il indique la pente.',
-       '<b>Pas η = 0,1 :</b> w passe de 1 à 1,15 ; recalculer ensuite la sortie et la perte.'], 'learning_step',6,
-      detail='η, prononcé êta, règle la taille de la correction : w nouveau = w − η × gradient. Ici h₁ = 0 et h₂ = 1,5 ; ŷ passe à 1,725 et L à 0,075625. Le TD calcule aussi les gradients des couches précédentes par la règle de chaîne. Un pas trop grand peut augmenter la perte ; une étape ne garantit pas la généralisation.')
-slide('02 · Comprendre un réseau','Des données pour apprendre.\nD’autres pour vérifier.',
-      'Une bonne courbe d’apprentissage ne suffit pas à démontrer une bonne prédiction.',
-      ['<b>Apprentissage :</b> ajuster poids et statistiques de normalisation.',
-       '<b>Validation :</b> choisir les réglages, sans toucher au test réservé.',
-       '<b>Test :</b> utiliser des séquences indépendantes ; comparer aussi à une méthode simple.'], 'split',5,
-      detail='Normaliser signifie centrer et mettre à l’échelle à partir des données d’apprentissage. Des fenêtres proches partagent des valeurs : séparer les séquences avant de créer les fenêtres. Pour une régression, MSE et MAE mesurent des erreurs de valeur ; ce ne sont pas des pourcentages de bonnes classes.')
-slide('02 · Comprendre un réseau','Du petit exemple\nau réseau que vous construirez.',
-      'La lampe explique le besoin ; les signaux simulés évitent de dépendre d’un capteur pour le TD.',
-      ['<b>Entrée du TD :</b> 3 signaux observés pendant 16 instants.',
-       '<b>Modèle :</b> petit Mixer inspiré de TSMixer ; mélanger instants et variables.',
-       '<b>Sortie :</b> une prochaine valeur ; entraîner sur PC, puis mesurer l’inférence sur carte.'], 'td_bridge',5,refs=['R08'],
-      detail='Le modèle du TD est une réduction pédagogique de 388 paramètres, pas une reproduction des résultats du papier. Les signaux sont synthétiques et ne valident pas une application industrielle. Le sujet donne les équations et les critères, pas une solution prête à exécuter. La prédiction d’une mesure et la classification d’un mot partagent une chaîne de données, calcul, intégration et validation.')
-slide('02 · Comprendre un réseau','Des familles différentes,\npour des structures différentes.',
-      'Choisir selon les données et le budget ; les détails avancés restent en annexes.',
-      ['<b>Convolution :</b> réutiliser un motif local, par exemple dans une image.',
-       '<b>Récurrence :</b> conserver un état pour traiter un flux.',
-       '<b>Attention :</b> calculer des relations dépendantes du contenu ; leur mémoire compte.'], 'families',3,refs=['R02','R07'],
-      detail='Le réseau du TD utilise des projections denses et une fenêtre explicite ; il n’a ni attention ni état récurrent. Un réseau dense reste un composant actuel. La modernité d’un système se juge aussi à son utilité, son efficacité et sa validation, pas seulement au nom de son architecture.')
-slide('02 · Comprendre un réseau','Quiz 2 / 5 · Compter\navant de lancer le programme.',
-      'Réseau 2 → 2 → 1, entièrement connecté, avec un biais par neurone calculé.',[], 'quiz',5,kind='quiz',
-      task='Comptez séparément les poids, les biais et les MAC. N’incluez pas les biais dans les MAC.',
-      quiz=dict(options=['6 paramètres ; 9 MAC.', '9 paramètres ; 6 MAC.', '9 paramètres ; 9 MAC.'],correct=1,
-                answer='4 + 2 poids et 2 + 1 biais donnent 9 paramètres. Les deux projections réalisent 2×2 + 1×2 = 6 MAC ; les biais et les activations ajoutent d’autres opérations.'),
-      detail='Ne pas confondre taille du fichier, nombre de paramètres, nombre de MAC et temps observé. Même un réseau minuscule utilise aussi des entrées, des activations et du code.')
+# Act II — 30 minutes. A complete numeric model, clearly separate from speech.
+scene('II · Ouvrir le modèle','Alice ouvre la boîte noire.',
+      'Maquette de calcul : 2 entrées → 2 neurones cachés → 1 sortie. Ce jouet ne reconnaît pas un mot.',
+      ['<b>Poids :</b> coefficients qui multiplient les entrées ; biais : décalages ajoutés.', '<b>ReLU :</b> max(0,z), pour dépasser une simple relation linéaire.', '<b>Une inférence :</b> appliquer les calculs avec les poids fixés.'], 'tiny_network',5,
+      quote='« Avant de miniaturiser le modèle, je veux comprendre ce qu’il fait. »',
+      detail='La couche cachée contient quatre poids et deux biais ; la sortie contient deux poids et un biais. Soit neuf paramètres et six MAC, biais exclus. Un MAC multiplie puis accumule. Le modèle est une régression illustrative ; il ne constitue ni un classifieur vocal ni la correction du Mixer.')
+scene('II · Ouvrir le modèle','Des nombres entrent.\nUne prédiction sort.',
+      'Modifier les entrées change les activations, sans modifier les poids.',
+      ['<b>Entrées :</b> x₁=1 et x₂=2 ; les biais sont nuls ici.', '<b>Activations :</b> h₁=max(0,x₁−x₂) ; h₂=max(0,0,5x₁+0,5x₂).', '<b>Prédiction :</b> ŷ=2h₁+h₂. Calculer avant de déplacer les curseurs.'], 'forward_lab',6,
+      quote='« Montre-moi le chemin de chaque nombre. »',
+      detail='h₁ et h₂ sont les valeurs après ReLU ; le chapeau de ŷ signifie prédit. L’exemple produit 1,5 au départ. Les coefficients sont choisis pour expliquer le calcul : ils ne sont pas présentés comme un modèle entraîné de reconnaissance vocale.')
+scene('II · Ouvrir le modèle','La prédiction est fausse.\nComment apprendre ?',
+      'Alice fixe une cible c=2. On corrige un seul poids de sortie w, les autres restant fixes.',
+      ['<b>Perte :</b> L=(ŷ−c)² mesure l’erreur sur cet exemple.', '<b>Gradient :</b> ∂L/∂w=2(ŷ−c)h₂ indique la pente ; ici −1,5.', '<b>Correction :</b> w ← w−η×gradient ; η est le pas d’apprentissage.'], 'learning_step',6,
+      quote='« Dans quel sens changer le poids, et de combien ? »',
+      detail='Avec η=0,1, w passe de 1 à 1,15, ŷ de 1,5 à 1,725 et L de 0,25 à 0,075625. Un pas trop grand peut augmenter l’erreur. Cette démonstration ne met à jour qu’un poids ; l’apprentissage du réseau complet utilise la règle de chaîne pour ses autres paramètres.')
+scene('II · Ouvrir le modèle','Alice reconnaît ses exemples.\nEt les autres ?',
+      'Réussir sur ce que l’on a déjà vu ne démontre pas la généralisation.',
+      ['<b>Apprentissage :</b> régler poids et normalisation, c’est-à-dire le centrage et l’échelle.', '<b>Validation :</b> choisir les réglages ; test réservé : évaluer après les choix.', '<b>Pour un flux :</b> séparer les séquences avant de former des fenêtres voisines.'], 'split',6,
+      quote='« Mon modèle a-t-il appris la tâche, ou seulement mes exemples ? »',
+      detail='Des fenêtres voisines partagent des mesures ; les répartir au hasard peut rendre le test trompeur. Les statistiques de normalisation viennent de l’apprentissage. Pour la voix, séparer aussi les personnes ou conditions selon le besoin. Pour le TD de régression, utiliser des erreurs comme MAE ou MSE, pas un taux de classes correctes.')
+scene('II · Ouvrir le modèle','Questions 2 / 6 · Suivre\net compter le calcul.',
+      'Même réseau jouet, entrée (x₁,x₂)=(2,1). Chaque neurone calculé possède un biais.',[], 'quiz',7,kind='quiz',
+      task='Écrivez h₁, h₂, puis ŷ. Comptez ensuite paramètres et MAC, biais exclus.',
+      questions=['Qu’est-ce qui change pendant l’inférence ?', 'Pourquoi une perte d’apprentissage faible ne suffit-elle pas ?'],
+      quiz=dict(options=['ŷ=3,5 ; 9 paramètres ; 6 MAC.', 'ŷ=1,5 ; 6 paramètres ; 9 MAC.', 'ŷ=3,5 ; 9 paramètres ; 9 MAC.'],correct=0,answer='h₁=1 et h₂=1,5 donnent ŷ=3,5. Les six poids et trois biais donnent neuf paramètres ; les projections réalisent six MAC, hors biais et activations.'),
+      detail='Le calcul de la sortie vérifie le mécanisme, pas la qualité d’un modèle entraîné. Les activations dépendent de l’entrée ; les paramètres restent fixés pendant l’inférence.')
 
-# 30 minutes: deployment precedes optimisation.
-slide('03 · Déployer et mesurer','Du PC à la carte :\nqu’est-ce qui voyage ?',
-      'On entraîne sur PC. On porte le calcul et les poids pour prédire sans le PC.',
-      ['<b>PC :</b> apprendre → figer les poids et la normalisation → exporter.',
-       '<b>Carte :</b> compiler ou installer → charger → exécuter l’inférence.',
-       '<b>Vérifier :</b> mêmes entrées, sorties comparées avec une tolérance expliquée.'], 'deployment',5,refs=['R19','R20'],
-      detail='Le TD commence avec sa propre inférence ; une application peut utiliser un runtime éprouvé et des noyaux optimisés. Vérifier les formes, les types, les unités et l’ordre des variables. Sur MCU on compile et flashe ; sur Pi Linux, on construit ou installe un programme. Une conversion réussie n’est pas une validation fonctionnelle.')
-slide('03 · Déployer et mesurer','Une plateforme contient\ndes unités de calcul.',
-      'Un MCU ou un système Linux peut réunir CPU, mémoires et accélérateurs.',
-      ['<b>CPU :</b> exécute le programme général ; le MCU en contient un.',
-       '<b>MCU :</b> petit système intégré avec Flash, SRAM et périphériques.',
-       '<b>Pi / SoC :</b> autre budget et système ; GPU ou NPU sont des accélérateurs éventuels.'], 'hardware_precise',3,
-      detail='Un Pi n’est pas un NPU ; un MCU n’est pas l’opposé d’un CPU. Un SoC peut intégrer plusieurs unités. Le logiciel doit exploiter les opérations et formats réellement pris en charge. Le modèle exact de carte et son logiciel font partie de toute comparaison.')
-slide('03 · Déployer et mesurer','Le fichier ne raconte pas\ntoute la mémoire.',
-      'Distinguer ce qui est conservé hors tension de ce qui doit tenir pendant l’inférence.',
-      ['<b>Flash / stockage :</b> programme, poids et constantes, selon leur placement.',
-       '<b>RAM :</b> entrées, activations, buffers temporaires et pile.',
-       '<b>Pic :</b> additionner ce qui existe au même moment ; vérifier aussi l’application entière.'], 'memory',6,refs=['R05'],
-      detail='Dans cette démonstration fictive, seuls les poids passent de FP32 à INT8 : les autres objets restent inchangés. Un MCU peut lire des constantes en Flash ; un runtime sur Linux peut charger le modèle en RAM. Le linker, la pile et les allocations doivent être vérifiés sur la cible. 1 Kio = 1024 octets ; 1 Ko = 1000 octets.')
-slide('03 · Déployer et mesurer','Une prédiction correcte\npeut arriver trop tard.',
-      'Le délai utile couvre acquisition, préparation, calcul et action.',
-      ['<b>Latence :</b> temps pour une entrée ; débit : sorties par seconde.',
-       '<b>Gigue :</b> variation des durées ; mesurer la dispersion et les retards.',
-       '<b>Échéance :</b> définir quoi faire quand une réponse arrive trop tard.'], 'deadline',4,
-      detail='Une moyenne ou un percentile ne prouve pas une borne de pire cas. Le pire cas observé n’est pas une borne WCET démontrée. Interruptions et autres tâches peuvent changer le délai. Un système doit gérer surcharge, redémarrage et entrée invalide.')
-slide('03 · Déployer et mesurer','Plus rapide ne veut pas\ndire automatiquement plus sobre.',
-      'Puissance en watts, énergie en joules : on doit préciser ce que l’on mesure.',
-      ['<b>Énergie :</b> E = P × Δt si la puissance P est constante pendant Δt.',
-       '<b>Exemple :</b> 0,1 W pendant 0,02 s = 0,002 J, soit 2 mJ.',
-       '<b>Périmètre :</b> compter calcul, capteur, veille, radio et pertes selon le service.'], 'energy',5,
-      detail='En général, E est l’intégrale de la puissance dans le temps. La durée et les MAC ne donnent pas seuls l’énergie. Sans instrument adapté, rapporter temps et mémoire sans inventer des joules. Une autonomie sur batterie nécessite aussi le rythme d’usage et la consommation de veille.')
-slide('03 · Déployer et mesurer','Quiz 3 / 5 · Le pic RAM\ntient-il dans 128 Kio ?',
-      'Poids : 80 Kio en Flash. En RAM, tous simultanés : activations 60, scratch 40, pile 20, entrées-sorties 16 Kio.',[], 'quiz',7,kind='quiz',
-      task='Dessinez les objets présents au pic. Additionnez seulement ceux qui occupent la RAM.',
-      quiz=dict(options=['120 Kio : les entrées-sorties ne comptent pas.', '216 Kio : tous les poids doivent être en RAM.', '136 Kio : le budget est dépassé de 8 Kio.'],correct=2,
-                answer='60 + 40 + 20 + 16 = 136 Kio. Les constantes sont ici en Flash ; le pic RAM dépasse déjà 128 Kio, avant toute autre consommation non annoncée.'),
-      detail='Une réutilisation de buffers peut réduire le pic seulement si leurs durées de vie ne se recouvrent plus. Il faut la démontrer ; le simple fait de renommer un buffer ne libère pas de mémoire.')
-slide('Pause','Pause · 10 minutes.', 'Au retour : observer un goulot, proposer un changement et mesurer.',
-      ['<b>À retenir :</b> un service, un modèle, une chaîne complète.', '<b>À compter :</b> qualité, mémoire, temps et énergie.'], 'pause',10,kind='break')
+# Act III — 25 minutes: a dependency, its failure and deployment.
+scene('III · La liaison disparaît','Chez Alice, le serveur\nsemble tout résoudre.',
+      'Schéma de fonctionnement : envoyer le son, calculer à distance, recevoir une décision.',
+      ['<b>À distance :</b> ressources de calcul et mises à jour centralisées.', '<b>À ajouter :</b> transmission, attente et retour de la réponse.', '<b>Dépendance :</b> chaque commande doit pouvoir joindre le service distant.'], 'story_remote',4,
+      quote='« Tant que le serveur répond, ma lampe fonctionne. »',
+      detail='Cette scène illustre une architecture : elle ne contacte aucun serveur et ne mesure aucun délai réseau. Un service distant peut être le bon choix si les conditions d’accès, de confidentialité et de délai sont acceptables.')
+scene('III · La liaison disparaît','Même mot. Même modèle.\nCette fois, rien ne se passe.',
+      'La connexion tombe. Le modèle distant n’a pas changé, le service rendu si.',
+      ['<b>Cause :</b> la chaîne dépend d’une liaison devenue indisponible.', '<b>Question :</b> quelle fonction doit rester possible pendant la coupure ?', '<b>Piste :</b> rapprocher l’inférence des données et prévoir un repli.'], 'story_outage',5,
+      quote='« Je n’ai pas besoin d’un meilleur score : j’ai besoin que cela fonctionne ici. »',
+      detail='Le bouton du schéma change une hypothèse de disponibilité ; il ne simule pas un test de réseau réel. En pratique, il faut tester la connexion et les modes dégradés dans le système. Une commande manuelle peut préserver un service utile sans prétendre garantir toute la fonction vocale.')
+scene('III · La liaison disparaît','Embarquer quoi ?\nEt à quel endroit ?',
+      'Le lieu de l’inférence et le lieu de l’apprentissage sont deux décisions différentes.',
+      ['<b>Dans l’objet :</b> réponse à bord, sous ses contraintes.', '<b>Passerelle :</b> calcul proche, mais liaison locale nécessaire.', '<b>Hybride :</b> entraînement ou mises à jour distants, fonction locale définie.'], 'placement_precise',5,refs=['R23'],
+      quote='« L’appareil peut-il fonctionner seul sans tout apprendre tout seul ? »',
+      detail='Oui : entraîner sur PC et exécuter localement est courant. Edge désigne un calcul proche des données, pas nécessairement dans l’objet. Le choix dépend des échanges autorisés, du délai et de la disponibilité attendue ; le local ne garantit pas à lui seul économie d’énergie ou confidentialité.')
+scene('III · La liaison disparaît','Du PC à l’appareil :\nfaire voyager le bon contenu.',
+      'Alice emporte les calculs, les poids et le prétraitement, pas son ordinateur d’apprentissage.',
+      ['<b>Figer :</b> poids, formes, ordre des variables et normalisation.', '<b>Construire :</b> compiler ou installer pour la vraie cible.', '<b>Comparer :</b> mêmes entrées, sorties et tolérance numérique expliquée.'], 'deployment',5,refs=['R19','R20'],
+      quote='« Mon programme démarre. Mais calcule-t-il encore la même chose ? »',
+      detail='Sur MCU, compiler et flasher ; sur Pi Linux, reconstruire ou installer pour son architecture. Un runtime exécute un graphe et un backend choisit ses noyaux ; des opérateurs absents peuvent échouer ou retomber sur CPU. Le TD peut d’abord porter sa propre inférence sans fournir ici sa correction.')
+scene('III · La liaison disparaît','Questions 3 / 6 · Alice\nveut une commande autonome.',
+      'Deux exigences : fonctionner sans Internet et ne pas faire sortir l’audio de l’objet.',[], 'quiz',6,kind='quiz',
+      task='Dessinez le trajet des données et vérifiez les deux exigences.',
+      questions=['Quelles fonctions peuvent encore utiliser un serveur ?', 'Quel repli faut-il prévoir si la reconnaissance se trompe ?'],
+      quiz=dict(options=['Reconnaître dans l’objet ; télécharger des mises à jour lorsque la liaison revient.', 'Reconnaître sur une passerelle Wi-Fi locale, sans utiliser le cloud.', 'Envoyer seulement de courts extraits audio au serveur.'],correct=0,answer='Seule la première proposition respecte les deux exigences. Une passerelle éviterait Internet mais ferait sortir l’audio de l’objet. Un entraînement distant peut rester compatible avec une inférence locale.'),
+      detail='Sans la contrainte sur la sortie de l’audio, une passerelle pourrait devenir un choix pertinent. Une bonne réponse dépend des exigences, pas d’un principe imposant que toute IA soit locale.')
+scene('Pause','Dix minutes.\nLa prochaine difficulté attend.',
+      'Alice veut maintenant faire entrer le modèle dans sa petite boîte.',
+      ['<b>Déjà compris :</b> besoin, apprentissage et dépendances.', '<b>À découvrir :</b> mémoire, temps, énergie et preuves.'], 'story_pause',10,kind='break',
+      quote='« Il ne reste plus qu’à le mettre dedans… vraiment ? »')
 
-# 35 minutes: two concrete levers and an independent live experiment.
-slide('04 · Optimiser une contrainte','Mesurer d’abord.\nChoisir le levier ensuite.',
-      'Une optimisation répond à un coût observé et à une hypothèse vérifiable.',
-      ['<b>Poids trop volumineux :</b> tester une représentation plus petite.',
-       '<b>Trop d’échanges mémoire :</b> revoir ordre, réemploi ou buffers.',
-       '<b>Qualité insuffisante :</b> revoir données et modèle avant d’accélérer une erreur.'], 'levers',4,
-      detail='Une opération peut attendre la mémoire plutôt que manquer de calcul. Commencer par une mesure de référence. Modifier un facteur à la fois et conserver les résultats défavorables. Architecture, exécution et matériel interagissent ; les autres leviers sont présentés en annexes.')
-slide('04 · Optimiser une contrainte','Levier 1 · Garder\nmoins de chiffres.',
-      'La quantification arrondit sur une grille. Il faut vérifier l’effet sur la sortie.',
-      ['<b>Échelle s :</b> distance entre deux valeurs représentables.',
-       '<b>Recette :</b> arrondir x/s, borner l’entier q, puis reconstruire x̂ = s×q.',
-       '<b>Limite :</b> des poids plus petits ne garantissent ni qualité conservée ni exécution entière rapide.'], 'quant',6,refs=['R03'],
-      detail='Ici x est dans [−1,1], qmax = 2^(b−1)−1 pour b bits et s = 1/qmax. Le code négatif extrême est inutilisé. La reconstruction est une illustration, pas une mesure de précision réseau. Un vrai INT8 distingue poids, activations, accumulateurs et échelles. Le jeu de calibration doit rester distinct du test réservé.')
-slide('04 · Optimiser une contrainte','Levier 2 · Déplacer moins\nde données inutiles.',
-      'Réutiliser une donnée proche du processeur peut éviter des transferts.',
-      ['<b>Ordre :</b> parcourir les tableaux dans un ordre favorable.',
-       '<b>Réemploi :</b> garder une valeur utile plutôt que la relire.',
-       '<b>Vérification :</b> même fonction, tolérance numérique et mémoire temporaire comptée.'], 'roofline',5,refs=['R07'],
-      detail='Une permutation de boucles peut aider la localité mais gêner une vectorisation. Des blocs trop grands peuvent augmenter registres ou buffers. L’addition flottante n’est pas parfaitement associative. Les détails de tuilage et de noyaux appartiennent à l’enquête du TD, pas à une recette universelle fournie ici.')
-slide('04 · Optimiser une contrainte','Micro-expérience :\nmême somme, deux écritures.',
-      'Mesure réelle dans ce navigateur. Aucun résultat Raspberry Pi ou MCU n’est simulé.',
-      ['<b>Référence :</b> additionner un tableau avec une boucle.',
-       '<b>Variante :</b> utiliser reduce ; vérifier l’égalité avant le chronométrage.',
-       '<b>Protocole :</b> échauffement, 7 paires alternées, médiane, dispersion et CSV brut.'], 'benchmark_lab',8,
-      detail='Micro-expérience indépendante du réseau et de sa correction. Elle enseigne une méthode de mesure, pas une optimisation de la projection du TD. Les mesures sont en millisecondes par lot et microsecondes par somme. Le moteur JavaScript, l’OS et la charge changent le résultat. Rien ne permet d’en déduire énergie, cycles ou performance sur une autre cible. Le contenu de ces deux fonctions est consultable dans les sources publiques du cours.')
-slide('04 · Optimiser une contrainte','Un gain de brique\nn’est pas le gain du système.',
-      'La partie inchangée limite l’accélération globale : loi d’Amdahl.',
-      ['<b>p :</b> part du temps initial dans la brique ; s : accélération de cette brique.',
-       '<b>Gain :</b> 1 / [(1 − p) + p/s], si aucun autre coût ne change.',
-       '<b>Exemple :</b> p = 20 % et s = 2 donnent 1,11× ; 10 % de temps économisé.'], 'amdahl',5,
-      detail='Le gain est un rapport de temps avant/après. Il ne faut pas confondre 1,11× avec 11 % de temps économisé. Le modèle suppose travail fixe et absence de surcoût ajouté. Les copies, conversions et préparations doivent être incluses dans la nouvelle mesure.')
-slide('04 · Optimiser une contrainte','Quiz 4 / 5 · Quel délai\naprès optimisation ?',
-      'Le système prenait 100 ms, dont 20 ms dans la brique. Cette brique devient deux fois plus rapide ; le reste est inchangé.',[], 'quiz',7,kind='quiz',
-      task='Écrivez le temps de chaque partie avant et après. Vérifiez le gain global.',
-      quiz=dict(options=['50 ms ; tout le système devient deux fois plus rapide.', '80 ms ; la brique optimisée ne coûte plus rien.', '90 ms ; 10 % du temps total est économisé.'],correct=2,
-                answer='Le reste prend 80 ms ; la brique prend désormais 10 ms. Total : 90 ms. Le gain de vitesse vaut 100/90 ≈ 1,11×. Si une conversion ajoute 12 ms, le total passe à 102 ms.'),
-      detail='Après ce calcul, une mesure sur la cible reste nécessaire. Le même code peut changer de comportement avec la taille des tableaux, les options du compilateur et les caches.')
+# Act IV — 30 minutes: memory, architecture and integer representation.
+scene('IV · La boîte est trop petite','Alice compare des appareils,\npas seulement des scores.',
+      'Un MCU, un ordinateur Linux et un accélérateur n’ont ni le même rôle ni le même budget.',
+      ['<b>MCU :</b> CPU, mémoire et périphériques dans un petit système.', '<b>Pi / SoC :</b> autre capacité mémoire et système logiciel.', '<b>NPU / GPU :</b> accélérateurs éventuels ; vérifier leurs formats et opérateurs.'], 'hardware_precise',4,
+      quote='« Quelle boîte peut réellement rendre mon service ? »',
+      detail='CPU est une unité de calcul ; MCU ou SoC est un système qui peut en contenir. Un Pi n’est pas un NPU et un MCU peut lui-même intégrer un accélérateur. Les chiffres de pointe ne décrivent pas automatiquement le graphe et les formats utilisés.')
+scene('IV · La boîte est trop petite','Le fichier entre.\nLe programme déborde.',
+      'Alice avait compté les poids, mais oublié la mémoire pendant le calcul.',
+      ['<b>Flash / stockage :</b> programme et constantes selon leur placement.', '<b>RAM :</b> entrées, activations, buffers temporaires et pile.', '<b>Pic :</b> compter ce qui vit au même moment dans toute l’application.'], 'memory',6,refs=['R05'],
+      quote='« Pourquoi le modèle tient-il sur disque, mais pas en fonctionnement ? »',
+      detail='La démonstration utilise deux budgets fictifs : poids en Flash et travail SRAM. Changer uniquement le format des poids ne réduit pas le second par magie. Un runtime peut charger des constantes en RAM : vérifier son comportement. 1 Ko=1000 octets ; 1 Kio=1024 octets.')
+scene('IV · La boîte est trop petite','2017 · Howard et ses collègues\nrevoient les opérations.',
+      'MobileNets : alléger la vision en séparant filtrage spatial et mélange des canaux.',
+      ['<b>Obstacle :</b> des convolutions coûteuses pour un appareil mobile.', '<b>Idée :</b> filtrer par canal, puis mélanger avec une projection 1×1.', '<b>Limite :</b> moins de MAC ne garantit pas le même gain de temps sur chaque cible.'], 'story_mobilenet',5,refs=['R02'],
+      quote='« Peut-on repenser le calcul plutôt que seulement changer la puce ? »',
+      detail='Andrew Howard et l’équipe proposent MobileNets en 2017 pour vision mobile et embarquée. La séparation depthwise + pointwise et les dimensions du modèle changent le compromis ressources/qualité. Ce n’est pas une opération à remplacer aveuglément dans un réseau vocal ou dans le Mixer.')
+scene('IV · La boîte est trop petite','2018 · Jacob et ses collègues\nchangent les nombres.',
+      'Quantification et apprentissage adaptés à une inférence en calcul entier.',
+      ['<b>Obstacle :</b> des représentations et calculs flottants coûteux selon le matériel.', '<b>Idée :</b> coder sur moins de bits, avec échelles et accumulateurs adaptés.', '<b>Condition :</b> vérifier la qualité et les noyaux réellement exécutés.'], 'story_jacob',6,refs=['R03'],
+      quote='« Ai-je vraiment besoin de tous ces chiffres pour chaque poids ? »',
+      detail='Le papier de Benoit Jacob et ses collègues paraît à CVPR 2018 après un dépôt en 2017. Il associe schéma de quantification et entraînement pour préserver la qualité. Une simulation de nombres arrondis ne prouve pas qu’une cible exécute rapidement un vrai noyau INT8.')
+scene('IV · La boîte est trop petite','Alice arrondit.\nQu’est-ce qu’elle perd ?',
+      'Une grille plus grossière économise des codes, mais modifie les valeurs.',
+      ['<b>Échelle s :</b> distance entre deux valeurs représentables.', '<b>Code q :</b> arrondi de x/s, limité à une plage entière.', '<b>Reconstruction :</b> x̂=s×q ; comparer l’erreur et la qualité du réseau entier.'], 'quant',5,refs=['R03'],
+      quote='« Quelques chiffres en moins, est-ce encore la même réponse utile ? »',
+      detail='La manipulation prend x dans [−1,1], qmax=2^(b−1)−1 et s=1/qmax pour b bits. Le code négatif extrême n’est pas utilisé. Les points ne sont pas des mesures de qualité vocale. Poids INT8, activations et accumulateurs peuvent avoir des formats différents ; les échelles et métadonnées ont aussi un coût.')
+scene('IV · La boîte est trop petite','Questions 4 / 6 · Quelle\nmémoire faut-il libérer ?',
+      '128 Kio de SRAM. Poids : 80 Kio en Flash. En RAM, simultanés : 60 + 40 + 20 + 16 Kio.',[], 'quiz',4,kind='quiz',
+      task='Dessinez le pic et additionnez les objets RAM, puis choisissez.',
+      questions=['Réduire seulement les poids Flash résout-il le pic SRAM ?', 'Quand deux buffers peuvent-ils partager le même espace ?'],
+      quiz=dict(options=['120 Kio : les entrées-sorties peuvent être ignorées.', '136 Kio : le pic dépasse la capacité de 8 Kio.', '216 Kio : tous les poids doivent toujours être copiés en SRAM.'],correct=1,answer='Le pic annoncé vaut 136 Kio : dépassement de 8 Kio. Dans ce scénario, les poids restent en Flash. Une réutilisation de buffers peut aider si leurs durées de vie ne se recouvrent pas.'),
+      detail='Le placement est une hypothèse du scénario, pas une règle universelle. Il faut compter le reste du firmware et mesurer ou borner la pile. Une économie de stockage ne démontre pas une économie de travail simultané.')
 
-# 30 minutes: evidence, reliability and a manageable research question.
-slide('05 · Construire une preuve','Une petite recherche :\nquand l’idée fonctionne-t-elle ?',
-      'Question du TD : quelle organisation d’une projection réduit son coût sur notre cible ?',
-      ['<b>Hypothèse :</b> nommer le mécanisme attendu, pas seulement « aller plus vite ».',
-       '<b>Comparaison :</b> mêmes poids, données, compilation et sorties vérifiées.',
-       '<b>Limite :</b> mesurer aussi le réseau entier ; chercher quand le gain disparaît.'], 'research',8,refs=['R08','R18'],
-      detail='Les 388 paramètres rendent le projet accessible, mais les surcoûts et la résolution du timer peuvent dominer. Un banc séparé peut étudier plusieurs dimensions ; référence et variante doivent y résoudre le même problème à chaque dimension. Apprendre à expérimenter et expliquer un résultat ne garantit pas une nouveauté publiable. Un résultat nul ou négatif peut être excellent s’il est étayé.')
-slide('05 · Construire une preuve','Prévoir les entrées difficiles\net garder la maîtrise.',
-      'Une faible erreur moyenne ne suffit pas à rendre une action acceptable.',
-      ['<b>Tester :</b> bruit, données absentes, valeurs hors plage et redémarrage.',
-       '<b>Réagir :</b> signaler, limiter ou refuser ; prévoir le mode de repli.',
-       '<b>Protéger :</b> contrôler les accès et les mises à jour ; le local n’est pas automatiquement sûr.'], 'robustness',7,refs=['R16'],
-      detail='Un score élevé ne prouve pas qu’une entrée est connue. Pour la voix, tester aussi les mots non prévus et le bruit seul. Pour une régression, tester changements d’échelle, capteur saturé et séquences décalées. Sécurité, robustesse statistique et sûreté sont distinctes. Une action critique demande une analyse adaptée ; ce cours ne constitue pas une certification.')
-slide('05 · Construire une preuve','Un résultat doit retrouver\nson code et ses conditions.',
-      'commit → configuration → binaire → mesures brutes → figure → conclusion.',
-      ['<b>Versionner :</b> étapes nommées, paramètres, outil de compilation et contributions.',
-       '<b>Automatiser :</b> tests de fonctions, contrôle des gradients et construction du programme.',
-       '<b>Tracer :</b> campagnes répétées, médiane, dispersion et fichiers bruts sur carte.'], 'measurement',7,
-      detail='GitHub et les invitations sont décrits dans le TD. Une CI exécute les tests et construit le code ; un runner partagé ne certifie pas les performances de la carte. Comparer d’abord quelques sorties PC/carte, puis seulement mesurer. Un manifeste d’expérience précise commit, cible, fréquence, options, données, poids et périmètre du timer. Sans instrument d’énergie, ne rapporter aucun chiffre d’énergie inventé.')
-slide('05 · Construire une preuve','Lire un article\ncomme un ingénieur.',
-      'MCUNet : faire tenir une tâche de vision en concevant ensemble réseau et moteur.',
-      ['<b>Problème :</b> la mémoire de travail limite les réseaux sur microcontrôleur.',
-       '<b>Réponse :</b> adapter architecture et moteur, puis mesurer sur des cibles identifiées.',
-       '<b>Votre lecture :</b> tâche, matériel, référence, métriques, limites et expérience à reproduire.'], 'codesign',8,refs=['R04','R05'],
-      detail='Lin, Chen et leurs collègues présentent MCUNet en 2020, puis MCUNetV2 en 2021 avec une exécution par morceaux pour réduire le pic mémoire. Examiner le coût ajouté et la qualité conservée. La veille avancée est en annexes : AWQ, T-MAC, T-MAN et travaux 2026 ne sont pas nécessaires pour démarrer le TD. Les prépublications y restent explicitement distinguées des publications évaluées.')
+# Act V — 25 minutes: movement of data, co-design and service constraints.
+scene('V · Cela tient, mais cela attend','Alice réduit les calculs.\nL’attente reste.',
+      'Le processeur peut attendre les données plutôt que manquer de multiplications.',
+      ['<b>Lire et écrire :</b> des transferts qui ont un coût.', '<b>Réutiliser :</b> garder une donnée proche et éviter des passages inutiles.', '<b>Tester :</b> réorganisation, sorties, buffers et compilateur sur la cible.'], 'story_memory_wait',5,refs=['R07'],
+      quote='« Pourquoi le processeur attend-il alors que le calcul paraît simple ? »',
+      detail='Le tuilage traite des morceaux réutilisables ; la fusion peut éviter une écriture intermédiaire. Cela peut aussi augmenter registres ou code. FlashAttention illustre une approche attentive aux échanges mémoire sur GPU ; son résultat ne se transpose pas directement en noyau MCU.')
+scene('V · Cela tient, mais cela attend','2020 · Lin, Chen et leur équipe\nconçoivent les deux ensemble.',
+      'MCUNet associe une architecture compacte et son moteur d’exécution.',
+      ['<b>Obstacle :</b> la mémoire de travail limite l’inférence sur MCU.', '<b>Réponse :</b> adapter réseau et ordonnancement à la cible.', '<b>Suite :</b> MCUNetV2 découpe le travail ; examiner aussi les recalculs ajoutés.'], 'story_mcunet',5,refs=['R04','R05'],
+      quote='« Le meilleur réseau dépend aussi de la manière de le faire tourner. »',
+      detail='Ji Lin, Wei-Ming Chen et leurs collègues, dont Song Han, proposent MCUNet en 2020. MCUNetV2 suit en 2021 avec exécution par patches. Les études portent sur des cibles et tâches identifiées ; elles ne prouvent pas que toute IA tient dans toute puce. Alice est fictive et n’a pas collaboré avec ces chercheurs.')
+scene('V · Cela tient, mais cela attend','La réponse est correcte.\nMais la lampe réagit trop tard.',
+      'Le service attend une réponse dans un délai défini, pas seulement une bonne moyenne.',
+      ['<b>Latence :</b> délai pour une entrée ; débit : sorties par seconde.', '<b>Gigue :</b> variabilité du délai entre les appels.', '<b>Échéance :</b> inclure acquisition, préparation, calcul et action ; prévoir un repli.'], 'deadline',4,
+      quote='« Une réponse utile est aussi une réponse qui arrive à temps. »',
+      detail='Un percentile décrit des observations ; il ne démontre pas une borne de pire cas. Le pire cas observé n’est pas une borne WCET prouvée. Interruptions, surcharge et démarrage doivent être pris en compte selon le contexte.')
+scene('V · Cela tient, mais cela attend','Alice débranche le chargeur.\nUne autre limite apparaît.',
+      'Le calcul compte, mais aussi l’écoute, le capteur, la radio et la veille.',
+      ['<b>Puissance P :</b> en watts ; énergie E : en joules.', '<b>À puissance constante :</b> E=P×Δt ; 0,1 W pendant 0,02 s donne 2 mJ.', '<b>Mesure :</b> préciser le périmètre et utiliser un instrument adapté.'], 'story_energy',5,
+      quote='« Mon appareil doit-il être rapide pendant une seconde, ou utile toute la journée ? »',
+      detail='La puissance varie généralement : l’énergie est son intégrale dans le temps. Une durée ou un nombre de MAC ne suffit pas pour annoncer des joules. La détection permanente d’un mot peut rendre la veille et l’écoute déterminantes. Le dessin et les 2 mJ sont illustratifs, pas une autonomie mesurée.')
+scene('V · Cela tient, mais cela attend','Une brique gagne.\nLe système gagne combien ?',
+      'La partie inchangée limite l’accélération : loi d’Amdahl.',
+      ['<b>p :</b> fraction initiale du temps dans la brique ; s : son accélération.', '<b>Gain global :</b> 1 / [(1−p)+p/s], si le reste ne change pas.', '<b>Exemple :</b> p=20 % et s=2 donnent 1,11×, soit 10 % du temps économisé.'], 'amdahl',3,
+      quote='« Deux fois plus vite… pour quelle partie exactement ? »',
+      detail='La relation suppose un travail fixe et aucun surcoût nouveau. Les copies et conversions ajoutées doivent être incluses dans le nouveau total. Ne pas confondre facteur de vitesse et pourcentage de durée économisée.')
+scene('V · Cela tient, mais cela attend','Questions 5 / 6 · Alice\nannonce un gain de 2×.',
+      'Avant : 100 ms au total, dont 20 ms dans la brique. Cette brique devient deux fois plus rapide.',[], 'quiz',3,kind='quiz',
+      task='Reconstituez les deux parties du temps. Le reste est inchangé.',
+      questions=['Que devient le résultat si une conversion ajoute 12 ms ?', 'Ces durées permettent-elles de calculer l’énergie consommée ?'],
+      quiz=dict(options=['50 ms : toute l’application devient deux fois plus rapide.', '90 ms : le système économise 10 % de sa durée.', '80 ms : la brique optimisée ne coûte plus rien.'],correct=1,answer='80 ms inchangées + 10 ms pour la brique = 90 ms. Avec 12 ms de conversion ajoutée, 102 ms : l’application ralentit. Les durées seules ne donnent pas l’énergie.'),
+      detail='Un résultat PC ne certifie pas un gain sur carte. Il faut vérifier la correction et mesurer le périmètre annoncé dans les mêmes conditions.')
 
-# 20 minutes: a decision exercise, then explicit learning outcomes.
-slide('06 · Décider et justifier','Quiz 5 / 5 · Quel système\nrespecte le besoin ?',
-      'Exercice fictif : qualité ≥ 96 %, RAM ≤ 100 Kio, p95 observé ≤ 20 ms et énergie ≤ 3 mJ par décision.',[], 'quiz',15,kind='quiz',
-      task='Comparez A, B et C dans le tableau. Choisissez, justifiez et proposez un test qui pourrait invalider ce choix.',
-      quiz=dict(options=['A : sa meilleure qualité suffit à accepter son dépassement RAM.', 'B : respecte ces quatre seuils ; il reste à valider la robustesse et les limites temporelles.', 'C : sa faible énergie compense automatiquement une qualité sous le seuil.'],correct=1,
-                answer='B satisfait les quatre seuils donnés. A dépasse la RAM ; C échoue au seuil de qualité. Les valeurs sont fictives, p95 est un constat sur les essais et ne garantit pas un pire cas. Tester un autre environnement ou une entrée inconnue peut remettre ce choix en cause.'),
-      detail='Dans cet exercice de classification indépendant du TD : A = 97 %, 120 Kio, 12 ms, 2,4 mJ ; B = 96 %, 96 Kio, 18 ms, 2,8 mJ ; C = 95 %, 72 Kio, 14 ms, 1,8 mJ. Le p95 provient de 500 décisions fictives ; l’énergie est annoncée sur acquisition, calcul et action, hors veille. Un produit doit aussi considérer coût, sécurité, mises à jour et usage réel. Le TD est une régression et utilise d’autres métriques ; ne pas appliquer ces pourcentages à son erreur de prédiction.')
-slide('06 · Décider et justifier','Ce que vous devez\nmaintenant pouvoir démontrer.',
-      'Au TD, transformer cette compréhension en programme, en mesures et en explication.',
-      ['<b>Expliquer :</b> une prédiction, un apprentissage et le trajet du PC à la carte.',
-       '<b>Compter :</b> paramètres, MAC, Flash, pic RAM et délai ; mesurer l’énergie si équipé.',
-       '<b>Défendre :</b> une optimisation vérifiée, ses résultats et ses limites.'], 'closing',5,kind='closing',
-      detail='Les acquis ne se résument pas à reconnaître des termes. Le dépôt doit permettre de refaire les tests, relier les courbes aux mesures et comprendre les contributions. Le rapport scientifique peut conclure qu’une idée ne convient pas à la cible. Ouvrir Ressources ou TD pour poursuivre ; les annexes complètent les architectures et la recherche actuelle.')
+# Act VI — 35 minutes: measurement, current research, judgement and an open ending.
+scene('VI · Alice demande des preuves','« Plus rapide », dit Alice.\n« Montre-le », répond la classe.',
+      'Micro-expérience indépendante : deux écritures de la même somme, dans ce navigateur.',
+      ['<b>Avant le chrono :</b> vérifier que les sorties sont égales.', '<b>Protocole :</b> échauffement, sept paires alternées, médiane et min–max.', '<b>Trace :</b> conserver le CSV ; aucune durée de carte ni énergie n’est déduite.'], 'benchmark_lab',8,
+      quote='« Je veux un résultat que quelqu’un d’autre puisse vérifier. »',
+      detail='Les fonctions JavaScript additionnent le même Float64Array de 4096 valeurs. Le programme mesure le navigateur présent, pas un Pi distant. Le moteur, la charge et l’environnement comptent. Les chiffres ne sont pas préremplis et le gagnant n’est pas imposé. Cette somme ne fournit pas une projection optimisée du TD.')
+scene('VI · Alice demande des preuves','La démonstration réussit.\nLa vraie vie change les entrées.',
+      'Une voix inconnue, du bruit ou un redémarrage peuvent changer le comportement.',
+      ['<b>Robustesse :</b> tester bruit, saturation, valeurs absentes et décalage des données.', '<b>Maîtrise :</b> refuser, signaler ou revenir à une commande manuelle.', '<b>Sécurité :</b> contrôler les accès et les mises à jour ; local ne signifie pas invulnérable.'], 'story_robustness',5,refs=['R16'],
+      quote='« Et quand il entend autre chose que “lumière” ? »',
+      detail='Un score élevé n’établit pas qu’une entrée est connue. La robustesse statistique, la cybersécurité et la sûreté ne sont pas synonymes. Un seuil de confiance et un repli doivent être validés dans le contexte. Un système critique demanderait une démarche dépassant ce cours.')
+scene('VI · Alice demande des preuves','Les étudiants prennent\nla suite de l’enquête.',
+      'Le TD utilise un petit Mixer de prédiction, pas un système vocal fourni.',
+      ['<b>Construire :</b> trois signaux, seize instants ; écrire calculs et apprentissage.', '<b>Enquêter :</b> une projection dense, poids fixés, correction puis mesures PC/carte.', '<b>Tracer :</b> commit → configuration → binaire → CSV → figure → conclusion.'], 'research',6,refs=['R08','R18'],
+      quote='« Dans quelles conditions notre idée aide-t-elle vraiment ? »',
+      detail='Le Mixer du TD est une réduction pédagogique de 388 paramètres inspirée de TSMixer, avec données synthétiques. Il ne valide pas une application industrielle et ne promet pas une nouveauté publiable. Une très petite opération peut être dominée par les surcoûts et la résolution du timer. La CI vérifie des tests et une construction, pas les performances de la carte. Aucun corrigé ni poids entraîné n’est fourni.')
+scene('VI · Alice demande des preuves','Aujourd’hui : plusieurs pistes,\npas une seule course aux paramètres.',
+      'Le besoin d’Alice reste petit ; les modèles et les matériels continuent d’évoluer.',
+      ['<b>Architecture :</b> MobileNetV4 étudie plusieurs cibles mobiles.', '<b>Représentation :</b> AWQ examine la quantification des poids de LLM.', '<b>Adaptation :</b> apprentissage local spécialisé ; choisir selon mémoire, données et usage.'], 'story_frontiers',4,refs=['R10','R09','R06'],
+      quote='« Ai-je besoin d’un grand modèle de langage pour reconnaître un mot ? »',
+      detail='MobileNetV4 et AWQ sont des publications 2024 aux périmètres différents. On-Device Training Under 256KB Memory (2022) étudie une adaptation ciblée, pas l’entraînement libre de tout réseau sur MCU. Les pistes 2025–2026 restent dans les annexes avec leur statut explicite. Petit est relatif : un modèle de langage compact peut rester beaucoup trop grand pour un MCU.')
+scene('VI · Alice demande des preuves','Questions 6 / 6 · Quelle\nboîte Alice peut-elle retenir ?',
+      'Exercice fictif : qualité ≥96 %, RAM ≤100 Kio, p95 observé ≤20 ms et énergie ≤3 mJ par décision.',[], 'quiz',8,kind='quiz',
+      task='Choisissez avec les quatre contraintes. Proposez ensuite un test qui pourrait invalider ce choix.',
+      questions=['Un p95 observé garantit-il tous les délais futurs ?'],
+      quiz=dict(decision=True,options=['A : sa qualité suffit à accepter son dépassement RAM.', 'B : les seuils donnés sont respectés ; la robustesse et les limites restent à vérifier.', 'C : sa faible énergie compense automatiquement sa qualité sous le seuil.'],correct=1,answer='B satisfait les quatre seuils fictifs. A dépasse la RAM, C manque la qualité requise. Un p95 observé ne garantit pas le pire cas. Tester d’autres conditions peut remettre le choix en cause.'),
+      detail='Données de classification fictives : A=97 %,120 Kio,12 ms,2,4 mJ ; B=96 %,96 Kio,18 ms,2,8 mJ ; C=95 %,72 Kio,14 ms,1,8 mJ. p95 sur 500 essais fictifs ; énergie sur acquisition/calcul/action, hors veille. Le TD est une régression : ses métriques ne sont pas ces pourcentages.')
+scene('VI · Alice demande des preuves','L’histoire ne se termine\npas par « ça marche ».',
+      'Elle se termine par : « Voilà ce qui marche, dans ces conditions, et ce qui reste à comprendre. »',
+      ['<b>Le besoin :</b> un service utile, pas un modèle choisi pour son nom.', '<b>Le compromis :</b> qualité, mémoire, délai et énergie dans un système réel.', '<b>La suite :</b> une question précise, des tests et des résultats reproductibles.'], 'story_epilogue',4,kind='closing',
+      quote='« Je peux expliquer mon choix, le mesurer et reconnaître ses limites. »',
+      detail='Le cours donne une grille de lecture et des exemples numériques. Le TD construit la maîtrise par implémentation, déploiement et analyse. Une hypothèse réfutée est un résultat utile si la méthode est rigoureuse. Les sources, le PDF et l’énoncé sont accessibles dans Ressources.')
 
 CORE_COUNT=len(SLIDES)
-assert CORE_COUNT==32
+assert CORE_COUNT==35
 assert sum(s['minutes'] for s in SLIDES)==180
-assert sum(bool(s['quiz']) for s in SLIDES)==5
+assert sum(bool(s['quiz']) for s in SLIDES)==6
 
 ADVANCED = [{'chapter': 'Annexes · Architectures et recherche',
   'title': 'La convolution\nréutilise un petit motif.',

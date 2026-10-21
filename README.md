@@ -1,21 +1,15 @@
 # Courses
 
-Course materials by **Roland Cédric TAYO**.
+Materials by **Roland Cédric TAYO**. Teaching language: French.
 
-**Course website:** https://rolln7drktayau.github.io/courses/
+## Embedded AI — Alice wants to take her AI along
 
-## Embedded AI
-
-- [Build the course together: guided workshop](https://rolln7drktayau.github.io/courses/embedded-ai/workshop/)
-
-- [Open the dynamic presentation](https://rolln7drktayau.github.io/courses/embedded-ai/)
+- [Follow Alice's story](https://rolln7drktayau.github.io/courses/embedded-ai/)
 - [Read the PDF](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf)
-- [Read the teaching plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
-- [Browse the course sources](embedded-ai/)
-- [Open the practical assignment and student resources](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
+- [Read the two-page plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
+- [Assignment and student resources](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
+- [Course sources](embedded-ai/)
 
-Teaching language: French. Designed for future embedded-systems engineers. The three-hour synthesis includes a ten-minute break, five applied quizzes, a complete teaching network and a live browser measurement experiment. It opens a wider 14-hour lecture / 14-hour practical module. References and a glossary accompany the core slides.
+A three-hour narrative course: 35 scenes, six acts, documented researchers, progressive illustrations, six question breaks and numerical demonstrations. The course connects human need, learning, deployment, memory, time, energy and reproducible evidence.
 
-GitHub Pages serves the `main` branch root. The `embedded-ai` directory contains only the course and its public sources, not an instructor solution.
-
-The 3.5-hour collaborative workshop is the recommended active route: seven teams, a common foundation, peer review, shared course assembly and an individual exit check. It has a seven-hour extension. The slide deck is a reference or alternative synthesis, not an additional mandatory three-hour lecture. Local facilitation notes are kept outside this repository.
+GitHub Pages serves the repository root from `main`. The URL remains unchanged. The project solution and local instructor preparation are not published.
