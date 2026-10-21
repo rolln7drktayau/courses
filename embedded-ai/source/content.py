@@ -221,14 +221,30 @@ slide('01 · Partir du besoin','Dans l’objet, à proximité\nou sur un serveur
        '<b>À proximité :</b> une passerelle traite les données ; la liaison locale reste nécessaire.',
        '<b>À distance :</b> davantage de ressources, mais transmission et dépendance réseau.'], 'placement_precise',3,refs=['R23'],
       detail='Edge désigne un calcul proche des données : il n’est pas toujours dans l’objet lui-même. Une architecture hybride partage les fonctions. Le local peut réduire les échanges ; il ne garantit ni économie d’énergie ni confidentialité sans validation de la chaîne entière.')
-slide('01 · Partir du besoin','Quiz 1 / 5 · Où placer\nla reconnaissance ?',
-      'La lampe doit répondre hors connexion Internet. L’audio ne doit pas quitter l’objet.',[], 'quiz',5,kind='quiz',
-      task='Dessinez le trajet du son jusqu’à la lampe. Puis justifiez votre choix.',
-      quiz=dict(options=['Reconnaître dans l’objet ; télécharger des mises à jour quand le réseau revient.',
-                         'Reconnaître sur une passerelle Wi-Fi dans la maison, sans envoyer au cloud.',
-                         'Envoyer seulement des extraits audio au serveur pour limiter le trafic.'],correct=0,
-                answer='La première architecture respecte les deux exigences. Une passerelle éviterait le cloud mais ferait sortir l’audio de l’objet. Le réseau peut servir aux mises à jour sans être requis pour chaque commande.'),
-      detail='Le choix serait différent si la confidentialité autorisait une passerelle locale. Il faut distinguer absence d’Internet, présence d’un réseau local et absence de tout réseau. Prévoir une commande manuelle et le rejet des entrées non reconnues.')
+slide('01 · Partir du besoin',
+      'Où reconnaître\nla commande ?',
+      'Deux exigences : fonctionner sans Internet et garder tout l’audio dans l’objet. Quelle architecture les respecte ?',
+      [],
+      'quiz',
+      5,
+      refs=[],
+      detail=('Le choix serait différent si la confidentialité autorisait une passerelle locale. Il faut '
+       'distinguer absence d’Internet, présence d’un réseau local et absence de tout réseau. Prévoir une '
+       'commande manuelle et le rejet des entrées non reconnues.'),
+      kind='quiz',
+      quiz={'options': ['L’objet prépare le son et reconnaît la commande.',
+                   'L’objet prépare le son ; une passerelle reconnaît la commande.',
+                   'L’objet prépare le son ; un serveur reconnaît la commande.'],
+       'correct': 0,
+       'answer': 'A respecte les deux exigences. Avec B, l’audio quitte l’objet. Avec C, la commande '
+                 'dépend aussi du réseau.',
+       'feedback': ['A respecte les deux exigences. Avec B, l’audio quitte l’objet. Avec C, la commande '
+                    'dépend aussi du réseau.',
+                    'Une passerelle évite éventuellement Internet, mais l’audio quitte encore l’objet. A '
+                    'respecte les deux exigences.',
+                    'Le serveur reçoit l’audio et demande une liaison : les deux exigences sont '
+                    'manquées. A les respecte.']},
+      task='Vérifiez chaque exigence séparément avant de choisir.')
 
 # 35 minutes: one complete network, then the connection to the assignment.
 slide('02 · Comprendre un réseau','Un petit réseau complet,\navant les grandes architectures.',
@@ -267,12 +283,26 @@ slide('02 · Comprendre un réseau','Des familles différentes,\npour des struct
        '<b>Récurrence :</b> conserver un état pour traiter un flux.',
        '<b>Attention :</b> calculer des relations dépendantes du contenu ; leur mémoire compte.'], 'families',3,refs=['R02','R07'],
       detail='Le réseau du TD utilise des projections denses et une fenêtre explicite ; il n’a ni attention ni état récurrent. Un réseau dense reste un composant actuel. La modernité d’un système se juge aussi à son utilité, son efficacité et sa validation, pas seulement au nom de son architecture.')
-slide('02 · Comprendre un réseau','Quiz 2 / 5 · Compter\navant de lancer le programme.',
-      'Réseau 2 → 2 → 1, entièrement connecté, avec un biais par neurone calculé.',[], 'quiz',5,kind='quiz',
-      task='Comptez séparément les poids, les biais et les MAC. N’incluez pas les biais dans les MAC.',
-      quiz=dict(options=['6 paramètres ; 9 MAC.', '9 paramètres ; 6 MAC.', '9 paramètres ; 9 MAC.'],correct=1,
-                answer='4 + 2 poids et 2 + 1 biais donnent 9 paramètres. Les deux projections réalisent 2×2 + 1×2 = 6 MAC ; les biais et les activations ajoutent d’autres opérations.'),
-      detail='Ne pas confondre taille du fichier, nombre de paramètres, nombre de MAC et temps observé. Même un réseau minuscule utilise aussi des entrées, des activations et du code.')
+slide('02 · Comprendre un réseau',
+      'Combien ce réseau\ncontient-il de paramètres ?',
+      'Deux entrées, deux neurones cachés, une sortie. Toutes les connexions sont présentes, avec un biais par neurone calculé.',
+      [],
+      'quiz',
+      5,
+      refs=[],
+      detail=('Ne pas confondre taille du fichier, nombre de paramètres, nombre de MAC et temps observé. Même '
+       'un réseau minuscule utilise aussi des entrées, des activations et du code.'),
+      kind='quiz',
+      quiz={'options': ['6 paramètres', '9 paramètres', '12 paramètres'],
+       'correct': 1,
+       'answer': 'La couche cachée a 4 poids et 2 biais ; la sortie a 2 poids et 1 biais. Total : 9 '
+                 'paramètres.',
+       'feedback': ['6 compte les poids mais oublie les trois biais. Le total vaut 9 paramètres.',
+                    'La couche cachée a 4 poids et 2 biais ; la sortie a 2 poids et 1 biais. Total : 9 '
+                    'paramètres.',
+                    'Les deux entrées ne sont pas des paramètres appris. Les deux couches calculées ont '
+                    'au total 6 poids et 3 biais : 9.']},
+      task='Comptez les poids, puis les biais. La question porte uniquement sur les paramètres.')
 
 # 30 minutes: deployment precedes optimisation.
 slide('03 · Déployer et mesurer','Du PC à la carte :\nqu’est-ce qui voyage ?',
@@ -305,12 +335,28 @@ slide('03 · Déployer et mesurer','Plus rapide ne veut pas\ndire automatiquemen
        '<b>Exemple :</b> 0,1 W pendant 0,02 s = 0,002 J, soit 2 mJ.',
        '<b>Périmètre :</b> compter calcul, capteur, veille, radio et pertes selon le service.'], 'energy',5,
       detail='En général, E est l’intégrale de la puissance dans le temps. La durée et les MAC ne donnent pas seuls l’énergie. Sans instrument adapté, rapporter temps et mémoire sans inventer des joules. Une autonomie sur batterie nécessite aussi le rythme d’usage et la consommation de veille.')
-slide('03 · Déployer et mesurer','Quiz 3 / 5 · Le pic RAM\ntient-il dans 128 Kio ?',
-      'Poids : 80 Kio en Flash. En RAM, tous simultanés : activations 60, scratch 40, pile 20, entrées-sorties 16 Kio.',[], 'quiz',7,kind='quiz',
-      task='Dessinez les objets présents au pic. Additionnez seulement ceux qui occupent la RAM.',
-      quiz=dict(options=['120 Kio : les entrées-sorties ne comptent pas.', '216 Kio : tous les poids doivent être en RAM.', '136 Kio : le budget est dépassé de 8 Kio.'],correct=2,
-                answer='60 + 40 + 20 + 16 = 136 Kio. Les constantes sont ici en Flash ; le pic RAM dépasse déjà 128 Kio, avant toute autre consommation non annoncée.'),
-      detail='Une réutilisation de buffers peut réduire le pic seulement si leurs durées de vie ne se recouvrent plus. Il faut la démontrer ; le simple fait de renommer un buffer ne libère pas de mémoire.')
+slide('03 · Déployer et mesurer',
+      'Quel est le pic\nde mémoire RAM annoncé ?',
+      'En RAM, simultanément : activations 60, temporaires 40, pile 20, entrées-sorties 16 Kio. Les 80 Kio de poids restent en Flash.',
+      [],
+      'quiz',
+      7,
+      refs=[],
+      detail=('Une réutilisation de buffers peut réduire le pic seulement si leurs durées de vie ne se '
+       'recouvrent plus. Il faut la démontrer ; le simple fait de renommer un buffer ne libère pas de '
+       'mémoire.'),
+      kind='quiz',
+      quiz={'options': ['120 Kio', '136 Kio', '216 Kio'],
+       'correct': 1,
+       'answer': '60 + 40 + 20 + 16 = 136 Kio. Les poids restent ici en Flash. Avec 128 Kio de RAM, il '
+                 'manque au moins 8 Kio.',
+       'feedback': ['120 oublie les 16 Kio d’entrées-sorties. Tous les éléments annoncés sont simultanés '
+                    ': le pic vaut 136 Kio.',
+                    '60 + 40 + 20 + 16 = 136 Kio. Les poids restent ici en Flash. Avec 128 Kio de RAM, '
+                    'il manque au moins 8 Kio.',
+                    '216 ajoute les poids Flash au budget RAM. Dans ce scénario, ils n’y sont pas copiés '
+                    ': le pic vaut 136 Kio.']},
+      task='Additionnez uniquement ce qui occupe la RAM au même moment.')
 slide('Pause','Pause · 10 minutes.', 'Au retour : observer un goulot, proposer un changement et mesurer.',
       ['<b>À retenir :</b> un service, un modèle, une chaîne complète.', '<b>À compter :</b> qualité, mémoire, temps et énergie.'], 'pause',10,kind='break')
 
@@ -345,12 +391,27 @@ slide('04 · Optimiser une contrainte','Un gain de brique\nn’est pas le gain d
        '<b>Gain :</b> 1 / [(1 − p) + p/s], si aucun autre coût ne change.',
        '<b>Exemple :</b> p = 20 % et s = 2 donnent 1,11× ; 10 % de temps économisé.'], 'amdahl',5,
       detail='Le gain est un rapport de temps avant/après. Il ne faut pas confondre 1,11× avec 11 % de temps économisé. Le modèle suppose travail fixe et absence de surcoût ajouté. Les copies, conversions et préparations doivent être incluses dans la nouvelle mesure.')
-slide('04 · Optimiser une contrainte','Quiz 4 / 5 · Quel délai\naprès optimisation ?',
-      'Le système prenait 100 ms, dont 20 ms dans la brique. Cette brique devient deux fois plus rapide ; le reste est inchangé.',[], 'quiz',7,kind='quiz',
-      task='Écrivez le temps de chaque partie avant et après. Vérifiez le gain global.',
-      quiz=dict(options=['50 ms ; tout le système devient deux fois plus rapide.', '80 ms ; la brique optimisée ne coûte plus rien.', '90 ms ; 10 % du temps total est économisé.'],correct=2,
-                answer='Le reste prend 80 ms ; la brique prend désormais 10 ms. Total : 90 ms. Le gain de vitesse vaut 100/90 ≈ 1,11×. Si une conversion ajoute 12 ms, le total passe à 102 ms.'),
-      detail='Après ce calcul, une mesure sur la cible reste nécessaire. Le même code peut changer de comportement avec la taille des tableaux, les options du compilateur et les caches.')
+slide('04 · Optimiser une contrainte',
+      'Quel sera\nle nouveau délai total ?',
+      'Avant : 100 ms, dont 20 ms dans une brique. Cette brique devient deux fois plus rapide. Tout le reste est inchangé.',
+      [],
+      'quiz',
+      7,
+      refs=[],
+      detail=('Après ce calcul, une mesure sur la cible reste nécessaire. Le même code peut changer de '
+       'comportement avec la taille des tableaux, les options du compilateur et les caches.'),
+      kind='quiz',
+      quiz={'options': ['90 ms', '50 ms', '80 ms'],
+       'correct': 0,
+       'answer': 'Le reste prend toujours 80 ms. La brique passe de 20 à 10 ms : total 90 ms, soit 10 % '
+                 'de temps économisé.',
+       'feedback': ['Le reste prend toujours 80 ms. La brique passe de 20 à 10 ms : total 90 ms, soit 10 '
+                    '% de temps économisé.',
+                    'Seule la brique est deux fois plus rapide. Les 80 autres millisecondes restent : le '
+                    'total vaut 90 ms.',
+                    '80 ms correspond au reste seul. La brique prend encore 10 ms : le total vaut 90 '
+                    'ms.']},
+      task='Séparez le temps de la brique et celui du reste, puis additionnez.')
 
 # 30 minutes: evidence, reliability and a manageable research question.
 slide('05 · Construire une preuve','Une petite recherche :\nquand l’idée fonctionne-t-elle ?',
@@ -379,12 +440,31 @@ slide('05 · Construire une preuve','Lire un article\ncomme un ingénieur.',
       detail='Lin, Chen et leurs collègues présentent MCUNet en 2020, puis MCUNetV2 en 2021 avec une exécution par morceaux pour réduire le pic mémoire. Examiner le coût ajouté et la qualité conservée. La veille avancée est en annexes : AWQ, T-MAC, T-MAN et travaux 2026 ne sont pas nécessaires pour démarrer le TD. Les prépublications y restent explicitement distinguées des publications évaluées.')
 
 # 20 minutes: a decision exercise, then explicit learning outcomes.
-slide('06 · Décider et justifier','Quiz 5 / 5 · Quel système\nrespecte le besoin ?',
-      'Exercice fictif : qualité ≥ 96 %, RAM ≤ 100 Kio, p95 observé ≤ 20 ms et énergie ≤ 3 mJ par décision.',[], 'quiz',15,kind='quiz',
-      task='Comparez A, B et C dans le tableau. Choisissez, justifiez et proposez un test qui pourrait invalider ce choix.',
-      quiz=dict(options=['A : sa meilleure qualité suffit à accepter son dépassement RAM.', 'B : respecte ces quatre seuils ; il reste à valider la robustesse et les limites temporelles.', 'C : sa faible énergie compense automatiquement une qualité sous le seuil.'],correct=1,
-                answer='B satisfait les quatre seuils donnés. A dépasse la RAM ; C échoue au seuil de qualité. Les valeurs sont fictives, p95 est un constat sur les essais et ne garantit pas un pire cas. Tester un autre environnement ou une entrée inconnue peut remettre ce choix en cause.'),
-      detail='Dans cet exercice de classification indépendant du TD : A = 97 %, 120 Kio, 12 ms, 2,4 mJ ; B = 96 %, 96 Kio, 18 ms, 2,8 mJ ; C = 95 %, 72 Kio, 14 ms, 1,8 mJ. Le p95 provient de 500 décisions fictives ; l’énergie est annoncée sur acquisition, calcul et action, hors veille. Un produit doit aussi considérer coût, sécurité, mises à jour et usage réel. Le TD est une régression et utilise d’autres métriques ; ne pas appliquer ces pourcentages à son erreur de prédiction.')
+slide('06 · Décider et justifier',
+      'Quel modèle respecte\nles quatre exigences ?',
+      'Tableau fictif. Exigences : qualité ≥ 96 %, RAM ≤ 100 Kio, p95 observé ≤ 20 ms et énergie ≤ 3 mJ par décision.',
+      [],
+      'quiz',
+      15,
+      refs=[],
+      detail=('Dans cet exercice de classification indépendant du TD : A = 97 %, 120 Kio, 12 ms, 2,4 mJ ; B = '
+       '96 %, 96 Kio, 18 ms, 2,8 mJ ; C = 95 %, 72 Kio, 14 ms, 1,8 mJ. Le p95 provient de 500 décisions '
+       'fictives ; l’énergie est annoncée sur acquisition, calcul et action, hors veille. Un produit '
+       'doit aussi considérer coût, sécurité, mises à jour et usage réel. Le TD est une régression et '
+       'utilise d’autres métriques ; ne pas appliquer ces pourcentages à son erreur de prédiction.'),
+      kind='quiz',
+      quiz={'options': ['Le modèle A', 'Le modèle B', 'Le modèle C'],
+       'correct': 1,
+       'answer': 'B respecte les quatre seuils. A dépasse la RAM ; C n’atteint pas la qualité demandée. '
+                 'Ce choix reste à valider dans d’autres conditions.',
+       'feedback': ['A dépasse le budget RAM : 120 Kio pour 100 autorisés. Sa qualité ne supprime pas '
+                    'cette contrainte. B respecte les quatre seuils.',
+                    'B respecte les quatre seuils. A dépasse la RAM ; C n’atteint pas la qualité '
+                    'demandée. Ce choix reste à valider dans d’autres conditions.',
+                    'C obtient 95 % au lieu des 96 % demandés. Son énergie ne compense pas ce seuil '
+                    'manqué. B respecte les quatre seuils.'],
+       'decision': True},
+      task='Vérifiez les quatre colonnes. Une exigence manquée élimine un candidat.')
 slide('06 · Décider et justifier','Ce que vous devez\nmaintenant pouvoir démontrer.',
       'Au TD, transformer cette compréhension en programme, en mesures et en explication.',
       ['<b>Expliquer :</b> une prédiction, un apprentissage et le trajet du PC à la carte.',

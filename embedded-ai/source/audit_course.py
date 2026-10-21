@@ -106,8 +106,18 @@ def main():
             if not item['quiz']:continue
             go(i);page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
             assert page.locator('.slide.active .quiz-feedback').inner_text().startswith('Oui.')
-            errors=page.evaluate(GEOMETRY)
-            if errors:quiz_overflow.append({'slide':i+1,'errors':errors})
+            for choice in range(len(item['quiz']['options'])):
+                page.locator(f'.slide.active [data-answer="{choice}"]').click()
+                feedback=page.locator('.slide.active .quiz-feedback').inner_text()
+                expected='Oui.' if choice==item['quiz']['correct'] else 'À revoir.'
+                assert feedback.startswith(expected)
+                assert item['quiz']['feedback'][choice] in feedback
+                assert page.locator('.slide.active .quiz-choice.correct').count()==1
+                errors=page.evaluate(GEOMETRY)
+                if errors:quiz_overflow.append({'slide':i+1,'choice':choice,'errors':errors})
+            page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            if item['quiz'].get('decision'):
+                assert page.locator('.slide.active .decision-table').is_visible()
             page.locator('[data-action="toc"]').click()
             page.locator(f'#quiz-list button[data-go="{i}"]').click()
             assert page.locator('.slide.active').get_attribute('data-index')==str(i)
@@ -118,7 +128,7 @@ def main():
         page.locator('[data-action="sources"]').click()
         page.get_by_role('button',name='Voir la bibliographie dans la présentation').click()
         assert 'Sources et limites' in page.locator('.slide.active h1').inner_text()
-        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Garder')
+        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Levier 1')
         page.locator('#slide-list .toc-entry').first.click()
         assert 'Garder' in page.locator('.slide.active h1').inner_text()
         page.keyboard.press('ArrowRight');assert 'Déplacer moins' in page.locator('.slide.active h1').inner_text()

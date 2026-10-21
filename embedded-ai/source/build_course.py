@@ -41,7 +41,7 @@ def build_core(item,index,start):
             options=''.join(f'<button class="quiz-choice" data-answer="{i}" aria-pressed="false"><span class="letter">{"ABC"[i]}</span><span>{escape(option)}</span></button>' for i,option in enumerate(quiz['options']))
             task=escape(item.get('task') or 'Discutez, choisissez et justifiez.')
             context='<span class="question-mark">?</span><h2>Votre raisonnement<br>avant la réponse.</h2>'
-            if item['title'].startswith('Quiz 5'):
+            if quiz.get('decision'):
                 context='<table class="decision-table"><caption>Valeurs fictives · périmètre commun</caption><thead><tr><th>Modèle</th><th>Qualité</th><th>Kio</th><th>ms¹</th><th>mJ</th></tr></thead><tbody><tr><th>A</th><td>97 %</td><td>120</td><td>12</td><td>2,4</td></tr><tr><th>B</th><td>96 %</td><td>96</td><td>18</td><td>2,8</td></tr><tr><th>C</th><td>95 %</td><td>72</td><td>14</td><td>1,8</td></tr></tbody></table><small>¹ p95 sur 500 essais fictifs. Énergie : acquisition + calcul + action, hors veille.</small>'
             middle=heading+f'<div class="content quiz-layout"><div class="quiz-prompt">{context}<p>{task}</p></div><div class="quiz-options">{options}<p class="quiz-feedback" aria-live="polite">Écrivez votre justification, puis choisissez.</p></div></div>'
         else:

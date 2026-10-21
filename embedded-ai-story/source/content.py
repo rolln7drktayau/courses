@@ -288,26 +288,33 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Un réseau apprend une relation entre ce qu’il reçoit et ce qu’il doit produire.',
   'layout': 'technical'},
  {'chapter': 'I · Un besoin humain',
-  'title': 'Faisons le point.\nPourquoi apprendre ?',
-  'lead': 'La lampe doit reconnaître une commande malgré les changements de voix et de bruit.',
+  'title': 'Quel essai aiderait la lampe\nà reconnaître plusieurs voix ?',
+  'lead': 'La lampe reconnaît mal le même mot lorsqu’une autre personne le prononce. Quelle démarche '
+          'essayer ?',
   'points': [],
   'visual': 'quiz',
   'minutes': 7,
   'quote': '',
   'refs': [],
-  'detail': 'Une bonne justification nomme le service, les variations, les erreurs possibles et une alternative '
-            'simple. Les exemples de test ne doivent pas être les exemples utilisés pour régler le modèle.',
+  'detail': 'Une bonne justification nomme le service, les variations, les erreurs possibles et une '
+            'alternative simple. Les exemples de test ne doivent pas être les exemples utilisés pour régler '
+            'le modèle. Les réponses du QCM concernent une seule question ; le prolongement se discute '
+            'après le choix.',
   'kind': 'quiz',
-  'quiz': {'options': ['Un réseau peut apprendre des régularités ; il faut vérifier sa qualité sur des exemples '
-                       'distincts.',
-                       'Un réseau rend inutile la définition du service et du coût des erreurs.',
-                       'Un seul enregistrement suffit dès que le réseau a beaucoup de paramètres.'],
-           'correct': 0,
-           'answer': 'L’apprentissage peut aider à traiter des variations, à condition de disposer de données et '
-                     'd’un test crédibles. Le choix final peut rester une règle ou une autre interface.'},
-  'questions': ['Une règle ou un bouton pourrait-il suffire ?',
-                'Quelles personnes et quels bruits faut-il inclure dans le test ?'],
-  'task': 'Expliquez ce qui varie avant de choisir. Une IA reste une option à comparer.',
+  'quiz': {'options': ['Comparer chaque son à un seul enregistrement plus fort.',
+                       'Apprendre sur plusieurs voix, puis tester des voix nouvelles.',
+                       'Régler le volume du micro pour toutes les personnes.'],
+           'correct': 1,
+           'answer': 'Des exemples variés peuvent aider à apprendre les variations. Des voix nouvelles '
+                     'servent ensuite à vérifier si le modèle généralise.',
+           'feedback': ['Monter le volume ne supprime pas les différences de voix ou de rythme. La démarche '
+                        'B traite ces variations et prévoit un test.',
+                        'Des exemples variés peuvent aider à apprendre les variations. Des voix nouvelles '
+                        'servent ensuite à vérifier si le modèle généralise.',
+                        'Le volume corrige un niveau sonore, pas toutes les différences entre personnes. La '
+                        'démarche B prévoit ces variations.']},
+  'questions': ['Après le choix : pourquoi garder certaines voix hors de l’apprentissage ?'],
+  'task': 'Choisissez une démarche, puis expliquez ce que le test doit vérifier.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'II · Ouvrir le modèle',
@@ -390,25 +397,25 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Le test doit poser des questions nouvelles au modèle.',
   'layout': 'technical'},
  {'chapter': 'II · Ouvrir le modèle',
-  'title': 'À votre tour :\nsuivez les nombres.',
-  'lead': 'Même réseau, nouvelles entrées : x₁ = 2 et x₂ = 1. Chaque neurone calculé a aussi un biais.',
+  'title': 'Avec ces entrées,\nquelle valeur le réseau prédit-il ?',
+  'lead': 'x₁ = 2, x₂ = 1. h₁ = max(0, x₁ − x₂), h₂ = max(0, 0,5x₁ + 0,5x₂), puis ŷ = 2h₁ + h₂.',
   'points': [],
   'visual': 'quiz',
   'minutes': 7,
   'quote': '',
   'refs': [],
-  'detail': 'Le calcul de la sortie vérifie le mécanisme, pas la qualité d’un modèle entraîné. Les activations '
-            'dépendent de l’entrée ; les paramètres restent fixés pendant l’inférence.',
+  'detail': 'Le calcul de la sortie vérifie le mécanisme, pas la qualité d’un modèle entraîné. Les '
+            'activations dépendent de l’entrée ; les paramètres restent fixés pendant l’inférence. Les '
+            'réponses du QCM concernent une seule question ; le prolongement se discute après le choix.',
   'kind': 'quiz',
-  'quiz': {'options': ['ŷ=3,5 ; 9 paramètres ; 6 MAC.',
-                       'ŷ=1,5 ; 6 paramètres ; 9 MAC.',
-                       'ŷ=3,5 ; 9 paramètres ; 9 MAC.'],
-           'correct': 0,
-           'answer': 'h₁=1 et h₂=1,5 donnent ŷ=3,5. Les six poids et trois biais donnent neuf paramètres ; les '
-                     'projections réalisent six MAC, hors biais et activations.'},
-  'questions': ['Qu’est-ce qui change pendant l’inférence ?',
-                'Pourquoi une perte d’apprentissage faible ne suffit-elle pas ?'],
-  'task': 'Écrivez h₁, h₂, puis ŷ. Comptez ensuite paramètres et MAC, biais exclus.',
+  'quiz': {'options': ['ŷ = 1,5', 'ŷ = 2,5', 'ŷ = 3,5'],
+           'correct': 2,
+           'answer': 'h₁ = 1 et h₂ = 1,5. Donc ŷ = 2 × 1 + 1,5 = 3,5. Les poids n’ont pas changé.',
+           'feedback': ['1,5 est la valeur de h₂. Il faut aussi ajouter 2h₁ : la sortie vaut 3,5.',
+                        'La sortie utilise 2h₁, pas h₁. Elle vaut 2 × 1 + 1,5 = 3,5.',
+                        'h₁ = 1 et h₂ = 1,5. Donc ŷ = 2 × 1 + 1,5 = 3,5. Les poids n’ont pas changé.']},
+  'questions': ['Ensuite, sans modifier ce calcul : combien le réseau comporte-t-il de poids et de biais ?'],
+  'task': 'Calculez les deux valeurs cachées avant de choisir la sortie.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'III · La liaison disparaît',
@@ -488,26 +495,33 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Déployer, c’est faire fonctionner le traitement complet sur la vraie cible.',
   'layout': 'technical'},
  {'chapter': 'III · La liaison disparaît',
-  'title': 'Quel système respecte\nla demande d’Alice ?',
-  'lead': 'La commande doit fonctionner sans Internet. L’audio doit rester dans l’objet.',
+  'title': 'Où reconnaître\nla commande ?',
+  'lead': 'Deux exigences : fonctionner sans Internet et garder tout l’audio dans l’objet. Quelle '
+          'architecture les respecte ?',
   'points': [],
   'visual': 'quiz',
   'minutes': 6,
   'quote': '',
   'refs': [],
-  'detail': 'Sans la contrainte sur la sortie de l’audio, une passerelle pourrait devenir un choix pertinent. Une '
-            'bonne réponse dépend des exigences, pas d’un principe imposant que toute IA soit locale.',
+  'detail': 'Sans la contrainte sur la sortie de l’audio, une passerelle pourrait devenir un choix '
+            'pertinent. Une bonne réponse dépend des exigences, pas d’un principe imposant que toute IA '
+            'soit locale. Les réponses du QCM concernent une seule question ; le prolongement se discute '
+            'après le choix.',
   'kind': 'quiz',
-  'quiz': {'options': ['Reconnaître dans l’objet ; télécharger des mises à jour lorsque la liaison revient.',
-                       'Reconnaître sur une passerelle Wi-Fi locale, sans utiliser le cloud.',
-                       'Envoyer seulement de courts extraits audio au serveur.'],
+  'quiz': {'options': ['L’objet prépare le son et reconnaît la commande.',
+                       'L’objet prépare le son ; une passerelle reconnaît la commande.',
+                       'L’objet prépare le son ; un serveur reconnaît la commande.'],
            'correct': 0,
-           'answer': 'Seule la première proposition respecte les deux exigences. Une passerelle éviterait '
-                     'Internet mais ferait sortir l’audio de l’objet. Un entraînement distant peut rester '
-                     'compatible avec une inférence locale.'},
-  'questions': ['Quelles fonctions peuvent encore utiliser un serveur ?',
-                'Quel repli faut-il prévoir si la reconnaissance se trompe ?'],
-  'task': 'Dessinez le trajet des données et vérifiez les deux exigences.',
+           'answer': 'A respecte les deux exigences. Avec B, l’audio quitte l’objet. Avec C, la commande '
+                     'dépend aussi du réseau.',
+           'feedback': ['A respecte les deux exigences. Avec B, l’audio quitte l’objet. Avec C, la commande '
+                        'dépend aussi du réseau.',
+                        'Une passerelle évite éventuellement Internet, mais l’audio quitte encore l’objet. '
+                        'A respecte les deux exigences.',
+                        'Le serveur reçoit l’audio et demande une liaison : les deux exigences sont '
+                        'manquées. A les respecte.']},
+  'questions': ['Après le choix : les mises à jour du modèle peuvent-elles encore venir d’un serveur ?'],
+  'task': 'Vérifiez chaque exigence séparément avant de choisir.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'Pause',
@@ -628,28 +642,31 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Réduire le nombre de niveaux crée des arrondis ; il faut mesurer leur effet sur la tâche.',
   'layout': 'technical'},
  {'chapter': 'IV · La boîte est trop petite',
-  'title': 'Le programme dépasse.\nOù gagner de la place ?',
-  'lead': 'Exemple fictif : 128 Kio de RAM. Les poids occupent 80 Kio en Flash. En RAM : 60 + 40 + 20 + 16 Kio en '
-          'même temps.',
+  'title': 'Quel est le pic\nde mémoire RAM annoncé ?',
+  'lead': 'En RAM, simultanément : activations 60, temporaires 40, pile 20, entrées-sorties 16 Kio. Les 80 '
+          'Kio de poids restent en Flash.',
   'points': [],
   'visual': 'quiz',
   'minutes': 4,
   'quote': '',
   'refs': [],
-  'detail': 'Le placement est une hypothèse du scénario, pas une règle universelle. Il faut compter le reste du '
-            'firmware et mesurer ou borner la pile. Une économie de stockage ne démontre pas une économie de '
-            'travail simultané.',
+  'detail': 'Le placement est une hypothèse du scénario, pas une règle universelle. Il faut compter le '
+            'reste du firmware et mesurer ou borner la pile. Une économie de stockage ne démontre pas une '
+            'économie de travail simultané. Les réponses du QCM concernent une seule question ; le '
+            'prolongement se discute après le choix.',
   'kind': 'quiz',
-  'quiz': {'options': ['120 Kio : les entrées-sorties peuvent être ignorées.',
-                       '136 Kio : le pic dépasse la capacité de 8 Kio.',
-                       '216 Kio : tous les poids doivent toujours être copiés en SRAM.'],
+  'quiz': {'options': ['120 Kio', '136 Kio', '216 Kio'],
            'correct': 1,
-           'answer': 'Le pic annoncé vaut 136 Kio : dépassement de 8 Kio. Dans ce scénario, les poids restent en '
-                     'Flash. Une réutilisation de buffers peut aider si leurs durées de vie ne se recouvrent '
-                     'pas.'},
-  'questions': ['Réduire seulement les poids Flash résout-il le pic SRAM ?',
-                'Quand deux buffers peuvent-ils partager le même espace ?'],
-  'task': 'Dessinez le pic et additionnez les objets RAM, puis choisissez.',
+           'answer': '60 + 40 + 20 + 16 = 136 Kio. Les poids restent ici en Flash. Avec 128 Kio de RAM, il '
+                     'manque au moins 8 Kio.',
+           'feedback': ['120 oublie les 16 Kio d’entrées-sorties. Tous les éléments annoncés sont '
+                        'simultanés : le pic vaut 136 Kio.',
+                        '60 + 40 + 20 + 16 = 136 Kio. Les poids restent ici en Flash. Avec 128 Kio de RAM, '
+                        'il manque au moins 8 Kio.',
+                        '216 ajoute les poids Flash au budget RAM. Dans ce scénario, ils n’y sont pas '
+                        'copiés : le pic vaut 136 Kio.']},
+  'questions': ['Après le calcul : compresser seulement les poids Flash résout-il ce dépassement ?'],
+  'task': 'Additionnez uniquement ce qui occupe la RAM au même moment.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'V · Cela tient, mais cela attend',
@@ -756,25 +773,30 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Accélérer un petit morceau ne divise pas tout le temps par le même nombre.',
   'layout': 'technical'},
  {'chapter': 'V · Cela tient, mais cela attend',
-  'title': 'Refaisons le compte.\nQuel est le vrai gain ?',
-  'lead': 'L’application prenait 100 ms, dont 20 ms dans la brique. Cette brique devient deux fois plus rapide.',
+  'title': 'Quel sera\nle nouveau délai total ?',
+  'lead': 'Avant : 100 ms, dont 20 ms dans une brique. Cette brique devient deux fois plus rapide. Tout le '
+          'reste est inchangé.',
   'points': [],
   'visual': 'quiz',
   'minutes': 3,
   'quote': '',
   'refs': [],
   'detail': 'Un résultat PC ne certifie pas un gain sur carte. Il faut vérifier la correction et mesurer le '
-            'périmètre annoncé dans les mêmes conditions.',
+            'périmètre annoncé dans les mêmes conditions. Les réponses du QCM concernent une seule question '
+            '; le prolongement se discute après le choix.',
   'kind': 'quiz',
-  'quiz': {'options': ['50 ms : toute l’application devient deux fois plus rapide.',
-                       '90 ms : le système économise 10 % de sa durée.',
-                       '80 ms : la brique optimisée ne coûte plus rien.'],
-           'correct': 1,
-           'answer': '80 ms inchangées + 10 ms pour la brique = 90 ms. Avec 12 ms de conversion ajoutée, 102 ms : '
-                     'l’application ralentit. Les durées seules ne donnent pas l’énergie.'},
-  'questions': ['Que devient le résultat si une conversion ajoute 12 ms ?',
-                'Ces durées permettent-elles de calculer l’énergie consommée ?'],
-  'task': 'Reconstituez les deux parties du temps. Le reste est inchangé.',
+  'quiz': {'options': ['90 ms', '50 ms', '80 ms'],
+           'correct': 0,
+           'answer': 'Le reste prend toujours 80 ms. La brique passe de 20 à 10 ms : total 90 ms, soit 10 % '
+                     'de temps économisé.',
+           'feedback': ['Le reste prend toujours 80 ms. La brique passe de 20 à 10 ms : total 90 ms, soit '
+                        '10 % de temps économisé.',
+                        'Seule la brique est deux fois plus rapide. Les 80 autres millisecondes restent : '
+                        'le total vaut 90 ms.',
+                        '80 ms correspond au reste seul. La brique prend encore 10 ms : le total vaut 90 '
+                        'ms.']},
+  'questions': ['Après le calcul : une conversion ajoute 12 ms. Le système reste-t-il plus rapide ?'],
+  'task': 'Séparez le temps de la brique et celui du reste, puis additionnez.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'VI · Alice demande des preuves',
@@ -859,30 +881,34 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Il n’existe pas de modèle optimal pour tous les appareils et tous les besoins.',
   'layout': 'illustrated'},
  {'chapter': 'VI · Alice demande des preuves',
-  'title': 'Vous devez choisir.\nQue gardez-vous ?',
-  'lead': 'Exemple fictif : qualité ≥ 96 %, RAM ≤ 100 Kio, délai p95 observé ≤ 20 ms, énergie ≤ 3 mJ par '
-          'décision.',
+  'title': 'Quel modèle respecte\nles quatre exigences ?',
+  'lead': 'Tableau fictif. Exigences : qualité ≥ 96 %, RAM ≤ 100 Kio, p95 observé ≤ 20 ms et énergie ≤ 3 mJ '
+          'par décision.',
   'points': [],
   'visual': 'quiz',
   'minutes': 8,
   'quote': '',
   'refs': [],
-  'detail': 'Données de classification fictives : A=97 %,120 Kio,12 ms,2,4 mJ ; B=96 %,96 Kio,18 ms,2,8 mJ ; C=95 '
-            '%,72 Kio,14 ms,1,8 mJ. p95 sur 500 essais fictifs ; énergie sur acquisition/calcul/action, hors '
-            'veille. Le TD est une régression : ses métriques ne sont pas ces pourcentages. Les seuils sont des '
-            'exigences, pas une compensation entre notes : une excellente précision ne crée pas de mémoire '
-            'supplémentaire.',
+  'detail': 'Données de classification fictives : A=97 %,120 Kio,12 ms,2,4 mJ ; B=96 %,96 Kio,18 ms,2,8 mJ '
+            '; C=95 %,72 Kio,14 ms,1,8 mJ. p95 sur 500 essais fictifs ; énergie sur '
+            'acquisition/calcul/action, hors veille. Le TD est une régression : ses métriques ne sont pas '
+            'ces pourcentages. Les seuils sont des exigences, pas une compensation entre notes : une '
+            'excellente précision ne crée pas de mémoire supplémentaire. Les réponses du QCM concernent une '
+            'seule question ; le prolongement se discute après le choix.',
   'kind': 'quiz',
-  'quiz': {'decision': True,
-           'options': ['A : sa qualité suffit à accepter son dépassement RAM.',
-                       'B : les seuils donnés sont respectés ; la robustesse et les limites restent à vérifier.',
-                       'C : sa faible énergie compense automatiquement sa qualité sous le seuil.'],
+  'quiz': {'options': ['Le modèle A', 'Le modèle B', 'Le modèle C'],
            'correct': 1,
-           'answer': 'B satisfait les quatre seuils fictifs. A dépasse la RAM, C manque la qualité requise. Un '
-                     'p95 observé ne garantit pas le pire cas. Tester d’autres conditions peut remettre le choix '
-                     'en cause.'},
-  'questions': ['Un p95 observé garantit-il tous les délais futurs ?'],
-  'task': 'Choisissez avec les quatre contraintes. Proposez ensuite un test qui pourrait invalider ce choix.',
+           'answer': 'B respecte les quatre seuils. A dépasse la RAM ; C n’atteint pas la qualité demandée. '
+                     'Ce choix reste à valider dans d’autres conditions.',
+           'feedback': ['A dépasse le budget RAM : 120 Kio pour 100 autorisés. Sa qualité ne supprime pas '
+                        'cette contrainte. B respecte les quatre seuils.',
+                        'B respecte les quatre seuils. A dépasse la RAM ; C n’atteint pas la qualité '
+                        'demandée. Ce choix reste à valider dans d’autres conditions.',
+                        'C obtient 95 % au lieu des 96 % demandés. Son énergie ne compense pas ce seuil '
+                        'manqué. B respecte les quatre seuils.'],
+           'decision': True},
+  'questions': ['Après le choix : quel essai supplémentaire pourrait remettre cette décision en cause ?'],
+  'task': 'Vérifiez les quatre colonnes. Une exigence manquée élimine un candidat.',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'VI · Alice demande des preuves',

@@ -114,8 +114,18 @@ def main():
             if not item['quiz']:continue
             go(i);page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
             assert page.locator('.slide.active .quiz-feedback').inner_text().startswith('Oui.')
-            errors=page.evaluate(GEOMETRY)
-            if errors:quiz_overflow.append({'slide':i+1,'errors':errors})
+            for choice in range(len(item['quiz']['options'])):
+                page.locator(f'.slide.active [data-answer="{choice}"]').click()
+                feedback=page.locator('.slide.active .quiz-feedback').inner_text()
+                expected='Oui.' if choice==item['quiz']['correct'] else 'À revoir.'
+                assert feedback.startswith(expected)
+                assert item['quiz']['feedback'][choice] in feedback
+                assert page.locator('.slide.active .quiz-choice.correct').count()==1
+                errors=page.evaluate(GEOMETRY)
+                if errors:quiz_overflow.append({'slide':i+1,'choice':choice,'errors':errors})
+            page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            if item['quiz'].get('decision'):
+                assert page.locator('.slide.active .decision-table').is_visible()
             page.locator('[data-action="toc"]').click()
             page.locator(f'#quiz-list button[data-go="{i}"]').click()
             assert page.locator('.slide.active').get_attribute('data-index')==str(i)

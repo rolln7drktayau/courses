@@ -123,7 +123,7 @@
         const k=Number(b.dataset.answer);b.classList.toggle('correct',k===d.quiz.correct);b.classList.toggle('wrong',k===answer && answer!==d.quiz.correct);
         b.setAttribute('aria-pressed',String(k===answer));
       });
-      const output=q('.quiz-feedback',root);output.classList.add('answered');output.textContent=(answer===d.quiz.correct?'Oui. ':'À revoir. ')+d.quiz.answer;
+      const output=q('.quiz-feedback',root);output.classList.add('answered');output.textContent=(answer===d.quiz.correct?'Oui. ':'À revoir. ')+(d.quiz.feedback?.[answer] || d.quiz.answer);
     }
   });
   document.addEventListener('keydown', e => {
