@@ -1,5 +1,5 @@
 {
-  "oral_slides": 35,
+  "oral_slides": 36,
   "annexes": 21,
   "minutes": 180,
   "references": 23,
@@ -23,9 +23,10 @@
     "Progressive reveals, reverse navigation, saved step URL and network schematic toggle"
   ],
   "embedded_artwork": "all narrative panels contain their offline image",
+  "opening_questions": "four unscored prompts, revealed separately before the story",
   "browser_benchmark_rows": 14,
   "quiz_feedback_overflow": [],
   "mobile_navigation_fits": true,
-  "pdf_pages": 56,
+  "pdf_pages": 57,
   "pdf_links": 54
 }

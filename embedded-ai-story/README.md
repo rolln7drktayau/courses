@@ -8,7 +8,7 @@ Le [cours principal](https://rolln7drktayau.github.io/courses/embedded-ai/) cons
 
 ## Parcours
 
-Alice voudrait commander une lampe à la voix. Cette situation permet d’expliquer, dans l’ordre, le besoin d’un modèle, ses calculs, le choix de les exécuter dans un objet et les contraintes qui apparaissent. Six chapitres et 35 scènes conduisent du service attendu à une petite question de recherche. Six pauses questions demandent de calculer, d’expliquer ou de choisir sous contraintes. Vingt et une pages complémentaires rassemblent extensions, vocabulaire, lectures et réponses.
+Alice voudrait commander une lampe à la voix. Cette situation permet d’expliquer, dans l’ordre, le besoin d’un modèle, ses calculs, le choix de les exécuter dans un objet et les contraintes qui apparaissent. Quatre questions orales ouvrent le parcours après la couverture, sans score ni outil externe. Six chapitres et 36 scènes conduisent du service attendu à une petite question de recherche. Six pauses questions demandent de calculer, d’expliquer ou de choisir sous contraintes. Vingt et une pages complémentaires rassemblent extensions, vocabulaire, lectures et réponses.
 
 L’idée de chaque scène est résumée en une phrase. Les termes sont expliqués lors de leur introduction ; les formules et leurs limites restent accessibles. Ce choix facilite une première lecture, sans prétendre qu’une lecture seule qualifie un ingénieur ou qu’un enfant maîtrise les mathématiques de l’apprentissage.
 

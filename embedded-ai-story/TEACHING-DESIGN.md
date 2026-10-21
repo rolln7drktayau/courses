@@ -14,7 +14,9 @@ La présentation part d’un usage quotidien, fait apparaître une difficulté, 
 | V | 120–145 | Pourquoi moins d’opérations ne garantit-il pas le même gain de temps ou d’énergie ? |
 | VI | 145–180 | Comment vérifier, comparer et poursuivre une recherche mesurée ? |
 
-Les pauses questions sont aux scènes 6, 11, 16, 23, 29 et 34. Elles associent explication orale, calcul ou choix, puis réponse commentée. Le rythme de trois heures comprend ces échanges. Les 21 pages complémentaires ne sont pas prévues pour une présentation intégrale pendant ces trois heures.
+Quatre questions orales de départ occupent quatre minutes après la couverture ; elles sont reprises à la conclusion. Ce temps est inclus dans les 25 minutes du premier chapitre. Aucun score ni service de quiz externe n’est nécessaire.
+
+Les pauses questions sont aux scènes 7, 12, 17, 24, 30 et 35. Elles associent explication orale, calcul ou choix, puis réponse commentée. Le rythme de trois heures comprend ces échanges. Les 21 pages complémentaires ne sont pas prévues pour une présentation intégrale pendant ces trois heures.
 
 Les images rendent les personnes et les situations visibles. Les textes, formules et chiffres restent séparés des images pour être lisibles, accessibles et modifiables. Les nombres illustratifs sont annoncés ; aucun score, temps ou gain matériel n’est inventé comme résultat expérimental. La mesure dans le navigateur est limitée explicitement à son environnement.
 

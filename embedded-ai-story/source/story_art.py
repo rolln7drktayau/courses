@@ -48,7 +48,7 @@ def draw_story(name):
     if name=='story_pause':
         return stage(4,'Alice prépare la carte sur son établi.','Après la pause : comment le faire tenir et fonctionner ?')
     if name=='story_epilogue':
-        return stage(5,'Alice explique son travail à deux camarades.','À votre tour : racontez le chemin du son jusqu’à la lampe.')
+        return stage(5,'Alice explique son travail à deux camarades.','Reprenez les quatre questions du départ : vos réponses ont-elles changé ?')
     if name=='story_robustness':
         return stage(1,'Des personnes différentes utilisent la commande.',
                      'Essayer d’autres personnes, d’autres bruits, d’autres conditions.',

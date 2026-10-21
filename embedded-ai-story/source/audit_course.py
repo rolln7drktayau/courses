@@ -22,7 +22,7 @@ GEOMETRY='''() => {
  if(content){within(s.querySelector('.points'),content,'points');within(s.querySelector('.visual'),content,'visual');
   within(s.querySelector('.story-copy'),content,'story-copy');
   within(s.querySelector('.quiz-options'),content,'quiz-options');}
- s.querySelectorAll('.visual,.interactive-panel,.reference-list,.glossary-grid').forEach(el=>{
+ s.querySelectorAll('.visual,.interactive-panel,.reference-list,.glossary-grid,.opening-grid,.opening-card,.quiz-prompt').forEach(el=>{
   if(el.scrollHeight>el.clientHeight+3||el.scrollWidth>el.clientWidth+3)errors.push({label:el.className,scrollH:el.scrollHeight-el.clientHeight,scrollW:el.scrollWidth-el.clientWidth});
  });
  const last=s.querySelector('.content,.reference-list,.glossary-grid,.answer-list,.hero-grid');
@@ -67,6 +67,14 @@ def main():
         def go(i):page.evaluate("(i)=>window.Course.show(i,true,'all')",i)
         def visual(name):
             go(next(i for i,item in enumerate(SLIDES+extra) if item.get('visual')==name))
+        assert sum(item['minutes'] for item in SLIDES)==180
+        page.evaluate('window.Course.show(1,true)')
+        assert page.locator('.slide.active .opening-card').count()==4
+        assert page.locator('.slide.active [data-answer]').count()==0
+        for count in range(1,5):
+            page.keyboard.press('ArrowRight')
+            assert page.locator('.slide.active .opening-card:not(.fragment-hidden)').count()==count
+        results['opening_questions']='four unscored prompts, revealed separately before the story'
         visual('forward_lab')
         assert page.locator('.slide.active [data-forward-value="y"]').inner_text()=='1,5'
         page.locator('.slide.active [data-forward="x1"]').fill('3')
@@ -112,7 +120,10 @@ def main():
         quiz_overflow=[]
         for i,item in enumerate(SLIDES):
             if not item['quiz']:continue
-            go(i);page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            go(i)
+            assert page.locator('.slide.active .quiz-followup').is_hidden()
+            page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            assert page.locator('.slide.active .quiz-followup').is_visible()
             assert page.locator('.slide.active .quiz-feedback').inner_text().startswith('Oui.')
             for choice in range(len(item['quiz']['options'])):
                 page.locator(f'.slide.active [data-answer="{choice}"]').click()
@@ -131,7 +142,7 @@ def main():
             assert page.locator('.slide.active').get_attribute('data-index')==str(i)
         results['quiz_feedback_overflow']=quiz_overflow
         results['interactive_checks'].append('Six end-of-act question breaks: open questions, numerical choices and explanations')
-        go(4);page.locator('.slide.active [data-ref="R01"]').click()
+        visual('story_alvinn');page.locator('.slide.active [data-ref="R01"]').click()
         assert page.locator('#reader').evaluate('d=>d.open');page.locator('[data-action="close"]').click()
         page.locator('[data-action="sources"]').click()
         page.get_by_role('button',name='Voir la bibliographie dans la présentation').click()
@@ -174,13 +185,16 @@ def main():
     for ref in REFERENCES:assert ref['id'] in text,ref['id']
     assert 'Futurs ingénieurs en systèmes embarqués' not in pdf[0].get_text()
     assert 'Alice' in pdf[0].get_text()
-    for i in [0,1,2,3,4,11,12,16,30,34]:
-        assert pdf[i].get_images(),f'Missing printed scene art at {i+1}'
+    for i,item in enumerate(SLIDES):
+        if item['visual'] in {'story_cover','story_request','story_voices','story_shakey','story_alvinn','story_remote','story_outage','story_pause','story_robustness','story_epilogue'}:
+            assert pdf[i].get_images(),f'Missing printed scene art at {i+1}'
     assert all(ref in text for ref in ['Pomerleau','Howard','Jacob','Wei-Ming Chen'])
-    assert 'La lampe' in pdf[1].get_text()
+    assert 'Sans Internet' not in pdf[1].get_text()
+    assert 'Une IA peut-elle fonctionner sans Internet' in pdf[1].get_text()
+    assert 'La lampe' in pdf[2].get_text()
     assert sum(bool(item['quiz']) for item in SLIDES)==6
     results['pdf_links']=sum(len(p.get_links()) for p in pdf)
-    selected=[0,1,2,3,4,7,12,19,20,24,30,33]
+    selected=[0,1,2,4,5,8,13,20,21,25,31,34]
     thumbs=[]
     for i in selected:
         pix=pdf[i].get_pixmap(matrix=fitz.Matrix(.4,.4))
