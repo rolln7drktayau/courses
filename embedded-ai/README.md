@@ -4,6 +4,7 @@
 
 A three-hour course for future embedded-systems engineers. The teaching language is **French**; the repository directory and technical source organisation use English names.
 
+- **Guided course-building workshop:** https://rolln7drktayau.github.io/courses/embedded-ai/workshop/
 - **Interactive presentation:** https://rolln7drktayau.github.io/courses/embedded-ai/
 - **PDF slides:** https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf
 - **Two-page teaching plan:** https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf
@@ -70,3 +71,11 @@ The browser audit checks every core and optional slide, numerical interactions, 
 GitHub Pages publishes the repository root from `main`; `.nojekyll` disables Jekyll processing. Commit the rebuilt HTML and PDFs together. Relative links keep the presentation and PDF under the same project path. No instructor solution or private TD artefact is included in this directory.
 
 The materials were prepared with AI assistance, followed by the documented reference, mathematical and browser checks. The PDF contains the initial numerical examples and quiz explanations; browser interactions and raw timing export require the HTML. Third-party papers are linked, not redistributed. No blanket licence is asserted here for those papers.
+
+## Active workshop route
+
+[workshop/](workshop/) provides a 210-minute guided inquiry for about 35 students in seven teams of five, with an optional 420-minute full-day extension. Students calculate a common case, investigate balanced complementary questions, challenge evidence and assemble their own course from exported JSON files. Individual exit questions check transfer beyond the team's topic.
+
+The page supports local drafts, group JSON/Markdown export and manual assembly of seven chapters as HTML/Markdown or printable PDF. It has no backend or cross-device synchronisation. The download bundle contains the reference presentation for offline consultation, student worksheets, illustrative data and a blank evidence-repository template. The private facilitation guide and the instructor's project solution are outside the repository.
+
+Use the workshop instead of adding it on top of the three-hour presentation. Rebuild public workshop documents with `python source/build_workshop.py` after rebuilding the presentation; verify with `python source/audit_workshop.py`.

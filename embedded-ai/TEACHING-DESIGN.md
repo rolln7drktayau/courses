@@ -37,3 +37,9 @@ The live micro-experiment compares a JavaScript loop and `reduce` on the same de
 The final decision table is fictional and independent of the regression project. Its observed p95 is not a worst-case guarantee. Learning to experiment and explaining a negative result are assessed; an accepted publication or a novel speed record is not promised.
 
 The 21 optional slides keep convolution, recurrence, attention, KV-cache details, compression and current research available without requiring their presentation within the core time. The PDF displays initial examples and quiz explanations; interactions and CSV export require HTML.
+
+## Guided course-building route
+
+The workshop at `workshop/` is a 210-minute alternative opening, not an additional three-hour lecture. Seven teams share a common case before separate inquiries. Rotating roles, directed peer review, short teach-backs, all-topic notes and an unaided individual check address the risk that only one student or one topic is understood. The teacher facilitates and validates; importing a JSON file does not certify it.
+
+Freeman et al. (2014), Cornell's group-work design guidance and CMU Eberly's small-group recommendations inform the choice; see `workshop/SOURCES.md`. Those sources support the approach in general, not a claimed measured learning gain for this new workshop. Local facilitation notes are kept outside the public repository.
