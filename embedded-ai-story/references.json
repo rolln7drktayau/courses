@@ -1,0 +1,232 @@
+[
+  {
+    "id": "R01",
+    "authors": "Dean Pomerleau",
+    "year": "1989",
+    "title": "ALVINN: An Autonomous Land Vehicle In a Neural Network",
+    "status": "Repère historique · publication CMU / actes NeurIPS",
+    "url": "https://publications.ri.cmu.edu/alvinn-an-autonomous-land-vehicle-in-a-neural-network",
+    "takeaway": "Relier perception apprise et action à bord d’un véhicule.",
+    "limit": "Démonstrateur historique ; ni autonomie générale ni exécution sur microcontrôleur."
+  },
+  {
+    "id": "R02",
+    "authors": "Andrew G. Howard et al.",
+    "year": "2017",
+    "title": "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications",
+    "status": "Article fondateur · arXiv 1704.04861",
+    "url": "https://arxiv.org/abs/1704.04861",
+    "takeaway": "Séparer convolution spatiale et mélange des canaux pour réduire le calcul.",
+    "limit": "Moins de MAC ne garantit pas la même réduction de latence sur chaque cible."
+  },
+  {
+    "id": "R03",
+    "authors": "Benoit Jacob et al.",
+    "year": "2018",
+    "title": "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference",
+    "status": "CVPR 2018 · prépublication 2017",
+    "url": "https://arxiv.org/abs/1712.05877",
+    "takeaway": "Co-concevoir quantification, apprentissage et noyaux entiers.",
+    "limit": "Le format des poids, des activations et des accumulateurs doit être distingué."
+  },
+  {
+    "id": "R04",
+    "authors": "Ji Lin, Wei-Ming Chen et al.",
+    "year": "2020",
+    "title": "MCUNet: Tiny Deep Learning on IoT Devices",
+    "status": "NeurIPS 2020",
+    "url": "https://arxiv.org/abs/2007.10319",
+    "takeaway": "Chercher ensemble l’architecture du réseau et son moteur d’exécution.",
+    "limit": "Résultats sur des cibles et tâches précises, pas une capacité universelle des MCU."
+  },
+  {
+    "id": "R05",
+    "authors": "Ji Lin, Wei-Ming Chen, Han Cai et al.",
+    "year": "2021",
+    "title": "MCUNetV2: Memory-Efficient Patch-based Inference for Tiny Deep Learning",
+    "status": "NeurIPS 2021",
+    "url": "https://arxiv.org/abs/2110.15352",
+    "takeaway": "Traiter des morceaux de carte de caractéristiques pour réduire le pic mémoire.",
+    "limit": "Les recouvrements peuvent ajouter du calcul ; l’ordonnancement compte."
+  },
+  {
+    "id": "R06",
+    "authors": "Ji Lin, Ligeng Zhu et al.",
+    "year": "2022",
+    "title": "On-Device Training Under 256KB Memory",
+    "status": "NeurIPS 2022",
+    "url": "https://arxiv.org/abs/2206.15472",
+    "takeaway": "Rendre possible une adaptation locale par mises à jour sélectives et co-conception.",
+    "limit": "Il ne s’agit pas d’entraîner librement n’importe quel réseau dans 256 Ko."
+  },
+  {
+    "id": "R07",
+    "authors": "Tri Dao, Daniel Y. Fu et al.",
+    "year": "2022",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "status": "NeurIPS 2022",
+    "url": "https://arxiv.org/abs/2205.14135",
+    "takeaway": "Réorganiser le calcul d’attention pour réduire les échanges mémoire sur GPU.",
+    "limit": "Attention exacte à l’arrondi près ; les résultats GPU ne décrivent pas un MCU."
+  },
+  {
+    "id": "R08",
+    "authors": "Si-An Chen et al.",
+    "year": "2023",
+    "title": "TSMixer: An All-MLP Architecture for Time Series Forecasting",
+    "status": "Transactions on Machine Learning Research, 2023",
+    "url": "https://arxiv.org/abs/2303.06053",
+    "takeaway": "Mélanger les instants puis les variables avec des perceptrons multicouches.",
+    "limit": "Le réseau du TD est une réduction pédagogique, pas une reproduction de l’article."
+  },
+  {
+    "id": "R09",
+    "authors": "Ji Lin, Jiaming Tang et al.",
+    "year": "2024",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+    "status": "MLSys 2024 · prépublication 2023",
+    "url": "https://arxiv.org/abs/2306.00978",
+    "takeaway": "Utiliser des statistiques d’activation pour mieux préserver les canaux sensibles.",
+    "limit": "Quantifier les poids ne signifie pas quantifier toute la mémoire ni tous les calculs."
+  },
+  {
+    "id": "R10",
+    "authors": "Danfeng Qin et al.",
+    "year": "2024",
+    "title": "MobileNetV4 — Universal Models for the Mobile Ecosystem",
+    "status": "ECCV 2024",
+    "url": "https://arxiv.org/abs/2404.10518",
+    "takeaway": "Concevoir des blocs et une recherche d’architecture adaptés à plusieurs matériels mobiles.",
+    "limit": "L’écosystème mobile évalué ne couvre pas tous les microcontrôleurs."
+  },
+  {
+    "id": "R11",
+    "authors": "Jianyu Wei, Shijie Cao et al.",
+    "year": "2025",
+    "title": "T-MAC: CPU Renaissance via Table Lookup for Low-Bit LLM Deployment on Edge",
+    "status": "EuroSys 2025 · prépublication 2024",
+    "url": "https://arxiv.org/abs/2407.00088",
+    "takeaway": "Remplacer certaines opérations de produits mixtes par des tables de recherche adaptées.",
+    "limit": "Bénéfices dépendants du bit-width, des noyaux, des formes et des matériels comparés."
+  },
+  {
+    "id": "R12",
+    "authors": "Loubna Ben Allal et al.",
+    "year": "2025",
+    "title": "SmolLM2: When Smol Goes Big — Data-Centric Training of a Small Language Model",
+    "status": "Prépublication arXiv 2502.02737",
+    "url": "https://arxiv.org/abs/2502.02737",
+    "takeaway": "La qualité et le mélange des données comptent aussi pour les petits modèles de langage.",
+    "limit": "« Petit » à 1,7 milliard de paramètres reste immense pour un MCU."
+  },
+  {
+    "id": "R13",
+    "authors": "Jianyu Wei, Qingtao Li et al.",
+    "year": "2025",
+    "title": "T-MAN: Enabling End-to-End Low-Bit LLM Inference on NPUs via Unified Table Lookup",
+    "status": "Prépublication arXiv · 14 novembre 2025",
+    "url": "https://arxiv.org/abs/2511.11248",
+    "takeaway": "Adapter tables, tuilage et pipeline aux opérations réellement prises en charge par un NPU.",
+    "limit": "Résultats propres aux systèmes étudiés ; le statut de publication évaluée n’est pas établi ici."
+  },
+  {
+    "id": "R14",
+    "authors": "Emre Can Kizilates",
+    "year": "2026",
+    "title": "From Compression to Deployment: Real-Time and Energy-Efficient FastGRNN on Ultra-Constrained Microcontrollers",
+    "status": "Prépublication arXiv · 15 juin 2026",
+    "url": "https://arxiv.org/abs/2606.17249",
+    "takeaway": "Étudier ensemble compression, activation par table, état récurrent et déploiement physique.",
+    "limit": "Étude particulière ; variabilité entre graines et temps de mise en régime à examiner."
+  },
+  {
+    "id": "R15",
+    "authors": "Ajay Kumar M et al.",
+    "year": "2026",
+    "title": "A Framework for Accelerating Transformer Inference on RISC-V for Edge AI",
+    "status": "Prépublication arXiv · accepté à ICECS 2026 selon la notice des auteurs",
+    "url": "https://arxiv.org/abs/2610.08688",
+    "takeaway": "Adapter instructions et compilation à des Transformers compacts, principalement encodeurs.",
+    "limit": "Modifier un cœur RISC-V est un travail matériel ; ce gain n’est pas un simple correctif logiciel."
+  },
+  {
+    "id": "R16",
+    "authors": "Apostol Vassilev, Alina Oprea et al.",
+    "year": "2025",
+    "title": "Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations",
+    "status": "Rapport technique NIST AI 100-2e2025",
+    "url": "https://doi.org/10.6028/NIST.AI.100-2e2025",
+    "takeaway": "Distinguer attaques sur données, entrées, modèles et vie privée.",
+    "limit": "Une taxonomie et des contre-mesures ne garantissent pas la sécurité d’un produit."
+  },
+  {
+    "id": "R17",
+    "authors": "Ji Lin, Ligeng Zhu, Wei-Ming Chen, Wei-Chen Wang, Song Han",
+    "year": "2023 / 2024",
+    "title": "Tiny Machine Learning: Progress and Futures",
+    "status": "IEEE Circuits and Systems Magazine 2023 · dépôt arXiv 2024",
+    "url": "https://arxiv.org/abs/2403.19076",
+    "takeaway": "Vue d’ensemble de la co-conception et du passage de l’inférence à l’adaptation locale.",
+    "limit": "Date de dépôt arXiv et date de publication diffèrent ; ce panorama n’est pas un état exhaustif 2026."
+  },
+  {
+    "id": "R18",
+    "authors": "Colby Banbury, Vijay Janapa Reddi et al.",
+    "year": "2021",
+    "title": "MLPerf Tiny Benchmark",
+    "status": "NeurIPS 2021 · Datasets and Benchmarks",
+    "url": "https://arxiv.org/abs/2106.07597",
+    "takeaway": "Comparer qualité, latence et énergie avec un protocole reproductible.",
+    "limit": "Respecter la tâche, le périmètre et les règles ; ne pas comparer seulement des scores isolés."
+  },
+  {
+    "id": "R19",
+    "authors": "Arm",
+    "year": "Documentation consultée en 2026",
+    "title": "CMSIS-NN — Efficient neural network kernels for Arm Cortex-M",
+    "status": "Dépôt officiel de noyaux optimisés",
+    "url": "https://github.com/ARM-software/CMSIS-NN",
+    "takeaway": "Les performances dépendent de noyaux adaptés à l’ISA et aux formats quantifiés.",
+    "limit": "Une bibliothèque ne supprime pas les limites mémoire ou les vérifications de l’application."
+  },
+  {
+    "id": "R20",
+    "authors": "Google AI Edge",
+    "year": "Documentation consultée en 2026",
+    "title": "LiteRT for Microcontrollers",
+    "status": "Documentation officielle du moteur MCU",
+    "url": "https://developers.google.com/edge/litert/microcontrollers/overview",
+    "takeaway": "Déployer un sous-ensemble d’opérateurs avec une allocation adaptée au microcontrôleur.",
+    "limit": "Vérifier les opérations, types et cibles pris en charge ; conversion n’est pas validation."
+  },
+  {
+    "id": "R21",
+    "authors": "MLCommons",
+    "year": "Documentation consultée en 2026",
+    "title": "MLPerf Inference: Tiny",
+    "status": "Méthodologie et résultats officiels",
+    "url": "https://mlcommons.org/benchmarks/inference-tiny/",
+    "takeaway": "Lire conjointement qualité, scénario de mesure et configuration matérielle.",
+    "limit": "Aucun chiffre de classement en temps réel n’est repris dans ce support."
+  },
+  {
+    "id": "R22",
+    "authors": "SRI International",
+    "year": "1966–1972",
+    "title": "Shakey the Robot",
+    "status": "Histoire du projet · organisme concepteur",
+    "url": "https://www.sri.com/press/story/75-years-of-innovation-shakey-the-robot/",
+    "takeaway": "Faire percevoir un environnement et planifier des actions à un robot mobile.",
+    "limit": "Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord."
+  },
+  {
+    "id": "R23",
+    "authors": "NIST",
+    "year": "Documentation consultée en 2026",
+    "title": "Edge AI",
+    "status": "Programme de recherche officiel",
+    "url": "https://www.nist.gov/programs-projects/edge-ai",
+    "takeaway": "Rapprocher l’inférence ou l’apprentissage des données et des usages.",
+    "limit": "Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr."
+  }
+]
