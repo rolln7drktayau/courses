@@ -17,16 +17,20 @@
 
 Read [COMMENCER.md](COMMENCER.md) for prerequisites, hardware, progression and the scope of the research.
 
+## Target hardware
+
+Raspberry Pi running Linux only. For about 35 students and 14 boards, seven teams of five each need at least one Pi, a suitable power supply, OS storage (normally microSD), and network access or a screen and keyboard. Record the exact Pi and OS; do not rank different board models by raw latency. No Nucleo, sensor or accelerator is required.
+
 ## First steps
 
 1. Read `assignment.pdf` and confirm the actual board and deadline with the teacher.
 2. Create a private GitHub repository for your group. Invite all group members and **rolln7drktayau**. Verify that the invitation is accepted.
-3. Choose your language and create your own environment. Install Git, a compiler or Python for PC work, and the actual board's toolchain. No ready-made model environment is supplied.
+3. Choose your language and create your own environment. Install Git, a compiler or Python for PC work, and the chosen language and compiler on the Raspberry Pi. No ready-made model environment is supplied.
 4. Implement the signal generator described in the assignment. Split independent sequences before windowing and calculate normalisation statistics only on training observations. Plot and check the signals before training.
 5. Write the model, gradients and tests, train it and compare the required simple baselines. Then deploy your inference, verify numerical agreement and measure on the board.
 6. Investigate one dense-projection hypothesis, retain raw measurements, version code/configurations/results and explain negative findings as carefully as positive ones.
 
-No dataset for the TD, pretrained model, trained weights, training code or firmware solution is supplied. Students generate the TD signals from the equations and implement the project themselves. The illustrative sine trace in the article template is **not** the TD dataset and must not be submitted as a project result.
+No dataset for the TD, pretrained model, trained weights, training code or deployment solution is supplied. Students generate the TD signals from the equations and implement the project themselves. The illustrative sine trace in the article template is **not** the TD dataset and must not be submitted as a project result.
 
 ## Rules and delivery
 
@@ -41,7 +45,10 @@ Report: **15 pages maximum in total**, including references and appendices; aim 
 - Git: https://git-scm.com/downloads/
 - Python, if chosen: https://www.python.org/downloads/
 - Python random and CSV documentation: https://docs.python.org/3/library/random.html and https://docs.python.org/3/library/csv.html
-- STM32 tools, if applicable to the assigned board: https://www.st.com/en/development-tools/stm32cubeide.html
+- Raspberry Pi Imager and OS: https://www.raspberrypi.com/software/
+- Raspberry Pi setup, power and storage: https://www.raspberrypi.com/documentation/computers/getting-started.html
+- SSH and file transfer: https://www.raspberrypi.com/documentation/computers/remote-access.html
+- Monotonic timing in Python: https://docs.python.org/3/library/time.html#time.perf_counter_ns
 - Unit tests in Python: https://docs.python.org/3/library/unittest.html
 - GitHub Actions: https://docs.github.com/en/actions/get-started/quickstart
 - Matplotlib, for figures only: https://matplotlib.org/stable/install/index.html
@@ -49,7 +56,7 @@ Report: **15 pages maximum in total**, including references and appendices; aim 
 - Original TSMixer paper: https://arxiv.org/abs/2303.06053
 - Authors' original implementation, for reading and comparison rather than copying the required model: https://github.com/google-research/google-research/tree/master/tsmixer
 - Gradient checks: https://cs231n.github.io/neural-networks-3/
-- Optimised Cortex-M kernels, as an explicitly separate comparator: https://github.com/ARM-software/CMSIS-NN
+- Optimised BLAS, as a separate comparator with equivalent operations and thread count: https://github.com/OpenMathLib/OpenBLAS
 
 For the article, upload `article-template.zip` into Overleaf; select `main.tex` and pdfLaTeX. Select `example.tex` temporarily to inspect the format example. The free plan suffices using manual source exports and GitHub versioning; no paid integration is required.
 

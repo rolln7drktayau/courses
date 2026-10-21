@@ -865,10 +865,10 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'layout': 'illustrated'},
  {'chapter': 'VI · Alice demande des preuves',
   'title': 'À vous de poursuivre\nune petite recherche.',
-  'lead': 'Le TD change d’application : vous prédirez un signal avec un petit réseau, puis vous optimiserez une '
+  'lead': 'Le TD change d’application : vous prédirez un signal sur Raspberry Pi, puis vous optimiserez une '
           'brique.',
   'points': ['Construire un réseau sur trois signaux et seize instants : chaque fonction doit être comprise.',
-             'Choisir une modification, annoncer ce qu’elle devrait améliorer, puis vérifier PC et carte.',
+             'Apprendre sur PC, déployer sur Pi, puis mesurer une modification et vérifier ses sorties.',
              'Relier chaque courbe à son code Git, sa configuration et ses mesures brutes.'],
   'visual': 'research',
   'minutes': 6,
@@ -877,7 +877,7 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'detail': 'Le Mixer du TD est une réduction pédagogique de 388 paramètres inspirée de TSMixer, avec données '
             'synthétiques. Il ne valide pas une application industrielle et ne promet pas une nouveauté '
             'publiable. Une très petite opération peut être dominée par les surcoûts et la résolution du timer. '
-            'La CI vérifie des tests et une construction, pas les performances de la carte. Aucun corrigé ni '
+            'Sur Pi Linux, noter charge, température et fréquence ; distinguer buffers et RAM du processus. La CI vérifie le logiciel, pas les performances du Pi. Aucun corrigé ni '
             'poids entraîné n’est fourni.',
   'kind': '',
   'quiz': None,

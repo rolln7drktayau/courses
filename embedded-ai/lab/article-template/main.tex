@@ -28,11 +28,11 @@ Embedded inference \sep forecasting \sep replace with your optimisation
 \section{Introduction}
 Explain the local prediction need and the board constraint. State one testable hypothesis.
 \section{Related work}
-Describe the original TSMixer idea~\cite{chen2023tsmixer} and its difference from the reduced TD network. Cite an optimisation source and the target documentation. A separate comparator may use CMSIS-NN~\cite{armcmsis} if appropriate.
+Describe the original TSMixer idea~\cite{chen2023tsmixer} and its difference from the reduced TD network. Cite an optimisation source and the target documentation. The target is a Raspberry Pi running Linux. Any optimised-library comparator must be separate from the handwritten implementation.
 \section{Method}
 Explain data generation, split, training-only normalisation, network and baselines. Define each symbol before using it. Show the implemented change with a diagram or short pseudocode.
 \section{Experimental protocol}
-Give board, clock, compiler, flags, versions, checksums, correctness tolerance, repetitions and timing scope. Explain dispersion and memory methodology.
+Give the Pi model, OS architecture, CPU frequency, temperature, load, compiler, flags, versions, checksums, correctness tolerance, repetitions and timing scope. Explain dispersion and distinguish explicit buffer bytes from process memory.
 \section{Results}
 Insert actual training/validation curves, observed-versus-predicted traces and board reference-versus-variant measurements. Include raw-data paths and the commit for every campaign. Do not reuse the separate example trace as your TD dataset or result.
 \section{Discussion and limitations}
