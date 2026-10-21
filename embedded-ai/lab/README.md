@@ -23,7 +23,7 @@ Raspberry Pi running Linux only. For about 35 students and 14 boards, seven team
 
 ## First steps
 
-1. Read `assignment.pdf` and confirm the actual board and deadline with the teacher.
+1. Read `assignment.pdf`, identify your Raspberry Pi and follow the module's December submission calendar. The technical settings, tolerances and measurement procedure are fixed in the assignment.
 2. Create a private GitHub repository for your group. Invite all group members and **rolln7drktayau**. Verify that the invitation is accepted.
 3. Use Python 3 for PC data and training, and C for inference and optimisation. Install Git, Python, and GCC/Make for C builds, including on the Pi. Only inference is ported to C. No ready-made model environment is supplied.
 4. Implement the signal generator described in the assignment. Split independent sequences before windowing and calculate normalisation statistics only on training observations. Plot and check the signals before training.
@@ -64,3 +64,7 @@ Report: **15 pages maximum in total**, including references and appendices; aim 
 For the article, upload `article-template.zip` into Overleaf; select `main.tex` and pdfLaTeX. Select `example.tex` temporarily to inspect the format example. The free plan suffices using manual source exports and GitHub versioning; no paid integration is required.
 
 This directory and its archives contain student-facing material only. The instructor's solved implementation, checkpoints, training results, benchmarks and completed results article are not published here.
+
+## Fixed experiment contract
+
+No instructor-selected technical threshold is required. Follow assignment sections 3–5: deterministic initial training, fixed numerical tolerances, the analytical simulator comparator, and the same C code/`-O2` comparison on PC and Pi. For each shape and campaign, warm up 100 calls, double the reference call count K until at least 100 ms (cap 2^24), then use K for both variants. Run three campaigns of ten alternating pairs; retain every raw duration and K. Plot median and min–max. A gain is not required for full credit. Failure diagnostics are in COMMENCER.md.
