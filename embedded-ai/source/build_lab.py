@@ -56,7 +56,7 @@ def main():
                     ('1. Problème et objectifs',1),('Rappels A — Données',2),('2. Données et références',3),
                     ('3. Réseau et apprentissage',4),('Rappels B — Réseau',5),('4. Déploiement',6),
                     ('5. Recherche et mesures',7),('6. Règles et évaluation',8),('7. GitHub',9),
-                    ('Jalons',10),('8. Dépôt scientifique',11),('9. Stratégie de tests',12),('10. Outils et sources',13)]])
+                    ('Jalons',10),('8. Atelier A — Fonctions',11),('9. Atelier B — Apprentissage et tests',12),('10. Outils et sources',13)]])
             temporary=target.with_suffix('.tmp.pdf');doc.save(temporary,garbage=4,deflate=True);doc.close();temporary.replace(target)
             results[name]={'pages':pages,'overflows':overflow}
         browser.close()

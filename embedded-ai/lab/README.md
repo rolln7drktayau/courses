@@ -25,9 +25,9 @@ Raspberry Pi running Linux only. For about 35 students and 14 boards, seven team
 
 1. Read `assignment.pdf` and confirm the actual board and deadline with the teacher.
 2. Create a private GitHub repository for your group. Invite all group members and **rolln7drktayau**. Verify that the invitation is accepted.
-3. Choose your language and create your own environment. Install Git, a compiler or Python for PC work, and the chosen language and compiler on the Raspberry Pi. No ready-made model environment is supplied.
+3. Use Python 3 for PC data and training, and C for inference and optimisation. Install Git, Python, and GCC/Make for C builds, including on the Pi. Only inference is ported to C. No ready-made model environment is supplied.
 4. Implement the signal generator described in the assignment. Split independent sequences before windowing and calculate normalisation statistics only on training observations. Plot and check the signals before training.
-5. Write the model, gradients and tests, train it and compare the required simple baselines. Then deploy your inference, verify numerical agreement and measure on the board.
+5. Follow the paper exercises in assignment sections 8 and 9: calculate a small case, write its function, test and explain it. Then assemble and train the model, compare the baselines and plot results. Port inference to C, verify Python-PC/C-PC/C-Pi agreement, then measure.
 6. Investigate one dense-projection hypothesis, retain raw measurements, version code/configurations/results and explain negative findings as carefully as positive ones.
 
 No dataset for the TD, pretrained model, trained weights, training code or deployment solution is supplied. Students generate the TD signals from the equations and implement the project themselves. The illustrative sine trace in the article template is **not** the TD dataset and must not be submitted as a project result.
@@ -38,12 +38,15 @@ The assignment is authoritative. Implement model calculations, differentiation a
 
 Prefer English identifiers, comments and commit messages. Keep pushed milestones, peer-reviewed changes, tests and experiment manifests. Deliver a runnable repository, raw data and measurements, figures, a report and individual contribution evidence. Invite teacher account **rolln7drktayau**.
 
+Keep a short function worksheet with handwritten inputs, calculation and result, its automated test and the function's role. Implement Makefile targets `test-c`, `inference` and `benchmark`, and document run arguments and exported file formats. A target must compile or test the real project; pushing to GitHub does not itself execute it on the Pi.
+
 Report: **15 pages maximum in total**, including references and appendices; aim for 6–10 useful pages. Optional bonus: readable English +0.5, careful scientific article presentation +0.5, complete recompilable free Overleaf sources +1. Final grade capped at 20/20; the core 20 points remain obtainable without these presentation options. Full expectations are in the PDFs.
 
 ## Free tools and original sources
 
 - Git: https://git-scm.com/downloads/
-- Python, if chosen: https://www.python.org/downloads/
+- Python 3: https://www.python.org/downloads/
+- GCC and GNU Make: https://gcc.gnu.org/ and https://www.gnu.org/software/make/manual/make.html
 - Python random and CSV documentation: https://docs.python.org/3/library/random.html and https://docs.python.org/3/library/csv.html
 - Raspberry Pi Imager and OS: https://www.raspberrypi.com/software/
 - Raspberry Pi setup, power and storage: https://www.raspberrypi.com/documentation/computers/getting-started.html

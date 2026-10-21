@@ -39,12 +39,12 @@
   "checks": "Explicit file whitelist; nested ZIP integrity; PDF identity; figure-only Python sources.",
   "files": {
     "COMMENCER.md": {
-      "bytes": 5889,
-      "sha256": "362e116b3adeda41f7752022a09988f802871b8084fac3f5650bcaca6456addb"
+      "bytes": 7128,
+      "sha256": "6b8008144088373164a11c30b8c59660b53989916ad518bf015d148fdd2111ed"
     },
     "README.md": {
-      "bytes": 5748,
-      "sha256": "08cbee37069b2a48a2f311fb3dcda7ab7ec6ad35322fdb49722d7365cacc5196"
+      "bytes": 6307,
+      "sha256": "99b79308bbe2f99c74e23b371da136160d429a3a3e899f506f513e7df863e8df"
     },
     "article-example.pdf": {
       "bytes": 109092,
@@ -95,24 +95,24 @@
       "sha256": "176ef972b023269b0593030dccee09164346c9df71bfd89255b8adb3d48e72ab"
     },
     "assignment.pdf": {
-      "bytes": 254078,
-      "sha256": "c9a41af8aa156482d30f90af18f1be21dd1c93b5b4d1d25665dbbf07eecce7ae"
+      "bytes": 256513,
+      "sha256": "43b261ac4ce95111f540e4bdd64e3bdf7b7d82de47ea6871db9afa8b27afa059"
     },
     "getting-started.html": {
-      "bytes": 7004,
-      "sha256": "ade92198a077f9d6d0677b47c853ec8b5d83cf7b138a96021f9dcf3576a1260a"
+      "bytes": 8287,
+      "sha256": "d5c1afd03e6c4ce43f7fb95ac72ec80cb72d27fc6ec536edfe12726add48625c"
     },
     "index.html": {
-      "bytes": 11694,
-      "sha256": "9b581b4435864d9d36d6c9303d8207fcfc8b7ec9a8de315eb53f9e18358fc16f"
+      "bytes": 11921,
+      "sha256": "bfef1ac77af2c3ffc972fc9316d0502dfbd0dcd0b354636facf06008251f6f92"
     },
     "report-guidelines.pdf": {
-      "bytes": 140920,
-      "sha256": "a74d4a7cd325fc5d5b7978a6b7ebd97dd4c54eff222c5ff8e32c2fe4cf7c58a9"
+      "bytes": 139564,
+      "sha256": "11923a11b1e14ea1d00e1931945db17159a00c907b907868ad2a4064b7609881"
     },
     "student-materials.zip": {
-      "bytes": 504178,
-      "sha256": "797dc7138e7731134535a95779c6897745b47b56a19297aa1df2fb1ecb223a23"
+      "bytes": 506157,
+      "sha256": "9b30f2de105f995fc315120839ca8e520dbb0af60ae7939ba45663835f5eb506"
     }
   }
 }

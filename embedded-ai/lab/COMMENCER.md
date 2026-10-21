@@ -11,8 +11,8 @@ Le cours storyboard de trois heures donne une vue d’ensemble. Il ne remplace p
 ## Ce qu’il faut
 
 - Par groupe : un PC, un Raspberry Pi identifié, son alimentation adaptée et une microSD avec Raspberry Pi OS. Avec environ 14 Pi pour 35 étudiants, sept groupes de cinq ont chacun au moins une carte. Un accès réseau permet SSH ; écran et clavier sont une autre possibilité.
-- Sur PC : Git, un langage maîtrisé et ses tests. **Python standard pour apprendre sur PC, puis C/C++ pour la carte** est un choix simple ; un autre langage reste possible s’il est réellement pris en charge par la cible.
-- Pour le Pi : Git et le langage choisi ; compiler directement sur le Pi simplifie le déploiement C/C++. Vérifier démarrage, transfert et lancement avant les séances de mesures. Noter modèle, architecture 32/64 bits, RAM et version de l’OS.
+- Langages du TD : **Python 3 sur PC pour les données et l’apprentissage ; C pour l’inférence et l’optimisation sur Pi**. Seule la prédiction est portée en C, pas l’entraînement. Git et les outils de tests accompagnent le travail.
+- Pour le Pi : Git, GCC et Make ; compiler directement sur le Pi. Vérifier démarrage, transfert et lancement avant les séances de mesures. Noter modèle, architecture 32/64 bits, RAM et version de l’OS.
 - Pour rendre le travail : GitHub et accès de l’enseignant `rolln7drktayau`. Matplotlib peut servir aux figures ; Overleaf et l’anglais sont des options bonifiées selon le barème.
 
 Aucun GPU, capteur, jeu de données téléchargé ou service payant n’est requis. Une mesure d’énergie exige un instrument adapté : sans instrument, vous ne prétendez pas avoir mesuré l’énergie. Le Raspberry Pi est la seule cible matérielle demandée ; aucune Nucleo n’est nécessaire.
@@ -25,10 +25,18 @@ Si ces prérequis manquent, le projet complet ne se termine pas raisonnablement 
 
 ## Les quatre passages
 
-1. **Données et fonctions.** Générer les 24 séquences ; séparer apprentissage, validation et test avant les fenêtres. La première fenêtre conservée va de t=32 à 47 et prédit x1(48). Vérifier les 2 304 / 576 / 576 fenêtres et la normalisation calculée sur l’apprentissage seul.
-2. **Apprentissage.** Vérifier les gradients, puis entraîner. Comparer au dernier point observé et au modèle linéaire. La meilleure méthode peut être la plus simple. Chronométrer deux époques avant un lancement complet.
-3. **Déploiement.** Transférer sources, poids et données par Git, SCP ou clé USB ; compiler si nécessaire et exécuter localement sur le Pi. Faire tourner les mêmes données et poids sur PC et sur Pi. Comparer les sorties avant tout chronométrage. La carte calcule elle-même ; le PC peut recueillir les résultats.
-4. **Expérience.** Écrire une hypothèse, figer une référence, tester une variante et répéter les mesures sur carte. Générer les figures depuis les CSV, conserver les versions Git et expliquer les limites.
+1. **Données et fonctions.** Suivre l’atelier A (§8 du sujet) : faire un petit calcul sur papier, écrire sa fonction Python et le transformer en test. Générer ensuite les séquences, vérifier les fenêtres et tracer les signaux. Montrer une fiche de calcul avant d’assembler le réseau.
+2. **Apprentissage.** Suivre l’atelier B (§9) : calculer un petit gradient à la main, programmer le retour et vérifier les dérivées. Assembler le réseau ; entraîner et comparer les deux références. Tracer perte train et erreur de validation. Chronométrer deux époques avant le lancement complet.
+3. **Déploiement.** Porter uniquement les fonctions de prédiction en C. Tester le petit calcul, puis comparer Python PC, C PC et C Pi sur les mêmes fenêtres et poids. Sur Pi, récupérer le tag Git et les fichiers exportés ; écrire les cibles `make test-c`, `make inference` et `make benchmark`, puis les utiliser. Le README indique les arguments et chemins exacts. Le Pi exécute lui-même les calculs ; récupérer ses CSV.
+4. **Expérience.** Écrire une hypothèse et conserver la référence. Modifier une seule brique, vérifier ses sorties, puis répéter les mesures sur Pi. Tracer le temps selon les dimensions pour les deux versions, avec dispersion, et montrer l’effet sur le réseau entier. Un gain n’est pas obligatoire.
+
+## Écrire à la main, avec quels outils ?
+
+Vous écrivez projection, ReLU, résidu, perte, gradients, mise à jour et inférence avec des boucles. Les bibliothèques standard sont autorisées pour mathématiques, fichiers, temps, mémoire et aléatoire. Matplotlib sert aux figures, les outils de tests aux vérifications. Pas de framework, autodifférentiation, NumPy ou BLAS pour réaliser le modèle à votre place. Aucun entraînement C n’est demandé.
+
+Chaque groupe conserve une fiche : fonction → entrée → résultat manuscrit → résultat du test → rôle. Les petits exemples sont calculés sur papier ; les 388 paramètres du réseau ne le sont pas. À chaque point de passage, un membre différent explique ce qui a été vérifié.
+
+Dans les séances, l’enseignant accompagne les dérivées, valide les étapes et aide au diagnostic. La première expérience est réalisée en TD ; son approfondissement et le rapport continuent ensuite.
 
 ## Mesurer sur le Pi
 
