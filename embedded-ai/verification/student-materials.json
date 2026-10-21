@@ -1,6 +1,6 @@
 {
   "student_only": true,
-  "public_file_count": 17,
+  "public_file_count": 19,
   "documents": {
     "assignment.pdf": {
       "pages": 13,
@@ -28,37 +28,43 @@
     "requirements-example.txt"
   ],
   "student_archive_files": [
+    "COMMENCER.md",
     "README.md",
     "article-example.pdf",
     "article-template.zip",
     "assignment.pdf",
+    "getting-started.html",
     "report-guidelines.pdf"
   ],
   "checks": "Explicit file whitelist; nested ZIP integrity; PDF identity; figure-only Python sources.",
   "files": {
+    "COMMENCER.md": {
+      "bytes": 4892,
+      "sha256": "669ca5c5abcef2d2af550e34b4ce9f8caeb54458941f2db2bb6a47e5ad63d08f"
+    },
     "README.md": {
-      "bytes": 4906,
-      "sha256": "073b49133aed53e36be6e552aaa7a65e642936b0ab31a5bfe826a4b31fadbb6e"
+      "bytes": 5069,
+      "sha256": "90d57f691f014443377323bfc393922856a2b4be8e5ab5c5ea1586e4ffd6874c"
     },
     "article-example.pdf": {
       "bytes": 109092,
       "sha256": "06460d13df65025ab61b3bf682d0eec22ac7f944d43b440e15ff263e45b8cc1c"
     },
     "article-template.zip": {
-      "bytes": 34415,
-      "sha256": "1d166d80be6ae69a9ad4eb9bac931cfce02ea6bff2f8a6d42cb42a2ce28e4031"
+      "bytes": 34435,
+      "sha256": "3d477631a8bf6fbbfc2cdb2bc15b781150a06e03fc374a620e2b1a5e9b3e8058"
     },
     "article-template/README.md": {
-      "bytes": 2420,
-      "sha256": "7dc2ab10724f6c26bd876555f28723a5dc40d2d7489fc79785f216a4401826f0"
+      "bytes": 2436,
+      "sha256": "f7139cfaecfb887d7bc0050a3f4af7a4421653b70a380da8f9bf16d7e593e429"
     },
     "article-template/data/illustrative_trace.csv": {
       "bytes": 2272,
       "sha256": "c479526d686688324d0baf6952015ae601d5738ca29cc76d20fbb4327ef8e03b"
     },
     "article-template/draw_architecture.py": {
-      "bytes": 989,
-      "sha256": "f113f3688cb960343c99076c2663a03ebadfd8ffba0766a990d43e2731c8c82f"
+      "bytes": 1004,
+      "sha256": "f6fa8ee4a8d4633308219bbf82f45ed37fc18bc7530600176422c5a6763b8864"
     },
     "article-template/example.tex": {
       "bytes": 11422,
@@ -77,8 +83,8 @@
       "sha256": "7da986c343327b0a4092a223b9baed055cb11bd5ff5f6574a1585abe940d7a75"
     },
     "article-template/plot_example.py": {
-      "bytes": 901,
-      "sha256": "0b396dba8e98a1c9515258b64ad0a5c3e7e8c058e0b7c0fde3853abeafab142c"
+      "bytes": 917,
+      "sha256": "8466659c26441e83f69f1aef90708343fbb8b7f294057b651ab019a440bed4f4"
     },
     "article-template/references.bib": {
       "bytes": 1225,
@@ -89,20 +95,24 @@
       "sha256": "176ef972b023269b0593030dccee09164346c9df71bfd89255b8adb3d48e72ab"
     },
     "assignment.pdf": {
-      "bytes": 253367,
-      "sha256": "77a8e04d9747388b9007fe9ba3e75b4426ac79198e59aa955249b0bbe537e672"
+      "bytes": 253680,
+      "sha256": "06bd6782f921f5548d1029e486a9887929b5843c78578f8fec87ec67c466315e"
+    },
+    "getting-started.html": {
+      "bytes": 6044,
+      "sha256": "22a4608d8ef2f5c1a70564c4c204c32dce801bc1a7b6b39ae4ca8c93d6c509a5"
     },
     "index.html": {
-      "bytes": 11173,
-      "sha256": "56db2be77b324d142d5601d482de417590b6931c036c36f39acae85dfc89f976"
+      "bytes": 11481,
+      "sha256": "c73b31f2342389567b59bfd66bfb2e0207dcf1e347703e9e7826222d14e4629f"
     },
     "report-guidelines.pdf": {
-      "bytes": 141044,
-      "sha256": "852a02c78cd160cf12f3256b01e083385ef3ee523fdd445c0d67255ada50052b"
+      "bytes": 140920,
+      "sha256": "819283c93e7a0688f4b0e1ff479ff8f1fc7d9b2f5abf8fdff7d4591f11925c18"
     },
     "student-materials.zip": {
-      "bytes": 497007,
-      "sha256": "96b4f3c55e188e21635f1c8c63f09e8b194514764cdf943b8705479a8a1a2cd0"
+      "bytes": 502992,
+      "sha256": "aefe0fb22b4d267033e06ec78bbc4dc7d61cb039a1b98d76b1a39695cbf1d17b"
     }
   }
 }

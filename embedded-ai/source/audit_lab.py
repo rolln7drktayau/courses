@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 LAB=ROOT/'lab'
 TEMPLATE={'README.md','main.tex','example.tex','references.bib','plot_example.py','draw_architecture.py',
           'requirements-example.txt','figures/architecture.pdf','figures/illustrative_signal.pdf','data/illustrative_trace.csv'}
-KIT={'README.md','assignment.pdf','report-guidelines.pdf','article-example.pdf','article-template.zip'}
+KIT={'README.md','COMMENCER.md','getting-started.html','assignment.pdf','report-guidelines.pdf','article-example.pdf','article-template.zip'}
 EXPECTED={'index.html',*KIT,'student-materials.zip',*('article-template/'+name for name in TEMPLATE)}
 
 

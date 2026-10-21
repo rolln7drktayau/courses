@@ -1,0 +1,70 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><title>Consignes du rapport scientifique</title><style>
+@page{size:A4;margin:18mm 21mm 17mm}
+*{box-sizing:border-box}body{margin:0;color:#202327;background:#fff;font-family:'Times New Roman',Times,serif;font-size:10.8pt;line-height:1.31}
+.page{height:261mm;display:flex;flex-direction:column;break-after:page}.page:last-child{break-after:auto}
+.running{font:7.8pt/1.2 Arial,sans-serif;color:#58616a;letter-spacing:.025em;padding-bottom:7px;border-bottom:.5px solid #bec4c8;margin-bottom:13px}
+.body{flex:1;min-height:0}.institution{text-align:center;font-size:9.2pt;margin:3px 0 16px;color:#3e4850}
+h1{text-align:center;font-size:20pt;line-height:1.17;font-weight:normal;margin:0 0 14px;letter-spacing:-.02em}
+.subtitle{text-align:center;font-size:10pt;line-height:1.45;margin-bottom:20px}
+.abstract{margin:0 7mm 16px;font-size:10.1pt;line-height:1.31}.abstract h2{text-align:center;font-size:11.2pt;margin:0 0 7px}
+.keywords{font-size:9.3pt}h2{font-size:12.1pt;margin:15px 0 8px;font-weight:bold}h3{font-size:10.9pt;margin:13px 0 6px;font-weight:bold}
+p{margin:7px 0 9px;text-align:justify;hyphens:auto}ul,ol{padding-left:19px;margin:8px 0}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;margin:11px 0;font-size:9.8pt;line-height:1.25}thead{border-top:1.1px solid #3b444b;border-bottom:.6px solid #7a858c}th{text-align:left;font-weight:bold;padding:6px}td{padding:6px;vertical-align:top;border-bottom:.5px solid #c7cdd0}tbody tr:last-child td{border-bottom:1px solid #7b858c}
+.equations{font-family:'Times New Roman',serif;text-align:center;font-size:10.8pt;line-height:1.7;margin:9px 0 12px;white-space:nowrap}.equations div{margin:2px 0}.compact{line-height:1.4;font-size:10.5pt}
+sub,sup{font-size:.72em}code{font:9pt Consolas,'Courier New',monospace}figure{margin:13px 0}figcaption{font-size:9.1pt;line-height:1.3;margin-top:8px;color:#444d54}
+.flow{display:flex;align-items:center;gap:9px;font-size:9.5pt;line-height:1.35}.flow span{flex:1;text-align:center;padding:8px 5px;border:.7px solid #a5afb4;background:#f3f5f5}.flow b{font-weight:normal;color:#6c7b83;font-size:14pt}
+.folio{flex-shrink:0;font-size:8pt;color:#606970;border-top:.5px solid #c2c8cd;padding-top:8px;margin-top:13px;display:flex;justify-content:space-between}
+a{color:#244f64;text-decoration:none}.refs{font-size:9pt;line-height:1.22}.refs li{margin:6px 0}.note{font-size:8.9pt;line-height:1.25;color:#47535b}.rules{font-size:9.2pt}.schedule{font-size:9.5pt}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+body{width:168mm}
+pre{font:8.2pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f5;padding:10px;border-left:2px solid #788b94;margin:10px 0}
+.symbols td:first-child{white-space:nowrap;width:25%}.symbols{font-size:9.7pt} .small{font-size:9.5pt} .badge{font:8pt Arial;color:#526674;text-transform:uppercase;letter-spacing:1px}
+</style><body><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Consignes du rapport scientifique</header><main class="body">
+<div class="institution">INEM · IA pour les systèmes embarqués · Consignes de rédaction</div>
+<h1>Présenter une expérience<br>comme un article scientifique</h1>
+<div class="subtitle">Rapport du projet TSMixer pédagogique · Roland Cédric TAYO</div>
+<div class="abstract"><h2>Objet</h2><p>Votre article répond à une question précise : votre modification d’une projection dense améliore-t-elle le réseau sur la carte étudiée, et à quel prix ? Le lecteur doit comprendre ce que vous avez fait, vérifier les résultats et savoir quelle expérience réaliser ensuite. Un résultat négatif bien démontré vaut autant qu’une amélioration bien démontrée.</p></div>
+<h2>1. Format et limites</h2>
+<p><b>Maximum : 15 pages au total</b>, depuis la première page jusqu’à la dernière, références et annexes comprises. Viser 6 à 10 pages ; ne pas remplir artificiellement. A4, une colonne, police de lecture 10 à 12 points, marges d’au moins 20 mm. Pas de page de garde séparée nécessaire. Numéroter pages, sections, équations, tableaux et figures.</p>
+<p>La présentation conseillée reprend l’esprit du manuscrit ADARE : titre précis, auteurs, résumé, mots-clés, sections numérotées, figures légendées et bibliographie. Le gabarit utilise la classe <code>elsarticle</code>, en mode manuscrit. Ce format n’implique ni soumission ni acceptation par une revue ; ne pas ajouter de faux logo ou DOI.</p>
+<h2>2. Bonus sur la note finale</h2>
+<table><thead><tr><th>Option vérifiable</th><th>Bonus maximal</th></tr></thead><tbody>
+<tr><td>Rapport en anglais clair, avec termes et unités cohérents ; une prose simple suffit.</td><td>+0,5 point</td></tr>
+<tr><td>Présentation d’article soignée : résumé utile, sections, figures lisibles, citations reliées à la bibliographie.</td><td>+0,5 point</td></tr>
+<tr><td>Projet Overleaf gratuit recompilable : export complet .tex, .bib, figures et PDF cohérents, déposés sur GitHub.</td><td>+1 point</td></tr>
+</tbody></table>
+<p><b>Note finale = min(20, note de base sur 20 + bonus obtenu).</b> Les options ne compensent pas une mesure invalide et n’accordent aucun point scientifique supplémentaire à un résultat inventé. La totalité de la note de base reste accessible avec un compte rendu clair hors Overleaf, rédigé en français. Le respect des 15 pages et les preuves demandées restent obligatoires.</p>
+<p class="note">Le code, ses identifiants et ses commentaires sont de préférence en anglais, indépendamment de la langue retenue pour le rapport. Aucun score de maîtrise linguistique avancée n’est attendu.</p>
+</main><footer class="folio"><span>Roland Cédric TAYO · 21 octobre 2026</span><span>1 / 3</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Consignes du rapport scientifique</header><main class="body">
+<h2>3. Plan attendu : une question, des preuves, une limite</h2>
+<table><thead><tr><th>Partie</th><th>Ce que le lecteur doit y trouver</th></tr></thead><tbody>
+<tr><td>Titre, auteurs, résumé</td><td>Un titre concret ; membres et groupe. Résumé de 120 à 180 mots : question, méthode, cible, résultat réellement mesuré et limite principale. 3 à 5 mots-clés.</td></tr>
+<tr><td>1. Introduction</td><td>Pourquoi prédire localement ? Quelle contrainte de cette carte étudiez-vous ? Formuler une hypothèse testable. Distinguer l’objectif pédagogique d’un besoin industriel démontré.</td></tr>
+<tr><td>2. Travaux liés</td><td>TSMixer, une source sur l’optimisation retenue et une source matérielle. Expliquer ce que vous reprenez et ce que vous modifiez. Ne pas comparer des chiffres obtenus sur des matériels incompatibles.</td></tr>
+<tr><td>3. Méthode</td><td>Données, séparation, normalisation, réseau et références ; fonction optimisée ; schéma et pseudocode de la différence. Définir chaque symbole à sa première apparition.</td></tr>
+<tr><td>4. Protocole expérimental</td><td>Carte exacte, fréquence, compilateur/options, versions, poids et données fixés, tests de correction, périmètre des mesures, répétitions et traitement de la dispersion.</td></tr>
+<tr><td>5. Résultats</td><td>Qualité de prédiction, référence/variante pour la brique, puis réseau complet ; valeurs brutes accessibles, unités et dispersion. Dire « non mesuré » si nécessaire.</td></tr>
+<tr><td>6. Discussion et limites</td><td>Expliquer le gain ou l’absence de gain, les effets de taille et la différence PC/carte. Séparer faits observés et interprétations. Reconnaître que les signaux sont simulés.</td></tr>
+<tr><td>7. Conclusion et suite</td><td>Réponse à l’hypothèse, portée limitée des résultats et une expérience suivante avec sa mesure et son critère de décision. Ne pas promettre une publication ou un record.</td></tr>
+<tr><td>Reproductibilité et références</td><td>URL et tag GitHub, commandes, manifeste, contributions et usages d’IA substantiels ; références vérifiables et citées dans le texte.</td></tr>
+</tbody></table>
+<h3>Les trois figures minimales du rapport final</h3>
+<p><b>1.</b> Perte d’apprentissage et erreur de validation par époque, avec échelles clairement distinctes si nécessaire. <b>2.</b> Valeur réelle et prédictions sur une séquence réservée, avec les références simples. <b>3.</b> Coût de référence et de variante sur la carte, puis effet global ; montrer dispersion et unités. Un schéma de la chaîne PC → carte et un tableau mémoire complètent utilement ces figures.</p>
+<p>La légende dit ce qui est tracé, sur quelles données et comment lire l’incertitude. Les axes portent nom et unité. Les résultats calculés théoriquement sont étiquetés <i>estimés</i>, les chronométrages sur carte <i>mesurés</i>. Ne pas inventer une courbe d’entraînement pour remplir le modèle.</p>
+</main><footer class="folio"><span>Roland Cédric TAYO · 21 octobre 2026</span><span>2 / 3</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Consignes du rapport scientifique</header><main class="body">
+<h2>4. Démarrer gratuitement avec Overleaf</h2>
+<ol><li>Créer un compte sur <a href="https://www.overleaf.com/">overleaf.com</a> et télécharger <code>Modele_Article_Overleaf_ADARE.zip</code> fourni avec le TD.</li>
+<li>Créer un projet en important ce ZIP (<i>New Project → Upload Project</i>). Choisir <code>main.tex</code> comme document principal et le compilateur pdfLaTeX.</li>
+<li>Compiler : le gabarit doit s’afficher. Remplacer titre, auteurs et textes d’attente. Pour lire l’exemple complet, choisir temporairement <code>example.tex</code> comme document principal ; revenir ensuite à <code>main.tex</code>.</li>
+<li>Mettre vos figures dans <code>figures/</code>, mettre à jour <code>references.bib</code>, citer avec <code>\cite{cle}</code> et vérifier que toutes les citations sont résolues.</li>
+<li>À chaque jalon de rédaction, télécharger le ZIP des sources et le PDF. Décompresser les sources dans <code>paper/</code> du dépôt local, relire les différences puis commiter et pousser : <code>docs(paper): update methods and measured results</code>.</li>
+<li>À la remise, tester l’import des sources finales dans un nouveau projet et vérifier la cohérence avec le PDF déposé. Fournir aussi le lien de consultation Overleaf à l’enseignant selon les modalités de partage disponibles ; l’archive des sources est la preuve durable.</li></ol>
+<p><b>Travail à plusieurs sans abonnement.</b> L’offre gratuite annonce un collaborateur invité par projet, en plus du propriétaire ; elle ne donne pas la synchronisation GitHub. Utiliser GitHub pour répartir les sections, relire et conserver les versions ; une personne importe les changements et compile. Ne pas partager les mots de passe. Les exports manuels suffisent au bonus.</p>
+<h2>5. L’exemple fourni : comment le lire ?</h2>
+<p><code>Exemple_Article_ADARE_EN.pdf</code> est une démonstration de forme, en anglais, avec un schéma, une courbe et un tableau. Ses figures utilisent une trace illustrative séparée et des comptes analytiques. <b>Il ne contient aucun entraînement de réseau ni résultat sur carte.</b> Les cases « not measured » sont volontaires. Votre article final doit les remplacer par vos expériences, jamais reprendre ces illustrations comme vos mesures.</p>
+<p>Le ZIP comprend le gabarit <code>main.tex</code>, l’exemple <code>example.tex</code>, une bibliographie <code>references.bib</code>, les figures et la trace illustrative. Il ne contient ni corrigé, ni réseau, ni apprentissage. Les sources de figures de l’exemple permettent de vérifier leur origine.</p>
+<h3>Vérification avant remise</h3>
+<p>Le PDF compte au plus 15 pages ; chaque symbole est défini ; le matériel et les options sont nommés ; les métriques ont une unité ; chaque chiffre important retrouve un CSV et un commit ; les figures sont lisibles à 100 % ; le ZIP compile ; l’enseignant a accès au dépôt ; les contributions et emprunts sont déclarés.</p>
+<p class="note">Sources officielles, consultées le 21 octobre 2026 : <a href="https://docs.overleaf.com/getting-started/your-first-project">guide du premier projet Overleaf</a> ; <a href="https://www.overleaf.com/user/subscription/plans">limites de l’offre gratuite</a> ; <a href="https://ctan.org/pkg/elsarticle">classe elsarticle et documentation</a>. Les conditions d’un service peuvent évoluer ; aucun achat n’est demandé par ce TD.</p>
+</main><footer class="folio"><span>Roland Cédric TAYO · 21 octobre 2026</span><span>3 / 3</span></footer></article></body></html>

@@ -1,72 +1,42 @@
-# Embedded AI — From requirements to evidence
+# Une lampe qui comprend, même sans Internet
 
-**Author: Roland Cédric TAYO** — INEM, 2026–2027.
+**Roland Cédric TAYO · INEM.** Cours en français, trois heures avec pause et échanges.
 
-A three-hour course for future embedded-systems engineers. The teaching language is **French**; the repository directory and technical source organisation use English names.
+[Présentation narrative](https://rolln7drktayau.github.io/courses/embedded-ai/) · [PDF](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf) · [Plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
 
-- **Interactive presentation:** https://rolln7drktayau.github.io/courses/embedded-ai/
-- **PDF slides:** https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf
-- **Two-page teaching plan:** https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf
-- **Practical assignment and student resources:** https://rolln7drktayau.github.io/courses/embedded-ai/lab/
+Ce storyboard est le cours principal. L’[énoncé du TD et les ressources étudiantes](https://rolln7drktayau.github.io/courses/embedded-ai/lab/) prolonge le cours. Aucun corrigé enseignant n’est inclus.
 
-The main presentation provides permanent **TD** and **PDF** links in its navigation bar. **Ressources** opens the course sources, student assignment files, article-template sources and bibliography. The `lab/` directory contains the assignment, report instructions and article template, with no instructor implementation or experiment results.
+## Parcours
 
-## Scope
+Alice voudrait commander une lampe à la voix. Cette situation permet d’expliquer, dans l’ordre, le besoin d’un modèle, ses calculs, le choix de les exécuter dans un objet et les contraintes qui apparaissent. Quatre questions orales ouvrent le parcours après la couverture, sans score ni outil externe. Six chapitres et 36 scènes conduisent du service attendu à une petite question de recherche. Six pauses questions demandent de calculer, d’expliquer ou de choisir sous contraintes. Vingt-trois pages complémentaires rassemblent extensions, vocabulaire, lectures et réponses.
 
-32 core slides; **180 minutes including a ten-minute break**, the five quizzes and class discussion. This synthesis introduces the broader **14-hour lecture / 14-hour practical module**. It is not the entire module. Twenty-one optional slides provide architectural extensions, research reading, references, a glossary and quiz explanations.
+L’idée de chaque scène est résumée en une phrase. Les termes sont expliqués lors de leur introduction ; les formules et leurs limites restent accessibles. Ce choix facilite une première lecture, sans prétendre qu’une lecture seule qualifie un ingénieur ou qu’un enfant maîtrise les mathématiques de l’apprentissage.
 
-The main path follows one complete 2 → 2 → 1 teaching network, then deployment, resource budgets, two optimisation levers and experimental evidence. The assignment uses its own reduced Mixer; the teaching network and browser experiment are independent examples, not the assignment solution.
+## Présenter
 
-There are 23 primary or official scientific sources. Established publications, preprints and documentation are labelled separately. Pedagogical references from MIT, Harvard and Carnegie Mellon and the choices drawn from them are documented in [TEACHING-DESIGN.md](TEACHING-DESIGN.md). Diagrams are original.
+- **→ / Espace** : dévoiler une étape, puis avancer.
+- **←** : revenir. **A** : tout montrer sur la page.
+- **T** : sommaire, recherche et accès direct aux six pauses questions.
+- **D** : explications complémentaires. **F** : plein écran.
+- Le PDF affiche les scènes entières ; les réponses raisonnées et deux pages de liaison vers le TD sont en annexe.
 
-## Concrete interactions
+L’HTML contient ses scripts, styles et illustrations : il peut se lire sans connexion. Les liens vers articles et TD nécessitent une connexion. Le bouton de liaison modifie un schéma et l’illustration ; il ne réalise pas un test réseau. Le chronométrage de sommes mesure réellement le navigateur, sans en déduire des performances sur Pi ou MCU. Les budgets et résultats du tableau de décision sont fictifs et signalés comme tels.
 
-- Change the teaching network inputs and observe hidden activations and output.
-- Change a one-weight learning rate; see both error reduction and overshoot.
-- Change weight representation and distinguish Flash from working SRAM.
-- Observe quantisation error and global speedup with analytical examples.
-- Run two array-sum implementations **in the current browser**: verify equal results, warm up, alternate seven paired campaigns, inspect median/min/max and download all 14 timing rows as CSV. No result is prefilled, and none is labelled as Raspberry Pi or MCU performance.
+Alice est fictive. Les chercheurs et leurs contributions sont documentés dans [SOURCES.md](SOURCES.md). Les schémas historiques sont des reconstructions pédagogiques et non des portraits ou photographies d’archives. Le petit réseau numérique ne reconnaît pas la voix : il sert à suivre chaque calcul. Le TD poursuit le raisonnement sur une autre tâche, la prédiction d’un signal.
 
-Core quizzes are at slides **6, 13, 19, 26 and 31**. They require an architecture, parameter/MAC count, peak-RAM calculation, global-time calculation and a justified system decision. The final multicriteria table is explicitly fictitious. The assignment is a regression task and uses different quality metrics.
+## Sources et reproduction
 
-
-## Files
-
-| Path | Purpose |
-|---|---|
-| `index.html` | Self-contained, offline-capable dynamic presentation |
-| `course.pdf` | 16:9 slides, references and PDF bookmarks |
-| `course-plan.pdf` | A4 schedule, prerequisites and learning outcomes |
-| `lab/` | Student assignment, report documents, Overleaf sources and downloadable materials |
-| `SOURCES.md` | Scientific reading guide, contributions and limitations |
-| `TEACHING-DESIGN.md` | Learning path and educational references |
-| `references.json`, `references.bib` | Reference metadata |
-| `source/content.py` | Course text and references |
-| `source/diagrams.py` | Original SVG diagrams |
-| `source/course.css`, `source/course.js` | Layout, navigation, quizzes and analytical demonstrations |
-| `source/build_course.py` | Rebuild the public HTML and PDFs |
-| `source/audit_course.py` | Layout, navigation and arithmetic checks |
-| `verification/checks.json` | Results of local automated checks |
-
-## Navigation
-
-Arrow keys / Page Up / Page Down / Space navigate. `T` or **Plan & questions** opens the five guiding questions, direct links to all five quizzes and searchable contents, `D` opens further explanations and `F` toggles fullscreen. Animations can be disabled, and the system reduced-motion preference is respected. The course itself needs no remote script, font or telemetry. Opening article links needs Internet.
-
-## Rebuild
-
-From this directory:
+`source/content.py` contient les scènes ; `story_art.py` et `diagrams.py`, les illustrations et schémas ; `course.js` et `course.css`, les interactions et la présentation. `assets/alice-scenes.png` est la planche originale d’illustrations, intégrée à l’HTML pendant la génération. Sa provenance et son prompt figurent dans [assets/ILLUSTRATIONS.md](assets/ILLUSTRATIONS.md).
 
 ```sh
 python -m pip install -r source/requirements.txt
 python -m playwright install chromium
 python source/build_course.py
 python source/audit_course.py
+python source/build_lab.py
+python source/audit_lab.py
 ```
 
-The browser audit checks every core and optional slide, numerical interactions, all quiz explanations, the live timing/CSV experiment and navigation. The build uses an installed Chrome on Windows when available, or Playwright Chromium otherwise. Students only need a browser or PDF reader, not these build dependencies.
+Le générateur utilise Chrome local s’il existe, sinon Chromium de Playwright. L’audit vérifie cinq tailles d’écran, les six réponses, les calculs interactifs, les étapes de dévoilement, le chronométrage/CSV, les illustrations imprimées et la pagination. Les résultats sont dans `verification/checks.json`. L’exactitude pédagogique nécessite aussi la lecture critique et le retour des étudiants.
 
-## Publication
-
-GitHub Pages publishes the repository root from `main`; `.nojekyll` disables Jekyll processing. Commit the rebuilt HTML and PDFs together. Relative links keep the presentation and PDF under the same project path. No instructor solution or private TD artefact is included in this directory.
-
-The materials were prepared with AI assistance, followed by the documented reference, mathematical and browser checks. The PDF contains the initial numerical examples and quiz explanations; browser interactions and raw timing export require the HTML. Third-party papers are linked, not redistributed. No blanket licence is asserted here for those papers.
+Préparé avec assistance IA ; illustrations générées avec l’outil intégré, textes et schémas retravaillés et vérifiés. Le PDF ADARE de l’auteur a servi de référence de narration, sans être redistribué.

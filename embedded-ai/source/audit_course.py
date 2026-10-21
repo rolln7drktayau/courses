@@ -20,8 +20,9 @@ GEOMETRY='''() => {
  };
  const content=s.querySelector('.content');
  if(content){within(s.querySelector('.points'),content,'points');within(s.querySelector('.visual'),content,'visual');
+  within(s.querySelector('.story-copy'),content,'story-copy');
   within(s.querySelector('.quiz-options'),content,'quiz-options');}
- s.querySelectorAll('.visual,.interactive-panel,.reference-list,.glossary-grid').forEach(el=>{
+ s.querySelectorAll('.visual,.interactive-panel,.reference-list,.glossary-grid,.opening-grid,.opening-card,.quiz-prompt').forEach(el=>{
   if(el.scrollHeight>el.clientHeight+3||el.scrollWidth>el.clientWidth+3)errors.push({label:el.className,scrollH:el.scrollHeight-el.clientHeight,scrollW:el.scrollWidth-el.clientWidth});
  });
  const last=s.querySelector('.content,.reference-list,.glossary-grid,.answer-list,.hero-grid');
@@ -47,18 +48,33 @@ def main():
         page.goto((ROOT/'index.html').as_uri())
         page.wait_for_function('window.Course && document.documentElement.dataset.ready === "true"')
         page.evaluate('document.body.classList.add("no-motion")')
+        images=page.locator('.scene-picture')
+        assert images.count()>=8
+        assert images.evaluate_all('els=>els.every(e=>getComputedStyle(e).backgroundImage.startsWith(\'url("data:image/png;base64,\'))')
+        results['embedded_artwork']='all narrative panels contain their offline image'
+        history_images=page.locator('.history-picture')
+        assert history_images.count()==2
+        assert history_images.evaluate_all('els=>els.every(e=>getComputedStyle(e).backgroundImage.startsWith(\'url("data:image/png;base64,\'))')
         for w,h in [(1920,1080),(1366,768),(1280,720),(1024,768),(768,1024)]:
             page.set_viewport_size({'width':w,'height':h});page.evaluate('window.Course.fit()')
             problems=[]
             for i in range(total):
-                page.evaluate('(i)=>window.Course.show(i,true)',i)
+                page.evaluate("(i)=>window.Course.show(i,true,'all')",i)
                 errors=page.evaluate(GEOMETRY)
                 if errors:problems.append({'slide':i+1,'errors':errors})
             results['viewports'][f'{w}x{h}']=problems
         page.set_viewport_size({'width':1600,'height':1000});page.evaluate('window.Course.fit()')
-        def go(i):page.evaluate('(i)=>window.Course.show(i,true)',i)
+        def go(i):page.evaluate("(i)=>window.Course.show(i,true,'all')",i)
         def visual(name):
             go(next(i for i,item in enumerate(SLIDES+extra) if item.get('visual')==name))
+        assert sum(item['minutes'] for item in SLIDES)==180
+        page.evaluate('window.Course.show(1,true)')
+        assert page.locator('.slide.active .opening-card').count()==4
+        assert page.locator('.slide.active [data-answer]').count()==0
+        for count in range(1,5):
+            page.keyboard.press('ArrowRight')
+            assert page.locator('.slide.active .opening-card:not(.fragment-hidden)').count()==count
+        results['opening_questions']='four unscored prompts, revealed separately before the story'
         visual('forward_lab')
         assert page.locator('.slide.active [data-forward-value="y"]').inner_text()=='1,5'
         page.locator('.slide.active [data-forward="x1"]').fill('3')
@@ -104,7 +120,10 @@ def main():
         quiz_overflow=[]
         for i,item in enumerate(SLIDES):
             if not item['quiz']:continue
-            go(i);page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            go(i)
+            assert page.locator('.slide.active .quiz-followup').is_hidden()
+            page.locator(f'.slide.active [data-answer="{item["quiz"]["correct"]}"]').click()
+            assert page.locator('.slide.active .quiz-followup').is_visible()
             assert page.locator('.slide.active .quiz-feedback').inner_text().startswith('Oui.')
             for choice in range(len(item['quiz']['options'])):
                 page.locator(f'.slide.active [data-answer="{choice}"]').click()
@@ -122,17 +141,32 @@ def main():
             page.locator(f'#quiz-list button[data-go="{i}"]').click()
             assert page.locator('.slide.active').get_attribute('data-index')==str(i)
         results['quiz_feedback_overflow']=quiz_overflow
-        results['interactive_checks'].append('Five numerical/decision quizzes: direct navigation and explanations')
-        go(3);page.locator('.slide.active [data-ref="R01"]').click()
+        results['interactive_checks'].append('Six end-of-act question breaks: open questions, numerical choices and explanations')
+        visual('story_alvinn');page.locator('.slide.active [data-ref="R01"]').click()
         assert page.locator('#reader').evaluate('d=>d.open');page.locator('[data-action="close"]').click()
         page.locator('[data-action="sources"]').click()
         page.get_by_role('button',name='Voir la bibliographie dans la présentation').click()
         assert 'Sources et limites' in page.locator('.slide.active h1').inner_text()
-        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Levier 1')
+        page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Howard')
         page.locator('#slide-list .toc-entry').first.click()
-        assert 'Garder' in page.locator('.slide.active h1').inner_text()
-        page.keyboard.press('ArrowRight');assert 'Déplacer moins' in page.locator('.slide.active h1').inner_text()
-        results['interactive_checks'].append('References, bibliography, search and keyboard navigation')
+        assert 'Howard' in page.locator('.slide.active h1').inner_text()
+        # A scene advances through its layers before the next scene; history restores its layer.
+        page.evaluate('window.Course.show(1,true)')
+        assert page.evaluate('window.Course.step')==0
+        assert page.locator('.slide.active .fragment-hidden').count()>0
+        page.keyboard.press('ArrowRight');assert page.evaluate('window.Course.step')==1
+        assert page.locator('.slide.active').get_attribute('data-index')=='1'
+        page.keyboard.press('a');assert page.locator('.slide.active .fragment-hidden').count()==0
+        page.keyboard.press('ArrowRight');assert page.locator('.slide.active').get_attribute('data-index')=='2'
+        page.keyboard.press('ArrowLeft');assert page.locator('.slide.active').get_attribute('data-index')=='1'
+        assert page.evaluate('window.Course.step')==page.evaluate('window.Course.maxStep')
+        page.evaluate('window.Course.show(1,true,2)');page.reload();page.wait_for_function('window.Course')
+        assert page.evaluate('window.Course.step')==2
+        visual('story_outage')
+        assert 'offline' in page.locator('.slide.active .network-scene').get_attribute('class')
+        page.locator('.slide.active [data-action="network-toggle"]').click()
+        assert 'online' in page.locator('.slide.active .network-scene').get_attribute('class')
+        results['interactive_checks'].append('Progressive reveals, reverse navigation, saved step URL and network schematic toggle')
         results['mobile_navigation_fits']=True
         for width in [1366,1100,1024,960,950,900,850,768,701,700,600,560,390,360]:
             page.set_viewport_size({'width':width,'height':844})
@@ -150,8 +184,17 @@ def main():
     text='\n'.join(p.get_text() for p in pdf)
     for ref in REFERENCES:assert ref['id'] in text,ref['id']
     assert 'Futurs ingénieurs en systèmes embarqués' not in pdf[0].get_text()
+    assert 'Alice' in pdf[0].get_text()
+    for i,item in enumerate(SLIDES):
+        if item['visual'] in {'story_cover','story_request','story_voices','story_shakey','story_alvinn','story_remote','story_outage','story_pause','story_robustness','story_epilogue'}:
+            assert pdf[i].get_images(),f'Missing printed scene art at {i+1}'
+    assert all(ref in text for ref in ['Pomerleau','Howard','Jacob','Wei-Ming Chen'])
+    assert 'Sans Internet' not in pdf[1].get_text()
+    assert 'Une IA peut-elle fonctionner sans Internet' in pdf[1].get_text()
+    assert 'La lampe' in pdf[2].get_text()
+    assert sum(bool(item['quiz']) for item in SLIDES)==6
     results['pdf_links']=sum(len(p.get_links()) for p in pdf)
-    selected=[0,3,6,7,8,10,13,15,18,23,26,30]
+    selected=[0,1,2,4,5,8,13,20,21,25,31,34]
     thumbs=[]
     for i in selected:
         pix=pdf[i].get_pixmap(matrix=fitz.Matrix(.4,.4))

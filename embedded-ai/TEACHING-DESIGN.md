@@ -1,39 +1,29 @@
-# Learning design and educational references
+# Choix pédagogiques du cours narratif
 
-Roland Cédric TAYO · INEM · Updated 21 October 2026.
+Roland Cédric TAYO · INEM.
 
-## Purpose and limits
+La présentation part d’un usage quotidien, fait apparaître une difficulté, puis introduit la notion qui permet de la comprendre. Elle reprend le principe de narration du support ADARE de l’auteur, avec des illustrations originales et des scènes plus aérées.
 
-The 180-minute synthesis introduces a 14-hour lecture / 14-hour practical module. The practical project continues with independent work. Core objectives are observable: explain a complete inference, distinguish training from deployment, calculate resource budgets, verify an optimisation and defend reproducible evidence.
+| Chapitre | Minutes | Question centrale |
+|---|---:|---|
+| I | 0–25 | Pourquoi apprendre à reconnaître une commande ? |
+| II | 25–55 | Comment un réseau calcule-t-il et apprend-il ? |
+| III | 55–80 | Où exécuter le modèle, et comment le déployer ? |
+| Pause | 80–90 | Dix minutes |
+| IV | 90–120 | Pourquoi le fichier et le calcul ne demandent-ils pas la même mémoire ? |
+| V | 120–145 | Pourquoi moins d’opérations ne garantit-il pas le même gain de temps ou d’énergie ? |
+| VI | 145–180 | Comment vérifier, comparer et poursuivre une recherche mesurée ? |
 
-## Published educational references
+Quatre questions orales de départ occupent quatre minutes après la couverture ; elles sont reprises à la conclusion. Ce temps est inclus dans les 25 minutes du premier chapitre. Aucun score ni service de quiz externe n’est nécessaire.
 
-These are sources of educational ideas, not a ranking or an assertion of equivalent coverage.
+Les pauses questions sont aux scènes 7, 12, 17, 24, 30 et 35. Elles associent explication orale, calcul ou choix, puis réponse commentée. Le rythme de trois heures comprend ces échanges. Les 23 pages complémentaires ne sont pas prévues pour une présentation intégrale pendant ces trois heures.
 
-- [MIT 6.5940 — TinyML and Efficient AI Computing, Fall 2026](https://hanlab.mit.edu/courses/2026-fall-65940): explicit prior ML/architecture knowledge, extended efficiency topics, labs and a final project. Adaptation here: learn the prerequisites, perform bounded experiments and separate advanced reading from the short common path.
-- [Harvard — Deploying TinyML](https://pll.harvard.edu/course/deploying-tinyml): programming and deploying a complete application on a physical microcontroller. Adaptation here: make the PC-to-device chain visible before discussing optimisation. No specific commercial kit is imposed by these slides.
-- [Carnegie Mellon — 18-444 Embedded Machine Learning](https://courses.apps.ece.cmu.edu/18444): neural architectures, training, model downsizing and constrained microcontroller inference. Adaptation here: connect model structure to deployment and its measured constraints.
+Les images rendent les personnes et les situations visibles. Les textes, formules et chiffres restent séparés des images pour être lisibles, accessibles et modifiables. Les nombres illustratifs sont annoncés ; aucun score, temps ou gain matériel n’est inventé comme résultat expérimental. La mesure dans le navigateur est limitée explicitement à son environnement.
 
-The slides, diagrams and examples in this repository are original. The source courses have different durations and prerequisites; their topic lists are not compressed into a three-hour claim of mastery.
+Le langage courant précède le vocabulaire technique. Cela aide un débutant à raconter le raisonnement, sans remplacer les prérequis mathématiques et les travaux pratiques nécessaires à la compétence d’ingénieur. Une observation avec des étudiants reste nécessaire pour ajuster le rythme et vérifier la compréhension réelle.
 
-## Main path
+Le cours de trois heures est une synthèse du module plus large, pas une promesse de couvrir toute l’IA embarquée. La progression application → modèle → déploiement rejoint celle de [Harvard Deploying TinyML](https://pll.harvard.edu/course/deploying-tinyml) et [CMU 18-444](https://courses.apps.ece.cmu.edu/18444). [MIT EfficientML](https://hanlab.mit.edu/courses/2026-fall-65940) fournit un repère pour les approfondissements d’efficacité. Ces références ne valent pas équivalence de formation.
 
-| Time | Activity | Evidence |
-|---|---|---|
-| 0–20 min | Human need, historical obstacles, computation placement | Justify a local architecture against two requirements |
-| 20–55 min | A complete 2 → 2 → 1 network and the project bridge | Trace an output, a loss and a gradient step; count parameters and MAC |
-| 55–85 min | Deployment and resource budgets | Explain PC/device equivalence and calculate peak SRAM |
-| 85–95 min | Break | Ten minutes included |
-| 95–130 min | Quantisation, data reuse and browser timing | Verify outputs, compare raw observations and calculate global gain |
-| 130–160 min | Hypotheses, reliability, Git/CI and a research paper | Specify controls, failure cases and provenance |
-| 160–180 min | Constrained design decision and outcomes | Justify a choice and propose a test that could disprove it |
+Le TD est commun au cours principal. Le dépôt ne contient ni corrigé, ni poids entraînés du projet enseignant.
 
-## Honest examples and research
-
-The toy network has nine parameters. Its given numbers are illustrative, not a trained checkpoint of the project. One learning demonstration updates only one output weight with hidden values fixed; the assignment requires the full specified gradients.
-
-The live micro-experiment compares a JavaScript loop and `reduce` on the same deterministic 4,096-value Float64Array. It checks correctness, warms up, uses a common measured batch size, alternates seven paired campaigns and exports raw observations. It measures only the current browser. It does not infer energy, MCU cycles or Raspberry Pi timings, and it provides no optimised projection implementation for the assignment.
-
-The final decision table is fictional and independent of the regression project. Its observed p95 is not a worst-case guarantee. Learning to experiment and explaining a negative result are assessed; an accepted publication or a novel speed record is not promised.
-
-The 21 optional slides keep convolution, recurrence, attention, KV-cache details, compression and current research available without requiring their presentation within the core time. The PDF displays initial examples and quiz explanations; interactions and CSV export require HTML.
+Deux annexes relient le réseau de démonstration au Mixer du TD : dimensions, paramètres partagés, connexions résiduelles et contrôles de gradients. Elles sont prévues pour accompagner les TD, hors du parcours oral de trois heures.

@@ -1,17 +1,15 @@
-# Courses
+# Cours · Roland Cédric TAYO
 
-Course materials by **Roland Cédric TAYO**.
+Le storyboard est le **cours principal d’IA pour les systèmes embarqués**.
 
-**Course website:** https://rolln7drktayau.github.io/courses/
+- [Cours dynamique](https://rolln7drktayau.github.io/courses/embedded-ai/)
+- [PDF du cours](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf)
+- [TD et documents étudiants](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
+- [Commencer le TD](https://rolln7drktayau.github.io/courses/embedded-ai/lab/getting-started.html)
+- [Sources du cours](embedded-ai/)
 
-## Embedded AI
+36 scènes principales, quatre questions d’ouverture et six pauses questions ; trois heures avec échanges et pause. Les 23 pages complémentaires incluent les références et le passage au réseau du TD. Le module complet comporte 14 h de cours et 14 h de TD, puis du travail personnel.
 
-- [Open the dynamic presentation](https://rolln7drktayau.github.io/courses/embedded-ai/)
-- [Read the PDF](https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf)
-- [Read the teaching plan](https://rolln7drktayau.github.io/courses/embedded-ai/course-plan.pdf)
-- [Browse the course sources](embedded-ai/)
-- [Open the practical assignment and student resources](https://rolln7drktayau.github.io/courses/embedded-ai/lab/)
+Le dépôt contient les supports étudiants et leurs sources de génération, sans corrigé enseignant. Le dossier `embedded-ai-story/` ne contient qu’une redirection pour préserver les liens déjà partagés.
 
-Teaching language: French. Designed for future embedded-systems engineers. The three-hour synthesis includes a ten-minute break, five applied quizzes, a complete teaching network and a live browser measurement experiment. It opens a wider 14-hour lecture / 14-hour practical module. References and a glossary accompany the core slides.
-
-GitHub Pages serves the `main` branch root. The `embedded-ai` directory contains only the course and its public sources, not an instructor solution.
+GitHub Pages publie la racine de `main`. Voir `embedded-ai/README.md` pour les commandes de génération et de vérification.

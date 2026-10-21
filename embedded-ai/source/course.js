@@ -7,7 +7,7 @@
   const coreCount = data.filter(d => d.minutes > 0).length;
   const bibliographyIndex = data.findIndex(d => d.chapter === 'Annexes · Sources');
   const modal = document.getElementById('reader');
-  let index = 0;
+  let index = 0, step = 0;
   const q = (s, root = document) => root.querySelector(s);
   const escape = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number = (x, digits = 2) => x.toLocaleString('fr-FR', {maximumFractionDigits: digits});
@@ -17,23 +17,36 @@
     const scale = Math.min(area.clientWidth / 1600, area.clientHeight / 900);
     document.getElementById('scaled').style.transform = `scale(${scale})`;
   }
-  function show(i, replace = false) {
-    index = Math.max(0, Math.min(slides.length - 1, i));
-    slides.forEach((slide, k) => {
-      const active = k === index;
-      slide.classList.toggle('active', active);
-      slide.setAttribute('aria-hidden', String(!active));
-      if ('inert' in slide) slide.inert = !active;
-    });
-    q('#position').textContent = index < coreCount ? `${index+1} / ${coreCount} · parcours` : `Annexe ${index-coreCount+1} / ${slides.length-coreCount}`;
-    q('#progress').style.width = `${100*Math.min(index,coreCount-1)/(coreCount-1)}%`;
-    const fragment = `#slide=${index+1}`;
-    if (replace) history.replaceState(null, '', fragment); else history.pushState(null, '', fragment);
-    q('#announcement').textContent = `${index+1}. ${data[index].title.replace(/\n/g,' ')}`;
+  function maxStep() {
+    return Math.max(0,...[...slides[index].querySelectorAll('[data-step]')].map(el=>Number(el.dataset.step)||0));
   }
-  function readHash() {
-    const match = location.hash.match(/slide=(\d+)/);
-    show(match ? Number(match[1])-1 : 0, true);
+  function applyStep(n,replace=false) {
+    const maximum=maxStep();step=n==='all'?maximum:Math.max(0,Math.min(maximum,Number(n)||0));
+    slides[index].querySelectorAll('.fragment').forEach(el=>{
+      const hidden=Number(el.dataset.step)>step;
+      el.classList.toggle('fragment-hidden',hidden);el.setAttribute('aria-hidden',String(hidden));
+      if('inert' in el)el.inert=hidden;
+    });
+    q('#position').textContent=index<coreCount?`${index+1}/${coreCount}${maximum?' · '+step+'/'+maximum:' · histoire'}`:`Annexe ${index-coreCount+1}/${slides.length-coreCount}`;
+    const all=q('[data-action="revealall"]',slides[index]);if(all){all.disabled=step===maximum;all.textContent=step===maximum?'Tout est visible':'Tout montrer · A';}
+    const fragment=`#slide=${index+1}`+(maximum?`&step=${step}`:'');
+    if(replace)history.replaceState(null,'',fragment);else history.pushState(null,'',fragment);
+    q('#announcement').textContent=`${index+1}. ${data[index].title.replace(/\n/g,' ')}${maximum?' · étape '+step+' sur '+maximum:''}`;
+  }
+  function show(i,replace=false,reveal=0) {
+    index=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach((slide,k)=>{
+      const active=k===index;slide.classList.toggle('active',active);slide.setAttribute('aria-hidden',String(!active));
+      if('inert' in slide)slide.inert=!active;
+    });
+    q('#progress').style.width=`${100*Math.min(index,coreCount-1)/(coreCount-1)}%`;
+    applyStep(reveal,replace);
+  }
+  function next(){if(step<maxStep())applyStep(step+1);else show(index+1);}
+  function previous(){if(step>0)applyStep(step-1);else show(index-1,false,'all');}
+  function readHash(){
+    const params=new URLSearchParams(location.hash.slice(1));
+    show(Math.max(0,Number(params.get('slide')||1)-1),true,params.get('step')||0);
   }
   function openModal(title, html) {
     q('#reader-title').textContent = title;
@@ -54,16 +67,11 @@
     openModal('Pour approfondir', `<h3>${escape(d.title.replace(/\n/g,' '))}</h3><p>${escape(d.detail || 'Retrouvez les sources et les définitions dans les annexes. Reliez chaque résultat à sa tâche, sa cible et son protocole.')}</p>${links?'<h3>Lectures associées</h3><ul>'+links+'</ul>':''}`);
   }
   function toc() {
-    const guiding = [
-      [2, '1. Pour qui ?', 'Définir le service utile.'],
-      [6, '2. Comment apprend-elle ?', 'Suivre un petit réseau complet.'],
-      [13, '3. Comment l’embarquer ?', 'Déployer, vérifier et compter.'],
-      [20, '4. Comment l’alléger ?', 'Tester une représentation et une exécution.'],
-      [26, '5. Quelle preuve ?', 'Enquêter puis prendre une décision mesurée.']
-    ];
-    const questions = guiding.map(([i,title,sub]) => `<button class="toc-entry" data-go="${i}"><strong>${escape(title)}</strong><small>${escape(sub)}</small></button>`).join('');
-    const quizzes = data.map((d,i)=>({d,i})).filter(({d})=>d.quiz).map(({d,i})=>`<button class="toc-entry" data-go="${i}"><small>Diapositive ${i+1} · cliquer, choisir et lire l’explication</small>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
-    openModal('Plan, questions et quiz', `<p><b>Trois heures, pause comprise.</b> Cinq questions guident les chapitres. Cinq quiz distincts permettent de mettre ces idées à l’épreuve.</p><h3>Les cinq questions directrices</h3><div class="toc-grid">${questions}</div><h3>Accès direct aux cinq quiz</h3><div class="toc-grid" id="quiz-list">${quizzes}</div><h3>Parcours complet · rechercher une diapositive</h3><input class="toc-search" type="search" aria-label="Rechercher une diapositive" placeholder="Rechercher une brique, un sujet, une publication…"><div class="toc-grid" id="slide-list"></div>`);
+    const acts=[];
+    data.slice(0,coreCount).forEach((d,i)=>{if(d.chapter!=='Pause'&&!acts.some(a=>a.title===d.chapter))acts.push({i,title:d.chapter});});
+    const chapters=acts.map(({i,title})=>`<button class="toc-entry" data-go="${i}"><strong>${escape(title)}</strong><small>Commencer à la scène ${i+1}</small></button>`).join('');
+    const quizzes=data.map((d,i)=>({d,i})).filter(({d})=>d.quiz).map(({d,i})=>`<button class="toc-entry" data-go="${i}"><small>Scène ${i+1} · discuter, calculer et justifier</small>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
+    openModal('L’histoire et ses six pauses questions', `<p><b>Trois heures, pause comprise.</b> Alice est fictive ; les épisodes scientifiques sont documentés. Flèche droite : révéler puis avancer. A : tout montrer.</p><h3>Les six actes</h3><div class="toc-grid">${chapters}</div><h3>Questions après chaque acte</h3><div class="toc-grid" id="quiz-list">${quizzes}</div><h3>Scènes et annexes</h3><input class="toc-search" type="search" aria-label="Rechercher une diapositive" placeholder="Chercher Alice, un chercheur, une brique…"><div class="toc-grid" id="slide-list"></div>`);
     const render = value => {
       const term = value.toLocaleLowerCase('fr');
       q('#slide-list', modal).innerHTML = data.map((d,i) => ({d,i})).filter(({d}) => (d.title+' '+d.chapter+' '+d.lead).toLocaleLowerCase('fr').includes(term)).map(({d,i}) => `<button class="toc-entry ${i===index?'current':''}" data-go="${i}"><small>${escape(d.chapter)} · ${d.minutes ? d.minutes+' min':'annexe'}</small><strong>${String(i+1).padStart(2,'0')}</strong>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
@@ -75,17 +83,23 @@
     if (el.dataset.ref && !e.ctrlKey && !e.metaKey) {e.preventDefault(); source(el.dataset.ref);}
     if (el.hasAttribute('data-go')) {modal.close(); show(Number(el.dataset.go));}
     const action = el.dataset.action;
-    if (action==='next') show(index+1);
-    if (action==='prev') show(index-1);
+    if (action==='next') next();
+    if (action==='prev') previous();
     if (action==='toc') toc();
     if (action==='details') details();
+    if (action==='revealall') applyStep('all');
+    if (action==='network-toggle') {
+      const root=el.closest('.visual-stack'),diagram=q('.network-scene',root);
+      const offline=diagram.classList.toggle('offline');diagram.classList.toggle('online',!offline);
+      el.textContent=offline?'Rétablir la liaison':'Couper la liaison';
+    }
     if (action==='benchmark') await runBenchmark(el.closest('.benchmark-lab'));
     if (action==='benchmark-csv') exportBenchmark(el.closest('.benchmark-lab'));
     if (action==='sources') {
       openModal('Cours, TD et sources', `<p>Retrouvez ici les documents à lire et les fichiers sources à consulter ou télécharger.</p>
         <h3>Travaux dirigés</h3><ul>
-          <li><a href="lab/" target="_blank" rel="noopener noreferrer">Énoncé du TD et ressources étudiantes</a></li>
-          <li><a href="lab/student-materials.zip" download>Dossier étudiant complet · ZIP</a></li>
+          <li><a href="https://rolln7drktayau.github.io/courses/embedded-ai/lab/" target="_blank" rel="noopener noreferrer">Énoncé du TD et ressources étudiantes</a></li>
+          <li><a href="https://rolln7drktayau.github.io/courses/embedded-ai/lab/student-materials.zip" download>Dossier étudiant complet · ZIP</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/tree/main/embedded-ai/lab" target="_blank" rel="noopener noreferrer">Fichiers du TD et sources du modèle d’article sur GitHub</a></li>
         </ul><h3>Cours</h3><ul>
           <li><a href="course.pdf" target="_blank" rel="noopener noreferrer">Présentation en PDF</a></li>
@@ -124,15 +138,17 @@
         b.setAttribute('aria-pressed',String(k===answer));
       });
       const output=q('.quiz-feedback',root);output.classList.add('answered');output.textContent=(answer===d.quiz.correct?'Oui. ':'À revoir. ')+(d.quiz.feedback?.[answer] || d.quiz.answer);
+      const followup=q('.quiz-followup',root);if(followup)followup.hidden=false;
     }
   });
   document.addEventListener('keydown', e => {
     if (modal.open || e.target.closest('input,textarea,[contenteditable="true"]')) return;
     if (e.target.closest('button,a') && [' ','Enter'].includes(e.key)) return;
-    if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) {e.preventDefault();show(index+1);}
-    if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)) {e.preventDefault();show(index-1);}
+    if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) {e.preventDefault();next();}
+    if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)) {e.preventDefault();previous();}
     if (e.key==='Home') {e.preventDefault();show(0);}
     if (e.key==='End') {e.preventDefault();show(coreCount-1);}
+    if (e.key.toLowerCase()==='a') applyStep('all');
     if (e.key.toLowerCase()==='t') toc();
     if (e.key.toLowerCase()==='d') details();
     if (e.key.toLowerCase()==='f') q('[data-action="fullscreen"]').click();
@@ -249,8 +265,8 @@
   },{passive:true});
   document.getElementById('viewport').addEventListener('touchend',e=>{
     if(!touch)return;const dx=e.changedTouches[0].clientX-touch[0],dy=e.changedTouches[0].clientY-touch[1];touch=null;
-    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.4)show(index+(dx<0?1:-1));
+    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.4)dx<0?next():previous();
   },{passive:true});
-  window.Course={show,fit,count:slides.length,coreCount};
+  window.Course={show,fit,count:slides.length,coreCount,setStep:applyStep,revealAll:()=>applyStep('all'),get step(){return step;},get maxStep(){return maxStep();}};
   fit();readHash();document.documentElement.dataset.ready='true';
 })();

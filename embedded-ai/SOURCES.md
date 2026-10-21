@@ -180,7 +180,7 @@ Limite : Étude particulière ; variabilité entre graines et temps de mise en r
 
 ## R15 — A Framework for Accelerating Transformer Inference on RISC-V for Edge AI
 
-Ajay Kumar M et al.. 2026. Prépublication arXiv · 6 octobre 2026.
+Ajay Kumar M et al.. 2026. Prépublication arXiv · accepté à ICECS 2026 selon la notice des auteurs.
 
 [Source originale](https://arxiv.org/abs/2610.08688)
 
@@ -266,7 +266,7 @@ Limite : Aucun chiffre de classement en temps réel n’est repris dans ce suppo
 
 SRI International. 1966–1972. Histoire du projet · organisme concepteur.
 
-[Source originale](https://www.sri.com/hoi/shakey-the-robot/)
+[Source originale](https://www.sri.com/press/story/75-years-of-innovation-shakey-the-robot/)
 
 Apport : Faire percevoir un environnement et planifier des actions à un robot mobile.
 

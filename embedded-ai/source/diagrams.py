@@ -40,6 +40,9 @@ def cells(x,y,rows,cols,size=28,active=(),zeros=False):
     return z
 
 def draw(name):
+    if name.startswith('story_'):
+        from story_art import draw_story
+        return draw_story(name)
     z=''
     if name=='tiny_network':
         for x,ys,labels in [(95,[150,335],['x₁','x₂']),(365,[150,335],['h₁','h₂']),(645,[242],['ŷ'])]:
@@ -324,6 +327,20 @@ def draw(name):
         z+=text(570,263,'Instructions + compilation\nAire et énergie à compter',23,TEAL)
         z+=text(570,370,'Ajay Kumar M et al.',21,MUTED)
         z+=text(380,459,'Deux prépublications : hypothèses et périmètres à vérifier.',20,MUTED)
+    elif name=='mixer_bridge':
+        for y,label,sub in [(15,'16 instants × 3 variables','48 valeurs normalisées'),
+                            (130,'Mélanger les instants','16 → 8 → 16, partagé entre variables'),
+                            (245,'Mélanger les variables','3 → 8 → 3, partagé entre instants'),
+                            (360,'Prévoir la prochaine valeur','48 → 1')]:
+            z+=node(100,y,560,85,label,sub,PALE if y in [130,245] else 'white')
+            if y<360:z+=arrow(380,y+90,380,y+108)
+        z+=text(380,484,'Chaque mélange ajoute sa correction à son entrée.',20,TEAL)
+    elif name=='shared_gradient_bridge':
+        z+=node(240,25,280,86,'Un poids partagé','Le même nombre, réutilisé')
+        for x,label in [(20,'Usage 1'),(270,'Usage 2'),(520,'Usage 3')]:
+            z+=arrow(380,117,x+110,179)+node(x,190,220,85,label,'Sa contribution au gradient',PALE)
+            z+=arrow(x+110,282,380,357)
+        z+=node(130,370,500,91,'Additionner les contributions','Puis corriger une seule fois le poids')
     else:
         z+=circle(380,220,120,'?')+text(380,420,'Argumenter avant de choisir.',25,TEAL)
     return svg(z,name)

@@ -15,6 +15,8 @@
 | `article-template/` | The same article sources, browsable in GitHub |
 | `student-materials.zip` | Downloadable documents and Overleaf archive together |
 
+Read [COMMENCER.md](COMMENCER.md) for prerequisites, hardware, progression and the scope of the research.
+
 ## First steps
 
 1. Read `assignment.pdf` and confirm the actual board and deadline with the teacher.

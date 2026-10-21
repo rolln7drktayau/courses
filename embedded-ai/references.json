@@ -144,7 +144,7 @@
     "authors": "Ajay Kumar M et al.",
     "year": "2026",
     "title": "A Framework for Accelerating Transformer Inference on RISC-V for Edge AI",
-    "status": "Prépublication arXiv · 6 octobre 2026",
+    "status": "Prépublication arXiv · accepté à ICECS 2026 selon la notice des auteurs",
     "url": "https://arxiv.org/abs/2610.08688",
     "takeaway": "Adapter instructions et compilation à des Transformers compacts, principalement encodeurs.",
     "limit": "Modifier un cœur RISC-V est un travail matériel ; ce gain n’est pas un simple correctif logiciel."
@@ -215,7 +215,7 @@
     "year": "1966–1972",
     "title": "Shakey the Robot",
     "status": "Histoire du projet · organisme concepteur",
-    "url": "https://www.sri.com/hoi/shakey-the-robot/",
+    "url": "https://www.sri.com/press/story/75-years-of-innovation-shakey-the-robot/",
     "takeaway": "Faire percevoir un environnement et planifier des actions à un robot mobile.",
     "limit": "Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord."
   },
