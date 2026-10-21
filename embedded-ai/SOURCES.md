@@ -259,3 +259,27 @@ MLCommons. Documentation consultée en 2026. Méthodologie et résultats officie
 Apport : Lire conjointement qualité, scénario de mesure et configuration matérielle.
 
 Limite : Aucun chiffre de classement en temps réel n’est repris dans ce support.
+
+
+
+## R22 — Shakey the Robot
+
+SRI International. 1966–1972. Histoire du projet · organisme concepteur.
+
+[Source originale](https://www.sri.com/hoi/shakey-the-robot/)
+
+Apport : Faire percevoir un environnement et planifier des actions à un robot mobile.
+
+Limite : Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord.
+
+
+
+## R23 — Edge AI
+
+NIST. Documentation consultée en 2026. Programme de recherche officiel.
+
+[Source originale](https://www.nist.gov/programs-projects/edge-ai)
+
+Apport : Rapprocher l’inférence ou l’apprentissage des données et des usages.
+
+Limite : Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr.

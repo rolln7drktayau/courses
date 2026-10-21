@@ -13,9 +13,9 @@ The main presentation provides permanent **TD** and **PDF** links in its navigat
 
 ## Scope
 
-44 core slides, five reasoning questions and interactive demonstrations; 180 minutes including a ten-minute break. Ten appendices provide references, a glossary and explanations. The course covers a selective history, data and model primitives, hardware/memory/latency/energy budgets, optimisation, deployment, reliability, security and research methodology.
+44 core slides, five explicit guiding questions and five directly accessible quizzes and interactive demonstrations; 180 minutes including a ten-minute break. Ten appendices provide references, a glossary and explanations. The course covers a selective history, data and model primitives, hardware/memory/latency/energy budgets, optimisation, deployment, reliability, security and research methodology.
 
-There are 21 primary or official sources, verified on 20 October 2026. Established publications, preprints and vendor documentation are labelled separately. Historical foundations are explicitly distinguished from 2023–2026 research. All diagrams are original; analytical illustrations are not presented as board measurements.
+There are 23 primary or official sources, including SRI’s Shakey history and the NIST Edge AI programme added on 21 October 2026. Established publications, preprints and vendor documentation are labelled separately. Historical foundations are explicitly distinguished from 2023–2026 research. All diagrams are original; analytical illustrations are not presented as board measurements.
 
 ## Files
 
@@ -36,7 +36,7 @@ There are 21 primary or official sources, verified on 20 October 2026. Establish
 
 ## Navigation
 
-Arrow keys / Page Up / Page Down / Space navigate. `T` opens the searchable contents, `D` opens further explanations and `F` toggles fullscreen. Animations can be disabled, and the system reduced-motion preference is respected. The course itself needs no remote script, font or telemetry. Opening article links needs Internet.
+Arrow keys / Page Up / Page Down / Space navigate. `T` or **Plan & questions** opens the five guiding questions, direct links to all five quizzes and searchable contents, `D` opens further explanations and `F` toggles fullscreen. Animations can be disabled, and the system reduced-motion preference is respected. The course itself needs no remote script, font or telemetry. Opening article links needs Internet.
 
 ## Rebuild
 

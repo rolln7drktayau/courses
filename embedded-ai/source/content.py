@@ -21,6 +21,8 @@ REFERENCES = [
     dict(id='R19',authors='Arm',year='Documentation consultée en 2026',title='CMSIS-NN — Efficient neural network kernels for Arm Cortex-M',status='Dépôt officiel de noyaux optimisés',url='https://github.com/ARM-software/CMSIS-NN',takeaway='Les performances dépendent de noyaux adaptés à l’ISA et aux formats quantifiés.',limit='Une bibliothèque ne supprime pas les limites mémoire ou les vérifications de l’application.'),
     dict(id='R20',authors='Google AI Edge',year='Documentation consultée en 2026',title='LiteRT for Microcontrollers',status='Documentation officielle du moteur MCU',url='https://developers.google.com/edge/litert/microcontrollers/overview',takeaway='Déployer un sous-ensemble d’opérateurs avec une allocation adaptée au microcontrôleur.',limit='Vérifier les opérations, types et cibles pris en charge ; conversion n’est pas validation.'),
     dict(id='R21',authors='MLCommons',year='Documentation consultée en 2026',title='MLPerf Inference: Tiny',status='Méthodologie et résultats officiels',url='https://mlcommons.org/benchmarks/inference-tiny/',takeaway='Lire conjointement qualité, scénario de mesure et configuration matérielle.',limit='Aucun chiffre de classement en temps réel n’est repris dans ce support.'),
+    dict(id='R22',authors='SRI International',year='1966–1972',title='Shakey the Robot',status='Histoire du projet · organisme concepteur',url='https://www.sri.com/hoi/shakey-the-robot/',takeaway='Faire percevoir un environnement et planifier des actions à un robot mobile.',limit='Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord.'),
+    dict(id='R23',authors='NIST',year='Documentation consultée en 2026',title='Edge AI',status='Programme de recherche officiel',url='https://www.nist.gov/programs-projects/edge-ai',takeaway='Rapprocher l’inférence ou l’apprentissage des données et des usages.',limit='Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr.'),
 ]
 
 SLIDES=[]
@@ -28,50 +30,52 @@ def slide(ch,title,lead,points,visual,minutes,refs=(),detail='',kind='',quiz=Non
     SLIDES.append(dict(chapter=ch,title=title,lead=lead,points=points,visual=visual,minutes=minutes,
                        refs=list(refs),detail=detail,kind=kind,quiz=quiz))
 
-# Chapter 1: 27 minutes.
+# Chapter 1: 27 minutes. Begin with a person's need, then architecture and history.
 slide('01 · Comprendre le besoin','Faire tenir l’IA\ndans le monde réel.',
-      'IA pour les systèmes embarqués · Cours de synthèse · 3 heures',
-      ['Roland Cédric TAYO','INEM · Futurs ingénieurs en systèmes embarqués','Publications et documentation vérifiées au 20 octobre 2026'],
-      'hero',2,kind='hero',detail='Ce cours relie besoin, modèle, mémoire, calcul et validation. Il prépare à argumenter des choix et à pratiquer le TD ; il ne remplace pas une formation complète en apprentissage ou en sûreté de fonctionnement.')
-slide('01 · Comprendre le besoin','Cinq questions pour guider nos choix.',
-      'Du besoin au résultat mesuré, sans confondre démonstration et produit.',
-      ['<b>Pourquoi ici ?</b> Choisir ce qui doit être calculé à bord.',
-       '<b>Qu’est-ce qui coûte ?</b> Lire les briques et le matériel.',
-       '<b>Quelle preuve ?</b> Optimiser, tester et expliquer les limites.'],
-      'route',3,detail='Prérequis : vecteurs et matrices, moyenne et variance, boucles, fonctions et notions CPU/mémoire. À la fin, vous devrez pouvoir expliquer un budget, identifier une opération coûteuse, lire un résultat de recherche et proposer une expérience. Le cours inclut une pause de dix minutes et cinq questions collectives.')
-slide('01 · Comprendre le besoin','Une pompe doit-elle envoyer\ntoutes ses mesures au cloud ?',
-      'Fil conducteur fictif : estimer une mesure future et signaler un comportement inhabituel.',
-      ['<b>Besoin :</b> fonctionner quand le réseau est indisponible.',
-       '<b>Contrainte :</b> décider à temps, avec une petite mémoire.',
-       '<b>Question préalable :</b> une règle ou un modèle linéaire suffit-il ?'],
-      'system',4,detail='Le scénario sert à raisonner ; il ne constitue pas une application industrielle validée. Le TD utilise trois signaux simulés et prédit la prochaine valeur. Une vraie maintenance prédictive demanderait des données de pannes, un coût des erreurs, un horizon utile et une validation sur le terrain.')
-slide('01 · Comprendre le besoin','Local, distant ou hybride :\nun choix d’architecture.',
-      'Rapprocher le calcul des données peut aider. Il faut encore compter le coût total.',
-      ['<b>Local :</b> autonomie réseau ; ressources à bord limitées.',
-       '<b>Distant :</b> calcul disponible ; transmission et dépendance réseau.',
-       '<b>Hybride :</b> filtrage local, assistance distante et mode dégradé défini.'],
-      'placement',4,refs=['R17'],detail='La latence bout en bout inclut acquisition, prétraitement, calcul, transferts et décision. Le local réduit certains transferts, sans garantir à lui seul moins d’énergie ou la confidentialité. Le choix dépend de la connectivité, du budget et des conséquences d’une erreur.')
-slide('01 · Comprendre le besoin','Le problème n’a pas commencé\navec les grands modèles.',
-      'Deux étapes : apprendre à percevoir à bord, puis rendre le réseau plus économique.',
-      ['<b>1989 · Dean Pomerleau, ALVINN :</b> relier perception et direction d’un véhicule.',
-       '<b>2017 · Andrew Howard et al., MobileNets :</b> réduire le calcul de la vision mobile.',
-       '<b>La question demeure :</b> que peut-on observer, calculer et décider sur la cible ?'],
-      'history1',4,refs=['R01','R02'],detail='ALVINN est un repère de perception apprise pour un véhicule équipé d’ordinateurs ; ce n’est pas un réseau exécuté sur un petit MCU. MobileNets formalise une famille d’architectures efficaces pour vision mobile et embarquée. Cette histoire est sélective, et ne désigne pas un unique inventeur de l’IA embarquée.')
-slide('01 · Comprendre le besoin','2020–2026 : optimiser\nle système avec le modèle.',
-      'La nouveauté se joue aussi dans la mémoire, les noyaux et les instructions.',
-      ['<b>2020 · Lin, Chen et al. :</b> MCUNet associe recherche de réseau et moteur MCU.',
-       '<b>2024–2025 :</b> architectures mobiles, quantification et noyaux bas bits.',
-       '<b>2026 :</b> adaptation matérielle et validation de très petites inférences.'],
-      'history2',4,refs=['R04','R10','R11','R15'],detail='L’évolution ne remplace pas tous les petits modèles par des LLM. Plusieurs voies coexistent : petits prédicteurs sur MCU, vision sur accélérateur, langage sur processeur mobile et apprentissage local spécialisé. Les ressources et preuves nécessaires ne sont pas les mêmes.')
-slide('01 · Comprendre le besoin','Choisir le problème avant\nde choisir le réseau.',
-      'Un modèle apprend une relation. Il ne remplace pas la définition du besoin.',
-      ['<b>Classer :</b> reconnaître un état ou un mot.',
-       '<b>Prédire / détecter :</b> estimer une valeur ou repérer un écart.',
-       '<b>Décider :</b> traduire une sortie en action avec des règles et des limites.'],
-      'tasks',3,detail='Une sortie de classifieur n’est pas automatiquement une probabilité fiable ; un score d’anomalie n’est pas une panne confirmée. Un contrôleur doit gérer une estimation erronée et les contraintes physiques. Comparer d’abord règle, filtre ou modèle linéaire à la solution apprise.')
-slide('01 · Comprendre le besoin','Question 1 · Que faut-il garantir ?',
-      'Le réseau devient indisponible pendant dix minutes. Le système doit continuer à surveiller la pompe.',
-      [],'quiz',3,kind='quiz',quiz=dict(options=['Choisir obligatoirement le réseau le plus précis du cloud.','Définir une surveillance locale et son comportement de repli.','Réduire le nombre de paramètres, puis ignorer la liaison.'],correct=1,answer='Le besoin porte sur le service complet. Une solution locale ou hybride doit préciser ce qui reste possible hors connexion, et comment les incertitudes sont gérées.'),detail='La réponse ne signifie pas que toutes les fonctions doivent être locales. Certaines analyses peuvent attendre un serveur. Ce qui doit continuer pendant la coupure doit avoir un chemin autonome défini.')
+      'IA pour les systèmes embarqués · Du besoin humain à la preuve · 3 heures',
+      ['Roland Cédric TAYO'],
+      'hero',2,kind='hero',detail='Le point de départ est une personne qui attend un service : comprendre une commande, reconnaître un objet ou être avertie à temps. Nous allons décider si une IA aide, où placer son calcul, puis comment la rendre compatible avec le matériel. Les sources et le TD sont accessibles par Ressources ; Plan & questions donne accès aux cinq questions directrices et aux cinq quiz.')
+slide('01 · Comprendre le besoin','Les cinq questions du cours.',
+      'Un besoin humain → un choix technique → une preuve sur le matériel.',
+      ['<b>1. Pour qui et pour quoi ?</b> Définir le service attendu.',
+       '<b>2. Pourquoi une IA ?</b> Comprendre ce qu’elle apprend et calcule.',
+       '<b>3. Pourquoi à bord ?</b> Choisir le lieu et le budget du calcul.',
+       '<b>4. Comment la faire tenir ?</b> Réduire ses coûts sans perdre le service.',
+       '<b>5. Comment lui faire confiance ?</b> Tester, mesurer et prévoir ses erreurs.'],
+      'route',3,kind='guide',detail='Ces cinq questions structurent les cinq chapitres. Elles ne sont pas les cinq quiz : les quiz sont cinq courtes mises en situation, numérotées et accessibles depuis Plan & questions. Cliquer sur une réponse affiche son explication. Prérequis : tableaux, fonctions, boucles, vecteurs et bases CPU/mémoire. Les 180 minutes incluent les échanges et dix minutes de pause.')
+slide('01 · Comprendre le besoin','Un besoin simple : se faire\ncomprendre par un objet.',
+      'Exemple : une personne veut allumer une lampe en disant « lumière ».',
+      ['<b>La personne :</b> elle veut agir sans utiliser ses mains.',
+       '<b>La difficulté :</b> les voix et le bruit changent ; le son n’est jamais identique.',
+       '<b>Le service attendu :</b> reconnaître la commande, ou la refuser en cas de doute.'],
+      'human_need',4,detail='Cet exemple illustre le raisonnement, sans imposer un nouveau projet ni du matériel audio pour le TD. Un interrupteur peut suffire si le besoin ne justifie pas la voix. Si la voix apporte une aide, il faut traiter les accents, les bruits, les fausses activations et une commande manuelle de secours. Reconnaître un mot court ne demande pas nécessairement un grand modèle de langage.')
+slide('01 · Comprendre le besoin','Pourquoi ne pas tout\nenvoyer à un serveur ?',
+      'Embarquer une IA, c’est exécuter son calcul dans l’objet ou à proximité de ses données.',
+      ['<b>Répondre à temps :</b> éviter un aller-retour réseau quand le délai compte.',
+       '<b>Rester utile hors connexion :</b> la commande peut fonctionner sans Internet.',
+       '<b>Limiter les échanges :</b> conserver l’audio localement si le système le permet.'],
+      'placement',4,refs=['R23'],detail='Un serveur distant peut offrir davantage de calcul et simplifier certaines mises à jour. Le local peut réduire les échanges, mais il faut mesurer énergie et délai de la chaîne entière. Il ne garantit pas à lui seul la confidentialité : stockage, mises à jour et accès doivent aussi être protégés. Une architecture hybride partage les fonctions et précise ce qui reste possible hors connexion. L’inférence peut être locale même si l’entraînement a eu lieu sur PC ou serveur.')
+slide('01 · Comprendre le besoin','D’où vient ce besoin\nd’agir dans le monde réel ?',
+      'Trois repères, pas un inventeur unique : percevoir, apprendre, puis réduire le coût.',
+      ['<b>1966–1972 · SRI, Shakey :</b> percevoir une pièce et planifier un déplacement.',
+       '<b>1989 · Dean Pomerleau, ALVINN :</b> apprendre à suivre une route à partir d’images.',
+       '<b>2017 · Howard et al., MobileNets :</b> rendre la vision moins coûteuse sur mobile.'],
+      'history1',4,refs=['R22','R01','R02'],detail='Le besoin naît de tâches physiques utiles, pas du désir de miniaturiser tous les modèles. Shakey, développé à SRI de 1966 à 1972, planifie des actions ; son calcul n’est pas entièrement embarqué. C’est un ancêtre de la question, pas du TinyML. ALVINN utilise un réseau sur un véhicule équipé d’ordinateurs et réussit sous certaines conditions, sans autonomie générale. MobileNets réduit le calcul de la vision mobile. Ces étapes ne représentent pas toute l’histoire de l’automatique, de la robotique ou de l’IA embarquée.')
+slide('01 · Comprendre le besoin','Des IA locales existent.\nPourquoi pas dans chaque objet ?',
+      'Une démonstration qui fonctionne ne suffit pas à livrer un service fiable.',
+      ['<b>Ce qui a progressé :</b> petits réseaux, calcul entier et moteurs adaptés aux puces.',
+       '<b>Ce qui bloque :</b> mémoire, batterie, délai et erreurs en conditions réelles.',
+       '<b>Ce que l’on cherche :</b> adapter ensemble le modèle, le logiciel et le matériel.'],
+      'barriers',4,refs=['R04','R17','R23'],detail='MCUNet, en 2020, associe recherche d’architecture et moteur pour faire tenir certaines tâches de vision sur MCU. Aujourd’hui, reconnaissance de mots, vision et prédiction peuvent être locales, selon la tâche et la cible ; un LLM reste une autre échelle de ressources. Données insuffisantes, changement d’environnement, coût de maintenance et conséquences d’une erreur peuvent rendre l’IA inadaptée. Les pistes de recherche étudiées ensuite sont la réduction des formats, les échanges mémoire, les noyaux spécialisés, l’adaptation locale et des protocoles de validation reproductibles. Il faut aussi pouvoir conclure qu’une règle ou un traitement distant convient mieux.')
+slide('01 · Comprendre le besoin','Une IA est-elle\nvraiment nécessaire ?',
+      'On choisit une méthode à partir du problème, puis on vérifie son utilité.',
+      ['<b>Règle simple :</b> un seuil ou un bouton suffit-il ?',
+       '<b>Modèle appris :</b> reconnaître des variations que l’on décrit mal par des règles.',
+       '<b>Décision finale :</b> gérer l’incertitude et garder une solution de repli.'],
+      'tasks',3,detail='Classer signifie choisir une catégorie, par exemple un mot. La régression estime une valeur, comme dans le TD de prédiction de signaux. Une décision est l’action choisie à partir du résultat et des contraintes. Un score n’est pas nécessairement une probabilité fiable. Comparer au départ une règle, un filtre ou un modèle linéaire ; le réseau doit apporter un service utile au regard de son coût et de ses erreurs.')
+slide('01 · Comprendre le besoin','Quiz 1 / 5 · Sans Internet,\nque doit-il rester possible ?',
+      'La commande vocale de la lampe doit fonctionner pendant une coupure Internet.',
+      [],'quiz',3,kind='quiz',quiz=dict(options=['Utiliser seulement un modèle distant, même pendant la coupure.','Reconnaître la commande localement et garder une commande manuelle.','Réduire les poids du modèle distant sans changer son emplacement.'],correct=1,answer='La fonction exigée pendant la coupure doit avoir un chemin local. La commande manuelle permet de garder la main en cas d’erreur.'),detail='Une fonction distante facultative peut rester indisponible pendant la coupure. On ne demande pas de tout embarquer : on définit précisément le service qui doit continuer et le comportement en cas d’entrée inconnue. Revenir au besoin de la personne avant de choisir un modèle.')
 
 # Chapter 2: 40 minutes.
 slide('02 · Lire les briques','Une prédiction traverse\nune chaîne entière.',
@@ -128,7 +132,7 @@ slide('02 · Lire les briques','Brique 8 · Apprendre demande\nplus que prédire
        '<b>Gradient :</b> calculer la sensibilité de cette erreur aux poids.',
        '<b>Mise à jour :</b> corriger les poids avec un petit pas.'],
       'training',3,refs=['R06'],detail='Mise à jour : θ ← θ − η∇L. θ désigne les paramètres ; η le pas ; L la perte ; ∇L ses dérivées. Le calcul arrière a besoin de valeurs intermédiaires et de gradients, parfois d’un état d’optimiseur. Lin, Zhu et al. étudient en 2022 des mises à jour sélectives et un moteur adapté pour un budget de 256 Ko de SRAM. Ce n’est pas un entraînement général sans contraintes.')
-slide('02 · Lire les briques','Question 2 · « 4 bits »\nveut-il dire « tout petit » ?',
+slide('02 · Lire les briques','Quiz 2 / 5 · « 4 bits »\nveut-il dire « tout petit » ?',
       'Les poids passent de 16 à 4 bits. Le cache KV, les activations et le runtime sont inchangés.',
       [],'quiz',4,kind='quiz',quiz=dict(options=['Toute la RAM est forcément divisée par quatre.','Le stockage brut des poids est divisé par quatre ; le reste doit être recompté.','Le modèle produit forcément quatre fois plus de sorties.'],correct=1,answer='Le ratio concerne seulement le payload des poids, avant métadonnées. Cache, activations, buffers et noyaux peuvent imposer un autre plafond mémoire ou temps.'),detail='Un format de stockage ne définit pas à lui seul le format de calcul. Des poids INT4 peuvent être utilisés avec des activations FP16, puis décompressés par un noyau. La vitesse dépend aussi du décodage, des accès mémoire et du matériel.')
 
@@ -169,7 +173,7 @@ slide('03 · Lire la cible','Deux recherches : déplacer\nla contrainte au bon e
        '<b>MobileNetV4 · 2024 :</b> concevoir des blocs efficaces pour plusieurs cibles mobiles.',
        '<b>Question ouverte :</b> le gain reste-t-il vrai sur notre cible et notre tâche ?'],
       'codesign',4,refs=['R05','R10'],detail='Lin et al. montrent le rôle de l’ordonnancement par patches et de la répartition du calcul dans le réseau. Qin et al. associent blocs, recherche d’architecture et distillation pour l’écosystème mobile. Lire les matériels effectivement évalués et les contraintes, puis formuler une expérience locale ; ne pas transformer un résultat mobile en promesse sur tous les MCU.')
-slide('03 · Lire la cible','Question 3 · Le modèle tient-il ?',
+slide('03 · Lire la cible','Quiz 3 / 5 · Le modèle tient-il ?',
       'Une carte a 128 Kio de SRAM. Le modèle utilise 80 Kio de constantes placées en Flash.',
       [],'quiz',4,kind='quiz',quiz=dict(options=['Oui : 80 est inférieur à 128.','Impossible de conclure sans activations, buffers, pile et placement réel.','Non : tous les poids doivent toujours être copiés en SRAM.'],correct=1,answer='Les deux budgets ne se confondent pas. Il faut vérifier la Flash disponible, le placement effectif des constantes, puis le pic SRAM de l’application complète.'),detail='1 Kio = 1024 octets ; 1 Ko = 1000 octets dans ce support. Le TD distingue 1552 octets de paramètres float32 et le reste de l’inférence. Vérifier les sections du binaire et la pile, plutôt que déduire toute la mémoire du nombre de poids.')
 slide('03 · Lire la cible','Pause · 10 minutes.',
@@ -221,7 +225,7 @@ slide('04 · Optimiser avec méthode','Accélérer une brique ne suffit\npas à 
        '<b>s :</b> accélération de cette seule brique.',
        '<b>Gain global :</b> 1 / [(1 − p) + p/s], si le reste est inchangé.'],
       'amdahl',4,detail='Exemple : si la projection occupe 20 % du temps, la rendre deux fois plus rapide ne rend pas le système deux fois plus rapide : gain global ≈1,11, soit 10 % du temps économisé. Cette relation suppose un travail fixe et aucun surcoût nouveau. Si des copies ou conversions sont ajoutées, les compter explicitement.')
-slide('04 · Optimiser avec méthode','Question 4 · Quel résultat\npeut-on défendre ?',
+slide('04 · Optimiser avec méthode','Quiz 4 / 5 · Quel résultat\npeut-on défendre ?',
       'Sur PC, la projection gagne 10 %. Le réseau entier ralentit de 5 %. La carte n’a pas été testée.',
       [],'quiz',3,kind='quiz',quiz=dict(options=['L’IA embarquée est accélérée de 10 %.','La brique gagne dans ce protocole PC, sans gain global ni preuve sur carte.','Il faut conserver seulement le meilleur chronométrage.'],correct=1,answer='Un résultat local n’établit ni l’effet système ni la portabilité. Le ralentissement est un résultat scientifique à expliquer, pas à cacher.'),detail='Déterminer quelles formes ou quels appels provoquent le ralentissement. Comparer référence et variante avec les mêmes options et données. Rechercher un surcoût de préparation ou un effet de compilateur ; ne pas attribuer une cause sans preuve.')
 
@@ -274,11 +278,11 @@ slide('05 · Livrer et questionner','Notre TD : une petite question,\nune expér
        '<b>Enquêter :</b> une projection dense, une hypothèse, des variantes limitées.',
        '<b>Conclure :</b> qualité, coûts PC puis carte, limites et expérience suivante.'],
       'research',5,refs=['R08'],detail='Le sujet fournit les équations, pas le code du réseau. Les étudiants écrivent calculs, gradients et tests, puis portent l’inférence. Une proposition de code, humaine ou issue d’un assistant, ne démontre ni sa correction ni sa performance sur la carte. La note porte sur preuves, compréhension et analyse, sans garantie de découverte nouvelle ou d’article accepté. Le corrigé enseignant ne fait pas partie du support du cours.')
-slide('05 · Livrer et questionner','Question 5 · Le réseau\nperd face au modèle linéaire.',
+slide('05 · Livrer et questionner','Quiz 5 / 5 · Le réseau\nperd face au modèle linéaire.',
       'Les données et le protocole sont corrects. La variante optimisée ralentit aussi le réseau sur carte.',
       [],'quiz',4,kind='quiz',quiz=dict(options=['Changer le test jusqu’à obtenir une victoire.','Rapporter les résultats, expliquer les limites et proposer un nouveau test séparé.','Masquer les références simples dans l’article.'],correct=1,answer='Une conclusion négative rigoureuse est utile. Elle peut montrer qu’un modèle plus simple convient mieux, ou que l’optimisation cible le mauvais coût.'),detail='La recherche cherche une réponse fiable à une question, pas une amélioration imposée. Un nouveau simulateur, une autre tâche ou une nouvelle cible doit être présenté comme une expérience distincte, avec des choix figés avant son évaluation finale.')
-slide('05 · Livrer et questionner','Votre métier : choisir\nun compromis et le prouver.',
-      'Le bon modèle est celui qui rend le service attendu dans le système réel.',
+slide('05 · Livrer et questionner','La suite : une IA utile,\nsobre et vérifiable.',
+      'Partir d’une personne, faire un choix mesuré, puis garder la maîtrise du système.',
       ['<b>Besoin clair.</b> Référence simple et données crédibles.',
        '<b>Budget explicite.</b> Matériel, mémoire, temps et énergie.',
        '<b>Preuve reproductible.</b> Tests, mesures, limites et maintien en service.'],

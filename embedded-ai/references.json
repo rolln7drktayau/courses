@@ -208,5 +208,25 @@
     "url": "https://mlcommons.org/benchmarks/inference-tiny/",
     "takeaway": "Lire conjointement qualité, scénario de mesure et configuration matérielle.",
     "limit": "Aucun chiffre de classement en temps réel n’est repris dans ce support."
+  },
+  {
+    "id": "R22",
+    "authors": "SRI International",
+    "year": "1966–1972",
+    "title": "Shakey the Robot",
+    "status": "Histoire du projet · organisme concepteur",
+    "url": "https://www.sri.com/hoi/shakey-the-robot/",
+    "takeaway": "Faire percevoir un environnement et planifier des actions à un robot mobile.",
+    "limit": "Repère d’IA en interaction avec le monde physique, pas un exemple de calcul entièrement à bord."
+  },
+  {
+    "id": "R23",
+    "authors": "NIST",
+    "year": "Documentation consultée en 2026",
+    "title": "Edge AI",
+    "status": "Programme de recherche officiel",
+    "url": "https://www.nist.gov/programs-projects/edge-ai",
+    "takeaway": "Rapprocher l’inférence ou l’apprentissage des données et des usages.",
+    "limit": "Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr."
   }
 ]

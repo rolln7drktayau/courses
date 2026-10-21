@@ -56,29 +56,42 @@ def draw(name):
         z+=text(380,318,'Données · Modèle · Système',17,color)
         z+=text(380,454,'Le service réel fixe le budget.',24,ink)
     elif name=='route':
-        labels=[('01','Besoin & histoire','27 min'),('02','Briques du modèle','40 min'),('03','Budgets de la cible','30 min + pause 10 min'),('04','Optimisation','32 min'),('05','Déploiement & recherche','41 min')]
+        labels=[('01','Pour qui et pour quoi ?','Besoin et histoire · 27 min'),('02','Pourquoi une IA ?','Briques du modèle · 40 min'),('03','Pourquoi à bord ?','Budgets · 30 min + pause 10 min'),('04','Comment la faire tenir ?','Optimisation · 32 min'),('05','Comment lui faire confiance ?','Déploiement et recherche · 41 min')]
         for i,(n,label,t) in enumerate(labels):
-            y=24+i*86;z+=circle(58,y+29,26,n)+text(108,y+23,label,26,anchor='start',weight=650)+text(108,y+53,t,20,MUTED,anchor='start')
-            if i<4:z+=path(f'M58,{y+57} V{y+83}',LINE)
-    elif name=='system':
-        z+=rect(35,155,190,195,PALE)+circle(130,250,59,'M')
-        z+=path('M35,180 H10 V110 H100',MUTED)+path('M225,310 H258 V380 H164',MUTED)
-        z+=text(130,393,'Pompe / procédé',22)
-        for i in range(3):
-            z+=path('M'+str(260)+','+str(150+i*56)+' '+ ' '.join(f'L{260+j*10},{150+i*56+12*math.sin(j*.6+i)}' for j in range(16)),TEAL)
-        z+=text(340,105,'3 signaux',24)
-        z+=arrow(425,240,473,240)+node(480,160,235,160,'Prédiction\nlocale','Cible à identifier')
-        z+=text(600,390,'Règle + contrôle de l’action',20,MUTED)
+            y=18+i*80;z+=circle(58,y+29,26,n)+text(108,y+23,label,26,anchor='start',weight=650)+text(108,y+53,t,20,MUTED,anchor='start')
+            if i<4:z+=path(f'M58,{y+57} V{y+77}',LINE)
+        z+=text(380,465,'Quiz : diapositives 8 · 18 · 25 · 34 · 43',21,TEAL)
+    elif name=='human_need':
+        z+=circle(110,115,36,'',fill=PALE)
+        z+=path('M50,235 V205 Q110,155 170,205 V235',TEAL)
+        z+=text(110,280,'Une personne',23)+text(110,315,'« lumière »',24,TEAL)
+        z+=arrow(180,200,263,200)
+        z+=node(275,130,215,155,'Reconnaître\nle mot','Calcul local',PALE)
+        z+=arrow(495,200,555,200)
+        z+=circle(645,177,49,'',fill='#f4e5b4',color=GOLD)
+        z+=path('M622,220 V245 H668 V220',GOLD)+path('M627,260 H663',GOLD)
+        z+=text(645,315,'La lampe',24)
+        z+=rect(55,375,650,85,'white')
+        z+=text(380,410,'Voix inconnue ou doute ?',24,weight=650)
+        z+=text(380,441,'Ne pas agir · garder la commande manuelle',21,MUTED)
     elif name=='placement':
         for i,(a,b) in enumerate([('LOCAL','Capteur → modèle'),('DISTANT','Capteur → réseau → serveur'),('HYBRIDE','Traitement local + recours distant')]):
             y=28+i*140;z+=node(25,y,705,113,a,b,PALE if i==0 else 'white')
             z+=circle(665,y+34,12,fill=TEAL if i==0 else '#d8e3e6')
     elif name=='history1':
-        z+=path('M105,246 H655',LINE)
-        for x,year,who,label in [(180,'1989','Dean Pomerleau','ALVINN\nPercevoir à bord'),(570,'2017','Andrew Howard et al.','MobileNets\nRéduire le calcul')]:
-            z+=circle(x,246,14,fill=TEAL)+text(x,95,year,42,TEAL,weight=650)+text(x,139,who,23)
-            z+=node(x-150,285,300,130,label)
-        z+=text(375,205,'Du véhicule équipé d’ordinateurs au modèle mobile',18,MUTED)
+        z+=path('M100,230 H660',LINE)
+        for x,year,who,label in [(130,'1966–72','SRI','Shakey\nPercevoir et planifier'),(380,'1989','Dean Pomerleau','ALVINN\nApprendre à guider'),(630,'2017','Howard et al.','MobileNets\nRéduire le calcul')]:
+            z+=circle(x,230,12,fill=TEAL)+text(x,103,year,32,TEAL,weight=650)+text(x,146,who,20)
+            z+=rect(x-112,278,224,119)
+            z+=text(x,320,label,21)
+        z+=text(380,457,'Le besoin précède la miniaturisation.',24,TEAL)
+    elif name=='barriers':
+        for i,(label,sub) in enumerate([('MÉMOIRE','Tout ne tient pas en RAM.'),('ÉNERGIE','La batterie n’est pas infinie.'),('DÉLAI','La réponse doit arriver à temps.'),('CONFIANCE','Une erreur peut avoir un coût.')]):
+            x=20+(i%2)*375;y=30+(i//2)*180
+            z+=rect(x,y,345,145,'white')
+            z+=text(x+172,y+57,label,25,TEAL,weight=650)
+            z+=text(x+172,y+104,sub,19,MUTED)
+        z+=text(380,452,'Piste : réduire → adapter → vérifier',25,TEAL)
     elif name=='history2':
         labels=[('2020','MCUNet','Réseau + moteur'),('2022','Apprentissage local','Mises à jour ciblées'),('2024–25','Mobile / LLM','Formats + noyaux'),('2026','Co-conception','Logiciel + matériel')]
         for i,(year,label,sub) in enumerate(labels):

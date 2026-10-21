@@ -53,10 +53,19 @@
     openModal('Pour approfondir', `<h3>${escape(d.title.replace(/\n/g,' '))}</h3><p>${escape(d.detail || 'Retrouvez les sources et les définitions dans les annexes. Reliez chaque résultat à sa tâche, sa cible et son protocole.')}</p>${links?'<h3>Lectures associées</h3><ul>'+links+'</ul>':''}`);
   }
   function toc() {
-    openModal('Parcours · 180 minutes, pause comprise', '<input class="toc-search" type="search" aria-label="Rechercher une diapositive" placeholder="Rechercher une brique, un sujet, une publication…"><div class="toc-grid"></div>');
+    const guiding = [
+      [2, '1. Pour qui et pour quoi ?', 'Définir le service attendu.'],
+      [6, '2. Pourquoi une IA ?', 'Comparer une règle et un modèle appris.'],
+      [3, '3. Pourquoi à bord ?', 'Choisir où calculer et avec quelles limites.'],
+      [26, '4. Comment la faire tenir ?', 'Réduire les coûts du modèle.'],
+      [35, '5. Comment lui faire confiance ?', 'Mesurer, tester et prévoir les erreurs.']
+    ];
+    const questions = guiding.map(([i,title,sub]) => `<button class="toc-entry" data-go="${i}"><strong>${escape(title)}</strong><small>${escape(sub)}</small></button>`).join('');
+    const quizzes = data.map((d,i)=>({d,i})).filter(({d})=>d.quiz).map(({d,i})=>`<button class="toc-entry" data-go="${i}"><small>Diapositive ${i+1} · cliquer, choisir et lire l’explication</small>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
+    openModal('Plan, questions et quiz', `<p><b>Trois heures, pause comprise.</b> Cinq questions guident les chapitres. Cinq quiz distincts permettent de mettre ces idées à l’épreuve.</p><h3>Les cinq questions directrices</h3><div class="toc-grid">${questions}</div><h3>Accès direct aux cinq quiz</h3><div class="toc-grid" id="quiz-list">${quizzes}</div><h3>Parcours complet · rechercher une diapositive</h3><input class="toc-search" type="search" aria-label="Rechercher une diapositive" placeholder="Rechercher une brique, un sujet, une publication…"><div class="toc-grid" id="slide-list"></div>`);
     const render = value => {
       const term = value.toLocaleLowerCase('fr');
-      q('.toc-grid', modal).innerHTML = data.map((d,i) => ({d,i})).filter(({d}) => (d.title+' '+d.chapter+' '+d.lead).toLocaleLowerCase('fr').includes(term)).map(({d,i}) => `<button class="toc-entry ${i===index?'current':''}" data-go="${i}"><small>${escape(d.chapter)} · ${d.minutes ? d.minutes+' min':'annexe'}</small><strong>${String(i+1).padStart(2,'0')}</strong>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
+      q('#slide-list', modal).innerHTML = data.map((d,i) => ({d,i})).filter(({d}) => (d.title+' '+d.chapter+' '+d.lead).toLocaleLowerCase('fr').includes(term)).map(({d,i}) => `<button class="toc-entry ${i===index?'current':''}" data-go="${i}"><small>${escape(d.chapter)} · ${d.minutes ? d.minutes+' min':'annexe'}</small><strong>${String(i+1).padStart(2,'0')}</strong>${escape(d.title.replace(/\n/g,' '))}</button>`).join('');
     };
     render(''); q('.toc-search', modal).addEventListener('input', e => render(e.target.value));
   }

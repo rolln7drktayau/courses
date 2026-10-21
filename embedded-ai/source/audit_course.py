@@ -86,10 +86,22 @@ def main():
         go(4);page.locator('.slide.active [data-ref="R01"]').click();assert page.locator('#reader').evaluate('d=>d.open')
         page.locator('[data-action="close"]').click()
         page.locator('[data-action="toc"]').click();page.locator('.toc-search').fill('Quantifier')
-        assert page.locator('.toc-entry').count()>=1;page.locator('.toc-entry').first.click()
+        assert page.locator('#slide-list .toc-entry').count()>=1;page.locator('#slide-list .toc-entry').first.click()
         assert 'Quantifier' in page.locator('.slide.active h1').inner_text()
         page.keyboard.press('ArrowRight');assert 'Calibrer' in page.locator('.slide.active h1').inner_text()
         results['interactive_checks'].append('Sources, searchable contents and keyboard navigation')
+        for i,s in enumerate(SLIDES):
+            if not s['quiz']:continue
+            page.locator('[data-action="toc"]').click()
+            page.locator(f'#quiz-list button[data-go="{i}"]').click()
+            assert page.locator('.slide.active').get_attribute('data-index')==str(i)
+        results['interactive_checks'].append('All five quizzes accessible directly through Plan & questions')
+        page.set_viewport_size({'width':390,'height':844})
+        nav=page.locator('.controls').bounding_box()
+        results['mobile_navigation_fits']=nav['x']>=0 and nav['x']+nav['width']<=390
+        assert results['mobile_navigation_fits'],nav
+        page.set_viewport_size({'width':1600,'height':1000})
+
         go(0);page.screenshot(path=str(VERIFY/'presentation_accueil.png'))
         go(15);page.screenshot(path=str(VERIFY/'presentation_cache_kv.png'))
         browser.close()
