@@ -57,3 +57,7 @@ Un gain nul, une variante plus lente ou un modèle linéaire meilleur restent de
 ## Premier geste
 
 Lire `assignment.pdf`, identifier la carte, créer le dépôt et inviter l’enseignant. Écrire ensuite le générateur et tracer une séquence. Ne télécharger ni réseau prêt à l’emploi ni corrigé. Le ZIP d’article contient uniquement un gabarit et des figures illustratives.
+
+## Vocabulaire à consulter
+
+Le glossaire Embedded France–Eclipse est lié dans les ressources du cours et à la fin du sujet. Repères : données au chapitre 2, optimisation au 3, outils et matériel aux 5–6, mesures au 9, versions et déploiement au 11. Il complète le cours ; il ne constitue pas une lecture intégrale obligatoire.

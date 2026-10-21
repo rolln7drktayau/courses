@@ -141,9 +141,11 @@ def draw(name):
     elif name=='tasks':
         for i,(a,b) in enumerate([('CLASSIFICATION','normal / inhabituel'),('RÉGRESSION','prochaine valeur : 0,42'),('DÉCISION','alerter / attendre / replier')]):
             z+=node(45,25+i*145,660,115,a,b,PALE if i==1 else 'white')
-    elif name in {'pipeline','deployment','measurement','research'}:
+    elif name in {'pipeline','deployment','measurement','research','service_pipeline','td_cycle'}:
         if name=='pipeline':labels=['Acquérir','Préparer','Inférer','Interpréter','Surveiller','Agir']
-        elif name=='deployment':labels=['PC : apprendre','Exporter','Compiler','Flasher','Comparer','Intégrer']
+        elif name=='service_pipeline':labels=['Capter le son','Préparer','Prédire','Interpréter','Agir','Surveiller']
+        elif name=='deployment':labels=['PC : apprendre','Exporter','Compiler sur Pi','Pi : exécuter','Comparer','Versionner']
+        elif name=='td_cycle':labels=['PC : entraîner','Exporter les poids','PC : tester en C','Pi : inférer','Pi : mesurer','PC : tracer']
         elif name=='measurement':labels=['Version Git','Configuration','Binaire','CSV brut','Analyse','Figure']
         else:labels=['Question','Hypothèse','Implémentation','Correction','Mesures','Limites / suite']
         for i,label in enumerate(labels):
@@ -155,6 +157,9 @@ def draw(name):
             elif i==2:z+=arrow(x+110,y+110,x+110,y+230)
             elif i<5:z+=arrow(x-4,y+50,x-28,y+50)
         if name=='research':z+=text(380,462,'La conclusion peut être négative.',22,TEAL)
+        if name=='service_pipeline':z+=text(380,462,'Le modèle ne réalise pas toute l’application.',22,TEAL)
+        if name=='deployment':z+=text(380,462,'Poids + préparation + programme + configuration',22,TEAL)
+        if name=='td_cycle':z+=text(380,462,'Modifier sur PC → vérifier → redéployer → comparer',21,TEAL)
     elif name=='split':
         for s in range(24):
             x=25+(s%12)*59;y=67+(s//12)*62

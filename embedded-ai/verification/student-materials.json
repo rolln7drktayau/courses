@@ -39,8 +39,8 @@
   "checks": "Explicit file whitelist; nested ZIP integrity; PDF identity; figure-only Python sources.",
   "files": {
     "COMMENCER.md": {
-      "bytes": 7128,
-      "sha256": "6b8008144088373164a11c30b8c59660b53989916ad518bf015d148fdd2111ed"
+      "bytes": 7473,
+      "sha256": "a1963d00b33b4600ab773550271c042b404667d8c18f133a3c9a97903e5d5c43"
     },
     "README.md": {
       "bytes": 6307,
@@ -95,12 +95,12 @@
       "sha256": "176ef972b023269b0593030dccee09164346c9df71bfd89255b8adb3d48e72ab"
     },
     "assignment.pdf": {
-      "bytes": 256513,
-      "sha256": "43b261ac4ce95111f540e4bdd64e3bdf7b7d82de47ea6871db9afa8b27afa059"
+      "bytes": 257242,
+      "sha256": "228513e873e1173f203402a13a20cb7c749ac40e9f821a47b76beb7eec896a2a"
     },
     "getting-started.html": {
-      "bytes": 8287,
-      "sha256": "d5c1afd03e6c4ce43f7fb95ac72ec80cb72d27fc6ec536edfe12726add48625c"
+      "bytes": 8637,
+      "sha256": "7064242554ee6d5e84008980cb5ad68cb145ec2f964b9cd2621507f7bc5cc9a9"
     },
     "index.html": {
       "bytes": 11921,
@@ -108,11 +108,11 @@
     },
     "report-guidelines.pdf": {
       "bytes": 139564,
-      "sha256": "11923a11b1e14ea1d00e1931945db17159a00c907b907868ad2a4064b7609881"
+      "sha256": "1d7c0411938fff13ed2eca29df4b79469722c9bfdc667156a30631e9e28d90d4"
     },
     "student-materials.zip": {
-      "bytes": 506157,
-      "sha256": "9b30f2de105f995fc315120839ca8e520dbb0af60ae7939ba45663835f5eb506"
+      "bytes": 507012,
+      "sha256": "c5e1120f1867cb8e5e8afebbee5b8ae60cf2dd7da017284e133326474a2ce0c8"
     }
   }
 }

@@ -2,7 +2,7 @@
   "oral_slides": 36,
   "annexes": 23,
   "minutes": 180,
-  "references": 23,
+  "references": 24,
   "viewports": {
     "1920x1080": [],
     "1366x768": [],
@@ -28,5 +28,5 @@
   "quiz_feedback_overflow": [],
   "mobile_navigation_fits": true,
   "pdf_pages": 59,
-  "pdf_links": 56
+  "pdf_links": 66
 }

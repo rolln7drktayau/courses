@@ -228,5 +228,15 @@
     "url": "https://www.nist.gov/programs-projects/edge-ai",
     "takeaway": "Rapprocher l’inférence ou l’apprentissage des données et des usages.",
     "limit": "Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr."
+  },
+  {
+    "id": "R24",
+    "authors": "Embedded France avec la Fondation Eclipse",
+    "year": "2026",
+    "title": "Glossaire structuré de l’IA embarquée",
+    "status": "Référentiel pédagogique · v1.1, 22 juillet 2026 · CC BY 4.0",
+    "url": "https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf",
+    "takeaway": "Relier données, modèles, exécution, matériel, mesures et cycle de vie.",
+    "limit": "Glossaire non normatif ; ne remplace ni un cours de calcul, ni les sources techniques. Distinguer puissance en W et énergie en J ; un percentile observé ne garantit pas le temps réel."
   }
 ]

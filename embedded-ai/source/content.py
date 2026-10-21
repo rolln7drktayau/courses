@@ -186,7 +186,17 @@ REFERENCES = [{'id': 'R01',
   'url': 'https://www.nist.gov/programs-projects/edge-ai',
   'takeaway': 'Rapprocher l’inférence ou l’apprentissage des données et des usages.',
   'limit': 'Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local '
-           'ne signifie pas automatiquement sûr.'}]
+           'ne signifie pas automatiquement sûr.'},
+ {'id': 'R24',
+ 'authors': 'Embedded France avec la Fondation Eclipse',
+ 'year': '2026',
+ 'title': 'Glossaire structuré de l’IA embarquée',
+ 'status': 'Référentiel pédagogique · v1.1, 22 juillet 2026 · CC BY 4.0',
+ 'url': 'https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf',
+ 'takeaway': 'Relier données, modèles, exécution, matériel, mesures et cycle de vie.',
+ 'limit': 'Glossaire non normatif ; ne remplace ni un cours de calcul, ni les sources techniques. '
+          'Distinguer puissance en W et énergie en J ; un percentile observé ne garantit pas le '
+          'temps réel.'}]
 
 # Six acts, one question per scene. Fictional situations are labelled.
 SLIDES = [{'chapter': 'I · Un besoin humain',
@@ -443,24 +453,27 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': '',
   'layout': 'technical'},
  {'chapter': 'III · La liaison disparaît',
-  'title': 'Pour commencer, Alice\nfait calculer un serveur.',
-  'lead': 'Son appareil envoie le son. Un ordinateur distant reconnaît la commande et répond.',
-  'points': ['Cela peut donner accès à un modèle plus grand.',
-             'Mais il faut une liaison disponible pour recevoir la réponse.',
-             'Le trajet du son, le délai et les accès doivent être acceptables.'],
-  'visual': 'story_remote',
+  'title': 'Du son à la lumière,\nil faut toute une chaîne.',
+  'lead': 'Pour son premier essai, Alice fait reconnaître la commande par un serveur.',
+  'points': ['Le <b>capteur</b> fournit le son ; le <b>prétraitement</b> prépare les nombres attendus.',
+ 'Le <b>modèle</b> produit une prédiction ; une règle décide si la lampe doit agir.',
+ 'Il faut aussi une liaison disponible et un repli si la réponse manque.'],
+  'visual': 'service_pipeline',
   'minutes': 4,
   'quote': '« Avec le Wi-Fi, ça marche. »',
-  'refs': [],
-  'detail': 'Cette scène illustre une architecture : elle ne contacte aucun serveur et ne mesure aucun délai '
-            'réseau. Un service distant peut être le bon choix si les conditions d’accès, de confidentialité et '
-            'de délai sont acceptables.',
+  'refs': ['R24'],
+  'detail': ('La chaîne comprend acquisition, préparation, inférence, décision et action ; on surveille '
+ 'aussi son fonctionnement. Le prétraitement doit être identique à celui prévu pendant '
+ 'l’apprentissage. Une prédiction n’est pas encore une action : la logique applicative peut '
+ 'refuser ou demander une confirmation. Dans ce premier essai, le modèle est distant ; la scène '
+ 'suivante examine la dépendance au réseau. Le schéma n’envoie aucun son et ne mesure pas de '
+ 'liaison. Glossaire Embedded France–Eclipse : chapitres 2 et 13.'),
   'kind': '',
   'quiz': None,
   'questions': [],
   'task': '',
-  'takeaway': 'Un modèle distant fait partie d’un service qui dépend aussi du réseau.',
-  'layout': 'illustrated'},
+  'takeaway': 'Le réseau est une fonction dans un système complet.',
+  'layout': 'technical'},
  {'chapter': 'III · La liaison disparaît',
   'title': 'Le Wi-Fi tombe.\nLa lampe ne répond plus.',
   'lead': 'Alice répète le même mot. Le modèle n’a pas changé ; la liaison manque.',
@@ -502,16 +515,20 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
  {'chapter': 'III · La liaison disparaît',
   'title': 'Qu’emporte-t-on\ndu PC vers la carte ?',
   'lead': 'Les poids seuls ne suffisent pas : l’appareil doit refaire le même traitement.',
-  'points': ['Conserver les poids, l’ordre des entrées et la façon de les préparer.',
-             'Compiler ou installer le programme pour le processeur de la carte.',
-             'Donner les mêmes entrées au PC et à la carte, puis comparer les sorties.'],
+  'points': ['Exporter les <b>poids</b>, la <b>normalisation</b>, l’ordre des entrées et la configuration.',
+ 'Dans le TD : entraîner en Python sur PC ; compiler l’inférence C sur Raspberry Pi.',
+ 'Tester les mêmes entrées sur PC et Pi, puis conserver une version identifiée.'],
   'visual': 'deployment',
   'minutes': 5,
   'quote': '',
-  'refs': ['R19', 'R20'],
-  'detail': 'Sur MCU, compiler et flasher ; sur Pi Linux, reconstruire ou installer pour son architecture. Un '
-            'runtime exécute un graphe et un backend choisit ses noyaux ; des opérateurs absents peuvent échouer '
-            'ou retomber sur CPU. Le TD peut d’abord porter sa propre inférence sans fournir ici sa correction.',
+  'refs': ['R19', 'R20', 'R24'],
+  'detail': ('Le modèle appris ne se réduit pas à un fichier de poids : il faut aussi son architecture, son '
+ 'programme et ses règles de préparation. Sur Pi Linux, récupérer sources et fichiers, compiler, '
+ 'puis exécuter localement. SSH pilote le Pi sans faire le calcul sur PC. Un push Git publie une '
+ 'version ; il ne lance pas l’inférence. Le TD porte ses fonctions C, sans runtime de réseau. '
+ 'Dans une chaîne industrielle, un runtime charge et exécute le modèle, un backend fournit les '
+ 'noyaux compatibles. Le choix dépend des opérations, des types numériques et du matériel. '
+ 'Glossaire : chapitres 5 et 11.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -594,10 +611,13 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'visual': 'memory',
   'minutes': 6,
   'quote': '',
-  'refs': ['R05'],
-  'detail': 'La démonstration utilise deux budgets fictifs : poids en Flash et travail SRAM. Changer uniquement '
-            'le format des poids ne réduit pas le second par magie. Un runtime peut charger des constantes en RAM '
-            ': vérifier son comportement. 1 Ko=1000 octets ; 1 Kio=1024 octets.',
+  'refs': ['R05', 'R24'],
+  'detail': ('Les budgets fictifs du dessin représentent une cible microcontrôleur, avec poids en Flash et '
+ 'travail en SRAM. Ils ne représentent pas la RAM de votre Pi. Sous Linux, distinguer taille des '
+ 'fichiers, poids, buffers explicites et mémoire du processus ; le runtime et les bibliothèques '
+ 'occupent aussi de la place. Changer les seuls poids ne réduit pas automatiquement les '
+ 'activations. Le petit réseau du TD ne sature pas la RAM du Pi. 1 Ko=1000 octets ; 1 Kio=1024 '
+ 'octets. Glossaire : chapitres 6 et 9.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -696,16 +716,20 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
  {'chapter': 'V · Cela tient, mais cela attend',
   'title': 'Moins de calculs.\nToujours de l’attente.',
   'lead': 'Le processeur doit aussi aller chercher les nombres et ranger les résultats.',
-  'points': ['Lire et écrire des données prend du temps et de l’énergie.',
-             'Une donnée déjà proche du processeur peut être réutilisée.',
-             'Changer l’ordre du travail peut aider, à condition de conserver les bons résultats.'],
+  'points': ['Les <b>poids</b> et les <b>activations</b> doivent être lus, écrits et parfois copiés.',
+ 'Le <b>cache</b> garde des données près du processeur ; bien les réutiliser peut réduire '
+ 'l’attente.',
+ 'Moins de paramètres ou de MAC ne garantit pas un calcul plus rapide : mesurer la vraie cible.'],
   'visual': 'story_memory_wait',
   'minutes': 5,
   'quote': '',
-  'refs': ['R07'],
-  'detail': 'Le tuilage traite des morceaux réutilisables ; la fusion peut éviter une écriture intermédiaire. '
-            'Cela peut aussi augmenter registres ou code. FlashAttention illustre une approche attentive aux '
-            'échanges mémoire sur GPU ; son résultat ne se transpose pas directement en noyau MCU.',
+  'refs': ['R07', 'R24'],
+  'detail': ('L’activation est un résultat dépendant de l’entrée ; un buffer est un tableau de travail. '
+ 'Changer les boucles ou la disposition des poids peut modifier la localité, les copies et la '
+ 'vectorisation. Les gains dépendent des dimensions et du compilateur. Le tuilage réutilise des '
+ 'blocs, la fusion peut éviter un intermédiaire ; les registres, la préparation et le code '
+ 'peuvent coûter davantage. FlashAttention étudie ces échanges sur GPU ; ses chiffres ne sont '
+ 'pas transférables à notre Pi. Glossaire : sections 3.3, 5.5 et 6.4.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -744,11 +768,11 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'minutes': 4,
   'quote': '',
   'refs': [],
-  'detail': 'Un percentile décrit des observations ; il ne démontre pas une borne de pire cas. Le pire cas '
-            'observé n’est pas une borne WCET prouvée. Interruptions, surcharge et démarrage doivent être pris en '
-            'compte selon le contexte. p95 signifie que 95 % des observations de cette campagne sont au plus '
-            'égales à cette valeur. ms = millisecondes. Il faut préciser l’effectif et les conditions de la '
-            'campagne.',
+  'detail': ('Une moyenne faible ne prouve pas le respect de chaque échéance. Un p95 observé est un quantile '
+ 'des essais, pas une borne garantie ni un WCET établi. Il faut annoncer le périmètre, la charge '
+ 'et la méthode. Sous Linux, ordonnancement, charge, température et fréquence font varier les '
+ 'temps. Le TD mesure des durées et leur dispersion ; il ne certifie pas un système temps réel. '
+ 'Glossaire : section 9.1, en distinguant observation et garantie.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -764,12 +788,13 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'visual': 'story_energy',
   'minutes': 5,
   'quote': '',
-  'refs': [],
-  'detail': 'La puissance varie généralement : l’énergie est son intégrale dans le temps. Une durée ou un nombre '
-            'de MAC ne suffit pas pour annoncer des joules. La détection permanente d’un mot peut rendre la '
-            'veille et l’écoute déterminantes. Le dessin et les 2 mJ sont illustratifs, pas une autonomie '
-            'mesurée. Δt se lit delta t et désigne la durée. mJ = millijoule = 0,001 joule. Avec une puissance '
-            'variable, additionner l’énergie de petits intervalles ou intégrer la puissance.',
+  'refs': ['R24'],
+  'detail': ('La puissance varie généralement : l’énergie est son intégrale dans le temps. Une durée ou un '
+ 'nombre de MAC ne suffit pas pour annoncer des joules. Sans instrument, le TD n’exige pas de '
+ 'mesure d’énergie. Les 2 mJ du dessin sont un exemple, pas une autonomie mesurée. Δt désigne '
+ 'une durée ; mJ = 0,001 joule. Inclure écoute, veille, calcul et échanges dans le périmètre. '
+ 'Attention à l’entrée énergétique du glossaire, page imprimée 54 : W et mW mesurent une '
+ 'puissance, J et mJ une énergie.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -833,11 +858,14 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'visual': 'benchmark_lab',
   'minutes': 8,
   'quote': '',
-  'refs': [],
-  'detail': 'Les fonctions JavaScript additionnent le même Float64Array de 4096 valeurs. Le programme mesure le '
-            'navigateur présent, pas un Pi distant. Le moteur, la charge et l’environnement comptent. Les '
-            'chiffres ne sont pas préremplis et le gagnant n’est pas imposé. Cette somme ne fournit pas une '
-            'projection optimisée du TD.',
+  'refs': ['R24'],
+  'detail': ('Les deux fonctions JavaScript additionnent le même Float64Array de 4096 valeurs. L’expérience '
+ 'décrit ce navigateur ; elle ne mesure pas le Raspberry Pi. Vérifier, échauffer, alterner et '
+ 'conserver les données brutes. Dans le TD, le Pi chronomètre son propre calcul et écrit un CSV '
+ '; le PC récupère ce fichier et produit les courbes. Chronométrer une requête depuis le PC '
+ 'inclurait aussi la communication. Temps, RAM, stockage, erreur de prédiction et énergie sont '
+ 'des métriques distinctes. Une suggestion d’IA n’est pas une mesure matérielle. Glossaire : '
+ 'chapitres 9 et 11.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -847,16 +875,19 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
  {'chapter': 'VI · Alice demande des preuves',
   'title': 'Chez Alice, ça marche.\nEt chez quelqu’un d’autre ?',
   'lead': 'La démonstration n’a pas encore essayé toutes les voix, tous les bruits ni toutes les pannes.',
-  'points': ['Tester les entrées inhabituelles, les données manquantes et les redémarrages.',
-             'Prévoir un refus ou une commande manuelle plutôt qu’une action incorrecte.',
-             'Protéger les accès et les mises à jour. Un appareil local peut aussi être attaqué.'],
+  'points': ['Tester les entrées inhabituelles ; prévoir un refus ou une commande manuelle.',
+ 'Journaliser les erreurs et garder la version du programme, des poids et des réglages.',
+ 'Vérifier chaque mise à jour ; pouvoir revenir à une version qui fonctionne.'],
   'visual': 'story_robustness',
   'minutes': 5,
   'quote': '',
-  'refs': ['R16'],
-  'detail': 'Un score élevé n’établit pas qu’une entrée est connue. La robustesse statistique, la cybersécurité '
-            'et la sûreté ne sont pas synonymes. Un seuil de confiance et un repli doivent être validés dans le '
-            'contexte. Un système critique demanderait une démarche dépassant ce cours.',
+  'refs': ['R16', 'R24'],
+  'detail': ('La robustesse statistique, la cybersécurité et la sûreté sont différentes. Protéger les accès '
+ 'et les mises à jour : le local n’est pas automatiquement sûr. Après déploiement, surveiller '
+ 'les erreurs et les dérives des entrées. Un retour arrière restaure une version précédente '
+ 'cohérente : code, poids et normalisation. Dans le TD, conserver les versions et réexécuter les '
+ 'mêmes tests après modification. Les fonctions critiques exigeraient une démarche '
+ 'supplémentaire. Glossaire : chapitres 10 et 11.'),
   'kind': '',
   'quiz': None,
   'questions': [],
@@ -864,26 +895,30 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'takeaway': 'Un système fiable sait aussi quoi faire quand il ne sait pas répondre.',
   'layout': 'illustrated'},
  {'chapter': 'VI · Alice demande des preuves',
-  'title': 'À vous de poursuivre\nune petite recherche.',
-  'lead': 'Le TD change d’application : vous prédirez un signal sur Raspberry Pi, puis vous optimiserez une '
-          'brique.',
-  'points': ['Construire un réseau sur trois signaux et seize instants : chaque fonction doit être comprise.',
-             'Apprendre sur PC, déployer sur Pi, puis mesurer une modification et vérifier ses sorties.',
-             'Relier chaque courbe à son code Git, sa configuration et ses mesures brutes.'],
-  'visual': 'research',
+  'title': 'Du premier modèle\nà une expérience sur Pi.',
+  'lead': 'Quatre TD : comprendre les fonctions, apprendre sur PC, puis déployer et améliorer.',
+  'points': ['<b>Construire :</b> petits calculs sur papier, fonctions Python, tests puis apprentissage.',
+ '<b>Déployer :</b> poids exportés, inférence C sur PC puis sur Pi, sorties comparées.',
+ '<b>Enquêter :</b> une hypothèse, une variante sur PC, mesures sur Pi et courbes issues des '
+ 'CSV.'],
+  'visual': 'td_cycle',
   'minutes': 6,
   'quote': '',
-  'refs': ['R08', 'R18'],
-  'detail': 'Le Mixer du TD est une réduction pédagogique de 388 paramètres inspirée de TSMixer, avec données '
-            'synthétiques. Il ne valide pas une application industrielle et ne promet pas une nouveauté '
-            'publiable. Une très petite opération peut être dominée par les surcoûts et la résolution du timer. '
-            'Sur Pi Linux, noter charge, température et fréquence ; distinguer buffers et RAM du processus. La CI vérifie le logiciel, pas les performances du Pi. Aucun corrigé ni '
-            'poids entraîné n’est fourni.',
+  'refs': ['R08', 'R18', 'R24'],
+  'detail': ('Données synthétiques : 3 signaux, une fenêtre de 16 instants et la prochaine valeur du premier '
+ 'signal à prédire. Le Mixer compte 388 paramètres et s’inspire de TSMixer, sans reproduire tout '
+ 'l’article. Les poids sont produits pendant l’entraînement, puis restent fixés pour '
+ 'l’optimisation de boucles ou de buffers. Comparer référence et variante C sur le même PC, puis '
+ 'sur le même Pi : un gain PC ne prouve pas un gain Pi. Le Pi fait l’inférence et chronomètre ; '
+ 'le PC récupère les CSV et trace les courbes. Modifier sur PC, tester, redéployer et vérifier à '
+ 'nouveau. Les séances accompagnent les dérivées et le déploiement ; le rapport et les essais '
+ 'approfondis se poursuivent à domicile. Les outils d’IA peuvent aider, sans remplacer la preuve '
+ 'expérimentale ni la compréhension individuelle. Aucun corrigé ni poids appris n’est fourni.'),
   'kind': '',
   'quiz': None,
   'questions': [],
   'task': '',
-  'takeaway': 'Un résultat sans gain peut apprendre quelque chose si l’expérience explique pourquoi.',
+  'takeaway': 'La question est précise : cette modification aide-t-elle sur notre cible, et pourquoi ?',
   'layout': 'technical'},
  {'chapter': 'VI · Alice demande des preuves',
   'title': 'Aujourd’hui, que cherche-t-on\nencore à améliorer ?',
@@ -945,10 +980,13 @@ SLIDES = [{'chapter': 'I · Un besoin humain',
   'visual': 'story_epilogue',
   'minutes': 4,
   'quote': '',
-  'refs': [],
-  'detail': 'Le cours donne une grille de lecture et des exemples numériques. Le TD construit la maîtrise par '
-            'implémentation, déploiement et analyse. Une hypothèse réfutée est un résultat utile si la méthode '
-            'est rigoureuse. Les sources, le PDF et l’énoncé sont accessibles dans Ressources.',
+  'refs': ['R24'],
+  'detail': ('Le cours fournit une vue du système ; le TD apprend les fonctions par petits calculs, tests et '
+ 'expériences. Le glossaire Embedded France–Eclipse sert à consulter le vocabulaire, pas à '
+ 'ajouter 83 pages à apprendre. Repères de lecture : données, chapitre 2 ; modèles et '
+ 'optimisation, 3 ; outils et matériel, 5–6 ; mesures, 9 ; fiabilité et versions, 10–11. Une '
+ 'hypothèse réfutée reste utile si l’expérience est correcte. Cours PDF, énoncé, kit étudiant, '
+ 'sources et glossaire sont accessibles dans Ressources.'),
   'kind': 'closing',
   'quiz': None,
   'questions': [],

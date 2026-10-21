@@ -283,3 +283,15 @@ NIST. Documentation consultée en 2026. Programme de recherche officiel.
 Apport : Rapprocher l’inférence ou l’apprentissage des données et des usages.
 
 Limite : Ressources, communications, données, confidentialité et sécurité restent des difficultés ; local ne signifie pas automatiquement sûr.
+
+
+
+## R24 — Glossaire structuré de l’IA embarquée
+
+Embedded France avec la Fondation Eclipse. 2026. Référentiel pédagogique · v1.1, 22 juillet 2026 · CC BY 4.0.
+
+[Source originale](https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf)
+
+Apport : Relier données, modèles, exécution, matériel, mesures et cycle de vie.
+
+Limite : Glossaire non normatif ; ne remplace ni un cours de calcul, ni les sources techniques. Distinguer puissance en W et énergie en J ; un percentile observé ne garantit pas le temps réel.

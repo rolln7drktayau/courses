@@ -24,6 +24,10 @@ L’HTML contient ses scripts, styles et illustrations : il peut se lire sans co
 
 Alice est fictive. Les chercheurs et leurs contributions sont documentés dans [SOURCES.md](SOURCES.md). Les schémas historiques sont des reconstructions pédagogiques et non des portraits ou photographies d’archives. Le petit réseau numérique ne reconnaît pas la voix : il sert à suivre chaque calcul. Le TD poursuit le raisonnement sur une autre tâche, la prédiction d’un signal.
 
+Le cours relie explicitement quatre repères au TD : chaîne complète (scène 13), éléments à déployer (16), coûts du calcul et de la mémoire (20 et 25), preuves de mesure (27–31). La scène 33 présente le cycle Python PC → inférence C PC → Pi → CSV → courbes → nouvelle variante. Le Pi chronomètre son propre calcul ; le PC récupère et analyse les résultats. Le TD conserve quatre séances de 3 h 30, puis le travail personnel.
+
+Le [glossaire Embedded France–Eclipse](https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf), v1.1 du 22 juillet 2026, CC BY 4.0, est une référence de vocabulaire non normative. Lire selon le besoin : données (§2), modèles et optimisation (§3), outils et matériel (§5–6), mesures (§9), confiance et cycle de vie (§10–11). Le programme n’exige pas d’en apprendre les 83 pages. Les diapositives distinguent puissance/énergie et percentile observé/borne garantie.
+
 ## Sources et reproduction
 
 `source/content.py` contient les scènes ; `story_art.py` et `diagrams.py`, les illustrations et schémas ; `course.js` et `course.css`, les interactions et la présentation. `assets/alice-scenes.png` est la planche originale d’illustrations, intégrée à l’HTML pendant la génération. Sa provenance et son prompt figurent dans [assets/ILLUSTRATIONS.md](assets/ILLUSTRATIONS.md).

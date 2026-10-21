@@ -105,6 +105,7 @@
           <li><a href="course.pdf" target="_blank" rel="noopener noreferrer">Présentation en PDF</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/blob/main/embedded-ai/TEACHING-DESIGN.md" target="_blank" rel="noopener noreferrer">Parcours et cours universitaires d’inspiration</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/tree/main/embedded-ai" target="_blank" rel="noopener noreferrer">Sources du cours et instructions de génération sur GitHub</a></li>
+          <li><a href="https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf" target="_blank" rel="noopener noreferrer">Glossaire Embedded France–Eclipse · vocabulaire à consulter</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/blob/main/embedded-ai/SOURCES.md" target="_blank" rel="noopener noreferrer">Guide des publications et références</a></li>
         </ul><button class="reading-link" data-go="${bibliographyIndex}">Voir la bibliographie dans la présentation →</button>`);
     }
