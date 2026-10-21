@@ -52,6 +52,9 @@ def main():
         assert images.count()>=8
         assert images.evaluate_all('els=>els.every(e=>getComputedStyle(e).backgroundImage.startsWith(\'url("data:image/png;base64,\'))')
         results['embedded_artwork']='all narrative panels contain their offline image'
+        history_images=page.locator('.history-picture')
+        assert history_images.count()==2
+        assert history_images.evaluate_all('els=>els.every(e=>getComputedStyle(e).backgroundImage.startsWith(\'url("data:image/png;base64,\'))')
         for w,h in [(1920,1080),(1366,768),(1280,720),(1024,768),(768,1024)]:
             page.set_viewport_size({'width':w,'height':h});page.evaluate('window.Course.fit()')
             problems=[]
@@ -161,7 +164,7 @@ def main():
     for ref in REFERENCES:assert ref['id'] in text,ref['id']
     assert 'Futurs ingénieurs en systèmes embarqués' not in pdf[0].get_text()
     assert 'Alice' in pdf[0].get_text()
-    for i in [0,1,2,11,12,16,30,34]:
+    for i in [0,1,2,3,4,11,12,16,30,34]:
         assert pdf[i].get_images(),f'Missing printed scene art at {i+1}'
     assert all(ref in text for ref in ['Pomerleau','Howard','Jacob','Wei-Ming Chen'])
     assert 'La lampe' in pdf[1].get_text()

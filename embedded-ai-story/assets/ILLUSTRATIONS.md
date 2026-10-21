@@ -1,5 +1,7 @@
 # Illustration provenance
 
+The additional `history-scenes.png` sheet replaces the geometric reconstructions on slides 4 and 5. Its two panels depict a Shakey-like laboratory robot and a late-1980s research vehicle. These are expressly labelled pedagogical reconstructions, not exact archival replicas. They were generated with the built-in image tool; the prompt is recorded in `history-generation.json`. CSS selects the two original panels without changing the sheet.
+
 File: `alice-scenes.png` (1536 × 1024 pixels). Generated with the built-in `image_gen.imagegen` tool on 21 October 2026. No CLI/API fallback was used. The original sheet is preserved; CSS selects its six panels. No image of a real researcher or copyrighted ADARE asset was reproduced.
 
 The sheet is decorative storytelling, not experimental evidence. In particular, its plotted curve is not used as a research result. All scientific diagrams, equations, labels and results are separately authored HTML/SVG or browser measurements.

@@ -70,23 +70,18 @@ def draw_story(name):
             z+=fragment(i+1,body)
         return svg(z,'Les postes de consommation')
     if name=='story_shakey':
-        z=year('1966–1972 · Shakey','Charles Rosen et l’équipe SRI')
-        z+=rect(88,244,136,131,'#e5f5f3',TEAL,4)+circle(114,391,20,fill=INK,color=INK)+circle(200,391,20,fill=INK,color=INK)
-        z+=path('M156,244 V173',INK)+rect(120,151,74,48,'#ffcf79',GOLD,4)+circle(175,175,9,fill=INK,color=INK)
-        z+=text(156,449,'Observer et agir',23)
-        z+=fragment(1,rect(475,172,183,138,'#e5edf3',INK,3)+text(566,223,'Ordinateur',24)+text(566,261,'extérieur',24)+path('M565,313 V345 H637',INK))
-        z+=fragment(2,arrow(242,258,456,258,dashed=True)+text(349,226,'Liaison radio',22,TEAL))
-        z+=fragment(3,text(430,445,'Le calcul n’est pas tout à bord.',23,TEAL))
-        return svg(z,'Shakey et son ordinateur extérieur ; dessin schématique')
+        return ('<figure class="history-stage"><div class="history-picture history-shakey" role="img" '
+                'aria-label="Reconstitution illustrée : Shakey, ses roues, sa caméra et un ordinateur de laboratoire."></div>'
+                '<figcaption><span class="fragment" data-step="1">Le robot observe et agit.</span> '
+                '<span class="fragment" data-step="2">L’ordinateur extérieur participe au calcul.</span>'
+                '<small>Reconstitution pédagogique de Shakey · SRI, 1966–1972. Ce n’est pas une photographie d’archive.</small></figcaption></figure>')
     if name=='story_alvinn':
-        z=year('1989 · ALVINN','Dean Pomerleau · Apprendre une direction')
-        z+=path('M40,435 L168,145 H235 L358,435',MUTED)+path('M203,165 V425',GOLD,True)
-        z+=rect(152,277,107,86,'#ff926b','#eb7a51',12)+rect(165,287,82,26,'#e5f5f3',TEAL,3)
-        z+=circle(160,363,12,fill=INK,color=INK)+circle(252,363,12,fill=INK,color=INK)
-        z+=fragment(1,text(560,175,'Des observations',25)+text(560,211,'de la route',25))
-        z+=fragment(2,arrow(560,232,560,274)+text(560,314,'Un réseau appris',25,TEAL)+arrow(560,337,560,374))
-        z+=fragment(3,text(560,416,'Une direction',25,INK)+text(380,483,'Schéma de principe ; essais dans des conditions précises.',20,MUTED))
-        return svg(z,'Principe du réseau ALVINN, sans résultat inventé')
+        return ('<figure class="history-stage"><div class="history-picture history-alvinn" role="img" '
+                'aria-label="Reconstitution illustrée : véhicule de recherche des années 1980 observant une route."></div>'
+                '<figcaption><span class="fragment" data-step="1">Observer la route</span> '
+                '<span class="fragment" data-step="2">→ calculer avec le réseau</span> '
+                '<span class="fragment" data-step="3">→ proposer une direction.</span>'
+                '<small>Illustration du principe d’ALVINN · Dean Pomerleau, 1989. Véhicule reconstitué, pas une archive.</small></figcaption></figure>')
     if name=='story_mobilenet':
         z=year('2017 · MobileNets','Andrew Howard et ses collègues')
         for i,c in enumerate(['#ff926b','#f4c751','#7ecdc0']):

@@ -83,7 +83,7 @@
     if (action==='benchmark-csv') exportBenchmark(el.closest('.benchmark-lab'));
     if (action==='sources') {
       openModal('Cours, TD et sources', `<p>Retrouvez ici les documents à lire et les fichiers sources à consulter ou télécharger.</p>
-        <h3>Construire le cours ensemble</h3><ul><li><a href="workshop/" target="_blank" rel="noopener noreferrer">Atelier guidé : sept groupes, fiches et synthèse collective</a></li><li><a href="workshop/protocol.pdf" target="_blank" rel="noopener noreferrer">Protocole de demi-journée et extension à une journée</a></li></ul><h3>Travaux dirigés</h3><ul>
+        <h3>Travaux dirigés</h3><ul>
           <li><a href="lab/" target="_blank" rel="noopener noreferrer">Énoncé du TD et ressources étudiantes</a></li>
           <li><a href="lab/student-materials.zip" download>Dossier étudiant complet · ZIP</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/tree/main/embedded-ai/lab" target="_blank" rel="noopener noreferrer">Fichiers du TD et sources du modèle d’article sur GitHub</a></li>

@@ -33,7 +33,7 @@ def build_core(item,index,start):
     kind=item.get('kind','');attrs=f'data-index="{index}" data-minutes="{item["minutes"]}" aria-label="{escape(item["title"].replace(chr(10)," "),quote=True)}"'
     top=header(item['chapter'],time if index<CORE_COUNT else 'Lecture libre')
     if kind=='hero':
-        middle=f'<div class="hero-grid"><div><div class="eyebrow">Modèles · calcul · mémoire · preuves</div><h1>{title}</h1><p class="lead">{lead}</p><div class="hero-author">Roland Cédric TAYO</div><div class="hero-entry"><a href="workshop/" target="_blank" rel="noopener noreferrer">Construire le cours ensemble →</a></div></div><div class="hero-art">{draw("hero")}</div></div>'
+        middle=f'<div class="hero-grid"><div><div class="eyebrow">Modèles · calcul · mémoire · preuves</div><h1>{title}</h1><p class="lead">{lead}</p><div class="hero-author">Roland Cédric TAYO</div></div><div class="hero-art">{draw("hero")}</div></div>'
     else:
         heading=f'<div class="heading"><h1>{title}</h1><p class="lead">{lead}</p></div>'
         if kind=='quiz':

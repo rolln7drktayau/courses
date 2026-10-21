@@ -22,4 +22,4 @@ Le langage courant précède le vocabulaire technique. Cela aide un débutant à
 
 Le cours de trois heures est une synthèse du module plus large, pas une promesse de couvrir toute l’IA embarquée. La progression application → modèle → déploiement rejoint celle de [Harvard Deploying TinyML](https://pll.harvard.edu/course/deploying-tinyml) et [CMU 18-444](https://courses.apps.ece.cmu.edu/18444). [MIT EfficientML](https://hanlab.mit.edu/courses/2026-fall-65940) fournit un repère pour les approfondissements d’efficacité. Ces références ne valent pas équivalence de formation.
 
-Le TD est commun au cours principal. Le dépôt ne contient ni corrigé, ni poids entraînés du projet enseignant. L’activité collaborative n’appartient pas à ce parcours narratif.
+Le TD est commun au cours principal. Le dépôt ne contient ni corrigé, ni poids entraînés du projet enseignant.
