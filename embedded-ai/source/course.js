@@ -98,10 +98,13 @@
     if (action==='sources') {
       openModal('Cours, TD et sources', `<p>Retrouvez ici les documents à lire et les fichiers sources à consulter ou télécharger.</p>
         <h3>Travaux dirigés</h3><ul>
+          <li><a href="perceptron.pdf" target="_blank" rel="noopener noreferrer">Introduction : perceptron · énoncé PDF</a></li>
           <li><a href="https://rolln7drktayau.github.io/courses/embedded-ai/lab/" target="_blank" rel="noopener noreferrer">Énoncé du TD et ressources étudiantes</a></li>
           <li><a href="https://rolln7drktayau.github.io/courses/embedded-ai/lab/student-materials.zip" download>Dossier étudiant complet · ZIP</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/tree/main/embedded-ai/lab" target="_blank" rel="noopener noreferrer">Fichiers du TD et sources du modèle d’article sur GitHub</a></li>
         </ul><h3>Cours</h3><ul>
+          <li><a href="course-plan.pdf" target="_blank" rel="noopener noreferrer">Plan complet et minutage · PDF</a></li>
+          <li><a href="https://github.com/rolln7drktayau/courses/blob/main/embedded-ai/HISTORY-AND-ROS.md" target="_blank" rel="noopener noreferrer">Historique, changements et points à vérifier</a></li>
           <li><a href="course.pdf" target="_blank" rel="noopener noreferrer">Présentation en PDF</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/blob/main/embedded-ai/TEACHING-DESIGN.md" target="_blank" rel="noopener noreferrer">Parcours et cours universitaires d’inspiration</a></li>
           <li><a href="https://github.com/rolln7drktayau/courses/tree/main/embedded-ai" target="_blank" rel="noopener noreferrer">Sources du cours et instructions de génération sur GitHub</a></li>

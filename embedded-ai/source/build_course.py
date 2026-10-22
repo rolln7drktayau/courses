@@ -16,11 +16,12 @@ REF={r['id']:r for r in REFERENCES}
 CHROME=Path(r'C:\Program Files\Google\Chrome\Application\chrome.exe')
 
 
-def footer(index,refs=(),detail=True):
+def footer(index,refs=(),detail=True,badge=''):
     citations=''.join(f'<a class="ref" href="{escape(REF[k]["url"],quote=True)}" data-ref="{k}" title="{escape(REF[k]["title"],quote=True)}">{k} · {REF[k]["year"]}</a>' for k in refs)
     detail_button='<button class="detail-button" data-action="details">Approfondir ↗</button>' if detail else ''
     if index<CORE_COUNT and not SLIDES[index]['quiz'] and SLIDES[index]['kind']!='hero':
         detail_button='<button class="detail-button reveal-all" data-action="revealall">Tout montrer</button>'+detail_button
+    if badge:citations='<span class="ref">'+escape(badge)+'</span>'+citations
     count=f'{index+1:02d} / {CORE_COUNT}' if index<CORE_COUNT else f'A{index-CORE_COUNT+1:02d}'
     return f'<footer class="slide-footer"><span class="author">Roland Cédric TAYO · INEM</span><span class="citations">{citations}{detail_button}</span><span class="slide-num">{count}</span></footer>'
 
@@ -65,6 +66,8 @@ def build_core(item,index,start):
         if kind=='opening':
             cards=''.join(f'<article class="opening-card fragment" data-step="{i+1}"><span>{i+1:02d}</span><h2>{escape(question)}</h2></article>' for i,question in enumerate(item['prompts']))
             middle=heading+f'<div class="content opening-content"><div class="opening-grid">{cards}</div><p class="opening-instruction">Proposez une réponse avec vos mots. Gardez-la en tête pour la fin du cours.</p></div>'
+        elif item['visual']=='history_timeline':
+            middle=heading+f'<div class="content history-wide"><div class="visual fragment" data-step="1">{draw(item["visual"])}</div>{takeaway}</div>'
         elif kind=='quiz':
             quiz=item['quiz']
             options=''.join(f'<button class="quiz-choice" data-answer="{i}" aria-pressed="false"><span class="letter">{"ABC"[i]}</span><span>{escape(option)}</span></button>' for i,option in enumerate(quiz['options']))
@@ -76,7 +79,7 @@ def build_core(item,index,start):
             copy=dialogue+f'<ul class="points">{body}</ul>'+takeaway
             middle=heading+f'<div class="content"><div class="story-copy">{copy}</div><div class="visual">{draw(item["visual"])}</div></div>'
     classes=f'slide {kind} {"story" if is_main else "appendix"} {item.get("layout", "technical")} {"active" if index==0 else ""}'
-    return f'<section class="{classes}" {attrs}>{top}{middle}{footer(index,item["refs"])}</section>'
+    return f'<section class="{classes}" {attrs}>{top}{middle}{footer(index,item["refs"],badge=item.get("badge",""))}</section>'
 
 
 def build_appendices():
@@ -87,15 +90,18 @@ def build_appendices():
         data.append(item)
     for group in range(0,len(REFERENCES),4):
         refs=REFERENCES[group:group+4];index=CORE_COUNT+len(sections)
-        title=f'Sources et limites de lecture · {group//4+1}/6'
+        title=f'Sources et limites de lecture · {group//4+1}/{(len(REFERENCES)+3)//4}'
         cards=''
         for r in refs:
             cards+=f'<article class="reference-item"><span class="reference-code">{r["id"]}</span><div><h2><a href="{escape(r["url"],quote=True)}" target="_blank" rel="noopener noreferrer">{escape(r["title"])} ↗</a></h2><p class="ref-meta">{escape(r["authors"])} · {escape(r["year"])} · {escape(r["status"])}</p><p class="ref-takeaway">{escape(r["takeaway"])}</p></div></article>'
+            if group>=24:
+                cards=cards[:-len('</div></article>')]+f'<p class="ref-limit">Limite : {escape(r["limit"])}</p></div></article>'
         if len(refs)==1:
             for key in ['R10','R09','R11']:
                 r=REF[key]
                 cards+=f'<article class="reference-item"><span class="reference-code">À lire</span><div><h2><a href="{r["url"]}">{escape(r["title"])} ↗</a></h2><p class="ref-takeaway">{escape(r["limit"])}</p></div></article>'
-        sections.append(f'<section class="slide appendix" data-index="{index}" aria-label="{title}">{header("Annexes · Bibliographie","Lecture libre")}<div class="heading"><h1>{title}</h1><p class="lead">Articles originaux, prépublications et documentation officielle · lire les limites de chaque source.</p></div><div class="reference-list">{cards}</div>{footer(index,detail=False)}</section>')
+        bib_class=' history-bib' if group>=24 else ''
+        sections.append(f'<section class="slide appendix{bib_class}" data-index="{index}" aria-label="{title}">{header("Annexes · Bibliographie","Lecture libre")}<div class="heading"><h1>{title}</h1><p class="lead">Articles originaux, prépublications et documentation officielle · lire les limites de chaque source.</p></div><div class="reference-list">{cards}</div>{footer(index,detail=False)}</section>')
         data.append(dict(title=title,chapter='Annexes · Sources',lead='Bibliographie scientifique',minutes=0,refs=[],detail='Les intitulés distinguent les actes ou revues identifiés, les prépublications et la documentation. La date de dépôt peut différer de la date de publication. Lire les résultats avec leurs configurations et limites.'))
     glossaries=[[
         ('MCU','Microcontrôleur : processeur, mémoire et périphériques réunis pour une application embarquée.'),
@@ -159,11 +165,9 @@ def build_html():
     return path,len(sections)
 
 
-def build_plan(page):
-    css="""@page{size:A4;margin:19mm 21mm}*{box-sizing:border-box}body{font:10.5pt/1.4 Georgia,'Times New Roman',serif;color:#18394b;margin:0}.page{height:258mm;display:flex;flex-direction:column;break-after:page}.page:last-child{break-after:auto}h1{font-size:23pt;line-height:1.15;font-weight:normal;margin:20px 0 12px}h2{font-size:12pt;margin:16px 0 6px}p{margin:6px 0 9px}table{width:100%;border-collapse:collapse;font-size:10pt}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid #d1dce0;vertical-align:top}th{border-top:2px solid #008b83}a{color:#006f70;text-decoration:none}li{margin-bottom:7px}.small{font-size:9pt;color:#607684}.footer{margin-top:auto;border-top:1px solid #cdd9df;padding-top:9px;font-size:9pt;color:#607684}.kicker{font:9pt Arial;letter-spacing:1px;text-transform:uppercase;color:#008b83}"""
-    html=f"""<!doctype html><html lang="fr"><meta charset="utf-8"><title>Parcours narratif — IA embarquée</title><style>{css}</style><body><article class="page"><div class="kicker">INEM · IA pour les systèmes embarqués</div><h1>Une lampe qui comprend, même sans Internet</h1><p><b>Roland Cédric TAYO</b> · 180 minutes, échanges et pause compris.</p><p>Une fiction pédagogique relie un besoin humain à l’apprentissage, au déploiement et aux compromis matériels. Alice est fictive ; les chercheurs et leurs travaux sont documentés. Le réseau numérique jouet ne constitue pas un système vocal réel.</p><h2>Six actes · {CORE_COUNT} scènes principales</h2><table><thead><tr><th>Minutes</th><th>Obstacle et progression</th><th>Questions</th></tr></thead><tbody><tr><td>0–25</td><td>I. Quatre questions de départ, puis voix variables, Shakey et ALVINN.</td><td>Pourquoi envisager un apprentissage ?</td></tr><tr><td>25–55</td><td>II. Ouvrir le modèle : calcul, perte, correction et données.</td><td>Suivre une sortie et compter.</td></tr><tr><td>55–80</td><td>III. La liaison disparaît : où calculer et que déployer ?</td><td>Respecter deux exigences.</td></tr><tr><td>80–90</td><td>Pause de dix minutes.</td><td>—</td></tr><tr><td>90–120</td><td>IV. La boîte est trop petite : mémoire, MobileNets et quantification.</td><td>Calculer un pic RAM.</td></tr><tr><td>120–145</td><td>V. Cela tient, mais cela attend : MCUNet, délai et énergie.</td><td>Calculer un gain global.</td></tr><tr><td>145–180</td><td>VI. Alice demande des preuves : mesures, robustesse, recherche et choix.</td><td>Défendre un système sous contraintes.</td></tr></tbody></table><h2>Navigation et progression</h2><p>Flèche droite : révéler l’étape suivante, puis passer à la scène suivante. Flèche gauche : revenir. A : tout montrer dans la scène. T : histoire et questions. D : approfondir. F : plein écran. Les animations peuvent être désactivées.</p><p>Une ouverture de quatre minutes suit la couverture. Les questions de fin de chapitre concluent les six actes : diapositives 7, 12, 17, 24, 30 et 35. Le PDF montre les scènes complètes ; les réponses raisonnées sont en annexes.</p><div class="footer">Roland Cédric TAYO · 1 / 2</div></article><article class="page"><div class="kicker">Repères, manipulations et portée</div><h1>De l’histoire à la compréhension</h1><ol><li>Relier un service au choix d’une méthode et au lieu du calcul.</li><li>Expliquer poids, biais, activation, perte, gradient et inférence sur un réseau 2 → 2 → 1.</li><li>Distinguer entraînement sur PC, export, inférence sur carte et comparaison des sorties.</li><li>Compter Flash et pic RAM, puis distinguer délai, puissance et énergie.</li><li>Comparer une référence et une variante, conserver les traces et expliquer les limites.</li></ol><h2>Manipulations dans le HTML</h2><p>Modifier les entrées ; faire varier un pas d’apprentissage ; couper une liaison dans un schéma logique ; changer une grille de quantification ; explorer la loi d’Amdahl ; chronométrer deux sommes dans le navigateur et exporter 14 observations brutes.</p><p class="small">Le schéma réseau ne contacte aucun serveur. Seule la somme effectue ici un chronométrage réel, dans le navigateur présent ; aucun temps sur MCU ou Pi ni aucune énergie ne sont simulés comme des mesures. Les budgets de mémoire et le tableau de décision sont fictifs et annoncés comme tels.</p><h2>Histoire documentée</h2><p>SRI, Shakey (1966–1972) ; Dean Pomerleau, ALVINN (1989) ; Andrew Howard et ses collègues, MobileNets (2017) ; Benoit Jacob et ses collègues, calcul entier (2018) ; Ji Lin, Wei-Ming Chen et leur équipe, MCUNet (2020) et MCUNetV2 (2021). Les bulles d’Alice sont fictives, sans citations inventées des chercheurs.</p><h2>Portée et prolongement</h2><p>Cette synthèse de trois heures ouvre le module de 14 h de cours et 14 h de TD. Le TD de prédiction sur signaux simulés se déploie sur Raspberry Pi sous Linux ; il ne reproduit pas le système vocal d’Alice. Ses équations et ses attentes restent dans son énoncé, sans corrigé enseignant publié.</p><p><a href="https://rolln7drktayau.github.io/courses/embedded-ai/">Présentation</a> · <a href="https://rolln7drktayau.github.io/courses/embedded-ai/course.pdf">PDF</a> · <a href="https://rolln7drktayau.github.io/courses/embedded-ai/lab/">TD</a>. Références et extensions hors parcours oral : annexes, SOURCES.md et references.bib.</p><div class="footer">Roland Cédric TAYO · 2 / 2</div></article></body></html>"""
-    path=OUT/'source'/'plan.html';path.write_text(html,encoding='utf-8')
-    page.goto(path.as_uri());page.emulate_media(media='print');page.pdf(path=str(OUT/'course-plan.pdf'),prefer_css_page_size=True,print_background=True)
+
+
+from plan_build import build_plan
 
 
 def main():
@@ -185,7 +189,7 @@ def main():
             toc.append([1,'Annexes — Architectures, recherche et références',CORE_COUNT+1])
             _,extra=build_appendices()
             toc.extend([2,s['title'],CORE_COUNT+1+i] for i,s in enumerate(extra));doc.set_toc(toc)
-        else:assert len(doc)==2,len(doc)
+        else:assert len(doc)==5,len(doc)
         temporary=target.with_suffix('.tmp.pdf');doc.save(temporary,garbage=4,deflate=True);doc.close();temporary.replace(target)
     print(json.dumps({'oral_slides':CORE_COUNT,'appendices':count-CORE_COUNT,'minutes_including_break':180,'references':len(REFERENCES),'html_bytes':path.stat().st_size}))
 

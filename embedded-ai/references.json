@@ -238,5 +238,115 @@
     "url": "https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf",
     "takeaway": "Relier données, modèles, exécution, matériel, mesures et cycle de vie.",
     "limit": "Glossaire non normatif ; ne remplace ni un cours de calcul, ni les sources techniques. Distinguer puissance en W et énergie en J ; un percentile observé ne garantit pas le temps réel."
+  },
+  {
+    "id": "R25",
+    "authors": "Smithsonian · National Museum of American History",
+    "year": "1958",
+    "title": "Electronic Neural Network, Mark I Perceptron",
+    "status": "Notice institutionnelle · date de l’objet au catalogue",
+    "url": "https://americanhistory.si.edu/collections/object/nmah_334414",
+    "takeaway": "Le réseau est matérialisé par des circuits et des potentiomètres.",
+    "limit": "La datation muséale ne date pas chaque étape ; la démonstration de 1958 sur IBM 704 est distincte du Mark I matériel."
+  },
+  {
+    "id": "R26",
+    "authors": "Stanford · CS231n",
+    "year": "2020",
+    "title": "Lecture 5 · Convolutional Neural Networks",
+    "status": "Cours universitaire officiel · histoire du perceptron",
+    "url": "https://cs231n.stanford.edu/slides/2020/lecture_5.pdf",
+    "takeaway": "Décrit la grille de 20 × 20 photocellules du Mark I, soit 400 entrées lumineuses.",
+    "limit": "Source pédagogique secondaire ; ne suffit pas à établir la date de mise en service ni les moteurs des potentiomètres."
+  },
+  {
+    "id": "R27",
+    "authors": "Dean A. Pomerleau",
+    "year": "1991",
+    "title": "Efficient Training of Artificial Neural Networks for Autonomous Navigation",
+    "status": "Neural Computation 3(1), 88–97 · article original",
+    "url": "https://publications.ri.cmu.edu/efficient-training-of-artificial-neural-networks-for-autonomous-navigation",
+    "takeaway": "Version à 30 × 32 pixels, 5 neurones cachés et 30 sorties ; vues décalées et directions corrigées pour apprendre le retour vers la route.",
+    "limit": "Ne pas attribuer cette architecture à toutes les versions d’ALVINN ; les rotations ne sont pas établies par cette lecture."
+  },
+  {
+    "id": "R28",
+    "authors": "Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner",
+    "year": "1998",
+    "title": "Gradient Based Learning Applied to Document Recognition",
+    "status": "Proceedings of the IEEE 86(11), 2278–2324 · article original",
+    "url": "https://bottou.org/papers/lecun-98h",
+    "takeaway": "Réseaux convolutifs et lecture de documents, dont un système commercial de lecture de chèques.",
+    "limit": "Ce système de lecture ne prouve pas que la puce ANNA ait équipé les installations commerciales."
+  },
+  {
+    "id": "R29",
+    "authors": "Eduard Säckinger, Bernhard E. Boser, Lawrence D. Jackel",
+    "year": "1991–1992",
+    "title": "A Neurocomputer Board Based on the ANNA Neural Network Chip",
+    "status": "NeurIPS 1991 · actes publiés en 1992",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/1991/hash/5e388103a391daabe3de1d76a6739ccd-Abstract.html",
+    "takeaway": "Carte avec puce ANNA et DSP, évaluée notamment pour la reconnaissance de codes postaux manuscrits.",
+    "limit": "Prototype de recherche ; apprentissage hors puce puis chargement des poids."
+  },
+  {
+    "id": "R30",
+    "authors": "Yann LeCun, John S. Denker, Sara A. Solla",
+    "year": "1989–1990",
+    "title": "Optimal Brain Damage",
+    "status": "NeurIPS 1989 · actes publiés en 1990",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/1989/hash/6c9882bbac1c7093bd25041881277658-Abstract.html",
+    "takeaway": "Estimer la sensibilité de l’erreur pour supprimer certains poids.",
+    "limit": "L’élagage ne garantit pas un gain de temps : la structure et le moteur d’exécution comptent."
+  },
+  {
+    "id": "R31",
+    "authors": "Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton",
+    "year": "2012",
+    "title": "ImageNet Classification with Deep Convolutional Neural Networks",
+    "status": "NeurIPS 2012 · article original",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+    "takeaway": "AlexNet illustre l’essor des réseaux profonds entraînés avec des GPU.",
+    "limit": "Résultats ImageNet ; ne décrit pas une implantation sur Raspberry Pi ou microcontrôleur."
+  },
+  {
+    "id": "R32",
+    "authors": "Song Han, Huizi Mao, William J. Dally",
+    "year": "2015–2016",
+    "title": "Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding",
+    "status": "Prépublication 2015 · ICLR 2016",
+    "url": "https://arxiv.org/abs/1510.00149",
+    "takeaway": "Associer suppression de poids, quantification et codage pour réduire le stockage.",
+    "limit": "Taille compressée sur disque et mémoire de travail pendant l’inférence sont différentes ; aucun facteur de gain universel."
+  },
+  {
+    "id": "R33",
+    "authors": "Pete Warden",
+    "year": "2019",
+    "title": "Launching TensorFlow Lite for Microcontrollers",
+    "status": "Annonce du concepteur · 7 mars 2019",
+    "url": "https://petewarden.com/2019/03/07/launching-tensorflow-lite-for-microcontrollers/",
+    "takeaway": "Lancement expérimental public après un travail commencé l’année précédente.",
+    "limit": "Jalon de structuration du TinyML ; pas la naissance de toute l’IA sur microcontrôleur."
+  },
+  {
+    "id": "R34",
+    "authors": "Pete Warden, Daniel Situnayake",
+    "year": "2019",
+    "title": "TinyML",
+    "status": "Livre · notice officielle O’Reilly, décembre 2019",
+    "url": "https://www.oreilly.com/library/view/tinyml/9781492052036/",
+    "takeaway": "Organiser le passage du modèle au dispositif à faible consommation.",
+    "limit": "Ouvrage pédagogique ; les exemples ne prouvent pas que toute tâche tient sur toute carte."
+  },
+  {
+    "id": "R35",
+    "authors": "Melanie Lefkowitz · Cornell Chronicle",
+    "year": "2019",
+    "title": "Professor’s perceptron paved the way for AI – 60 years too soon",
+    "status": "Histoire institutionnelle · Cornell University",
+    "url": "https://news.cornell.edu/stories/2019/09/professors-perceptron-paved-way-ai-60-years-too-soon",
+    "takeaway": "Distingue la démonstration du perceptron sur IBM 704 en juillet 1958 de la machine matérielle.",
+    "limit": "Utilisé pour cette distinction historique ; les formules journalistiques sur les réseaux modernes ne sont pas reprises."
   }
 ]

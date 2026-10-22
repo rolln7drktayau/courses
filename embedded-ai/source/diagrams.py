@@ -40,6 +40,9 @@ def cells(x,y,rows,cols,size=28,active=(),zeros=False):
     return z
 
 def draw(name):
+    if name in {'history_timeline','alvinn_recovery','why_embedded','feedback_bridge'}:
+        from history_diagrams import history_diagram
+        return history_diagram(name)
     if name.startswith('story_'):
         from story_art import draw_story
         return draw_story(name)

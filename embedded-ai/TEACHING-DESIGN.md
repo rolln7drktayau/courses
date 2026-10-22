@@ -6,17 +6,17 @@ La présentation part d’un usage quotidien, fait apparaître une difficulté, 
 
 | Chapitre | Minutes | Question centrale |
 |---|---:|---|
-| I | 0–25 | Pourquoi apprendre à reconnaître une commande ? |
-| II | 25–55 | Comment un réseau calcule-t-il et apprend-il ? |
-| III | 55–80 | Où exécuter le modèle, et comment le déployer ? |
+| I | 0–29 | Pourquoi apprendre à reconnaître une commande ? |
+| II | 29–59 | Comment un réseau calcule-t-il et apprend-il ? |
+| III | 59–80 | Où exécuter le modèle, et comment le déployer ? |
 | Pause | 80–90 | Dix minutes |
 | IV | 90–120 | Pourquoi le fichier et le calcul ne demandent-ils pas la même mémoire ? |
 | V | 120–145 | Pourquoi moins d’opérations ne garantit-il pas le même gain de temps ou d’énergie ? |
 | VI | 145–180 | Comment vérifier, comparer et poursuivre une recherche mesurée ? |
 
-Quatre questions orales de départ occupent quatre minutes après la couverture ; elles sont reprises à la conclusion. Ce temps est inclus dans les 25 minutes du premier chapitre. Aucun score ni service de quiz externe n’est nécessaire.
+Quatre questions orales de départ occupent trois minutes après la couverture ; elles sont reprises à la conclusion. Ce temps est inclus dans les 29 minutes du premier chapitre. Aucun score ni service de quiz externe n’est nécessaire.
 
-Les pauses questions sont aux scènes 7, 12, 17, 24, 30 et 35. Elles associent explication orale, calcul ou choix, puis réponse commentée. Le rythme de trois heures comprend ces échanges. Les 23 pages complémentaires ne sont pas prévues pour une présentation intégrale pendant ces trois heures.
+Les pauses questions sont aux scènes 10, 15, 20, 27, 33 et 38. Elles associent explication orale, calcul ou choix, puis réponse commentée. Le rythme de trois heures comprend ces échanges. Les 26 pages complémentaires ne sont pas prévues pour une présentation intégrale pendant ces trois heures.
 
 Les images rendent les personnes et les situations visibles. Les textes, formules et chiffres restent séparés des images pour être lisibles, accessibles et modifiables. Les nombres illustratifs sont annoncés ; aucun score, temps ou gain matériel n’est inventé comme résultat expérimental. La mesure dans le navigateur est limitée explicitement à son environnement.
 
@@ -27,3 +27,5 @@ Le cours de trois heures est une synthèse du module plus large, pas une promess
 Le TD est commun au cours principal. Le dépôt ne contient ni corrigé, ni poids entraînés du projet enseignant.
 
 Deux annexes relient le réseau de démonstration au Mixer du TD : dimensions, paramètres partagés, connexions résiduelles et contrôles de gradients. Elles sont prévues pour accompagner les TD, hors du parcours oral de trois heures.
+
+La frise et l’approfondissement ALVINN relient l’histoire aux contraintes de données, mémoire et comparaison. Le pont final vers ROS introduit la boucle d’action sans anticiper les développements de Philippe. Voir [le plan et les vérifications historiques](HISTORY-AND-ROS.md).

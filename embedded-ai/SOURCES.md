@@ -295,3 +295,135 @@ Embedded France avec la Fondation Eclipse. 2026. Référentiel pédagogique · v
 Apport : Relier données, modèles, exécution, matériel, mesures et cycle de vie.
 
 Limite : Glossaire non normatif ; ne remplace ni un cours de calcul, ni les sources techniques. Distinguer puissance en W et énergie en J ; un percentile observé ne garantit pas le temps réel.
+
+
+
+## R25 — Electronic Neural Network, Mark I Perceptron
+
+Smithsonian · National Museum of American History. 1958. Notice institutionnelle · date de l’objet au catalogue.
+
+[Source originale](https://americanhistory.si.edu/collections/object/nmah_334414)
+
+Apport : Le réseau est matérialisé par des circuits et des potentiomètres.
+
+Limite : La datation muséale ne date pas chaque étape ; la démonstration de 1958 sur IBM 704 est distincte du Mark I matériel.
+
+
+
+## R26 — Lecture 5 · Convolutional Neural Networks
+
+Stanford · CS231n. 2020. Cours universitaire officiel · histoire du perceptron.
+
+[Source originale](https://cs231n.stanford.edu/slides/2020/lecture_5.pdf)
+
+Apport : Décrit la grille de 20 × 20 photocellules du Mark I, soit 400 entrées lumineuses.
+
+Limite : Source pédagogique secondaire ; ne suffit pas à établir la date de mise en service ni les moteurs des potentiomètres.
+
+
+
+## R27 — Efficient Training of Artificial Neural Networks for Autonomous Navigation
+
+Dean A. Pomerleau. 1991. Neural Computation 3(1), 88–97 · article original.
+
+[Source originale](https://publications.ri.cmu.edu/efficient-training-of-artificial-neural-networks-for-autonomous-navigation)
+
+Apport : Version à 30 × 32 pixels, 5 neurones cachés et 30 sorties ; vues décalées et directions corrigées pour apprendre le retour vers la route.
+
+Limite : Ne pas attribuer cette architecture à toutes les versions d’ALVINN ; les rotations ne sont pas établies par cette lecture.
+
+
+
+## R28 — Gradient Based Learning Applied to Document Recognition
+
+Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner. 1998. Proceedings of the IEEE 86(11), 2278–2324 · article original.
+
+[Source originale](https://bottou.org/papers/lecun-98h)
+
+Apport : Réseaux convolutifs et lecture de documents, dont un système commercial de lecture de chèques.
+
+Limite : Ce système de lecture ne prouve pas que la puce ANNA ait équipé les installations commerciales.
+
+
+
+## R29 — A Neurocomputer Board Based on the ANNA Neural Network Chip
+
+Eduard Säckinger, Bernhard E. Boser, Lawrence D. Jackel. 1991–1992. NeurIPS 1991 · actes publiés en 1992.
+
+[Source originale](https://proceedings.neurips.cc/paper_files/paper/1991/hash/5e388103a391daabe3de1d76a6739ccd-Abstract.html)
+
+Apport : Carte avec puce ANNA et DSP, évaluée notamment pour la reconnaissance de codes postaux manuscrits.
+
+Limite : Prototype de recherche ; apprentissage hors puce puis chargement des poids.
+
+
+
+## R30 — Optimal Brain Damage
+
+Yann LeCun, John S. Denker, Sara A. Solla. 1989–1990. NeurIPS 1989 · actes publiés en 1990.
+
+[Source originale](https://proceedings.neurips.cc/paper_files/paper/1989/hash/6c9882bbac1c7093bd25041881277658-Abstract.html)
+
+Apport : Estimer la sensibilité de l’erreur pour supprimer certains poids.
+
+Limite : L’élagage ne garantit pas un gain de temps : la structure et le moteur d’exécution comptent.
+
+
+
+## R31 — ImageNet Classification with Deep Convolutional Neural Networks
+
+Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton. 2012. NeurIPS 2012 · article original.
+
+[Source originale](https://proceedings.neurips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html)
+
+Apport : AlexNet illustre l’essor des réseaux profonds entraînés avec des GPU.
+
+Limite : Résultats ImageNet ; ne décrit pas une implantation sur Raspberry Pi ou microcontrôleur.
+
+
+
+## R32 — Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding
+
+Song Han, Huizi Mao, William J. Dally. 2015–2016. Prépublication 2015 · ICLR 2016.
+
+[Source originale](https://arxiv.org/abs/1510.00149)
+
+Apport : Associer suppression de poids, quantification et codage pour réduire le stockage.
+
+Limite : Taille compressée sur disque et mémoire de travail pendant l’inférence sont différentes ; aucun facteur de gain universel.
+
+
+
+## R33 — Launching TensorFlow Lite for Microcontrollers
+
+Pete Warden. 2019. Annonce du concepteur · 7 mars 2019.
+
+[Source originale](https://petewarden.com/2019/03/07/launching-tensorflow-lite-for-microcontrollers/)
+
+Apport : Lancement expérimental public après un travail commencé l’année précédente.
+
+Limite : Jalon de structuration du TinyML ; pas la naissance de toute l’IA sur microcontrôleur.
+
+
+
+## R34 — TinyML
+
+Pete Warden, Daniel Situnayake. 2019. Livre · notice officielle O’Reilly, décembre 2019.
+
+[Source originale](https://www.oreilly.com/library/view/tinyml/9781492052036/)
+
+Apport : Organiser le passage du modèle au dispositif à faible consommation.
+
+Limite : Ouvrage pédagogique ; les exemples ne prouvent pas que toute tâche tient sur toute carte.
+
+
+
+## R35 — Professor’s perceptron paved the way for AI – 60 years too soon
+
+Melanie Lefkowitz · Cornell Chronicle. 2019. Histoire institutionnelle · Cornell University.
+
+[Source originale](https://news.cornell.edu/stories/2019/09/professors-perceptron-paved-way-ai-60-years-too-soon)
+
+Apport : Distingue la démonstration du perceptron sur IBM 704 en juillet 1958 de la machine matérielle.
+
+Limite : Utilisé pour cette distinction historique ; les formules journalistiques sur les réseaux modernes ne sont pas reprises.
