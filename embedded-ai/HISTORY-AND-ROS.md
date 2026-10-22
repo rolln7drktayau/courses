@@ -82,8 +82,6 @@ Quatre questions pour partir de vos idées. Nous y reviendrons à la fin de l’
 - Pourquoi une IA qui marche sur PC pourrait-elle poser problème sur une petite carte ?
 - Comment vérifier qu’une modification apporte un progrès réel ?
 
-**À retenir :** 
-
 Ces questions ouvrent une discussion, sans score ni correction immédiate. Un appareil peut utiliser des règles, un modèle appris ou les deux. Le cours permettra de distinguer ces cas, de discuter le lieu du calcul, de nommer les contraintes et de définir une mesure crédible.
 
 Références : Cadrage de la séance suivante ; aucune performance annoncée.
@@ -192,8 +190,6 @@ La lampe a appris le mot « lumière » à partir de plusieurs enregistrements. 
 
 Quiz et correction conservés intégralement ; consulter la diapositive.
 
-**À retenir :** 
-
 Une bonne justification nomme le service, les variations, les erreurs possibles et une alternative simple. Les exemples de test ne doivent pas être les exemples utilisés pour régler le modèle. Les réponses du QCM concernent une seule question ; le prolongement se discute après le choix.
 
 Références : Cadrage de la séance suivante ; aucune performance annoncée.
@@ -259,8 +255,6 @@ Références : R19, R20, R24
 Exigences : qualité ≥ 96 %, RAM ≤ 100 Kio, p95 observé ≤ 20 ms et énergie ≤ 3 mJ par décision.
 
 Quiz et correction conservés intégralement ; consulter la diapositive.
-
-**À retenir :** 
 
 Données de classification fictives : A=97 %,120 Kio,12 ms,2,4 mJ ; B=96 %,96 Kio,18 ms,2,8 mJ ; C=95 %,72 Kio,14 ms,1,8 mJ. p95 sur 500 essais fictifs ; énergie sur acquisition/calcul/action, hors veille. Le TD est une régression : ses métriques ne sont pas ces pourcentages. Les seuils sont des exigences, pas une compensation entre notes : une excellente précision ne crée pas de mémoire supplémentaire. Les réponses du QCM concernent une seule question ; le prolongement se discute après le choix.
 
