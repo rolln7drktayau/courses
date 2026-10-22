@@ -37,7 +37,7 @@ def main():
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path=str(CHROME) if CHROME.exists() else None,headless=True)
         page=browser.new_page()
-        for name,pages in [('assignment',13),('report-guidelines',3),('perceptron',7)]:
+        for name,pages in [('assignment',13),('report-guidelines',3),('perceptron',9)]:
             page.goto((ROOT/'source/lab'/f'{name}.html').as_uri())
             page.emulate_media(media='print')
             overflow=page.locator('.page').evaluate_all('''ss=>ss.flatMap((s,i)=>{
@@ -63,7 +63,8 @@ def main():
                     'Objectifs et parcours','Étape 1 — Perceptron simple et généralisation',
                     'Étape 2 — Deux classes, Widrow–Hoff','Étape 3 — Dix classes',
                     'Étape 4 — Perceptron multicouche','MNIST et vérifications',
-                    'Petite recherche, présentation et règles de travail'],1)])
+                    'Mémoire et langage','Recherche — Quantification',
+                    'Mesures, versionnement et remise'],1)])
             temporary=target.with_suffix('.tmp.pdf');doc.save(temporary,garbage=4,deflate=True);doc.close();temporary.replace(target)
             results[name]={'pages':pages,'overflows':overflow}
         browser.close()

@@ -96,23 +96,23 @@
     },
     "assignment.pdf": {
       "bytes": 254176,
-      "sha256": "ad32468d0bb7890e361fc54a7413bf45a49da9eaa2cdb58a342bbeea0e7d3cbe"
+      "sha256": "2f387bf18490c42e6811c3e24b20336cb4b78ae1b7207f8ee562b08fb8a88868"
     },
     "getting-started.html": {
       "bytes": 11203,
       "sha256": "96237552814b60876fd33b3cdfc601d8be83aed08ffcf390ce07e40b6607977b"
     },
     "index.html": {
-      "bytes": 12042,
-      "sha256": "109de1403e35480e4040f6264e4784ab55a86398715de97148710537a6b28eee"
+      "bytes": 12188,
+      "sha256": "3823ef5be3bf81dfc3c83ec7d1a503550413ba82cb83409524e98fb703f90f7f"
     },
     "report-guidelines.pdf": {
       "bytes": 137112,
-      "sha256": "04e503edb10981786e5f134aa171af7a49f0b88b1ef7aa9844531b0066852de2"
+      "sha256": "feb8fa8cb284b56b237a19c1f634cd528117e144989fce688a2a5534482f26b5"
     },
     "student-materials.zip": {
-      "bytes": 503916,
-      "sha256": "7f005df3cfd9b4eea9e89a96f4bb2a9b0d2e25c88c624a4bae12feba0f09a151"
+      "bytes": 503919,
+      "sha256": "d71b0840334eda3836343e2911746371b2a15bf6c16e9127f6a8868c46d453f7"
     }
   }
 }
