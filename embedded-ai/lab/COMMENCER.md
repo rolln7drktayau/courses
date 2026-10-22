@@ -6,14 +6,14 @@ Roland Cédric TAYO · INEM.
 
 Générer trois signaux, apprendre sur PC un petit réseau de **388 paramètres**, puis faire exécuter ses prédictions par un **Raspberry Pi sous Linux**. Ensuite, modifier une seule brique de calcul et vérifier si le système gagne réellement en temps ou en mémoire. Le projet ne demande ni reconnaissance vocale, ni capteur, ni grand modèle de langage.
 
-Le cours storyboard de trois heures donne une vue d’ensemble. Il ne remplace pas les 14 heures de cours du module, les 14 heures de TD et le travail personnel jusqu’au rendu. Les équations et les règles complètes restent dans `assignment.pdf`.
+Le cours storyboard donne une vue d’ensemble. Les ateliers du TD et le travail personnel permettent de passer des calculs à un programme vérifié. Les équations et les règles complètes restent dans `assignment.pdf`.
 
 ## Ce qu’il faut
 
 - Par groupe : un PC, un Raspberry Pi identifié, son alimentation adaptée et une microSD avec Raspberry Pi OS. Avec environ 14 Pi pour 35 étudiants, sept groupes de cinq ont chacun au moins une carte. Un accès réseau permet SSH ; écran et clavier sont une autre possibilité.
 - Langages du TD : **Python 3 sur PC pour les données et l’apprentissage ; C pour l’inférence et l’optimisation sur Pi**. Seule la prédiction est portée en C, pas l’entraînement. Git et les outils de tests accompagnent le travail.
 - Pour le Pi : Git, GCC et Make ; compiler directement sur le Pi. Vérifier démarrage, transfert et lancement avant les séances de mesures. Noter modèle, architecture 32/64 bits, RAM et version de l’OS.
-- Pour rendre le travail : GitHub et accès de l’enseignant `rolln7drktayau`. Matplotlib peut servir aux figures ; Overleaf et l’anglais sont des options bonifiées selon le barème.
+- Pour rendre le travail : GitHub et accès de l’enseignant `rolln7drktayau`. Matplotlib peut servir aux figures ; Overleaf est facultatif ; une rédaction claire en anglais est recommandée.
 
 Aucun GPU, capteur, jeu de données téléchargé ou service payant n’est requis. Une mesure d’énergie exige un instrument adapté : sans instrument, vous ne prétendez pas avoir mesuré l’énergie. Le Raspberry Pi est la seule cible matérielle demandée ; aucune Nucleo n’est nécessaire.
 

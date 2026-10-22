@@ -37,7 +37,7 @@ def main():
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path=str(CHROME) if CHROME.exists() else None,headless=True)
         page=browser.new_page()
-        for name,pages in [('assignment',13),('report-guidelines',3)]:
+        for name,pages in [('assignment',13),('report-guidelines',3),('perceptron',7)]:
             page.goto((ROOT/'source/lab'/f'{name}.html').as_uri())
             page.emulate_media(media='print')
             overflow=page.locator('.page').evaluate_all('''ss=>ss.flatMap((s,i)=>{
@@ -46,17 +46,24 @@ def main():
                 return bottom>footer.top-3?[{page:i+1,pixels:bottom-footer.top}]:[];
             })''')
             assert not overflow,(name,overflow)
-            target=ROOT/'lab'/f'{name}.pdf'
+            target=(ROOT if name=='perceptron' else ROOT/'lab')/f'{name}.pdf'
             page.pdf(path=str(target),prefer_css_page_size=True,print_background=True)
             doc=fitz.open(target);assert len(doc)==pages,(name,len(doc))
-            doc.set_metadata({'title':'TD IA embarquée' if name=='assignment' else 'Consignes du rapport scientifique',
+            titles={'assignment':'TD IA embarquée','report-guidelines':'Consignes du rapport scientifique','perceptron':'Comprendre le perceptron, du pixel à la prédiction'}
+            doc.set_metadata({'title':titles[name],
                               'author':'Roland Cédric TAYO','subject':'INEM · 2026–2027'})
             if name=='assignment':
                 doc.set_toc([[1,title,index] for title,index in [
                     ('1. Problème et objectifs',1),('Rappels A — Données',2),('2. Données et références',3),
                     ('3. Réseau et apprentissage',4),('Rappels B — Réseau',5),('4. Déploiement',6),
-                    ('5. Recherche et mesures',7),('6. Règles et évaluation',8),('7. GitHub',9),
+                    ('5. Recherche et mesures',7),('6. Règles et rendus',8),('7. GitHub',9),
                     ('Jalons',10),('8. Atelier A — Fonctions',11),('9. Atelier B — Apprentissage et tests',12),('10. Outils et sources',13)]])
+            elif name=='perceptron':
+                doc.set_toc([[1,title,index] for index,title in enumerate([
+                    'Objectifs et parcours','Étape 1 — Perceptron simple et généralisation',
+                    'Étape 2 — Deux classes, Widrow–Hoff','Étape 3 — Dix classes',
+                    'Étape 4 — Perceptron multicouche','MNIST et vérifications',
+                    'Petite recherche, présentation et règles de travail'],1)])
             temporary=target.with_suffix('.tmp.pdf');doc.save(temporary,garbage=4,deflate=True);doc.close();temporary.replace(target)
             results[name]={'pages':pages,'overflows':overflow}
         browser.close()

@@ -1,0 +1,152 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><title>Comprendre le perceptron</title><style>
+@page{size:A4;margin:18mm 21mm 17mm}
+*{box-sizing:border-box}body{margin:0;color:#202327;background:#fff;font-family:'Times New Roman',Times,serif;font-size:10.8pt;line-height:1.31}
+.page{height:261mm;display:flex;flex-direction:column;break-after:page}.page:last-child{break-after:auto}
+.running{font:7.8pt/1.2 Arial,sans-serif;color:#58616a;letter-spacing:.025em;padding-bottom:7px;border-bottom:.5px solid #bec4c8;margin-bottom:13px}
+.body{flex:1;min-height:0}.institution{text-align:center;font-size:9.2pt;margin:3px 0 16px;color:#3e4850}
+h1{text-align:center;font-size:20pt;line-height:1.17;font-weight:normal;margin:0 0 14px;letter-spacing:-.02em}
+.subtitle{text-align:center;font-size:10pt;line-height:1.45;margin-bottom:20px}
+.abstract{margin:0 7mm 16px;font-size:10.1pt;line-height:1.31}.abstract h2{text-align:center;font-size:11.2pt;margin:0 0 7px}
+.keywords{font-size:9.3pt}h2{font-size:12.1pt;margin:15px 0 8px;font-weight:bold}h3{font-size:10.9pt;margin:13px 0 6px;font-weight:bold}
+p{margin:7px 0 9px;text-align:justify;hyphens:auto}ul,ol{padding-left:19px;margin:8px 0}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;margin:11px 0;font-size:9.8pt;line-height:1.25}thead{border-top:1.1px solid #3b444b;border-bottom:.6px solid #7a858c}th{text-align:left;font-weight:bold;padding:6px}td{padding:6px;vertical-align:top;border-bottom:.5px solid #c7cdd0}tbody tr:last-child td{border-bottom:1px solid #7b858c}
+.equations{font-family:'Times New Roman',serif;text-align:center;font-size:10.8pt;line-height:1.7;margin:9px 0 12px;white-space:nowrap}.equations div{margin:2px 0}.compact{line-height:1.4;font-size:10.5pt}
+sub,sup{font-size:.72em}code{font:9pt Consolas,'Courier New',monospace}figure{margin:13px 0}figcaption{font-size:9.1pt;line-height:1.3;margin-top:8px;color:#444d54}
+.flow{display:flex;align-items:center;gap:9px;font-size:9.5pt;line-height:1.35}.flow span{flex:1;text-align:center;padding:8px 5px;border:.7px solid #a5afb4;background:#f3f5f5}.flow b{font-weight:normal;color:#6c7b83;font-size:14pt}
+.folio{flex-shrink:0;font-size:8pt;color:#606970;border-top:.5px solid #c2c8cd;padding-top:8px;margin-top:13px;display:flex;justify-content:space-between}
+a{color:#244f64;text-decoration:none}.refs{font-size:9pt;line-height:1.22}.refs li{margin:6px 0}.note{font-size:8.9pt;line-height:1.25;color:#47535b}.rules{font-size:9.2pt}.schedule{font-size:9.5pt}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+body{width:168mm}
+pre{font:8.2pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f5;padding:10px;border-left:2px solid #788b94;margin:10px 0}
+.symbols td:first-child{white-space:nowrap;width:25%}.symbols{font-size:9.7pt} .small{font-size:9.5pt} .badge{font:8pt Arial;color:#526674;text-transform:uppercase;letter-spacing:1px}
+
+.eyebrow{font:8pt/1.3 Arial,sans-serif;color:#58616a;letter-spacing:.03em;text-transform:uppercase;margin-bottom:9px}
+.equation{font:10.8pt/1.7 'Times New Roman',serif;text-align:center;margin:9px 0 12px}
+.equation.compact{font-size:10.5pt;line-height:1.5}.box{border-left:1px solid #a5afb4;padding:6px 11px;margin:11px 0;background:#f3f5f5}
+.results{border:1px solid #a5afb4;padding:9px 12px;margin:12px 0}.results h3{margin:0 0 7px}.results ul{margin-bottom:0}
+.figures{display:flex;gap:22px;align-items:flex-start}.pattern{border:1px solid #c7cdd0;padding:8px 18px;text-align:center}
+.pattern pre{background:transparent;border:0;padding:0;font:10pt/1.15 Consolas,monospace;text-align:left;margin:7px 0 0}
+.tight li{margin:5px 0}.check{font-size:9.7pt;border-top:1px solid #c7cdd0;padding-top:9px;margin-top:12px}
+</style><body><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="institution">INEM · IA pour les systèmes embarqués · Réseaux de neurones</div>
+<h1>Comprendre le perceptron,<br>du pixel à la prédiction</h1>
+<div class="subtitle">Reconnaître des chiffres en quatre étapes progressives<br>Travaux dirigés et initiation à la recherche · Roland Cédric TAYO</div>
+<div class="abstract"><h2>Résumé</h2><p>Ce travail conduit du neurone simple au réseau multicouche. Les fonctions sont écrites à la main : lire les pixels, calculer une sortie, corriger les poids, puis tester. Chaque étape distingue les activités et les résultats à conserver. Une petite étude comparative apprend à formuler une hypothèse et à interpréter les mesures.</p><p class="keywords"><b>Mots-clés :</b> perceptron ; classification ; apprentissage ; généralisation ; expérimentation.</p></div>
+<h2>Objectifs et parcours</h2><p>Comprendre comment des nombres entrent dans un neurone, comment ses poids changent pendant l’apprentissage et comment vérifier ce qu’il a appris.</p>
+<div class="flow"><span>Lire des pixels</span><b>→</b><span>Calculer une sortie</span><b>→</b><span>Corriger les poids</span><b>→</b><span>Tester et tracer</span></div>
+<h3>LE PARCOURS</h3>
+<table><thead><tr><th>Étape et dossier de référence</th><th>Ce que l’on découvre</th></tr></thead><tbody>
+<tr><td><b>1. Généralisation</b><br><code>1-Generalisation</code></td><td>Un neurone distingue 0 et 1 ; on perturbe ensuite les pixels pour tester sa résistance au bruit.</td></tr>
+<tr><td><b>2. Deux classes</b><br><code>2-Separation-deux-classes</code></td><td>La règle de Widrow–Hoff apprend à partir d’un score réel, au lieu de la seule décision 0 ou 1.</td></tr>
+<tr><td><b>3. Dix classes</b><br><code>3-Separation-dix-classes</code></td><td>Dix neurones donnent dix scores. Le score le plus grand désigne le chiffre prédit.</td></tr>
+<tr><td><b>4. Multicouche</b><br><code>4-Perceptron-Multicouches</code></td><td>Une couche cachée et la rétropropagation permettent d’aborder les chiffres manuscrits MNIST.</td></tr>
+</tbody></table>
+<div class="box"><b>Progression.</b> Les étapes 1 à 3 construisent les bases. L’étape 4 ouvre le prolongement : lire une image et comprendre les calculs avant de terminer l’entraînement. Commencer par vérifier le petit réseau avant de programmer l’ensemble sur MNIST.</div>
+<h3>RÈGLE DE TRAVAIL</h3><p>Écrire les calculs à la main en C, avec la bibliothèque standard uniquement. Commenter, expliquer et tester chaque fonction. Les outils de figures sont autorisés. Les règles détaillées figurent page 7.</p><p class="note"><b>Prérequis :</b> fonctions, boucles, tableaux et fichiers ; sommes de produits. Les dérivées et leur enchaînement sont nécessaires à l’étape 4.</p>
+</main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>1 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Étape 1 · 1-Generalisation</div><h2>Un neurone distingue les chiffres 0 et 1</h2>
+<p><b>Question.</b> Peut-il reconnaître deux motifs, puis leurs versions abîmées ?</p>
+<div class="figures"><div class="pattern"><b>zero.txt</b><pre>......
+.****.
+.*..*.
+.*..*.
+.*..*.
+.*..*.
+.****.
+......
+0</pre></div><div class="pattern"><b>un.txt</b><pre>......
+...*..
+..**..
+...*..
+...*..
+...*..
+..***.
+......
+1</pre></div><p class="small">Chaque fichier comporte <b>8 lignes de 6 caractères</b>, puis la classe en 9<sup>e</sup> ligne.<br><br><code>.</code> devient 0 ; <code>*</code> devient 1.<br><br>Lire ligne par ligne : on obtient 48 entrées x<sub>j</sub>, avec j de 0 à 47.</p></div>
+<h3>ACTIVITÉ — CONSTRUIRE, APPRENDRE, TESTER</h3>
+<ol class="tight"><li>Créer les deux fichiers. Écrire les fonctions de lecture, de calcul du score, de décision et de mise à jour. Initialiser les poids w<sub>j</sub> dans [−0,1 ; 0,1], avec une graine enregistrée (par exemple 42). Initialiser le biais <b>b=−0,5</b> et fixer le pas <b>ε=0,01</b>.</li>
+<li>Pour un exemple, calculer le score a, la prédiction ŷ et l’erreur e. Puis corriger les poids et le biais :</li></ol>
+<div class="equation">a = Σ<sub>j=0</sub><sup>47</sup> w<sub>j</sub>x<sub>j</sub> + b ; &nbsp; ŷ = 1 si a ≥ 0, sinon 0.<br>
+e = d − ŷ ; &nbsp; w<sub>j</sub> ← w<sub>j</sub> + ε e x<sub>j</sub> ; &nbsp; b ← b + ε e.</div>
+<p class="small"><b>Lire la recette :</b> d est la classe attendue ; ŷ est la classe prédite. Σ signifie additionner ; ← signifie remplacer par la nouvelle valeur. Le biais b décale la frontière de décision. Le seuil θ=0,5 du sujet initial correspond à b=−θ avant apprentissage.</p>
+<ol start="3" class="tight"><li>Une époque présente les deux motifs, une fois chacun, dans un ordre mélangé. À la fin, <b>sans modifier les poids</b>, recompter les erreurs sur les deux motifs. Arrêter à zéro erreur, ou après 1 000 époques en signalant la limite.</li>
+<li>Pour p=0, 10, …, 100 % de bruit, copier le motif et inverser exactement n=arrondi(48p/100) pixels <b>distincts</b>, tirés au hasard. Tester 50 copies par chiffre et par p. Garder les mêmes copies pour l’étape 2 ; ne jamais apprendre sur ces copies.</li></ol>
+<div class="results"><h3>RÉSULTATS À CONSERVER</h3><ul><li>Une figure à deux panneaux : erreurs sur les deux motifs selon l’époque ; taux d’erreur selon le bruit, avec une courbe par chiffre.</li><li>CSV, graine et poids appris. Taux d’erreur (%) = 100 × nombre de mauvaises réponses / nombre d’essais.</li><li>Quatre phrases : que change l’apprentissage ? Que se passe-t-il avec le bruit ? Ces tests ne prouvent pas la reconnaissance de toutes les écritures.</li></ul></div>
+<p class="check"><b>Sur papier :</b> pour x=[1,0], w=[0,2 ; −0,1], b=−0,5 et d=1, calculer une sortie puis une mise à jour. Ce mini-exemple a deux entrées, pas 48.</p></main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>2 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Étape 2 · 2-Separation-deux-classes</div><h2>Changer la règle d’apprentissage : Widrow–Hoff</h2>
+<p><b>Question.</b> Que change une correction fondée sur la valeur du score, plutôt que sur la seule décision ?</p>
+<div class="flow"><span>Même motif x</span><b>→</b><span>Score réel a</span><b>→</b><span>Erreur d − a</span><b>→</b><span>Correction des poids</span></div>
+<h3>CE QUI CHANGE</h3>
+<p>Le score reste a=Σ<sub>j</sub>w<sub>j</sub>x<sub>j</sub>+b. À l’étape 1, la correction utilisait d−ŷ : une décision déjà correcte ne produisait plus de correction. Ici, elle utilise <b>d−a</b> : le score continue à se rapprocher de la cible numérique 0 ou 1.</p>
+<div class="equation">e = d − a ; &nbsp; w<sub>j</sub> ← w<sub>j</sub> + ε e x<sub>j</sub> ; &nbsp; b ← b + ε e.<br>
+Pour classer après calcul : ŷ = 1 si a ≥ 0,5, sinon 0.</div>
+<p class="small">Le score réel n’est pas limité à [0 ; 1] et n’est pas une probabilité. Le seuil de décision vaut ici 0,5 parce que les cibles numériques valent 0 et 1. Il ne remplace pas le biais b.</p>
+<h3>ACTIVITÉ — MODIFIER UNE CHOSE ET COMPARER</h3>
+<ol><li>Repartir des <b>poids initiaux</b> de l’étape 1, pas de ses poids appris. Conserver les motifs, le biais initial et ε=0,01. Remplacer seulement la règle d’erreur et utiliser le seuil de décision indiqué ci-dessus.</li>
+<li>Sur un petit exemple, calculer à la main la correction avec d−ŷ, puis avec d−a. Écrire ce qui diffère. Dans le programme, distinguer explicitement <code>score</code>, <code>prediction</code> et <code>target</code>.</li>
+<li>Présenter les deux motifs à chaque époque. Après l’époque, calculer la perte L sur les deux motifs avec des poids figés. Arrêter si L≤10<sup>−4</sup>, ou après 1 000 époques. Si elle explose ou devient non finie, vérifier la mise à jour ; refaire ensuite un essai à ε=0,001 en le signalant.</li>
+<li>Tester les <b>mêmes copies bruitées</b> qu’à l’étape 1, sans mise à jour. Comparer la robustesse des deux règles.</li></ol>
+<div class="equation">L = (1 / 2N) Σ<sub>k=1</sub><sup>N</sup> (d<sub>k</sub> − a<sub>k</sub>)² ; &nbsp; ici N=2.</div>
+<p class="small">N est le nombre de motifs évalués ; k désigne un motif ; d<sub>k</sub> est sa cible et a<sub>k</sub> son score. Le carré pénalise l’écart numérique. Le facteur ½ simplifie la dérivée. Une perte numérique et un taux de mauvaises classes sont deux mesures différentes.</p>
+<div class="results"><h3>RÉSULTATS À CONSERVER</h3><ul><li>Une figure : perte L selon l’époque et comparaison des courbes d’erreur au bruit des deux méthodes. Nommer les axes et les courbes.</li><li>Un tableau donnant, pour chaque méthode, les scores et décisions sur les deux motifs propres, puis l’erreur à 10 %, 30 % et 50 % de bruit.</li><li>Quatre phrases : quelle règle fonctionne le mieux dans votre essai, pour quel chiffre et dans quelles limites ?</li></ul></div>
+<div class="box"><b>À examiner, pas à supposer.</b> Widrow–Hoff réduit une erreur quadratique. Il ne garantit ni un écart égal aux deux classes, ni des courbes de bruit symétriques, ni une meilleure robustesse dans tous les cas.</div></main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>3 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Étape 3 · 3-Separation-dix-classes</div><h2>Passer de deux chiffres à dix chiffres</h2>
+<p><b>Question.</b> Comment choisir une classe parmi dix, au lieu de répondre seulement 0 ou 1 ?</p>
+<div class="flow"><span>48 pixels</span><b>→</b><span>10 neurones linéaires</span><b>→</b><span>10 scores</span><b>→</b><span>Le plus grand gagne</span></div>
+<h3>ACTIVITÉ — ÉTENDRE LE PROGRAMME</h3>
+<ol><li>Créer les dix fichiers : <code>zero.txt</code>, <code>un.txt</code>, <code>deux.txt</code>, <code>trois.txt</code>, <code>quatre.txt</code>, <code>cinq.txt</code>, <code>six.txt</code>, <code>sept.txt</code>, <code>huit.txt</code> et <code>neuf.txt</code>. Même format : 8 lignes de 6 pixels, puis la classe de 0 à 9.</li>
+<li>Écrire le vecteur cible d de longueur 10 : une seule case vaut 1, celle du chiffre attendu ; les autres valent 0. Par exemple, pour le chiffre 2 : d=[0,0,1,0,0,0,0,0,0,0].</li>
+<li>Créer W, tableau de <b>10 lignes et 48 colonnes</b>, et 10 biais b<sub>i</sub>. W<sub>ij</sub> relie le pixel j à la sortie i. Initialiser les poids comme avant et les biais à zéro ; fixer ε=0,01.</li>
+<li>À partir d’un motif, calculer les dix scores puis appliquer Widrow–Hoff à chaque sortie :</li></ol>
+<div class="equation">a<sub>i</sub> = Σ<sub>j=0</sub><sup>47</sup> W<sub>ij</sub>x<sub>j</sub> + b<sub>i</sub> ; &nbsp; e<sub>i</sub> = d<sub>i</sub> − a<sub>i</sub>,<br>
+W<sub>ij</sub> ← W<sub>ij</sub> + ε e<sub>i</sub>x<sub>j</sub> ; &nbsp; b<sub>i</sub> ← b<sub>i</sub> + ε e<sub>i</sub>.</div>
+<p class="small">i va de 0 à 9 ; j de 0 à 47. Calculer les dix erreurs à partir des scores avant mise à jour. Pour prédire, choisir <b>argmax<sub>i</sub> a<sub>i</sub></b> : l’indice du score le plus grand. En cas d’égalité, prendre le plus petit indice. Ne pas chercher dix décisions binaires indépendantes.</p>
+<ol start="5"><li>Une époque parcourt les dix motifs dans un ordre mélangé. Calculer ensuite, sans apprendre, le nombre de classes correctes et L=(1/2N)Σ<sub>k</sub>Σ<sub>i</sub>(d<sub>ki</sub>−a<sub>ki</sub>)², avec N=10. Arrêter si L≤10<sup>−4</sup>, ou après 1 000 époques ; noter le résultat réellement obtenu.</li>
+<li>Pour chaque chiffre, produire 50 variantes à 10 % de bruit, sur des copies séparées. Remplir une matrice de confusion 10×10 : <b>ligne = chiffre réel ; colonne = chiffre prédit</b>. Chaque ligne contient donc 50 essais.</li></ol>
+<div class="results"><h3>RÉSULTATS À CONSERVER</h3><ul><li>Une figure à deux panneaux : taux de reconnaissance sur les dix motifs selon l’époque ; matrice de confusion sur les 500 variantes bruitées.</li><li>Un tableau des dix prédictions sur motifs propres et le taux global sur les variantes : 100 × bonnes réponses / 500.</li><li>Quatre phrases : quels chiffres se confondent ? Dix motifs appris ne représentent pas toutes les façons d’écrire les chiffres.</li></ul></div>
+<p class="check"><b>Contrôle.</b> Vous devez avoir 480 poids et 10 biais. Chaque motif donne exactement une classe prédite. Les poids restent figés pendant les évaluations.</p></main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>4 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Étape 4 · 4-Perceptron-Multicouches</div><h2>Une couche cachée pour les chiffres manuscrits</h2>
+<p><b>Question.</b> Comment apprendre des transformations intermédiaires au lieu de relier directement chaque pixel aux sorties ? Les données et leur lecture sont décrites page suivante.</p>
+<div class="flow"><span>MNIST : 28 × 28</span><b>→</b><span>784 entrées</span><b>→</b><span>100 neurones cachés</span><b>→</b><span>10 sorties</span></div>
+<h3>ACTIVITÉ — SUIVRE LES CALCULS, PUIS PROGRAMMER</h3>
+<ol class="tight"><li>Afficher une image MNIST et son étiquette. Convertir chaque pixel p<sub>j</sub> en x<sub>j</sub>=p<sub>j</sub>/255 : les entrées sont entre 0 et 1. Créer la cible d de dix valeurs comme à l’étape 3.</li>
+<li>Créer W<sup>(1)</sup> de taille 100×784, W<sup>(2)</sup> de taille 10×100 et les biais b<sup>(1)</sup>, b<sup>(2)</sup>. Initialiser les biais à zéro ; tirer chaque poids entre −1/√n et +1/√n, où n est le nombre d’entrées de sa couche (784 ou 100). Garder la graine.</li>
+<li>Calculer d’abord la couche cachée, puis les sorties, avec la sigmoïde σ :</li></ol>
+<div class="equation compact">σ(u)=1/(1+exp(−u)) ; &nbsp; σ′(u)=σ(u)[1−σ(u)].<br>
+u<sub>h</sub>=Σ<sub>j</sub>W<sup>(1)</sup><sub>hj</sub>x<sub>j</sub>+b<sup>(1)</sup><sub>h</sub> ; &nbsp; z<sub>h</sub>=σ(u<sub>h</sub>),<br>
+v<sub>i</sub>=Σ<sub>h</sub>W<sup>(2)</sup><sub>ih</sub>z<sub>h</sub>+b<sup>(2)</sup><sub>i</sub> ; &nbsp; s<sub>i</sub>=σ(v<sub>i</sub>).</div>
+<p class="small">h désigne un neurone caché (0 à 99), j un pixel (0 à 783), i une sortie (0 à 9). z est une activation cachée ; s est la sortie. exp est l’exponentielle ; σ′ est la dérivée. Les exposants (1) et (2) désignent les couches, pas des puissances.</p>
+<ol start="4" class="tight"><li>Pour la perte d’un exemple L=½Σ<sub>i</sub>(d<sub>i</sub>−s<sub>i</sub>)², calculer les signaux de correction de la sortie, puis de la couche cachée :</li></ol>
+<div class="equation compact">δ<sub>i</sub>=(d<sub>i</sub>−s<sub>i</sub>)s<sub>i</sub>(1−s<sub>i</sub>),<br>
+δ<sub>h</sub>=z<sub>h</sub>(1−z<sub>h</sub>) Σ<sub>i</sub>W<sup>(2)</sup><sub>ih</sub>δ<sub>i</sub>.</div>
+<ol start="5" class="tight"><li>Quand <b>tous les δ sont calculés avec les anciens poids</b>, mettre à jour : W<sup>(2)</sup><sub>ih</sub>←W<sup>(2)</sup><sub>ih</sub>+εδ<sub>i</sub>z<sub>h</sub> ; W<sup>(1)</sup><sub>hj</sub>←W<sup>(1)</sup><sub>hj</sub>+εδ<sub>h</sub>x<sub>j</sub>. Ajouter εδ au biais correspondant. Ici δ est l’opposé du gradient local : le signe + est cohérent.</li>
+<li>Vérifier d’abord sur papier un réseau réduit 2→2→2, puis la même sortie dans le programme. Entraîner sur MNIST selon le protocole page 6. Prédire avec argmax<sub>i</sub>s<sub>i</sub>, sans modifier les poids au test.</li></ol>
+<div class="results"><h3>RÉSULTATS À CONSERVER</h3><ul><li>Pour amorcer : une image avec son label, les dimensions vérifiées et la trace du petit calcul 2→2→2.</li><li>Pour terminer : une figure des pertes train/validation selon l’époque ; un tableau de reconnaissance sur le test et dix exemples réel/prédit.</li><li>Une explication : comment l’erreur de sortie corrige-t-elle aussi la couche cachée ? Aucun score de 96 % n’est imposé ou garanti.</li></ul></div></main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>5 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Fiche pratique · Données, vérifications et remise</div><h2>Lire MNIST et terminer sans ambiguïté</h2>
+<h3>1. LES QUATRE FICHIERS</h3>
+<p>Le <a href="https://github.com/cvdfoundation/mnist">miroir de la CVDF</a> propose les fichiers compressés et décrit le format IDX. Télécharger puis décompresser les quatre fichiers <code>.gz</code>. Si les données du dossier de travail sont déjà disponibles, vérifier leurs en-têtes avant utilisation.</p>
+<table class="small"><thead><tr><th>Fichier décompressé</th><th>Contenu et en-tête à lire</th></tr></thead><tbody>
+<tr><td><code>train-images-idx3-ubyte</code></td><td>60 000 images 28×28 ; 16 octets d’en-tête.</td></tr>
+<tr><td><code>train-labels-idx1-ubyte</code></td><td>60 000 labels de 0 à 9 ; 8 octets d’en-tête.</td></tr>
+<tr><td><code>t10k-images-idx3-ubyte</code></td><td>10 000 images de test ; 16 octets d’en-tête.</td></tr>
+<tr><td><code>t10k-labels-idx1-ubyte</code></td><td>10 000 labels de test ; 8 octets d’en-tête.</td></tr>
+</tbody></table>
+<p class="small">Les nombres d’en-tête sont des entiers de 32 bits en <b>big-endian</b> : l’octet de poids fort vient en premier. Lire type, nombre d’éléments et dimensions. Une image occupe ensuite 784 octets non signés. Pour l’indice r, lire l’image à 16+784r et le label à 8+r ; les indices commencent à 0. Ainsi, les indices d’entraînement vont de 0 à 59 999.</p>
+<h3>2. PREMIÈRE EXÉCUTION DE L’ÉTAPE 4</h3>
+<ol class="tight"><li>Prendre les images train d’indices 0 à 4 999 pour apprendre et 5 000 à 5 999 pour valider. Ces ensembles ne se recouvrent pas. Les fichiers officiels de test restent réservés à l’évaluation finale.</li>
+<li>Utiliser ε=0,01, une mise à jour par exemple et au plus cinq époques. Mélanger les exemples train à chaque époque ; chronométrer la première. À chaque fin d’époque, calculer perte et taux de reconnaissance sur train et validation, <b>sans mise à jour</b>. Garder les poids de plus faible perte de validation.</li>
+<li>Évaluer une fois ces poids sur les 10 000 images de test. Si vous commencez par 1 000 pour vérifier le programme, appeler ce résultat « test partiel, N=1 000 ». Ne pas ajuster les réglages à partir du test.</li></ol>
+<p class="note">Ce démarrage réduit sert à comprendre et déboguer. L’utilisation d’un plus grand ensemble d’apprentissage est un prolongement, avec une nouvelle partition documentée. Une baisse de perte ne garantit pas à elle seule une bonne reconnaissance sur le test.</p>
+<h3>3. VÉRIFIER ET CONSERVER</h3>
+<p>Pour chaque étape : sources commentées, tests, réglages, graines, poids, CSV, figure et analyse. Distinguer ce qui est terminé de ce qui est amorcé. L’étude comparative et la présentation éventuelle sont précisées page 7.</p>
+<p><b>En cas de blocage :</b> vérifier d’abord lecture et dimensions ; puis normalisation, signes et ordre des mises à jour. Revenir au petit calcul avant de relancer un entraînement.</p>
+<p class="note"><b>Sujet initial :</b> « Reconnaissance de caractères », Pierre Andry, Université de Cergy-Pontoise (<code>toDo.pdf</code>). Adaptation pédagogique : Roland Cédric TAYO.</p><p class="note"><b>Lectures :</b> <a href="https://github.com/cvdfoundation/mnist">CVDF — MNIST et format IDX</a> ; <a href="https://cs231n.github.io/optimization-2/">Stanford CS231n — règle de chaîne et rétropropagation</a>. Ces lectures aident à comprendre ; elles ne remplacent pas vos calculs.</p></main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>6 / 7</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Travaux dirigés · Perceptron</header><main class="body"><div class="eyebrow">Petite recherche · Compréhension et résultats</div>
+<h2>Comparer une idée, puis expliquer ce que l’on a appris</h2>
+<p>Cette étude prolonge les étapes 1 et 2. Elle porte sur votre propre programme et reste limitée à une modification.</p><h3>1. PETITE RECHERCHE — UNE MODIFICATION, UNE COMPARAISON</h3>
+<p>Sur l’étape 1 ou 2 : <b>que change ε=0,001 au lieu de 0,01 ?</b> Écrire d’abord une hypothèse sur les époques nécessaires et l’erreur à 30 % de bruit.</p>
+<p>Comparer les deux pas pour les graines 42, 43 et 44 : six essais au total. Pour chaque paire, garder <b>poids initiaux, ordre des exemples et motifs bruités identiques</b>. Conserver les critères d’arrêt et le plafond de 1 000 époques.</p>
+<p><b>Résultats :</b> six lignes CSV (graine, pas, époques, arrêt atteint ou non, erreur propre et à 30 % de bruit), une figure montrant tous les essais, puis une conclusion et un prochain test. Un résultat nul ou défavorable est recevable ; atteindre le plafond n’est pas converger.</p>
+<h3>2. PRÉSENTATION ÉVENTUELLE</h3>
+<p>Préparer : une fonction et son calcul ; les résultats et les courbes ; la recherche ; les limites et la suite. Chacun peut être interrogé. Distinguer étapes terminées et amorcées.</p>
+<p><b>Remise :</b> code commenté, tests, réglages, graines, poids, CSV, figures et analyse. Taux de reconnaissance =100×bonnes classes/N ; taux d’erreur =100−ce taux. Une somme de δ n’est pas un taux d’erreur.</p>
+<h3>OUTILS ET MÉTHODE</h3>
+<ul><li>Un PC, un compilateur <b>C</b> et un outil de figures : Gnuplot ou Python/Matplotlib. <b>Concevoir et écrire à la main</b> score, décision, perte, mise à jour, gradients et entraînement. Ne pas recopier les anciens programmes.</li>
+<li>Aucune bibliothèque de calcul matriciel ou d’IA, aucun framework ni autodifférentiation. La bibliothèque standard C reste autorisée : fichiers, mémoire, aléatoire, <code>exp</code>, <code>sqrt</code>. Les outils de figures sont autorisés.</li>
+<li><b>Documenter chaque fonction :</b> rôle, entrées et dimensions, sortie, équation, commentaire des choix et petit test. Code et commentaires en anglais de préférence ; chacun doit pouvoir expliquer ses fonctions.</li>
+<li><b>Papier → fonction → test → figure → explication.</b> Garder CSV et réglages. Recherche et présentation éventuelle : page 7.</li></ul>
+</main><footer class="folio"><span>Roland Cédric TAYO · INEM</span><span>7 / 7</span></footer></article></body></html>

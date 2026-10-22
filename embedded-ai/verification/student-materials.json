@@ -39,24 +39,24 @@
   "checks": "Explicit file whitelist; nested ZIP integrity; PDF identity; figure-only Python sources.",
   "files": {
     "COMMENCER.md": {
-      "bytes": 9965,
-      "sha256": "ae3c2f4b364de900f416e2f88a778c42d4b4b25624bbdccaacf61e004df8b13c"
+      "bytes": 9944,
+      "sha256": "b7613dd9db4d0317b3d633309306040bd0ca509dbc16f9f1d81f0b635205f89f"
     },
     "README.md": {
-      "bytes": 7025,
-      "sha256": "7505aac572a01f2fed24d1ec35a3d25c5aa141c39ad6c776ccd109eef3a06f3c"
+      "bytes": 6917,
+      "sha256": "87a7ddb682e2be8e6c28d9315f2785b870385cb05443291b9e777844a6ee579f"
     },
     "article-example.pdf": {
       "bytes": 109092,
       "sha256": "06460d13df65025ab61b3bf682d0eec22ac7f944d43b440e15ff263e45b8cc1c"
     },
     "article-template.zip": {
-      "bytes": 34513,
-      "sha256": "e3839983939b012cfd30222468b92d2dac33af2601f7c6a965301579fcf10259"
+      "bytes": 34460,
+      "sha256": "d3fc04c9fcf746a16d074c08704e8ed39892979c85c5d5c10f1b7f8915bd56d6"
     },
     "article-template/README.md": {
-      "bytes": 2436,
-      "sha256": "f7139cfaecfb887d7bc0050a3f4af7a4421653b70a380da8f9bf16d7e593e429"
+      "bytes": 2342,
+      "sha256": "c74c86c19d9cfffa6ff0ed2c2303d6dd47d397cafb96d185bde83b847b613021"
     },
     "article-template/data/illustrative_trace.csv": {
       "bytes": 2272,
@@ -95,24 +95,24 @@
       "sha256": "176ef972b023269b0593030dccee09164346c9df71bfd89255b8adb3d48e72ab"
     },
     "assignment.pdf": {
-      "bytes": 256925,
-      "sha256": "d08d967f55443c560fa92d968cf103e8ec90d158aae68ec50e0ead6e56213dc4"
+      "bytes": 254176,
+      "sha256": "ad32468d0bb7890e361fc54a7413bf45a49da9eaa2cdb58a342bbeea0e7d3cbe"
     },
     "getting-started.html": {
-      "bytes": 11224,
-      "sha256": "09c4d31c87248ff6cdfdb2fb973bc1a47e53a581185bb6c4d67d1e9fb34ee972"
+      "bytes": 11203,
+      "sha256": "96237552814b60876fd33b3cdfc601d8be83aed08ffcf390ce07e40b6607977b"
     },
     "index.html": {
-      "bytes": 12076,
-      "sha256": "d2e4edbc86cec5a7e49db2a53caf8469602b37303750556ecb2fb95805bbfae7"
+      "bytes": 12042,
+      "sha256": "109de1403e35480e4040f6264e4784ab55a86398715de97148710537a6b28eee"
     },
     "report-guidelines.pdf": {
-      "bytes": 139383,
-      "sha256": "7f270f25613ddcf704860666e5e974d0d5660f9aaafacf2e4071d969aa359aaf"
+      "bytes": 137112,
+      "sha256": "04e503edb10981786e5f134aa171af7a49f0b88b1ef7aa9844531b0066852de2"
     },
     "student-materials.zip": {
-      "bytes": 508954,
-      "sha256": "67d6ccbe3bf510008fd06d73474475eacba962fc1e5a19fa097670bfea911109"
+      "bytes": 503916,
+      "sha256": "7f005df3cfd9b4eea9e89a96f4bb2a9b0d2e25c88c624a4bae12feba0f09a151"
     }
   }
 }

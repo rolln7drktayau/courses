@@ -28,13 +28,11 @@ pre{font:8.2pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywher
 <h2>1. Format et limites</h2>
 <p><b>Maximum : 15 pages au total</b>, depuis la première page jusqu’à la dernière, références et annexes comprises. Viser 6 à 10 pages ; ne pas remplir artificiellement. A4, une colonne, police de lecture 10 à 12 points, marges d’au moins 20 mm. Pas de page de garde séparée nécessaire. Numéroter pages, sections, équations, tableaux et figures.</p>
 <p>La présentation conseillée reprend l’esprit du manuscrit ADARE : titre précis, auteurs, résumé, mots-clés, sections numérotées, figures légendées et bibliographie. Le gabarit utilise la classe <code>elsarticle</code>, en mode manuscrit. Ce format n’implique ni soumission ni acceptation par une revue ; ne pas ajouter de faux logo ou DOI.</p>
-<h2>2. Bonus sur la note finale</h2>
-<table><thead><tr><th>Option vérifiable</th><th>Bonus maximal</th></tr></thead><tbody>
-<tr><td>Rapport en anglais clair, avec termes et unités cohérents ; une prose simple suffit.</td><td>+0,5 point</td></tr>
-<tr><td>Présentation d’article soignée : résumé utile, sections, figures lisibles, citations reliées à la bibliographie.</td><td>+0,5 point</td></tr>
-<tr><td>Projet Overleaf gratuit recompilable : export complet .tex, .bib, figures et PDF cohérents, déposés sur GitHub.</td><td>+1 point</td></tr>
-</tbody></table>
-<p><b>Note finale = min(20, note de base sur 20 + bonus obtenu).</b> Les options ne compensent pas une mesure invalide et n’accordent aucun point scientifique supplémentaire à un résultat inventé. La totalité de la note de base reste accessible avec un compte rendu clair hors Overleaf, rédigé en français. Le respect des 15 pages et les preuves demandées restent obligatoires.</p>
+<h2>2. Langue et outils de rédaction</h2>
+<p>Un anglais simple et précis est recommandé. Un rapport en français reste possible. Employer des termes et des unités cohérents ; privilégier une explication claire.</p>
+<p>Présenter le travail comme un article scientifique : résumé, sections, figures lisibles, citations et bibliographie. Le rapport reste limité à 15 pages au total.</p>
+<p>Overleaf gratuit est un outil facultatif. Si vous l’utilisez, déposer sur GitHub les sources complètes et recompilables : fichiers <code>.tex</code>, <code>.bib</code>, figures et PDF cohérents. Une rédaction locale en LaTeX convient aussi. Aucun abonnement n’est requis.</p>
+<p>Les mesures doivent être valides et traçables. Une présentation soignée ne remplace pas les preuves expérimentales.</p>
 <p class="note">Le code, ses identifiants et ses commentaires sont de préférence en anglais, indépendamment de la langue retenue pour le rapport. Aucun score de maîtrise linguistique avancée n’est attendu.</p>
 </main><footer class="folio"><span>Roland Cédric TAYO · 21 octobre 2026</span><span>1 / 3</span></footer></article><article class="page"><header class="running">INEM · IA pour les systèmes embarqués · Consignes du rapport scientifique</header><main class="body">
 <h2>3. Plan attendu : une question, des preuves, une limite</h2>
@@ -60,7 +58,7 @@ pre{font:8.2pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywher
 <li>Mettre vos figures dans <code>figures/</code>, mettre à jour <code>references.bib</code>, citer avec <code>\cite{cle}</code> et vérifier que toutes les citations sont résolues.</li>
 <li>À chaque jalon de rédaction, télécharger le ZIP des sources et le PDF. Décompresser les sources dans <code>paper/</code> du dépôt local, relire les différences puis commiter et pousser : <code>docs(paper): update methods and measured results</code>.</li>
 <li>À la remise, tester l’import des sources finales dans un nouveau projet et vérifier la cohérence avec le PDF déposé. Fournir aussi le lien de consultation Overleaf à l’enseignant selon les modalités de partage disponibles ; l’archive des sources est la preuve durable.</li></ol>
-<p><b>Travail à plusieurs sans abonnement.</b> L’offre gratuite annonce un collaborateur invité par projet, en plus du propriétaire ; elle ne donne pas la synchronisation GitHub. Utiliser GitHub pour répartir les sections, relire et conserver les versions ; une personne importe les changements et compile. Ne pas partager les mots de passe. Les exports manuels suffisent au bonus.</p>
+<p><b>Travail à plusieurs sans abonnement.</b> L’offre gratuite annonce un collaborateur invité par projet, en plus du propriétaire ; elle ne donne pas la synchronisation GitHub. Utiliser GitHub pour répartir les sections, relire et conserver les versions ; une personne importe les changements et compile. Ne pas partager les mots de passe. Les exports manuels permettent de conserver les sources et leurs versions.</p>
 <h2>5. L’exemple fourni : comment le lire ?</h2>
 <p><code>article-example.pdf</code> est une démonstration de forme, en anglais, avec un schéma, une courbe et un tableau. Ses figures utilisent une trace illustrative séparée et des comptes analytiques. <b>Il ne contient aucun entraînement de réseau ni résultat sur carte.</b> Les cases « not measured » sont volontaires. Votre article final doit les remplacer par vos expériences, jamais reprendre ces illustrations comme vos mesures.</p>
 <p>Le ZIP comprend le gabarit <code>main.tex</code>, l’exemple <code>example.tex</code>, une bibliographie <code>references.bib</code>, les figures et la trace illustrative. Il ne contient ni corrigé, ni réseau, ni apprentissage. Les sources de figures de l’exemple permettent de vérifier leur origine.</p>

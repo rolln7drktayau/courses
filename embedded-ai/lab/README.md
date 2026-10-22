@@ -8,8 +8,8 @@
 
 | File | Purpose |
 |---|---|
-| `assignment.pdf` | Official assignment: objectives, equations and symbol reminders, implementation, deployment, experiments, rules and marking scheme (13 pages) |
-| `report-guidelines.pdf` | Scientific report requirements, 15-page limit and optional presentation bonuses (3 pages) |
+| `assignment.pdf` | Official assignment: objectives, equations and symbol reminders, implementation, deployment, experiments, rules and deliverables (13 pages) |
+| `report-guidelines.pdf` | Scientific report requirements, 15-page limit and writing recommendations (3 pages) |
 | `article-example.pdf` | English article-format illustration, not a completed TD experiment (5 pages) |
 | `article-template.zip` | Importable free Overleaf project: template, example, bibliography and figure sources |
 | `article-template/` | The same article sources, browsable in GitHub |
@@ -40,7 +40,7 @@ Prefer English identifiers, comments and commit messages. Keep pushed milestones
 
 Keep a short function worksheet with handwritten inputs, calculation and result, its automated test and the function's role. Implement Makefile targets `test-c`, `inference` and `benchmark`, and document run arguments and exported file formats. A target must compile or test the real project; pushing to GitHub does not itself execute it on the Pi.
 
-Report: **15 pages maximum in total**, including references and appendices; aim for 6–10 useful pages. Optional bonus: readable English +0.5, careful scientific article presentation +0.5, complete recompilable free Overleaf sources +1. Final grade capped at 20/20; the core 20 points remain obtainable without these presentation options. Full expectations are in the PDFs.
+Report: **15 pages maximum in total**, including references and appendices; aim for 6–10 useful pages. Clear English is recommended; free Overleaf is optional. Provide the complete report sources and figures. Full expectations are in the PDFs.
 
 ## Free tools and original sources
 
@@ -67,4 +67,4 @@ This directory and its archives contain student-facing material only. The instru
 
 ## Fixed experiment contract
 
-No instructor-selected technical threshold is required. Follow assignment sections 3–5: deterministic initial training, fixed numerical tolerances, the analytical simulator comparator, and the same C code/`-O2` comparison on PC and Pi. For each shape and campaign, warm up 100 calls, double the reference call count K until at least 100 ms (cap 2^24), then use K for both variants. Run three campaigns of ten alternating pairs; retain every raw duration and K. Plot median and min–max. A gain is not required for full credit. Failure diagnostics are in COMMENCER.md.
+No instructor-selected technical threshold is required. Follow assignment sections 3–5: deterministic initial training, fixed numerical tolerances, the analytical simulator comparator, and the same C code/`-O2` comparison on PC and Pi. For each shape and campaign, warm up 100 calls, double the reference call count K until at least 100 ms (cap 2^24), then use K for both variants. Run three campaigns of ten alternating pairs; retain every raw duration and K. Plot median and min–max. A gain is not required; rigorous negative results must be explained. Failure diagnostics are in COMMENCER.md.

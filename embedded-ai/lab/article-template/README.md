@@ -4,7 +4,7 @@ Upload this ZIP as a new Overleaf project. Select `main.tex` as the main documen
 
 The style uses Elsevier's `elsarticle` manuscript class: one column, numbered sections, abstract, keywords, numbered references, figures and equations. It follows the manuscript spirit of ADARE; it is not a journal submission or an accepted paper.
 
-Maximum final report length: **15 pages including references and appendices**. Aim for 6–10 useful pages. An English report (+0.5), careful article presentation (+0.5), and a complete, recompilable free Overleaf project (+1) can earn up to **2 bonus points**, with the final grade capped at 20/20. The core grade remains obtainable without these options. See the separate French report instructions for full requirements.
+Maximum final report length: **15 pages including references and appendices**. Aim for 6–10 useful pages. Clear English and a readable scientific article layout are recommended. Free Overleaf is optional; include the complete, recompilable sources and figures. See the separate French report instructions for full requirements.
 
 The free Overleaf plan currently permits one invited collaborator plus the owner, and does not include GitHub integration (checked 20 October 2026). Use GitHub for team versioning and manually export/import sources; never share a password. Deposit `.tex`, `.bib`, figures and the matching PDF under `paper/` on GitHub. Invite the teacher account **rolln7drktayau** on GitHub.
 
