@@ -1,0 +1,75 @@
+{
+  "calculated_examples": {
+    "weights16": 14000000000,
+    "weights4": 3500000000,
+    "kv8": 1073741824,
+    "kv32": 4294967296,
+    "roofline": {
+      "memory": 0.07,
+      "calculation": 0.007,
+      "bound": 0.07,
+      "rate": 14.285714285714285
+    },
+    "quant": {
+      "scale": 0.1285714285714286,
+      "codes": [
+        -7,
+        -2,
+        1,
+        6
+      ]
+    },
+    "quantOutput": -0.9642857142857144,
+    "quantOriginal": -1.05,
+    "zero": {
+      "scale": 1,
+      "codes": [
+        0,
+        0
+      ]
+    },
+    "halfAway": {
+      "scale": 1,
+      "codes": [
+        1,
+        1,
+        -1
+      ]
+    },
+    "collisions": 16384000
+  },
+  "shared_object_transition": {
+    "retained": true,
+    "moved": true,
+    "transition": "0.95s, 0.65s"
+  },
+  "observed_transition": {
+    "before": "matrix(1, 0, 0, 1, 335, 170)",
+    "during": "matrix(1, 0, 0, 1, 338.026, 106.459)",
+    "after": "matrix(1, 0, 0, 1, 340, 65)"
+  },
+  "viewports": {
+    "1920x1080": [],
+    "1366x768": [],
+    "1024x768": [],
+    "768x1024": [],
+    "390x844": []
+  },
+  "interaction_checks": [
+    "memory and KV controls",
+    "bandwidth bound",
+    "quantization controls",
+    "context switch",
+    "three questions and feedback",
+    "keyboard navigation",
+    "outline",
+    "per-scene citations",
+    "continuous mobile reading",
+    "auto-play stops at a question"
+  ],
+  "console_errors": [],
+  "external_runtime_requests": [],
+  "reduced_motion": "respected",
+  "pdf_pages": 23,
+  "pdf_links": 47
+}

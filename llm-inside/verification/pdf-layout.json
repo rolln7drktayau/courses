@@ -1,0 +1,186 @@
+[
+  {
+    "id": "opening",
+    "copyBottom": 631.71875,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "learn",
+    "copyBottom": 631.71875,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "embedding",
+    "copyBottom": 693.3125,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "distributed",
+    "copyBottom": 731.640625,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "attention",
+    "copyBottom": 725.71875,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "q-memory",
+    "copyBottom": 780.3125,
+    "footerTop": 831,
+    "visualBottom": 737.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "decode",
+    "copyBottom": 662.515625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "weights",
+    "copyBottom": 730.75,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "cache",
+    "copyBottom": 733.84375,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "roofline",
+    "copyBottom": 725.71875,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "q-bandwidth",
+    "copyBottom": 780.3125,
+    "footerTop": 831,
+    "visualBottom": 737.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "quantize",
+    "copyBottom": 817.65625,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "flash",
+    "copyBottom": 662.515625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "architectures",
+    "copyBottom": 725.5,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "bitnet",
+    "copyBottom": 809.828125,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "speculative",
+    "copyBottom": 694.703125,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "proof",
+    "copyBottom": 700.84375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "q-hash",
+    "copyBottom": 780.3125,
+    "footerTop": 831,
+    "visualBottom": 737.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "pi",
+    "copyBottom": 795.6875,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "end",
+    "copyBottom": 757.359375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "sources-memory",
+    "copyBottom": 783.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "sources-system",
+    "copyBottom": 809.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "sources-models",
+    "copyBottom": 783.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  }
+]

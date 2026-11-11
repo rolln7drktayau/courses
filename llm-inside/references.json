@@ -1,0 +1,137 @@
+[
+  {
+    "id": "R1",
+    "title": "Attention Is All You Need",
+    "authors": "Ashish Vaswani et al.",
+    "year": "2017",
+    "url": "https://arxiv.org/abs/1706.03762",
+    "type": "NeurIPS 2017",
+    "use": "Transformer, attention, représentations et calculs matriciels. Le cours utilise un décodeur causal comme exemple ; le papier présente une architecture encodeur-décodeur."
+  },
+  {
+    "id": "R2",
+    "title": "Locating and Editing Factual Associations in GPT",
+    "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+    "year": "2022",
+    "url": "https://arxiv.org/abs/2202.05262",
+    "type": "NeurIPS 2022",
+    "use": "Des interventions causales localisent certains calculs liés à des associations factuelles. Cela ne fournit pas une adresse universelle de chaque connaissance."
+  },
+  {
+    "id": "R3",
+    "title": "Toy Models of Superposition",
+    "authors": "Nelson Elhage et al.",
+    "year": "2022",
+    "url": "https://transformer-circuits.pub/2022/toy_model/index.html",
+    "type": "Article de recherche · modèles jouets",
+    "use": "Des caractéristiques peuvent partager des dimensions, avec des interférences. Un axe n’est donc pas nécessairement un concept isolé."
+  },
+  {
+    "id": "R4",
+    "title": "Extracting Training Data from Large Language Models",
+    "authors": "Nicholas Carlini et al.",
+    "year": "2021",
+    "url": "https://arxiv.org/abs/2012.07805",
+    "type": "USENIX Security 2021 · prépublication initiale 2020",
+    "use": "Des passages d’entraînement ont été extraits de GPT-2. Une représentation distribuée n’interdit ni la mémorisation ni la restitution de texte."
+  },
+  {
+    "id": "R5",
+    "title": "Roofline: An Insightful Visual Performance Model…",
+    "authors": "Samuel Williams, Andrew Waterman, David Patterson",
+    "year": "2008 / 2009",
+    "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html",
+    "type": "Rapport Berkeley 2008 · article CACM 2009",
+    "use": "Relier le calcul et le trafic mémoire. Le maximum des deux temps est une borne optimiste, pas une prédiction exacte de latence."
+  },
+  {
+    "id": "R6",
+    "title": "GQA: Training Generalized Multi-Query Transformer Models…",
+    "authors": "Joshua Ainslie et al.",
+    "year": "2023",
+    "url": "https://arxiv.org/abs/2305.13245",
+    "type": "EMNLP 2023",
+    "use": "Plusieurs têtes de requêtes partagent des têtes K/V ; cela réduit notamment le cache. Une conversion peut demander un réentraînement complémentaire."
+  },
+  {
+    "id": "R7",
+    "title": "AWQ: Activation-aware Weight Quantization…",
+    "authors": "Ji Lin et al.",
+    "year": "2023 / 2024",
+    "url": "https://arxiv.org/abs/2306.00978",
+    "type": "Prépublication 2023 · MLSys 2024",
+    "use": "Quantification des poids guidée par les activations et implémentation adaptée au matériel. Ses résultats ne sont pas ceux de notre petit exemple d’arrondi."
+  },
+  {
+    "id": "R8",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention…",
+    "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré",
+    "year": "2022",
+    "url": "https://arxiv.org/abs/2205.14135",
+    "type": "NeurIPS 2022",
+    "use": "Réorganiser le calcul par blocs pour réduire les transferts HBM/SRAM sur GPU, sans approximation de parcimonie de l’attention. Des écarts d’arrondi restent possibles."
+  },
+  {
+    "id": "R9",
+    "title": "Reformer: The Efficient Transformer",
+    "authors": "Nikita Kitaev, Łukasz Kaiser, Anselm Levskaya",
+    "year": "2020",
+    "url": "https://arxiv.org/abs/2001.04451",
+    "type": "ICLR 2020",
+    "use": "LSH pour sélectionner des groupes de candidats ; c’est une attention approximative. Une signature binaire ne remplace pas à elle seule les valeurs V."
+  },
+  {
+    "id": "R10",
+    "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "authors": "Albert Gu, Tri Dao",
+    "year": "2023 / 2024",
+    "url": "https://arxiv.org/abs/2312.00752",
+    "type": "Prépublication 2023 · COLM 2024",
+    "use": "État récurrent de taille indépendante de la longueur de séquence pour un modèle fixé. Cela n’assure pas la conservation exacte de tout le passé."
+  },
+  {
+    "id": "R11",
+    "title": "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits",
+    "authors": "Shuming Ma et al.",
+    "year": "2024",
+    "url": "https://arxiv.org/abs/2402.17764",
+    "type": "Prépublication · résultats dans les configurations étudiées",
+    "use": "BitNet b1.58, poids ternaires et entraînement adapté. Le titre n’implique pas que tous les paramètres d’un fichier réel occupent exactement 1,58 bit."
+  },
+  {
+    "id": "R12",
+    "title": "BitNet b1.58 2B4T Technical Report",
+    "authors": "Shuming Ma et al.",
+    "year": "2025",
+    "url": "https://arxiv.org/abs/2504.12285",
+    "type": "Rapport technique · prépublication",
+    "use": "Un modèle natif basse précision et des implémentations ouvertes existent ; on ne peut pas présenter cette piste comme absente du monde réel."
+  },
+  {
+    "id": "R13",
+    "title": "Fast Inference from Transformers via Speculative Decoding",
+    "authors": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+    "year": "2023",
+    "url": "https://arxiv.org/abs/2211.17192",
+    "type": "ICML 2023 · prépublication initiale 2022",
+    "use": "Propositions d’un petit modèle, vérification et correction d’échantillonnage par le modèle cible. La distribution est préservée sous les hypothèses de l’algorithme exact ; le gain dépend du cas."
+  },
+  {
+    "id": "R14",
+    "title": "GGUF — spécification du format",
+    "authors": "Projet ggml",
+    "year": "Documentation évolutive",
+    "url": "https://github.com/ggml-org/ggml/blob/master/docs/gguf.md",
+    "type": "Documentation officielle",
+    "use": "Conteneur de tenseurs et de métadonnées. GGUF est un format ; AWQ est une méthode. Ni l’un ni l’autre n’est une promesse de vitesse universelle."
+  },
+  {
+    "id": "R15",
+    "title": "BitNet — implémentation officielle",
+    "authors": "Microsoft Research",
+    "year": "Code évolutif",
+    "url": "https://github.com/microsoft/BitNet",
+    "type": "Dépôt officiel",
+    "use": "Implémentations et modèles compatibles. La disponibilité du code ne garantit ni la prise en charge de toute machine ni la qualité sur toute tâche."
+  }
+]

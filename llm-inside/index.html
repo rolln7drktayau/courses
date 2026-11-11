@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Roland Cédric TAYO">
+  <meta name="description" content="Un mini-cours animé : où un modèle de langage garde l'information, pourquoi l'inférence coûte cher et comment vérifier une optimisation pour l'embarqué.">
+  <title>Dans la mémoire d’un modèle · Roland Cédric TAYO</title>
+  <link rel="stylesheet" href="assets/course.css">
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="../">RCT <span>/ MINI-COURS</span></a>
+    <div class="tools">
+      <button id="toc" title="Plan du mini-cours">Plan</button>
+      <button id="play" aria-pressed="false" title="Avancer automatiquement ; pause aux questions">Lecture auto</button>
+      <button id="reader-toggle" aria-pressed="false">Lire</button>
+      <a href="course.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      <button id="references">Sources</button>
+      <button id="fullscreen" title="Plein écran (F)">⛶</button>
+    </div>
+  </header>
+  <main id="viewport" aria-label="Présentation">
+    <article id="slide" aria-label="Diapositive">
+      <div class="topline"><span id="chapter"></span><span class="series">COMPRENDRE → COMPTER → VÉRIFIER</span></div>
+      <div class="copy">
+        <div id="eyebrow" class="eyebrow"></div>
+        <h1 id="title"></h1>
+        <p id="lead" class="lead"></p>
+        <div id="body"></div>
+        <div id="reveal" class="reveal"><span class="take-label">À RETENIR</span><p id="takeaway"></p></div>
+      </div>
+      <div id="visual" class="visual">
+        <svg id="art" viewBox="0 0 850 520" role="img" aria-labelledby="art-title">
+          <title id="art-title"></title>
+          <defs>
+            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#d6dedb"/></pattern>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#688480" stroke-width="1.5"/></marker>
+          </defs>
+          <rect width="850" height="520" fill="url(#grid)" opacity=".48" rx="24"/>
+          <g id="connectors"></g><g id="objects"></g>
+        </svg>
+        <div id="controls" class="controls"></div>
+        <p id="caption" class="caption"></p>
+      </div>
+      <footer class="slide-footer"><span>Roland Cédric TAYO · INEM</span><div id="citations"></div><span id="slide-number"></span></footer>
+    </article>
+  </main>
+  <nav class="navigation" aria-label="Navigation des diapositives">
+    <button id="previous" title="Revenir (←)">←</button>
+    <div class="nav-middle"><span id="position"></span><div class="track"><div id="progress"></div></div><span id="hint">→ Construire le schéma</span></div>
+    <button id="next" title="Révéler ou avancer (→ ou espace)">→</button>
+  </nav>
+  <div id="reader" hidden></div>
+  <dialog id="modal"><div class="modal-head"><h2 id="modal-title"></h2><button id="close-modal" aria-label="Fermer">×</button></div><div id="modal-content"></div></dialog>
+  <div id="announcer" class="sr-only" aria-live="polite"></div>
+  <script src="assets/content.js"></script>
+  <script src="assets/course.js"></script>
+</body>
+</html>
