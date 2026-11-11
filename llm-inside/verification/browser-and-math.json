@@ -1,14 +1,19 @@
 {
-  "calculated_examples": {
+  "analytical_examples": {
     "weights16": 14000000000,
     "weights4": 3500000000,
-    "kv8": 1073741824,
-    "kv32": 4294967296,
-    "roofline": {
+    "cacheBytes": 1073741824,
+    "roof": {
       "memory": 0.07,
       "calculation": 0.007,
       "bound": 0.07,
       "rate": 14.285714285714285
+    },
+    "computeLimited": {
+      "memory": 0.07,
+      "calculation": 0.14,
+      "bound": 0.14,
+      "rate": 7.142857142857142
     },
     "quant": {
       "scale": 0.1285714285714286,
@@ -19,121 +24,94 @@
         6
       ]
     },
-    "quantOutput": -0.9642857142857144,
-    "quantOriginal": -1.05,
-    "zero": {
-      "scale": 1,
-      "codes": [
-        0,
-        0
-      ]
+    "before": -1.05,
+    "after": -0.9642857142857144,
+    "budget8": {
+      "weights": 3.5,
+      "cache": 1.073741824,
+      "other": 1,
+      "total": 5.573741824,
+      "capacity": 8,
+      "margin": 2.426258176
     },
-    "halfAway": {
-      "scale": 1,
-      "codes": [
-        1,
-        1,
-        -1
-      ]
-    },
-    "collisions": 16384000
+    "budget4": {
+      "weights": 3.5,
+      "cache": 1.073741824,
+      "other": 1,
+      "total": 5.573741824,
+      "capacity": 4,
+      "margin": -1.5737418239999998
+    }
   },
-  "pedagogical_checks": {
-    "defined_keywords": 48,
-    "inline_definitions": "manually reviewed in content",
-    "attention_before_shared_features": true,
-    "hash_question_immediately_after_hashing": true,
-    "attention_illustration_uses_final_position": true,
-    "cache_grid_changes_with_head_count": true,
-    "question_correct_positions": [
-      0,
-      1,
-      2
+  "comparison_example": {
+    "kind": "illustrative_not_measured",
+    "source": "assets/comparison-example.csv",
+    "rows": [
+      {
+        "kind": "illustrative_not_measured",
+        "version": "reference",
+        "ram_gb": "4.8",
+        "median_ms": "120",
+        "min_ms": "110",
+        "max_ms": "145",
+        "correct": "47",
+        "n_questions": "50",
+        "n_timing_repetitions": "5",
+        "prompt_tokens": "128",
+        "generated_tokens": "20",
+        "model_loading_included": "false"
+      },
+      {
+        "kind": "illustrative_not_measured",
+        "version": "variant",
+        "ram_gb": "3.9",
+        "median_ms": "80",
+        "min_ms": "75",
+        "max_ms": "105",
+        "correct": "46",
+        "n_questions": "50",
+        "n_timing_repetitions": "5",
+        "prompt_tokens": "128",
+        "generated_tokens": "20",
+        "model_loading_included": "false"
+      }
     ],
-    "original_conversation_reference_removed": true,
-    "definitions_linked_at_introducing_scene": [
-      "ai",
-      "llm",
-      "weights",
-      "context",
-      "training",
-      "inference",
-      "token",
-      "tokenizer",
-      "vector",
-      "embedding",
-      "attention",
-      "softmax",
-      "causal",
-      "neuron",
-      "matrix",
-      "mlp",
-      "activation",
-      "superposition",
-      "transformer",
-      "prefill",
-      "decode",
-      "autoregressive",
-      "throughput",
-      "bit",
-      "precision",
-      "parameter",
-      "ram",
-      "cache",
-      "head",
-      "gqa",
-      "latency",
-      "bound",
-      "quantization",
-      "scale",
-      "float",
-      "gpu",
-      "hash",
-      "state",
-      "collision",
-      "ternary",
-      "kernel",
-      "distribution",
-      "sampling",
-      "hypothesis",
-      "runtime",
-      "reference",
-      "csv",
-      "fingerprint"
-    ]
+    "decision": "variant fails quality threshold"
   },
-  "shared_object_transition": {
-    "retained": true,
-    "moved": true,
-    "transition": "0.95s, 0.65s"
-  },
+  "defined_keywords": 51,
   "observed_transition": {
     "before": "matrix(1, 0, 0, 1, 335, 170)",
-    "during": "matrix(1, 0, 0, 1, 338.226, 102.248)",
+    "during": "matrix(1, 0, 0, 1, 338.026, 106.447)",
     "after": "matrix(1, 0, 0, 1, 340, 65)"
   },
   "viewports": {
-    "1920x1080": [],
-    "1366x768": [],
-    "1024x768": [],
-    "768x1024": [],
-    "390x844": []
+    "discovery/1920x1080": [],
+    "discovery/1366x768": [],
+    "discovery/1024x768": [],
+    "discovery/768x1024": [],
+    "discovery/390x844": [],
+    "engineer/1920x1080": [],
+    "engineer/1366x768": [],
+    "engineer/1024x768": [],
+    "engineer/768x1024": [],
+    "engineer/390x844": []
   },
-  "interaction_checks": [
-    "memory and KV controls",
-    "bandwidth bound",
-    "quantization controls",
-    "context switch",
-    "three questions and feedback",
-    "keyboard navigation",
-    "outline",
-    "per-scene citations",
-    "continuous mobile reading",
-    "auto-play stops at a question"
-  ],
   "console_errors": [],
   "external_runtime_requests": [],
   "reduced_motion": "respected",
-  "pdf_pages": 23,
-  "pdf_links": 50
+  "discovery_scenes": 15,
+  "discovery_pages": 18,
+  "engineer_pages": 30,
+  "pdfs": {
+    "course.pdf": {
+      "pages": 18,
+      "links": 40,
+      "sha256": "e72235e3e235e90a38a03096aecbbf91958274e8a33f22a0dd17bfa26278134b"
+    },
+    "engineering.pdf": {
+      "pages": 30,
+      "links": 59,
+      "sha256": "38664683fe279da25edfa48b6fbe802716f5e10610d2312b50e7c9406e06ee75"
+    }
+  }
 }

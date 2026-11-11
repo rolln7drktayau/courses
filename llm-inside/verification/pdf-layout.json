@@ -5,7 +5,8 @@
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "learn",
@@ -13,31 +14,26 @@
     "footerTop": 831,
     "visualBottom": 757.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "embedding",
-    "copyBottom": 707.3125,
+    "copyBottom": 764.890625,
     "footerTop": 831,
     "visualBottom": 757.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "attention",
-    "copyBottom": 791.046875,
+    "copyBottom": 631.71875,
     "footerTop": 831,
     "visualBottom": 779.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "distributed",
-    "copyBottom": 768.90625,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "q-memory",
@@ -45,39 +41,53 @@
     "footerTop": 831,
     "visualBottom": 737.46875,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "decode",
-    "copyBottom": 662.515625,
+    "copyBottom": 694.703125,
     "footerTop": 831,
-    "visualBottom": 757.515625,
+    "visualBottom": 778.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "weights",
-    "copyBottom": 769.078125,
-    "footerTop": 831,
-    "visualBottom": 758.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "cache",
-    "copyBottom": 772.171875,
-    "footerTop": 831,
-    "visualBottom": 758.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "roofline",
-    "copyBottom": 764.046875,
+    "copyBottom": 670.046875,
     "footerTop": 831,
     "visualBottom": 779.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
+  },
+  {
+    "id": "cache",
+    "copyBottom": 700.84375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "discovery"
+  },
+  {
+    "id": "memory-total",
+    "copyBottom": 723.15625,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "discovery"
+  },
+  {
+    "id": "roofline",
+    "copyBottom": 700.84375,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "q-bandwidth",
@@ -85,71 +95,35 @@
     "footerTop": 831,
     "visualBottom": 737.46875,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "quantize",
-    "copyBottom": 800.484375,
+    "copyBottom": 731.640625,
     "footerTop": 831,
     "visualBottom": 779.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
-    "id": "flash",
-    "copyBottom": 731.640625,
+    "id": "measurement-example",
+    "copyBottom": 687.65625,
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "architectures",
-    "copyBottom": 756.296875,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "q-hash",
-    "copyBottom": 802.3125,
-    "footerTop": 831,
-    "visualBottom": 737.46875,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "bitnet",
-    "copyBottom": 798.5,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "speculative",
-    "copyBottom": 693.3125,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "proof",
-    "copyBottom": 745.640625,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "pi",
-    "copyBottom": 789.546875,
+    "copyBottom": 738.109375,
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "end",
@@ -157,7 +131,8 @@
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "sources-memory",
@@ -165,7 +140,8 @@
     "footerTop": 831,
     "visualBottom": 0,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "sources-system",
@@ -173,7 +149,8 @@
     "footerTop": 831,
     "visualBottom": 0,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
   },
   {
     "id": "sources-models",
@@ -181,6 +158,277 @@
     "footerTop": 831,
     "visualBottom": 0,
     "slideWidth": 1600,
-    "slideHeight": 900
+    "slideHeight": 900,
+    "audience": "discovery"
+  },
+  {
+    "id": "opening",
+    "copyBottom": 714.84375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "learn",
+    "copyBottom": 807.234375,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "embedding",
+    "copyBottom": 764.890625,
+    "footerTop": 831,
+    "visualBottom": 757.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "attention",
+    "copyBottom": 631.71875,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "attention-math",
+    "copyBottom": 791.046875,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "distributed",
+    "copyBottom": 768.90625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "q-memory",
+    "copyBottom": 780.3125,
+    "footerTop": 831,
+    "visualBottom": 737.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "decode",
+    "copyBottom": 801.09375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "weights",
+    "copyBottom": 670.046875,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "weights-math",
+    "copyBottom": 769.078125,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "cache",
+    "copyBottom": 700.84375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "cache-math",
+    "copyBottom": 772.171875,
+    "footerTop": 831,
+    "visualBottom": 758.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "memory-total",
+    "copyBottom": 723.15625,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "roofline",
+    "copyBottom": 700.84375,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "roofline-math",
+    "copyBottom": 764.046875,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "q-bandwidth",
+    "copyBottom": 780.3125,
+    "footerTop": 831,
+    "visualBottom": 737.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "quantize",
+    "copyBottom": 731.640625,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "quantize-math",
+    "copyBottom": 800.484375,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "flash",
+    "copyBottom": 731.640625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "architectures",
+    "copyBottom": 756.296875,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "q-hash",
+    "copyBottom": 814.390625,
+    "footerTop": 831,
+    "visualBottom": 758.46875,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "bitnet",
+    "copyBottom": 798.5,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "speculative",
+    "copyBottom": 724.109375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "proof",
+    "copyBottom": 745.640625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "measurement-example",
+    "copyBottom": 687.65625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "pi",
+    "copyBottom": 799.703125,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "end",
+    "copyBottom": 757.359375,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "sources-memory",
+    "copyBottom": 809.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "sources-system",
+    "copyBottom": 809.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "sources-models",
+    "copyBottom": 783.984375,
+    "footerTop": 831,
+    "visualBottom": 0,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
   }
 ]

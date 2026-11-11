@@ -2,8 +2,11 @@
 (() => {
  'use strict';
  const $=s=>document.querySelector(s), NS='http://www.w3.org/2000/svg';
- const slides=window.SLIDES, refs=window.REFERENCES;
- const state={index:0,step:0,context:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,quantBits:4,auto:false};
+ const allSlides=window.SLIDES, refs=window.REFERENCES, discoveryIds=window.DISCOVERY_IDS;
+ const initialId=location.hash.slice(1).split('?')[0];
+ const initialAudience=new URLSearchParams(location.search).get('audience')==='engineer'||(initialId&&allSlides.some(s=>s.id===initialId)&&!discoveryIds.includes(initialId))?'engineer':'discovery';
+ let slides=initialAudience==='engineer'?allSlides:discoveryIds.map(id=>allSlides.find(s=>s.id===id));
+ const state={index:0,step:0,context:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,compute:2e12,budget:8,budgetBits:4,quantBits:4,auto:false,audience:initialAudience};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let timer, currentSpecs=[], currentEdges=[];
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -12,6 +15,7 @@
  const math={
   weightBytes:(n,b)=>n*b/8,
   kvBytes:(l,s,h,d,p,batch=1)=>2*l*s*h*d*p*batch,
+  memoryBudget(n,b,l,s,h,d,p,otherGB,capacityGB){const weights=n*b/8/1e9,cache=2*l*s*h*d*p/1e9,total=weights+cache+otherGB;return {weights,cache,other:otherGB,total,capacity:capacityGB,margin:capacityGB-total};},
   roofline(n,b,bandwidth,compute){const memory=n*b/8/bandwidth,calculation=2*n/compute;return {memory,calculation,bound:Math.max(memory,calculation),rate:1/Math.max(memory,calculation)};},
   quantize(weights,b){const qmax=2**(b-1)-1,max=Math.max(...weights.map(Math.abs)),scale=max===0?1:max/qmax;return {scale,codes:weights.map(w=>Math.max(-qmax,Math.min(qmax,Math.sign(w)*Math.floor(Math.abs(w/scale)+.5))))};},
   dot:(a,b)=>a.reduce((sum,x,i)=>sum+x*b[i],0)
@@ -78,11 +82,13 @@
   }
   if(scene==='attention'){
    const names=state.context?['En','avril,','il','pleut.']:['Avril','chante.'];
-   names.forEach((w,i)=>{node('word'+i,50+i*183,35,token(w,w.toLowerCase().startsWith('avril')?colors.sand:colors.blue,160));node('kv-label'+i,50+i*183,118,text(80,0,'K : repère · V : info','minor','middle'));});
-   node('query',550,175,tile(260,90,'Dernier token','Q : ce que je cherche',colors.sand));
+   const technical=slides[state.index].id==='attention-math';
+   names.forEach((w,i)=>{node('word'+i,50+i*183,35,token(w,w.toLowerCase().startsWith('avril')?colors.sand:colors.blue,160));if(technical)node('kv-label'+i,50+i*183,118,text(80,0,'K : repère · V : info','minor','middle'));});
+   if(technical)node('query',550,175,tile(260,90,'Dernier token','Q : ce que je cherche',colors.sand));
+   else node('last-position',240,160,text(210,0,'À la fin de la phrase : tout ce texte est déjà lu.','minor','middle'));
    node('model',335,240,chip('ATTENTION','combiner les valeurs'));
    names.forEach((w,i)=>link('e'+i,130+i*183,130,360,235,1,true));
-   link('q-query',130+(names.length-1)*183,93,680,170,1);link('q-compare',550,225,520,285,1);
+   if(technical){link('q-query',130+(names.length-1)*183,93,680,170,1);link('q-compare',550,225,520,285,1);}
    node('meaning',245,430,tile(365,80,state.context?'Un mois de l’année':'Une personne qui chante','à la fin de la phrase',colors.sand),1);
    link('c',425,400,425,427,1);
   }
@@ -99,29 +105,38 @@
    node('label',315,435,text(225,0,state.bits+' bits par paramètre · compte idéal','minor','middle'),1);link('a',235,255,310,255,1);
   }
   if(scene==='cache'){
-   const gib=math.kvBytes(32,state.cache,state.heads,128,2)/2**30;
+   const gb=math.kvBytes(32,state.cache,state.heads,128,2)/1e9,technical=slides[state.index].id==='cache-math';
    node('model',35,170,chip());
    let grid='';const rows=state.heads/4,cols=Math.max(1,Math.ceil(state.cache/2048));
    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)grid+=`<rect x="${c*25}" y="${r*16}" width="20" height="12" rx="3" fill="${state.heads===8?'#8cbda5':'#caa46a'}"/>`;
-   node('kv',330,145,rect(455,250,'#fff')+text(22,40,'CACHE K / V','mid')+`<g transform="translate(22 65)">${grid}</g>`+text(22,222,number(gib,2)+' Gio','big'));
-   link('a',215,245,325,245,1,true);node('label',260,450,text(270,0,number(state.cache,0)+' tokens · '+state.heads+' têtes K/V','minor','middle')+text(270,30,'Plus de contexte : colonnes · plus de têtes : lignes','minor','middle'),1);
+   node('kv',330,145,rect(455,250,'#fff')+text(22,40,technical?'CACHE K / V':'CALCULS GARDÉS EN CACHE','mid')+`<g transform="translate(22 65)">${grid}</g>`+text(22,222,number(gb,2)+' Go','big'));
+   link('a',215,245,325,245,1,true);node('label',260,450,text(270,0,number(state.cache,0)+' tokens'+(technical?' · '+state.heads+' têtes K/V':''),'minor','middle')+text(270,30,technical?'Plus de contexte : colonnes · plus de têtes : lignes':'Plus de contexte, plus de calculs à garder.','minor','middle'),1);
+  }
+  if(scene==='memory-total'){
+   const m=math.memoryBudget(7e9,state.budgetBits,32,state.cache,state.heads,128,2,1,state.budget);
+   const unit=640/Math.max(m.total,m.capacity),width=v=>v*unit;let offset=0;let bars='';
+   [[m.weights,'#087e79'],[m.cache,'#af783c'],[m.other,'#7896b0']].forEach(([v,c])=>{bars+=`<rect x="${offset}" y="100" width="${width(v)}" height="70" fill="${c}"/>`;offset+=width(v);});
+   node('budget-stack',70,75,text(0,15,'RAM : un budget commun','mid')+bars+`<path d="M${width(m.capacity)} 75V195" stroke="${m.margin<0?colors.red:colors.ink}" stroke-width="3"/>`+text(width(m.capacity),65,'Budget '+number(m.capacity,0)+' Go','minor','middle'));
+   node('budget-labels',70,285,lines(['Paramètres : '+number(m.weights,2)+' Go','Cache : '+number(m.cache,2)+' Go','Reste du système et du calcul : 1 Go supposé'],0,0,'',35));
+   node('budget-result',70,410,rect(710,85,m.margin<0?colors.pink:colors.mint)+text(355,34,'TOTAL : '+number(m.total,2)+' Go','mid','middle')+text(355,66,m.margin<0?'Dépassement : '+number(-m.margin,2)+' Go':'Marge calculée : '+number(m.margin,2)+' Go','minor','middle'),1);
   }
   if(scene==='roofline'){
    const fixed=slides[state.index].id==='q-bandwidth';
-   const r=fixed?{memory:.07,calculation:.007,bound:.07,rate:1/.07}:math.roofline(7e9,state.roofBits,state.bandwidth*1e9,2e12);
+   const r=fixed?{memory:.07,calculation:.007,bound:.07,rate:1/.07}:math.roofline(7e9,state.roofBits,state.bandwidth*1e9,state.compute);
    const max=Math.max(r.memory,r.calculation),w=v=>Math.max(5,530*v/max);
    node('memory-time',95,90,text(0,0,'Déplacer les poids','mid')+`<rect y="25" width="${w(r.memory)}" height="65" rx="9" fill="${colors.gold}"/>`+text(555,68,number(r.memory*1000,1)+' ms',''));
    node('compute-time',95,245,text(0,0,'Effectuer les opérations','mid')+`<rect y="25" width="${w(r.calculation)}" height="65" rx="9" fill="${colors.teal}"/>`+text(555,68,number(r.calculation*1000,1)+' ms',''));
-   node('bound',95,395,rect(660,90,colors.mint)+text(330,38,'BORNE OPTIMISTE ≥ '+number(r.bound*1000,1)+' ms / étape','mid','middle')+text(330,68,'Au plus '+number(r.rate,1)+' tokens/s dans ces seules hypothèses','minor','middle'),1);
+   node('bound',95,395,rect(660,90,colors.mint)+text(330,38,'AU MIEUX : '+number(r.bound*1000,1)+' ms / étape','mid','middle')+text(330,68,'Les autres coûts peuvent allonger ce temps.','minor','middle'),1);
   }
   if(scene==='quantize'){
+   const technical=slides[state.index].id==='quantize-math';
    const w=[-.9,-.32,.18,.76],x=[1,.5,-1,.25],q=math.quantize(w,state.quantBits),back=q.codes.map(v=>v*q.scale),before=math.dot(w,x),after=math.dot(back,x);
    const pos=v=>105+(v+1)*315;
    node('axis',0,60,`<path d="M90 180H760" stroke="#819e90" stroke-width="2"/>`+[-1,-.5,0,.5,1].map(v=>`<path d="M${pos(v)} 170V190" stroke="#819e90"/>`+text(pos(v),218,number(v,1),'minor','middle')).join(''));
    w.forEach((v,i)=>{node('original'+i,pos(v),105,`<circle r="9" fill="${colors.gold}"/>`+text(0,-20,number(v,2),'minor','middle'));node('rounded'+i,pos(state.step?back[i]:v),285,`<circle r="11" fill="${colors.teal}"/>`+text(0,33,number(back[i],2),'minor','middle'),1);link('q'+i,pos(v),125,pos(back[i]),272,1);});
-   node('quant-legend',95,35,`<circle r="6" fill="${colors.gold}"/>`+text(15,6,'poids initiaux w','minor')+`<circle cx="330" r="6" fill="${colors.teal}"/>`+text(345,6,'poids reconstruits ŵ','minor'));
-   node('before',60,390,tile(320,95,'Sortie initiale : '+number(before,4),'y = somme des wᵢxᵢ',colors.sand));
-   node('after',430,390,tile(350,95,'Après : '+number(after,4),'écart absolu : '+number(Math.abs(after-before),4),colors.mint),1);
+   node('quant-legend',95,35,`<circle r="6" fill="${colors.gold}"/>`+text(15,6,technical?'poids initiaux w':'poids initiaux','minor')+`<circle cx="330" r="6" fill="${colors.teal}"/>`+text(345,6,technical?'poids reconstruits ŵ':'poids arrondis','minor'));
+   node('before',60,390,tile(320,95,'Valeur avant : '+number(before,4),technical?'y = somme des wᵢxᵢ':'avant arrondi des poids',colors.sand));
+   node('after',430,390,tile(350,95,'Après : '+number(after,4),'écart dû aux arrondis : '+number(Math.abs(after-before),4),colors.mint),1);
   }
   if(scene==='flash'){
    node('global',45,55,rect(750,110,colors.blue)+text(375,38,'Mémoire globale du GPU','mid','middle')+text(375,78,'Q, K, V et la sortie','minor','middle'));
@@ -168,12 +183,28 @@
    node('hash-code',490,185,rect(290,125,colors.mint)+text(145,58,'0101','big','middle')+text(145,95,'même code, textes différents','minor','middle'),1);
    link('a',340,125,485,220,1);link('b',340,355,485,270,1);
   }
+  if(scene==='hash-neighbor'){
+   node('query',40,55,tile(270,90,'Une requête','chercher les voisins utiles',colors.blue));
+   node('bucket',65,220,rect(380,240,colors.mint)+text(190,38,'Groupe consulté','mid','middle'));
+   node('candidate0',95,300,token('A',colors.blue,120),1);node('candidate1',265,300,token('C',colors.blue,120),1);
+   node('missed',535,220,rect(260,240,colors.sand)+text(130,38,'Autre groupe','mid','middle')+text(130,105,'B : voisin utile','mid','middle')+text(130,155,'non consulté ici','minor','middle'),1);
+   link('a',175,145,235,215,1);node('risk',455,125,text(150,0,'Un voisin utile peut tomber ailleurs.','minor','middle'),1);
+  }
+  if(scene==='comparison'){
+   node('comparison-table',15,60,rect(820,340,'#fff')+text(410,35,'EXERCICE · DONNÉES FICTIVES','mid','middle')+
+    `<path d="M20 75H800M20 130H800M20 200H800M20 265H800" stroke="#c6d7cc"/>`+
+    text(25,108,'Indicateur','mid')+text(410,108,'Référence','mid','middle')+text(665,108,'Variante','mid','middle')+
+    text(25,170,'RAM maximale','')+text(410,170,'4,8 Go','','middle')+text(665,170,'3,9 Go','','middle')+
+    text(25,235,'Durée médiane','')+text(410,225,'120 ms','','middle')+text(410,249,'110–145 ms','minor','middle')+text(665,225,'80 ms','','middle')+text(665,249,'75–105 ms','minor','middle')+
+    text(25,308,'Réponses correctes','')+text(410,308,'47 / 50','','middle')+text(665,308,'46 / 50','','middle'));
+   node('comparison-verdict',85,430,rect(680,70,colors.pink)+text(340,43,'Plus rapide, mais sous le seuil de qualité fixé.','mid','middle'),1);
+  }
   if(scene==='pi'){
    node('reference',45,60,tile(300,100,'Référence','même tâche, mêmes entrées',colors.blue));
    node('variant',490,60,tile(300,100,'Variante','une modification à la fois',colors.sand));
    node('model',335,235,chip('RASPBERRY PI','mesurer sur la cible'));
    link('a',195,160,385,230,1,true);link('b',640,160,465,230,1,true);
-   node('csv',160,445,tile(540,72,'CSV bruts + configuration + conclusion','',colors.mint),1);
+   node('csv',160,445,tile(540,72,'Mesures + configuration + conclusion','',colors.mint),1);
   }
   const liveKeys=new Set(currentSpecs.map(s=>s.key));
   for(const [key,el] of specs)if(!liveKeys.has(key))el.style.opacity='0';
@@ -196,15 +227,16 @@
  function controlHTML(type){
   if(type==='context')return `<button data-context="0" class="${state.context===0?'active':''}">Avril chante.</button><button data-context="1" class="${state.context===1?'active':''}">En avril, il pleut.</button>`;
   if(type==='bits')return [16,8,4,2].map(b=>`<button data-bits="${b}" class="${state.bits===b?'active':''}">${b} bits</button>`).join('');
-  if(type==='cache')return `<label>Tokens <select id="cache-size" aria-label="Longueur du contexte">${[512,8192,32768].map(s=>`<option value="${s}" ${s===state.cache?'selected':''}>${number(s,0)}</option>`).join('')}</select></label><button id="heads" class="active">${state.heads} têtes K/V · changer</button>`;
-  if(type==='roofline')return `<label>Débit mémoire <input id="bandwidth" type="range" min="20" max="100" step="10" value="${state.bandwidth}"><output id="bandwidth-value">${state.bandwidth} Go/s</output></label><button id="roof-bits">Poids ${state.roofBits} bits · changer</button>`;
+  if(type==='cache')return `<label>Tokens présents <select id="cache-size" aria-label="Longueur du contexte">${[512,8192,32768].map(s=>`<option value="${s}" ${s===state.cache?'selected':''}>${number(s,0)}</option>`).join('')}</select></label>`+(slides[state.index].id==='cache-math'?`<button id="heads" class="active">${state.heads} têtes K/V · changer</button>`:'');
+  if(type==='budget')return `<button id="budget-cap">Budget : ${state.budget} Go · changer</button><button id="budget-bits">Poids : ${state.budgetBits} bits · changer</button>`;
+  if(type==='roofline')return `<label>Débit mémoire <input id="bandwidth" type="range" min="20" max="100" step="10" value="${state.bandwidth}"><output id="bandwidth-value">${state.bandwidth} Go/s</output></label><button id="roof-bits">Poids ${state.roofBits} bits · changer</button><button id="compute">Calcul : ${state.compute===2e12?'rapide':'plus lent'} · changer</button>`;
   if(type==='quantize')return [8,4,2].map(b=>`<button data-quant="${b}" class="${state.quantBits===b?'active':''}">${b} bits</button>`).join('');
   return '';
  }
  function bodyHTML(s){
   if(s.question)return '<div class="options">'+s.question.map((x,i)=>`<button data-answer="${i}">${String.fromCharCode(65+i)}. ${esc(x)}</button>`).join('')+'</div><p id="feedback" class="feedback" aria-live="polite"></p>';
   if(s.reading)return '<div class="reading-list">'+s.reading.map(id=>{const r=refs.find(r=>r.id===id);return `<div class="entry"><a href="${r.url}" target="_blank" rel="noopener">${id} · ${esc(r.title)} ↗</a><p>${esc(r.authors)} · ${esc(r.year)}<br>${esc(r.type)}</p></div>`;}).join('')+'</div>';
-  return s.body||'';
+  return (state.audience==='engineer'&&s.engineerBody?s.engineerBody:s.body)||'';
  }
  function resize(){const area=$('#viewport').getBoundingClientRect();document.documentElement.style.setProperty('--scale',Math.min(area.width/1600,area.height/900));}
  function setHash(){history.replaceState(null,'',`#${slides[state.index].id}${state.step?'?step=1':''}`);}
@@ -212,7 +244,10 @@
   const s=slides[state.index];$('#slide').dataset.scene=s.id;$('#slide').classList.toggle('question',!!s.question);$('#slide').classList.toggle('reference-slide',!!s.reading);$('#slide').classList.toggle('revealed',state.step===1);
   $('#chapter').textContent=s.chapter;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title;$('#lead').textContent=s.lead;$('#body').innerHTML=bodyHTML(s);$('#takeaway').textContent=s.take;
   $('#caption').textContent=s.caption||'';$('#controls').innerHTML=controlHTML(s.control);decorateKeywords();
+  $('#audience').textContent=state.audience==='engineer'?'Découverte':'Ingénieur';$('#audience').setAttribute('aria-pressed',String(state.audience==='engineer'));$('#pdf-link').href=state.audience==='engineer'?'engineering.pdf':'course.pdf';
   $('#citations').innerHTML=(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}" data-ref="${id}" target="_blank" rel="noopener">${id}</a>`).join('');
+  if(s.id==='pi')$('#citations').insertAdjacentHTML('beforeend','<a href="https://github.com/rolln7drktayau/courses/blob/main/llm-inside/MESURER-SUR-PI.md" target="_blank" rel="noopener">Protocole Pi ↗</a>');
+  if(s.detail){const b=document.createElement('button');b.className='detail-link';b.dataset.detail=s.detail;b.textContent='Formule · Ingénieur ↗';$('#citations').append(b);}
   $('#slide-number').textContent=`${state.index+1} / ${slides.length}`;$('#position').textContent=`${String(state.index+1).padStart(2,'0')} / ${slides.length}`;$('#progress').style.width=(100*(state.index+(state.step?1:.35))/slides.length)+'%';
   $('#hint').textContent=state.step?'→ Scène suivante':'→ Construire le schéma';$('#previous').disabled=state.index===0&&state.step===0;$('#next').disabled=state.index===slides.length-1&&state.step===1;
   if(s.question&&state.step){$('#feedback').textContent=s.explanation;$('#body [data-answer="'+s.answer+'"]').classList.add('correct');}
@@ -221,11 +256,19 @@
   $('#announcer').textContent=`Diapositive ${state.index+1}. ${$('#title').textContent}`;
   schedule();
  }
- function schedule(){clearTimeout(timer);if(!state.auto)return;const s=slides[state.index];if(s.question||s.reading||state.index===19){pause();return;}timer=setTimeout(next,state.step?10000:6500);}
+ function schedule(){clearTimeout(timer);if(!state.auto)return;const s=slides[state.index];if(s.question||s.reading||s.id==='end'){pause();return;}timer=setTimeout(next,state.step?10000:6500);}
  function pause(){state.auto=false;clearTimeout(timer);$('#play').setAttribute('aria-pressed','false');$('#play').textContent='Lecture auto';}
  function next(){if(!state.step){state.step=1;render(false);}else if(state.index<slides.length-1){state.index++;state.step=0;render();}}
  function previous(){if(state.step){state.step=0;render(false);}else if(state.index>0){state.index--;state.step=1;render();}}
  function go(index,revealed=false){pause();state.index=Math.max(0,Math.min(slides.length-1,index));state.step=revealed?1:0;render(false);}
+ function setAudience(audience,keepId){
+  let id=keepId||slides[state.index].id;if(audience==='discovery'&&!discoveryIds.includes(id))id=allSlides.find(s=>s.id===id)?.detailOf||'opening';pause();
+  if(document.body.classList.contains('reader-mode'))toggleReader();
+  state.audience=audience;slides=audience==='engineer'?allSlides:discoveryIds.map(id=>allSlides.find(s=>s.id===id));
+  window.Deck.slides=slides;$('#reader').innerHTML='';state.index=Math.max(0,slides.findIndex(s=>s.id===id));state.step=0;
+  const url=new URL(location.href);if(audience==='engineer')url.searchParams.set('audience','engineer');else url.searchParams.delete('audience');history.replaceState(null,'',url);render(false);
+ }
+ function goTo(id,revealed=false){if(!slides.some(s=>s.id===id))setAudience('engineer',id);go(slides.findIndex(s=>s.id===id),revealed);}
  function modal(title,html){pause();$('#modal-title').textContent=title;$('#modal-content').innerHTML=html;$('#modal').showModal();}
  function refHTML(r){return `<article class="reference" id="ref-${r.id}"><strong>${r.id} · ${esc(r.title)}</strong><p>${esc(r.authors)} · ${esc(r.year)} · ${esc(r.type)}</p><p>${esc(r.use)}</p><a href="${r.url}" target="_blank" rel="noopener">Lire la source originale ↗</a></article>`;}
  const keywords=window.KEYWORDS;
@@ -254,11 +297,11 @@
   const entries=id?keywords.filter(k=>k.id===id):[...keywords].sort((a,b)=>a.term.localeCompare(b.term,'fr'));
   modal(id?'Un mot, une définition':'Les mots du mini-cours','<p>Les mots soulignés dans les scènes ouvrent ces définitions. Les notions essentielles sont aussi expliquées dans le texte du PDF.</p>'+entries.map(k=>`<article class="reference"><strong>${esc(k.term)}</strong><p>${esc(k.definition)}</p></article>`).join(''));
  }
- function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections apportées au texte de départ</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
+ function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections du texte de départ</a> · <a href="MESURER-SUR-PI.md">Protocole technique sur Pi</a> · <a href="engineering.pdf">PDF ingénieur complet</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
  function toggleReader(){
   const show=!document.body.classList.contains('reader-mode');pause();document.body.classList.toggle('reader-mode',show);$('#reader-toggle').setAttribute('aria-pressed',String(show));$('#reader-toggle').textContent=show?'Présenter':'Lire';$('#reader').hidden=!show;
   if(show&&!$('#reader').children.length){
-   const saved={...state};let content='<h1>Dans la mémoire d’un modèle</h1><p>Roland Cédric TAYO · INEM · Mini-cours, environ 20 minutes avec échanges.</p><p>Lecture continue. Les schémas sont pédagogiques ; les comptes mémoire ne sont pas des mesures sur une carte.</p>';
+   const saved={...state};let content='<h1>Dans la mémoire d’un modèle</h1><p>Roland Cédric TAYO · INEM · '+(state.audience==='engineer'?'Parcours ingénieur complet':'Parcours découverte, environ 20 minutes avec échanges')+'.</p><p>Lecture continue. Les schémas sont pédagogiques ; les comptes mémoire ne sont pas des mesures sur une carte.</p>';
    slides.forEach((s,i)=>{state.index=i;state.step=1;draw();const svg=$('#art').cloneNode(true);svg.removeAttribute('id');svg.querySelectorAll('[id]').forEach(el=>{const old=el.id;el.id='r'+i+'-'+old;});let art=svg.outerHTML.replace(/url\(#(grid|arrow)\)/g,`url(#r${i}-$1)`);if(s.scene==='none')art='';content+=`<section><div class="eyebrow">${esc(s.chapter)}</div><h2>${s.title}</h2><p>${esc(s.lead)}</p>${s.question?'<p><strong>Question :</strong> '+esc(s.question[s.answer])+'</p><p>'+esc(s.explanation)+'</p>':bodyHTML(s)}<div class="reader-svg">${art}</div><p class="small">${esc(s.caption||'')}</p><p class="reader-note"><strong>À retenir.</strong> ${esc(s.take)}</p><p class="reader-sources">${(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}">${id}</a>`).join(' · ')}</p></section>`;});
    $('#reader').innerHTML=content;Object.assign(state,saved);draw();
   }
@@ -266,6 +309,7 @@
  }
  document.addEventListener('click',e=>{
   const word=e.target.closest('[data-term]');if(word){showGlossary(word.dataset.term);return;}
+  const detail=e.target.closest('[data-detail]');if(detail){goTo(detail.dataset.detail);return;}
   const answer=e.target.closest('[data-answer]');if(answer){pause();const s=slides[state.index],i=+answer.dataset.answer;$('#feedback').textContent=(i===s.answer?'Oui. ':'À reconsidérer. ')+s.explanation;$('#body').querySelectorAll('[data-answer]').forEach(b=>b.classList.toggle('correct',+b.dataset.answer===s.answer));answer.classList.toggle('incorrect',i!==s.answer);state.step=1;$('#slide').classList.add('revealed');draw();setHash();return;}
   const ref=e.target.closest('[data-ref]');if(ref){e.preventDefault();showRefs(ref.dataset.ref);return;}
   const jump=e.target.closest('[data-jump]');if(jump){$('#modal').close();go(+jump.dataset.jump);return;}
@@ -274,12 +318,16 @@
   const q=e.target.closest('[data-quant]');if(q){state.quantBits=+q.dataset.quant;state.step=1;$('#slide').classList.add('revealed');$('#controls').innerHTML=controlHTML('quantize');draw();return;}
   if(e.target.closest('#heads')){state.heads=state.heads===8?32:8;$('#controls').innerHTML=controlHTML('cache');draw();}
   if(e.target.closest('#roof-bits')){state.roofBits=state.roofBits===4?16:4;$('#controls').innerHTML=controlHTML('roofline');draw();}
+  if(e.target.closest('#compute')){state.compute=state.compute===2e12?1e11:2e12;$('#controls').innerHTML=controlHTML('roofline');draw();}
+  if(e.target.closest('#budget-cap')){state.budget=state.budget===8?4:8;$('#controls').innerHTML=controlHTML('budget');draw();}
+  if(e.target.closest('#budget-bits')){state.budgetBits=state.budgetBits===4?16:4;$('#controls').innerHTML=controlHTML('budget');draw();}
  });
  document.addEventListener('input',e=>{if(e.target.id==='bandwidth'){state.bandwidth=+e.target.value;$('#bandwidth-value').textContent=state.bandwidth+' Go/s';draw();}});
  document.addEventListener('change',e=>{if(e.target.id==='cache-size'){state.cache=+e.target.value;draw();}});
  $('#next').addEventListener('click',next);$('#previous').addEventListener('click',previous);
  $('#play').addEventListener('click',()=>{if(state.auto){pause();return;}state.auto=true;$('#play').textContent='Pause';$('#play').setAttribute('aria-pressed','true');schedule();});
- $('#toc').addEventListener('click',()=>modal('Le parcours', '<p>20 scènes pour comprendre, puis 3 pages de sources. Utiliser → pour construire le schéma, puis pour avancer. Les scènes interactives sont manipulables.</p><div class="toc-grid">'+slides.map((s,i)=>`<button data-jump="${i}">${String(i+1).padStart(2,'0')} · ${s.title.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ')}</button>`).join('')+'</div>'));
+ $('#toc').addEventListener('click',()=>modal('Le parcours', '<p>'+ (state.audience==='engineer'?'Parcours complet avec formules et recherches.':'15 scènes essentielles, puis 3 pages de sources. Aucun calcul avancé n’est requis.')+' Utiliser → pour construire le schéma, puis avancer. Le bouton Ingénieur ouvre les approfondissements.</p><div class="toc-grid">'+slides.map((s,i)=>`<button data-jump="${i}">${String(i+1).padStart(2,'0')} · ${s.title.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ')}</button>`).join('')+'</div>'));
+ $('#audience').addEventListener('click',()=>setAudience(state.audience==='engineer'?'discovery':'engineer'));
  $('#references').addEventListener('click',()=>showRefs());$('#glossary').addEventListener('click',()=>showGlossary());$('#close-modal').addEventListener('click',()=>$('#modal').close());
  $('#reader-toggle').addEventListener('click',toggleReader);
  function fullscreen(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.();}
@@ -288,6 +336,6 @@
  window.addEventListener('resize',resize);
  const hash=location.hash.slice(1).split('?'),start=slides.findIndex(s=>s.id===hash[0]);if(start>=0)state.index=start;if(hash[1]?.includes('step=1'))state.step=1;
  if(new URLSearchParams(location.search).has('print'))document.body.classList.add('print-mode','motion-off');
- window.Deck={go,next,previous,state,slides,refs,draw,pause,resize,showRefs,showGlossary,toggleReader};
+ window.Deck={go,goTo,setAudience,next,previous,state,slides,allSlides,refs,draw,pause,resize,showRefs,showGlossary,toggleReader};
  render(false);document.documentElement.dataset.ready='true';
 })();

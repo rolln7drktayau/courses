@@ -2,6 +2,8 @@
 
 Roland Cédric TAYO · INEM. Relecture du 11 novembre 2026.
 
+**Historique :** ce compte rendu décrit la version de 23 pages. La révision du 12 novembre sépare Découverte (18 pages) et Ingénieur (30 pages) ; voir [la relecture selon trois publics](RELECTURE-PUBLICS.md).
+
 ## Place et acquis visés
 
 Ce support est un panorama complémentaire au cours d’IA embarquée. En environ vingt minutes de présentation, on vise trois acquis : distinguer les sources d’information d’un modèle, expliquer ses principaux coûts d’inférence et reconnaître ce qui demande une vérification expérimentale. Les manipulations et échanges peuvent prolonger cette durée ; celle-ci n’a pas été mesurée devant une classe.

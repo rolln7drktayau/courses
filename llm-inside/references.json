@@ -142,5 +142,23 @@
     "url": "https://arxiv.org/abs/2005.11401",
     "type": "NeurIPS 2020",
     "use": "Combiner les paramètres d’un modèle et une source documentaire récupérée. Les documents sélectionnés fournissent un contexte supplémentaire ; ils ne garantissent pas une réponse vraie."
+  },
+  {
+    "id": "R17",
+    "title": "llama.cpp et llama-bench",
+    "authors": "Projet ggml",
+    "year": "Documentation évolutive",
+    "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench",
+    "type": "Documentation et implémentation officielles",
+    "use": "Mesurer séparément le traitement d’entrée et la génération. Le benchmark rapporte des temps ou débits ; il n’évalue pas la qualité et ne remplace pas la mesure du système intégré."
+  },
+  {
+    "id": "R18",
+    "title": "Raspberry Pi — matériel et fonctionnement",
+    "authors": "Raspberry Pi",
+    "year": "Documentation évolutive",
+    "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
+    "type": "Documentation officielle",
+    "use": "Capacités, alimentation et fonctionnement thermique. Les valeurs théoriques du mini-cours ne sont pas des débits mesurés d’un Raspberry Pi."
   }
 ]

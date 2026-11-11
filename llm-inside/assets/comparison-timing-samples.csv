@@ -1,0 +1,11 @@
+kind,version,repetition,elapsed_ms
+illustrative_not_measured,reference,1,110
+illustrative_not_measured,reference,2,115
+illustrative_not_measured,reference,3,120
+illustrative_not_measured,reference,4,135
+illustrative_not_measured,reference,5,145
+illustrative_not_measured,variant,1,75
+illustrative_not_measured,variant,2,77
+illustrative_not_measured,variant,3,80
+illustrative_not_measured,variant,4,92
+illustrative_not_measured,variant,5,105
