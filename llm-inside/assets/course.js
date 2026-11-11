@@ -3,7 +3,7 @@
  'use strict';
  const $=s=>document.querySelector(s), NS='http://www.w3.org/2000/svg';
  const slides=window.SLIDES, refs=window.REFERENCES;
- const state={index:0,step:0,context:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,quantBits:8,auto:false};
+ const state={index:0,step:0,context:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,quantBits:4,auto:false};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let timer, currentSpecs=[], currentEdges=[];
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -38,14 +38,20 @@
  function draw(){
   currentSpecs=[];currentEdges=[];
   const scene=slides[state.index].scene;
-  if(scene==='memory'||scene==='end'){
+  if(scene==='memory'){
    node('model',335,170,chip());
    node('context',45,45,tile(215,86,'Le contexte','ce que je fournis',colors.blue));
-   node('document',565,45,tile(235,86,'Les documents','si un outil les consulte',colors.sand));
+   node('document',565,45,tile(235,86,'Les documents','extraits ajoutés au contexte',colors.sand));
    node('word0',350,400,token('Paris',colors.pink,150),1);
-   link('a',250,130,335,210,1,true);link('b',580,130,515,210,1,true);link('c',425,330,425,395,1,true);
-   if(scene==='end')node('final',200,35,text(220,0,'INFORMATION · COÛT · PREUVE','minor','middle'));
-   else node('label',145,490,text(275,0,'Une réponse peut mobiliser plusieurs sources.','minor','middle'),1);
+   link('a',250,130,335,210,1,true);link('b',565,88,265,88,1,true);link('c',425,330,425,395,1,true);
+   node('label',145,490,text(275,0,'Les extraits consultés rejoignent le contexte.','minor','middle'),1);
+  }
+  if(scene==='end'){
+   node('information',320,25,tile(230,90,'Information','poids, contexte, documents',colors.blue));
+   node('cost',40,365,tile(230,90,'Coût','mémoire et temps',colors.sand));
+   node('evidence',580,365,tile(230,90,'Preuve','tests et mesures',colors.mint));
+   node('model',335,180,chip('DÉCISION','pour le besoin visé'),1);
+   link('a',385,115,155,360,1);link('b',275,410,575,410,1);link('c',690,360,485,115,1);
   }
   if(scene==='learn'){
    node('context',45,90,tile(230,95,'Exemples','texte d’apprentissage',colors.blue));
@@ -65,19 +71,20 @@
    node('label',650,70,rect(150,360,colors.sand)+lines(['Une ligne','par token.','','Beaucoup de','composantes.','','Axes sans','étiquette','obligatoire.'],18,40));
   }
   if(scene==='features'){
-   node('model',30,160,chip());
-   let s=`<path d="M220 0V310M40 155H420" stroke="#b1c4b8" stroke-width="1.5"/>`;
-   const labels=['forme','syntaxe','autre propriété','autre propriété'];
-   [[130,-100],[-140,-65],[150,115],[-110,135]].forEach(([x,y],i)=>{s+=`<path d="M220 155L${220+x} ${155+y}" stroke="${[colors.teal,colors.gold,'#6788ad','#9d6b8b'][i]}" stroke-width="3"/>`+text(220+x,155+y+(y<0?-14:24),labels[i],'minor',x>0?'end':'start');});
-   node('space',340,95,s,1);link('a',210,240,370,240,1);node('label',350,450,text(210,0,'Plusieurs directions dans le même espace.','minor','middle'),1);
+   [180,350].forEach((y,i)=>node('unit'+i,145,y,`<circle r="36" fill="${colors.mint}" stroke="#689b87"/>`+text(0,7,String(i+1),'mid','middle')+text(-88,65,'Unité '+(i+1),'minor')));
+   ['Nom d’animal','Forme plurielle','Rôle dans la phrase'].forEach((label,i)=>node('property'+i,470,65+i*145,tile(320,90,label,'propriété illustrée',i%2?colors.sand:colors.blue),1));
+   [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]].forEach(([a,b],i)=>link('share'+i,183,[180,350][a],465,110+b*145,1));
+   node('label',160,500,text(280,0,'Deux unités partagées par trois propriétés illustrées.','minor','middle'),1);
   }
   if(scene==='attention'){
    const names=state.context?['En','avril,','il','pleut.']:['Avril','chante.'];
-   names.forEach((w,i)=>node('word'+i,50+i*183,55,token(w,w.toLowerCase().startsWith('avril')?colors.sand:colors.blue,160)));
-   node('model',335,220,chip('ATTENTION','combiner le contexte'));
-   names.forEach((w,i)=>link('e'+i,130+i*183,114,425,220,1,true));
-   node('meaning',245,430,tile(365,80,state.context?'Un mois de l’année':'Une personne qui chante','interprétation illustrée',colors.sand),1);
-   link('c',425,380,425,427,1);
+   names.forEach((w,i)=>{node('word'+i,50+i*183,35,token(w,w.toLowerCase().startsWith('avril')?colors.sand:colors.blue,160));node('kv-label'+i,50+i*183,118,text(80,0,'K : repère · V : info','minor','middle'));});
+   node('query',550,175,tile(260,90,'Dernier token','Q : ce que je cherche',colors.sand));
+   node('model',335,240,chip('ATTENTION','combiner les valeurs'));
+   names.forEach((w,i)=>link('e'+i,130+i*183,130,360,235,1,true));
+   link('q-query',130+(names.length-1)*183,93,680,170,1);link('q-compare',550,225,520,285,1);
+   node('meaning',245,430,tile(365,80,state.context?'Un mois de l’année':'Une personne qui chante','à la fin de la phrase',colors.sand),1);
+   link('c',425,400,425,427,1);
   }
   if(scene==='decode'){
    node('context',35,55,tile(770,95,'PREFILL : le contexte est traité','« La capitale de la France est »',colors.blue));
@@ -94,10 +101,10 @@
   if(scene==='cache'){
    const gib=math.kvBytes(32,state.cache,state.heads,128,2)/2**30;
    node('model',35,170,chip());
-   let grid='';const count=Math.min(64,Math.max(4,Math.round(state.cache/512)));
-   for(let i=0;i<count;i++)grid+=`<rect x="${(i%16)*26}" y="${Math.floor(i/16)*32}" width="20" height="25" rx="4" fill="${state.heads===8?'#8cbda5':'#caa46a'}"/>`;
+   let grid='';const rows=state.heads/4,cols=Math.max(1,Math.ceil(state.cache/2048));
+   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)grid+=`<rect x="${c*25}" y="${r*16}" width="20" height="12" rx="3" fill="${state.heads===8?'#8cbda5':'#caa46a'}"/>`;
    node('kv',330,145,rect(455,250,'#fff')+text(22,40,'CACHE K / V','mid')+`<g transform="translate(22 65)">${grid}</g>`+text(22,222,number(gib,2)+' Gio','big'));
-   link('a',215,245,325,245,1,true);node('label',260,450,text(270,0,number(state.cache,0)+' tokens · '+state.heads+' têtes K/V','minor','middle'),1);
+   link('a',215,245,325,245,1,true);node('label',260,450,text(270,0,number(state.cache,0)+' tokens · '+state.heads+' têtes K/V','minor','middle')+text(270,30,'Plus de contexte : colonnes · plus de têtes : lignes','minor','middle'),1);
   }
   if(scene==='roofline'){
    const fixed=slides[state.index].id==='q-bandwidth';
@@ -112,21 +119,27 @@
    const pos=v=>105+(v+1)*315;
    node('axis',0,60,`<path d="M90 180H760" stroke="#819e90" stroke-width="2"/>`+[-1,-.5,0,.5,1].map(v=>`<path d="M${pos(v)} 170V190" stroke="#819e90"/>`+text(pos(v),218,number(v,1),'minor','middle')).join(''));
    w.forEach((v,i)=>{node('original'+i,pos(v),105,`<circle r="9" fill="${colors.gold}"/>`+text(0,-20,number(v,2),'minor','middle'));node('rounded'+i,pos(state.step?back[i]:v),285,`<circle r="11" fill="${colors.teal}"/>`+text(0,33,number(back[i],2),'minor','middle'),1);link('q'+i,pos(v),125,pos(back[i]),272,1);});
-   node('before',60,390,tile(320,95,'Sortie initiale : '+number(before,4),'y = Σ wᵢxᵢ',colors.sand));
+   node('quant-legend',95,35,`<circle r="6" fill="${colors.gold}"/>`+text(15,6,'poids initiaux w','minor')+`<circle cx="330" r="6" fill="${colors.teal}"/>`+text(345,6,'poids reconstruits ŵ','minor'));
+   node('before',60,390,tile(320,95,'Sortie initiale : '+number(before,4),'y = somme des wᵢxᵢ',colors.sand));
    node('after',430,390,tile(350,95,'Après : '+number(after,4),'écart absolu : '+number(Math.abs(after-before),4),colors.mint),1);
   }
   if(scene==='flash'){
-   node('global',45,55,rect(750,110,colors.blue)+text(375,38,'Mémoire globale GPU · HBM','mid','middle')+text(375,78,'Q, K, V et la sortie','minor','middle'));
+   node('global',45,55,rect(750,110,colors.blue)+text(375,38,'Mémoire globale du GPU','mid','middle')+text(375,78,'Q, K, V et la sortie','minor','middle'));
    node('local',205,280,rect(440,175,colors.mint)+text(220,38,'Mémoire rapide sur puce','mid','middle')+text(220,145,'réutiliser les blocs avant de repartir','minor','middle'));
    for(let i=0;i<3;i++)node('block'+i,250+i*115,state.step?350:105,rect(85,54,['#acd1bc','#cde0ee','#e5cba5'][i])+text(42,34,['Q','K','V'][i],'mid','middle'));
    link('a',280,165,280,275,1,true);link('b',570,280,570,170,1,true);
   }
   if(scene==='architectures'){
-   ['A','B','C','D'].forEach((x,i)=>node('word'+i,45+i*200,35,token(x,colors.blue,150)));
-   node('hash-box',45,260,tile(330,150,'Reformer','sélection de candidats',colors.sand)+text(165,115,'recherche approximative','minor','middle'),1);
-   node('model',480,245,chip('Mamba','état mis à jour'),1);
-   link('a',145,110,180,255,1);link('b',660,110,570,240,1);
-   node('label',75,465,text(340,0,'Choisir une autre représentation change les compromis.','minor','middle'),1);
+   node('history',45,30,tile(760,80,'Le même texte : A · B · C · D','deux stratégies différentes',colors.blue));
+   node('hash-box',45,200,tile(330,120,'Reformer','codes → groupes de candidats',colors.sand)+text(165,100,'certains éléments peuvent être manqués','minor','middle'),1);
+   ['A','C'].forEach((t,i)=>node('candidate'+i,105+i*130,355,token(t,colors.sand,100),1));
+   link('select-a',165,320,155,350,1);link('select-c',255,320,285,350,1);
+   node('selection-note',40,460,text(180,0,'A et C retenus dans cet exemple','minor','middle'),1);
+   node('old-state',470,195,tile(145,100,'État','résumé de A à C',colors.mint),1);
+   node('new-input',665,195,token('D',colors.blue,130),1);
+   node('new-state',545,355,tile(230,95,'Nouvel état','résumé mis à jour',colors.mint),1);
+   link('a',180,110,180,195,1);link('b',640,110,555,190,1);link('state-prev',545,295,610,350,1);link('state-input',730,255,710,350,1);
+   node('label',475,490,text(180,0,'Mamba : taille de l’état fixée par le modèle','minor','middle'),1);
   }
   if(scene==='bitnet'){
    ['−1','0','+1'].forEach((w,i)=>node('weight'+i,70+i*245,80,rect(200,160,[colors.pink,'#eceee8',colors.mint][i])+text(100,80,w,'big','middle')+text(100,125,['soustraire','ignorer','additionner'][i],'minor','middle')));
@@ -134,10 +147,12 @@
   }
   if(scene==='speculative'){
    node('draft',40,70,tile(200,100,'Brouillon','proposer',colors.sand));
-   ['Le','chat','vole'].forEach((w,i)=>node('word'+i,300+i*170,90,token(w,i===2?colors.pink:colors.mint,140)));
+   ['Le','chat','dort'].forEach((w,i)=>{node('word'+i,300+i*170,90,token(w,i===2?colors.pink:colors.mint,140));node('accept'+i,300+i*170,180,text(70,0,i===2?'rejeté':'accepté','minor','middle'),1);});
    node('model',355,275,chip('CIBLE','vérifier et corriger'),1);
-   link('a',240,120,295,120);link('b',550,150,445,270,1);
-   node('correction',615,325,tile(185,95,'dort','correction illustrée',colors.mint),1);
+   link('a',240,120,295,120);
+   [370,540,710].forEach((x,i)=>link('verify'+i,x,150,390+i*50,270,1));
+   link('correct',535,355,610,365,1);
+   node('correction',615,325,tile(185,95,'joue','autre suite possible',colors.mint),1);
    node('label',40,475,text(385,0,'La vraie règle porte sur des probabilités, pas sur « cela semble juste ».','minor','middle'),1);
   }
   if(scene==='proof'){
@@ -196,7 +211,7 @@
  function render(animate=true){
   const s=slides[state.index];$('#slide').dataset.scene=s.id;$('#slide').classList.toggle('question',!!s.question);$('#slide').classList.toggle('reference-slide',!!s.reading);$('#slide').classList.toggle('revealed',state.step===1);
   $('#chapter').textContent=s.chapter;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title;$('#lead').textContent=s.lead;$('#body').innerHTML=bodyHTML(s);$('#takeaway').textContent=s.take;
-  $('#caption').textContent=s.caption||'';$('#controls').innerHTML=controlHTML(s.control);
+  $('#caption').textContent=s.caption||'';$('#controls').innerHTML=controlHTML(s.control);decorateKeywords();
   $('#citations').innerHTML=(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}" data-ref="${id}" target="_blank" rel="noopener">${id}</a>`).join('');
   $('#slide-number').textContent=`${state.index+1} / ${slides.length}`;$('#position').textContent=`${String(state.index+1).padStart(2,'0')} / ${slides.length}`;$('#progress').style.width=(100*(state.index+(state.step?1:.35))/slides.length)+'%';
   $('#hint').textContent=state.step?'→ Scène suivante':'→ Construire le schéma';$('#previous').disabled=state.index===0&&state.step===0;$('#next').disabled=state.index===slides.length-1&&state.step===1;
@@ -213,6 +228,32 @@
  function go(index,revealed=false){pause();state.index=Math.max(0,Math.min(slides.length-1,index));state.step=revealed?1:0;render(false);}
  function modal(title,html){pause();$('#modal-title').textContent=title;$('#modal-content').innerHTML=html;$('#modal').showModal();}
  function refHTML(r){return `<article class="reference" id="ref-${r.id}"><strong>${r.id} · ${esc(r.title)}</strong><p>${esc(r.authors)} · ${esc(r.year)} · ${esc(r.type)}</p><p>${esc(r.use)}</p><a href="${r.url}" target="_blank" rel="noopener">Lire la source originale ↗</a></article>`;}
+ const keywords=window.KEYWORDS;
+ const aliases=keywords.flatMap(k=>k.aliases.map(alias=>({alias,id:k.id}))).sort((a,b)=>b.alias.length-a.alias.length);
+ const escapeRegex=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const termPattern=new RegExp('(?<![\\p{L}\\p{N}_])('+[...new Set(aliases.map(x=>escapeRegex(x.alias)))].join('|')+')(?![\\p{L}\\p{N}_])','giu');
+ function decorateKeywords(){
+  if(slides[state.index].reading)return;
+  const seen=new Set();
+  for(const root of [$('.copy'),$('#caption')]){
+   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];
+   while(walker.nextNode()){const t=walker.currentNode;if(!t.parentElement.closest('button,a,.equation'))nodes.push(t);}
+   for(const t of nodes){
+    const original=t.textContent;termPattern.lastIndex=0;let match,last=0,changed=false;const fragment=document.createDocumentFragment();
+    while((match=termPattern.exec(original))){
+     const k=aliases.find(x=>x.alias.toLocaleLowerCase('fr')===match[0].toLocaleLowerCase('fr'));
+     if(!k||seen.has(k.id))continue;
+     seen.add(k.id);fragment.append(document.createTextNode(original.slice(last,match.index)));
+     const b=document.createElement('button');b.className='term';b.dataset.term=k.id;b.textContent=match[0];b.setAttribute('aria-label','Définition : '+match[0]);fragment.append(b);last=match.index+match[0].length;changed=true;
+    }
+    if(changed){fragment.append(document.createTextNode(original.slice(last)));t.replaceWith(fragment);}
+   }
+  }
+ }
+ function showGlossary(id){
+  const entries=id?keywords.filter(k=>k.id===id):[...keywords].sort((a,b)=>a.term.localeCompare(b.term,'fr'));
+  modal(id?'Un mot, une définition':'Les mots du mini-cours','<p>Les mots soulignés dans les scènes ouvrent ces définitions. Les notions essentielles sont aussi expliquées dans le texte du PDF.</p>'+entries.map(k=>`<article class="reference"><strong>${esc(k.term)}</strong><p>${esc(k.definition)}</p></article>`).join(''));
+ }
  function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections apportées au texte de départ</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
  function toggleReader(){
   const show=!document.body.classList.contains('reader-mode');pause();document.body.classList.toggle('reader-mode',show);$('#reader-toggle').setAttribute('aria-pressed',String(show));$('#reader-toggle').textContent=show?'Présenter':'Lire';$('#reader').hidden=!show;
@@ -224,6 +265,7 @@
   resize();
  }
  document.addEventListener('click',e=>{
+  const word=e.target.closest('[data-term]');if(word){showGlossary(word.dataset.term);return;}
   const answer=e.target.closest('[data-answer]');if(answer){pause();const s=slides[state.index],i=+answer.dataset.answer;$('#feedback').textContent=(i===s.answer?'Oui. ':'À reconsidérer. ')+s.explanation;$('#body').querySelectorAll('[data-answer]').forEach(b=>b.classList.toggle('correct',+b.dataset.answer===s.answer));answer.classList.toggle('incorrect',i!==s.answer);state.step=1;$('#slide').classList.add('revealed');draw();setHash();return;}
   const ref=e.target.closest('[data-ref]');if(ref){e.preventDefault();showRefs(ref.dataset.ref);return;}
   const jump=e.target.closest('[data-jump]');if(jump){$('#modal').close();go(+jump.dataset.jump);return;}
@@ -238,14 +280,14 @@
  $('#next').addEventListener('click',next);$('#previous').addEventListener('click',previous);
  $('#play').addEventListener('click',()=>{if(state.auto){pause();return;}state.auto=true;$('#play').textContent='Pause';$('#play').setAttribute('aria-pressed','true');schedule();});
  $('#toc').addEventListener('click',()=>modal('Le parcours', '<p>20 scènes pour comprendre, puis 3 pages de sources. Utiliser → pour construire le schéma, puis pour avancer. Les scènes interactives sont manipulables.</p><div class="toc-grid">'+slides.map((s,i)=>`<button data-jump="${i}">${String(i+1).padStart(2,'0')} · ${s.title.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ')}</button>`).join('')+'</div>'));
- $('#references').addEventListener('click',()=>showRefs());$('#close-modal').addEventListener('click',()=>$('#modal').close());
+ $('#references').addEventListener('click',()=>showRefs());$('#glossary').addEventListener('click',()=>showGlossary());$('#close-modal').addEventListener('click',()=>$('#modal').close());
  $('#reader-toggle').addEventListener('click',toggleReader);
  function fullscreen(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.();}
  $('#fullscreen').addEventListener('click',fullscreen);
- document.addEventListener('keydown',e=>{if($('#modal').open||e.target.matches('input,select,textarea')||document.body.classList.contains('reader-mode'))return;if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();previous();}if(e.key==='Home'){e.preventDefault();go(0);}if(e.key==='End'){e.preventDefault();go(slides.length-1,true);}if(e.key.toLowerCase()==='f')fullscreen();});
+ document.addEventListener('keydown',e=>{if($('#modal').open||e.target.matches('input,select,textarea')||document.body.classList.contains('reader-mode'))return;if(e.target.closest('button,a')&&[' ','Enter'].includes(e.key))return;if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();previous();}if(e.key==='Home'){e.preventDefault();go(0);}if(e.key==='End'){e.preventDefault();go(slides.length-1,true);}if(e.key.toLowerCase()==='f')fullscreen();});
  window.addEventListener('resize',resize);
  const hash=location.hash.slice(1).split('?'),start=slides.findIndex(s=>s.id===hash[0]);if(start>=0)state.index=start;if(hash[1]?.includes('step=1'))state.step=1;
  if(new URLSearchParams(location.search).has('print'))document.body.classList.add('print-mode','motion-off');
- window.Deck={go,next,previous,state,slides,refs,draw,pause,resize,showRefs,toggleReader};
+ window.Deck={go,next,previous,state,slides,refs,draw,pause,resize,showRefs,showGlossary,toggleReader};
  render(false);document.documentElement.dataset.ready='true';
 })();

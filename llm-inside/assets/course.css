@@ -4,3 +4,7 @@
 
 .reader-svg svg text{font-family:"Segoe UI",Arial,sans-serif;fill:var(--ink);font-size:20px}.reader-svg svg .minor{font-size:15px;fill:var(--muted)}.reader-svg svg .big{font-size:42px;font-weight:750}.reader-svg svg .mid{font-size:25px;font-weight:650}.reader-svg svg .mono{font:18px Consolas,monospace}.reader-svg .edge{fill:none;stroke:#688480;stroke-width:2.4;marker-end:url(#r0-arrow)}
 [data-scene="quantize"] .legend{font-size:17px;line-height:1.35}
+
+button.term{display:inline;border:0;border-bottom:1px dotted #719b8e;border-radius:0;padding:0;margin:0;background:none;color:inherit;font:inherit;font-weight:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;vertical-align:baseline}button.term:hover{background:#d9eee5}h1 button.term{border-bottom:0}.term:focus-visible{outline:2px solid #b66a26;outline-offset:2px}.print-mode .term{border:0}@media print{button.term{border:0}}@media(max-width:700px){.brand{font-size:15px}.tools{gap:1px;font-size:10px}.tools button,.tools a{padding:6px 4px}}
+[data-scene="quantize"] .equation{font-size:26px;line-height:1.25;padding:12px 18px}
+button.term{text-transform:inherit}

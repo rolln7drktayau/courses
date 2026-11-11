@@ -156,6 +156,16 @@ Implémentations et modèles compatibles. La disponibilité du code ne garantit 
 
 
 
+## R16 — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+
+Patrick Lewis et al.. 2020. **NeurIPS 2020.**
+
+[Source originale](https://arxiv.org/abs/2005.11401)
+
+Combiner les paramètres d’un modèle et une source documentaire récupérée. Les documents sélectionnés fournissent un contexte supplémentaire ; ils ne garantissent pas une réponse vraie.
+
+
+
 ## Inspiration visuelle
 
 Nerdy Kings, [vidéo indiquée par l’enseignant](https://www.youtube.com/watch?v=gYG4J6Do0UU). Référence de rythme et de construction visuelle uniquement ; schémas et code du support originaux.

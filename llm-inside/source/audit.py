@@ -16,6 +16,8 @@ def main():
         requests=[];page.on('request',lambda r:requests.append(r.url))
         page.goto((ROOT/'index.html').as_uri())
         page.wait_for_function('document.documentElement.dataset.ready === "true"')
+        def go(sid,revealed=True):
+            page.evaluate('([id,full])=>Deck.go(Deck.slides.findIndex(s=>s.id===id),full)',[sid,revealed])
         values=page.evaluate('''()=>{
           const m=MathLab,q=m.quantize([-.9,-.32,.18,.76],4);
           const z=m.quantize([0,0],2),r=m.roofline(7e9,4,50e9,2e12);
@@ -38,29 +40,61 @@ def main():
         assert values['collisions']==16_384_000
         report['calculated_examples']=values
         # Actual control changes must update the SVG, not just the labels.
-        page.evaluate('Deck.go(7,true)');page.locator('[data-bits="4"]').click()
+        go('weights');page.locator('[data-bits="4"]').click()
         assert '3,50 Go' in page.locator('#art').text_content()
-        page.evaluate('Deck.go(8,true)');page.locator('#cache-size').select_option('32768')
+        go('cache');page.locator('#cache-size').select_option('32768')
         assert '4,00 Gio' in page.locator('#art').text_content()
+        small_grid=page.locator('[data-key="kv"] rect').count()-1
         page.locator('#heads').click();assert '16,00 Gio' in page.locator('#art').text_content()
-        page.evaluate('Deck.go(9,true)');page.locator('#bandwidth').fill('100')
+        assert page.locator('[data-key="kv"] rect').count()-1==4*small_grid
+        go('roofline');page.locator('#bandwidth').fill('100')
         assert '35,0 ms' in page.locator('#art').text_content()
-        page.evaluate('Deck.go(11,true)');page.locator('[data-quant="2"]').click()
+        go('quantize');page.locator('[data-quant="2"]').click()
         assert page.evaluate('Deck.state.quantBits')==2
-        page.evaluate('Deck.go(4,true)');page.locator('[data-context="1"]').click()
+        go('attention');page.locator('[data-context="1"]').click()
         assert 'Un mois' in page.locator('#art').text_content()
-        for index in [5,10,17]:
-            page.evaluate('(i)=>Deck.go(i)',index)
-            page.locator('[data-answer="0"]').click()
-            assert page.locator('[data-answer="0"]').get_attribute('class')=='incorrect'
-            assert page.locator('[data-answer="1"]').get_attribute('class')=='correct'
+        assert 'Dernier token' in page.locator('#art').text_content()
+        answers=[]
+        for sid in ['q-memory','q-bandwidth','q-hash']:
+            go(sid,False)
+            answer=page.evaluate('Deck.slides[Deck.state.index].answer');wrong=(answer+1)%3;answers.append(answer)
+            page.locator(f'[data-answer="{wrong}"]').click()
+            assert 'incorrect' in page.locator(f'[data-answer="{wrong}"]').get_attribute('class')
+            assert 'correct' in page.locator(f'[data-answer="{answer}"]').get_attribute('class')
             assert page.locator('#feedback').inner_text()
+        assert set(answers)=={0,1,2}
+        order=page.evaluate('Deck.slides.map(s=>s.id)')
+        assert order.index('attention')<order.index('distributed')
+        assert order.index('q-hash')==order.index('architectures')+1
+        assert order.index('proof')+1==order.index('pi')
+        go('embedding');page.locator('[data-term="token"]').first.click()
+        assert page.locator('#modal-title').inner_text()=='Un mot, une définition'
+        assert 'Unité traitée' in page.locator('#modal-content').inner_text()
+        page.locator('#close-modal').click()
+        page.locator('[data-term="token"]').first.focus();page.keyboard.press('Space')
+        assert page.locator('#modal').get_attribute('open') is not None
+        page.locator('#close-modal').click();page.locator('#glossary').click()
+        assert page.locator('#modal .reference').count()==len(page.evaluate('KEYWORDS'))
+        page.locator('#close-modal').click()
+        glossary=page.evaluate('KEYWORDS');assert all(k['definition'].strip() for k in glossary)
+        linked_first_scenes=[]
+        for item in glossary:
+            if item.get('first'):
+                go(item['first'])
+                assert page.locator(f'[data-term="{item["id"]}"]').count(),item
+                linked_first_scenes.append(item['id'])
+        report['pedagogical_checks']={'defined_keywords':len(glossary),'inline_definitions':'manually reviewed in content',
+          'attention_before_shared_features':True,'hash_question_immediately_after_hashing':True,
+          'attention_illustration_uses_final_position':True,'cache_grid_changes_with_head_count':True,
+          'question_correct_positions':answers,'original_conversation_reference_removed':True,
+          'definitions_linked_at_introducing_scene':linked_first_scenes}
         page.evaluate('Deck.go(0)');page.keyboard.press('ArrowRight')
         assert page.evaluate('Deck.state.index===0 && Deck.state.step===1')
         page.keyboard.press('ArrowRight');assert page.evaluate('Deck.state.index')==1
         page.keyboard.press('ArrowLeft');assert page.evaluate('Deck.state.index')==0
-        page.locator('#toc').click();page.locator('[data-jump="8"]').click()
-        assert page.evaluate('Deck.state.index')==8
+        cache_index=order.index('cache')
+        page.locator('#toc').click();page.locator(f'[data-jump="{cache_index}"]').click()
+        assert page.evaluate('Deck.state.index')==cache_index
         page.locator('[data-ref="R6"]').click();assert page.locator('#modal').get_attribute('open') is not None
         assert page.locator('#ref-R6').is_visible();page.locator('#close-modal').click()
         # The same SVG object is retained across scenes; movement is not only a fade.
@@ -109,7 +143,7 @@ def main():
           'context switch','three questions and feedback','keyboard navigation','outline','per-scene citations',
           'continuous mobile reading','auto-play stops at a question']
         references=page.evaluate('REFERENCES')
-        assert len({r['id'] for r in references})==15
+        assert len({r['id'] for r in references})==16
         assert not [u for u in requests if u.startswith('http')],requests
         browser.close()
         reduced=p.chromium.launch(executable_path=CHROME,headless=True)

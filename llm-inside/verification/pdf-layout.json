@@ -1,15 +1,15 @@
 [
   {
     "id": "opening",
-    "copyBottom": 631.71875,
+    "copyBottom": 714.84375,
     "footerTop": 831,
-    "visualBottom": 757.515625,
+    "visualBottom": 778.515625,
     "slideWidth": 1600,
     "slideHeight": 900
   },
   {
     "id": "learn",
-    "copyBottom": 631.71875,
+    "copyBottom": 700.84375,
     "footerTop": 831,
     "visualBottom": 757.515625,
     "slideWidth": 1600,
@@ -17,15 +17,7 @@
   },
   {
     "id": "embedding",
-    "copyBottom": 693.3125,
-    "footerTop": 831,
-    "visualBottom": 757.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "distributed",
-    "copyBottom": 731.640625,
+    "copyBottom": 707.3125,
     "footerTop": 831,
     "visualBottom": 757.515625,
     "slideWidth": 1600,
@@ -33,9 +25,17 @@
   },
   {
     "id": "attention",
-    "copyBottom": 725.71875,
+    "copyBottom": 791.046875,
     "footerTop": 831,
-    "visualBottom": 758.515625,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "distributed",
+    "copyBottom": 768.90625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
     "slideWidth": 1600,
     "slideHeight": 900
   },
@@ -51,13 +51,13 @@
     "id": "decode",
     "copyBottom": 662.515625,
     "footerTop": 831,
-    "visualBottom": 778.515625,
+    "visualBottom": 757.515625,
     "slideWidth": 1600,
     "slideHeight": 900
   },
   {
     "id": "weights",
-    "copyBottom": 730.75,
+    "copyBottom": 769.078125,
     "footerTop": 831,
     "visualBottom": 758.515625,
     "slideWidth": 1600,
@@ -65,7 +65,7 @@
   },
   {
     "id": "cache",
-    "copyBottom": 733.84375,
+    "copyBottom": 772.171875,
     "footerTop": 831,
     "visualBottom": 758.515625,
     "slideWidth": 1600,
@@ -73,7 +73,7 @@
   },
   {
     "id": "roofline",
-    "copyBottom": 725.71875,
+    "copyBottom": 764.046875,
     "footerTop": 831,
     "visualBottom": 779.515625,
     "slideWidth": 1600,
@@ -89,15 +89,15 @@
   },
   {
     "id": "quantize",
-    "copyBottom": 817.65625,
+    "copyBottom": 800.484375,
     "footerTop": 831,
-    "visualBottom": 758.515625,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900
   },
   {
     "id": "flash",
-    "copyBottom": 662.515625,
+    "copyBottom": 731.640625,
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
@@ -105,31 +105,7 @@
   },
   {
     "id": "architectures",
-    "copyBottom": 725.5,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "bitnet",
-    "copyBottom": 809.828125,
-    "footerTop": 831,
-    "visualBottom": 757.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "speculative",
-    "copyBottom": 694.703125,
-    "footerTop": 831,
-    "visualBottom": 778.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900
-  },
-  {
-    "id": "proof",
-    "copyBottom": 700.84375,
+    "copyBottom": 756.296875,
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
@@ -137,15 +113,39 @@
   },
   {
     "id": "q-hash",
-    "copyBottom": 780.3125,
+    "copyBottom": 802.3125,
     "footerTop": 831,
     "visualBottom": 737.46875,
     "slideWidth": 1600,
     "slideHeight": 900
   },
   {
+    "id": "bitnet",
+    "copyBottom": 798.5,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "speculative",
+    "copyBottom": 693.3125,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
+    "id": "proof",
+    "copyBottom": 745.640625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900
+  },
+  {
     "id": "pi",
-    "copyBottom": 795.6875,
+    "copyBottom": 789.546875,
     "footerTop": 831,
     "visualBottom": 778.515625,
     "slideWidth": 1600,
@@ -161,7 +161,7 @@
   },
   {
     "id": "sources-memory",
-    "copyBottom": 783.984375,
+    "copyBottom": 809.984375,
     "footerTop": 831,
     "visualBottom": 0,
     "slideWidth": 1600,

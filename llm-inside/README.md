@@ -6,6 +6,7 @@ Roland Cédric TAYO · INEM. Mini-cours en français, environ vingt minutes avec
 - [PDF](course.pdf) : les mêmes 23 scènes, construites et avec les réponses aux pauses questions.
 - [Sources scientifiques](SOURCES.md), accessibles aussi au pied des scènes.
 - [Corrections du texte initial](CORRECTIONS.md).
+- [Relecture pédagogique et limites](RELECTURE.md).
 - [Cours complet d’IA embarquée](../embedded-ai/).
 
 ## Utilisation
@@ -14,11 +15,14 @@ Ouvrir `index.html`. Aucun compte, aucune installation et aucun appel à un mod�
 
 Flèches gauche/droite ou espace : revenir, construire un schéma, puis avancer. `F` : plein écran ; `Home` : début ; `End` : dernière page. Les boutons Plan et Sources ouvrent des panneaux. La lecture automatique est facultative et s’arrête aux questions et à la conclusion. Les curseurs et boutons permettent de varier les hypothèses des calculs. Le bouton **Lire** propose une version continue, plus pratique sur un téléphone. La préférence système de réduction des animations est respectée.
 
+Les mots soulignés sont cliquables : leur définition s’ouvre sans quitter la scène. Le bouton **Lexique** rassemble les définitions. Les mots essentiels et les symboles des équations sont aussi expliqués près de leur introduction pour que le PDF reste compréhensible seul.
+
 Les scènes partagent un espace SVG : les objets se déplacent et les liaisons se recomposent. Les textes changent séparément ; l’animation sert la continuité du raisonnement. Les illustrations restent schématiques, et les nombres théoriques sont présentés comme tels.
 
 ## Sources du support
 
 - `assets/content.js` : texte, questions et bibliographie.
+- `assets/keywords.js` : mots-clés et définitions.
 - `assets/course.js` : dessins SVG, transitions, commandes et calculs pédagogiques.
 - `assets/course.css` : présentation, lecture et impression.
 - `source/build_pdf.py` : export vectoriel des scènes vers le PDF.

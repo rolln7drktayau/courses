@@ -133,5 +133,14 @@
     "url": "https://github.com/microsoft/BitNet",
     "type": "Dépôt officiel",
     "use": "Implémentations et modèles compatibles. La disponibilité du code ne garantit ni la prise en charge de toute machine ni la qualité sur toute tâche."
+  },
+  {
+    "id": "R16",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "authors": "Patrick Lewis et al.",
+    "year": "2020",
+    "url": "https://arxiv.org/abs/2005.11401",
+    "type": "NeurIPS 2020",
+    "use": "Combiner les paramètres d’un modèle et une source documentaire récupérée. Les documents sélectionnés fournissent un contexte supplémentaire ; ils ne garantissent pas une réponse vraie."
   }
 ]

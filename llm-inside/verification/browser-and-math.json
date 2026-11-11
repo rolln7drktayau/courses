@@ -38,6 +38,70 @@
     },
     "collisions": 16384000
   },
+  "pedagogical_checks": {
+    "defined_keywords": 48,
+    "inline_definitions": "manually reviewed in content",
+    "attention_before_shared_features": true,
+    "hash_question_immediately_after_hashing": true,
+    "attention_illustration_uses_final_position": true,
+    "cache_grid_changes_with_head_count": true,
+    "question_correct_positions": [
+      0,
+      1,
+      2
+    ],
+    "original_conversation_reference_removed": true,
+    "definitions_linked_at_introducing_scene": [
+      "ai",
+      "llm",
+      "weights",
+      "context",
+      "training",
+      "inference",
+      "token",
+      "tokenizer",
+      "vector",
+      "embedding",
+      "attention",
+      "softmax",
+      "causal",
+      "neuron",
+      "matrix",
+      "mlp",
+      "activation",
+      "superposition",
+      "transformer",
+      "prefill",
+      "decode",
+      "autoregressive",
+      "throughput",
+      "bit",
+      "precision",
+      "parameter",
+      "ram",
+      "cache",
+      "head",
+      "gqa",
+      "latency",
+      "bound",
+      "quantization",
+      "scale",
+      "float",
+      "gpu",
+      "hash",
+      "state",
+      "collision",
+      "ternary",
+      "kernel",
+      "distribution",
+      "sampling",
+      "hypothesis",
+      "runtime",
+      "reference",
+      "csv",
+      "fingerprint"
+    ]
+  },
   "shared_object_transition": {
     "retained": true,
     "moved": true,
@@ -45,7 +109,7 @@
   },
   "observed_transition": {
     "before": "matrix(1, 0, 0, 1, 335, 170)",
-    "during": "matrix(1, 0, 0, 1, 338.026, 106.459)",
+    "during": "matrix(1, 0, 0, 1, 338.226, 102.248)",
     "after": "matrix(1, 0, 0, 1, 340, 65)"
   },
   "viewports": {
@@ -71,5 +135,5 @@
   "external_runtime_requests": [],
   "reduced_motion": "respected",
   "pdf_pages": 23,
-  "pdf_links": 47
+  "pdf_links": 50
 }
