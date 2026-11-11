@@ -26,3 +26,11 @@ Le PDF public de départ était bien à jour : ses octets correspondaient au fic
 L’agent a demandé de retirer les notations et termes techniques restant dans la scène de quantification Découverte, de définir le périmètre des durées du tableau et de corriger un titre dont le point d’interrogation passait seul à la ligne. Ces points ont été corrigés et les deux PDF régénérés. Une dernière relecture ciblée les a confirmés.
 
 Les tests du support contrôlent les calculs, les deux parcours, les questions, les définitions, les changements de schéma, les liens, les tailles d’écran et les deux PDF. Ils ne prouvent pas que le public a appris ; une séance avec de vrais lecteurs reste la façon de vérifier cela.
+
+## Renforcement : étapes et recherche sous contraintes
+
+Après le retour sur l’illustration des embeddings, le bloc abstrait a été remplacé par des tokens, des identifiants fictifs, une table de vecteurs et une sortie sélectionnée. Les schémas ont trois états numérotés distincts ; un parcours en cinq parties les situe dans la démarche.
+
+Le parcours Découverte reste à 15 scènes et 3 pages de sources. Les contraintes, les pistes par brique et la préparation d’une enquête remplacent des éléments moins prioritaires ; ces derniers restent dans le parcours Ingénieur, désormais de 33 pages. Une fiche d’hypothèse JSON est téléchargeable sans transmettre de données. Le critère pédagogique final est de savoir choisir un coût, expliquer une idée, annoncer un risque et préparer un test, pas seulement réciter des termes.
+
+Une relecture ciblée par l’agent a confirmé la distinction des trois étapes, le fonctionnement du choix de token et la présence des contraintes mémoire, temps, énergie/chaleur, fiabilité et exploitation. Cela reste une simulation de lecture, pas un test auprès de vrais apprenants.

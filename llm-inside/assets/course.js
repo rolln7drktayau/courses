@@ -6,7 +6,7 @@
  const initialId=location.hash.slice(1).split('?')[0];
  const initialAudience=new URLSearchParams(location.search).get('audience')==='engineer'||(initialId&&allSlides.some(s=>s.id===initialId)&&!discoveryIds.includes(initialId))?'engineer':'discovery';
  let slides=initialAudience==='engineer'?allSlides:discoveryIds.map(id=>allSlides.find(s=>s.id===id));
- const state={index:0,step:0,context:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,compute:2e12,budget:8,budgetBits:4,quantBits:4,auto:false,audience:initialAudience};
+ const state={index:0,step:0,context:0,embeddingToken:1,lever:0,bits:16,cache:8192,heads:8,roofBits:4,bandwidth:50,compute:2e12,budget:8,budgetBits:4,quantBits:4,auto:false,audience:initialAudience};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let timer, currentSpecs=[], currentEdges=[];
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -32,11 +32,14 @@
  }
  const token=(label,fill=colors.blue,w=112)=>rect(w,58,fill)+text(w/2,36,label,'','middle');
  const specs=new Map(),edges=new Map();
- function node(key,x,y,markup,level=0){currentSpecs.push({key,x,y,markup,opacity:level>state.step?0:1});}
+ const outputNodes={memory:['word0'],learn:['inference'],embedding:['embedding-result'],attention:['meaning'],features:['property0','property1','property2'],decode:['word1','word2'],weights:['weight-bar'],cache:['kv'],'memory-total':['budget-result'],roofline:['bound'],quantize:['after','rounded0','rounded1','rounded2','rounded3'],flash:['block0','block1','block2'],architectures:['candidate0','candidate1','new-state'],bitnet:['formula'],speculative:['correction'],proof:['measurement'],'hash-neighbor':['missed'],comparison:['comparison-verdict'],pi:['csv'],end:['evidence'],constraints:['constraints-verdict'],levers:['idea-output'],research:['research-test']};
+ function node(key,x,y,markup,level=0){if(outputNodes[slides[state.index].scene]?.includes(key))level=2;currentSpecs.push({key,x,y,markup,opacity:level>state.step?0:1});}
  function link(key,x1,y1,x2,y2,level=0,flow=false){
   const dx=x2-x1,dy=y2-y1,horizontal=Math.abs(dx)>=Math.abs(dy);
   const offset=Math.min(80,.45*(horizontal?Math.abs(dx):Math.abs(dy)));
   const cx=horizontal?Math.sign(dx)*offset:0,cy=horizontal?0:Math.sign(dy)*offset;
+  if((slides[state.index].scene==='memory'||slides[state.index].scene==='attention')&&key==='c')level=2;
+  if(slides[state.index].scene==='quantize'&&/^q\d/.test(key))level=2;
   currentEdges.push({key,d:`M ${x1} ${y1} C ${x1+cx} ${y1+cy}, ${x2-cx} ${y2-cy}, ${x2} ${y2}`,opacity:level>state.step?0:1,flow});
  }
  function draw(){
@@ -51,10 +54,10 @@
    node('label',145,490,text(275,0,'Les extraits consultés rejoignent le contexte.','minor','middle'),1);
   }
   if(scene==='end'){
-   node('information',320,25,tile(230,90,'Information','poids, contexte, documents',colors.blue));
-   node('cost',40,365,tile(230,90,'Coût','mémoire et temps',colors.sand));
-   node('evidence',580,365,tile(230,90,'Preuve','tests et mesures',colors.mint));
-   node('model',335,180,chip('DÉCISION','pour le besoin visé'),1);
+   node('information',320,25,tile(230,90,'Une contrainte','temps, mémoire, énergie…',colors.blue));
+   node('cost',40,365,tile(230,90,'Une idée','changer une brique',colors.sand));
+   node('evidence',580,365,tile(230,90,'Une preuve','référence, variante, courbes',colors.mint));
+   node('model',335,180,chip('HYPOTHÈSE','à mettre à l’épreuve'),1);
    link('a',385,115,155,360,1);link('b',275,410,575,410,1);link('c',690,360,485,115,1);
   }
   if(scene==='learn'){
@@ -66,13 +69,43 @@
    node('inference',65,365,tile(720,100,'ENSUITE : UNE INFÉRENCE','nouveau contexte → poids fixes → sortie',colors.sand),1);
   }
   if(scene==='embedding'){
-   ['Paris',' est','…'].forEach((w,i)=>{
-    node('word'+i,55,65+i*145,token(w,colors.blue,155));
-    const vals=[['0,2','−0,4','0,8','…'],['−0,1','0,7','0,3','…'],['0,6','0,1','−0,2','…']][i];
-    node('vector'+i,325,65+i*145,rect(310,65,'#fff')+vals.map((v,j)=>text(37+j*75,40,v,'mono','middle')).join(''),1);
-    link('e'+i,210,95+i*145,325,95+i*145,1);
+   const words=['Le','chat','dort'],ids=[17,42,58],vectors=[['0,2','−0,4','0,8'],['−0,1','0,7','0,3'],['0,6','0,1','−0,2']];
+   node('phrase',35,40,text(0,0,'« Le chat dort »','mid'));
+   words.forEach((w,i)=>{
+    const y=105+i*110;
+    node('word'+i,35,y,token(w,i===state.embeddingToken?colors.sand:colors.blue,140));
+    node('token-id'+i,205,y+10,rect(85,40,'#fff')+text(42,27,'ID '+ids[i],'minor','middle'),1);
+    link('token-id-link'+i,175,y+30,200,y+30,1);
    });
-   node('label',650,70,rect(150,360,colors.sand)+lines(['Une ligne','par token.','','Beaucoup de','composantes.','','Axes sans','étiquette','obligatoire.'],18,40));
+   let table=rect(450,345,'#fff')+text(225,36,'Table apprise pendant l’entraînement','mid','middle')+text(35,80,'ID','minor')+text(240,80,'Vecteur : 3 nombres ici','minor','middle');
+   ids.forEach((id,i)=>{const y=110+i*75;table+=`<rect x="12" y="${y}" width="426" height="62" rx="8" fill="${i===state.embeddingToken?colors.sand:'#f0f5f0'}"/>`+text(35,y+39,id,'mono')+vectors[i].map((v,j)=>text(155+j*100,y+39,v,'mono','middle')).join('');});
+   node('embedding-table',350,45,table,1);
+   node('embedding-result',350,430,rect(450,80,colors.mint)+text(225,32,'« '+words[state.embeddingToken]+' » devient cette liste :','minor','middle')+text(225,62,'[ '+vectors[state.embeddingToken].join(' ; ')+' ]','mid','middle'));
+   link('lookup',290,145+state.embeddingToken*110,345,185+state.embeddingToken*75,1);
+   link('embedding-output',575,395,575,425,2);
+  }
+  if(scene==='constraints'){
+   const cards=[['Mémoire','RAM pour travailler','stockage pour conserver'],['Temps','une échéance à respecter','la moyenne ne suffit pas'],['Énergie et chaleur','tenir l’autonomie','trop chaud : calcul ralenti'],['Fiabilité','réponses assez justes','réagir aux entrées imprévues'],['Exploitation','réseau, données privées','mises à jour et maintenance']];
+   cards.forEach((c,i)=>{const x=i<3?20+i*280:160+(i-3)*280,y=i<3?35:215;node('constraint'+i,x,y,rect(250,145,i%2?colors.sand:colors.blue)+text(125,35,c[0],'mid','middle')+text(125,79,c[1],'minor','middle')+text(125,110,c[2],'minor','middle'),i?1:0);});
+   node('constraints-verdict',95,430,tile(660,80,'Transformer les limites en critères vérifiables','Les limites dépendent de l’appareil et de la tâche.',colors.mint));
+  }
+  if(scene==='levers'){
+   const ideas=[
+    {name:'Calcul matriciel',meaning:'multiplier et additionner des nombres',idea:'Réordonner les calculs, réutiliser les données',risk:'La machine ou les arrondis peuvent changer le gain',test:'Comparer sorties, durée et transferts sur la cible'},
+    {name:'Poids du réseau',meaning:'nombres appris qui règlent les calculs',idea:'Coder les poids avec moins de bits',risk:'Arrondis, qualité et coût de reconstruction',test:'Courbes : qualité et RAM selon les bits'},
+    {name:'Attention et contexte',meaning:'relire et conserver les informations utiles',idea:'Garder ou sélectionner moins d’informations',risk:'Oublier une information nécessaire à la tâche',test:'Courbes : qualité et mémoire selon le contexte'}];
+   const a=ideas[state.lever];
+   node('chosen-brick',65,30,tile(720,95,a.name,a.meaning,colors.blue));
+   node('proposed-change',65,190,rect(720,110,colors.sand)+text(25,35,'Idée à examiner','mid')+text(25,78,a.idea,''),1);
+   node('idea-output',65,365,rect(720,145,colors.mint)+text(25,35,'Risque : '+a.risk,'minor')+text(25,85,'Test à préparer','mid')+text(25,122,a.test,'',));
+   link('a',425,125,425,185,1);link('b',425,300,425,360,2);
+  }
+  if(scene==='research'){
+   node('research-idea',45,30,tile(760,90,'Une hypothèse écrite avant de mesurer','Ce changement devrait aider, parce que…',colors.sand));
+   node('research-pc',45,220,tile(315,110,'Sur le PC','vérifier les sorties et le protocole',colors.blue),1);
+   node('research-test',460,220,tile(345,110,'Sur la cible','comparer référence et variante',colors.mint));
+   node('research-return',80,410,tile(690,85,'Résultat favorable, nul ou défavorable','Garder les preuves ; choisir le prochain essai.',colors.mint),2);
+   link('a',270,120,200,215,1);link('b',365,275,455,275,2);link('c',630,330,425,405,2);
   }
   if(scene==='features'){
    [180,350].forEach((y,i)=>node('unit'+i,145,y,`<circle r="36" fill="${colors.mint}" stroke="#689b87"/>`+text(0,7,String(i+1),'mid','middle')+text(-88,65,'Unité '+(i+1),'minor')));
@@ -225,6 +258,9 @@
   $('#art-title').textContent=slides[state.index].alt||'Schéma pédagogique';
  }
  function controlHTML(type){
+  if(type==='embedding')return ['Le','chat','dort'].map((t,i)=>`<button data-embedding="${i}" class="${state.embeddingToken===i?'active':''}">${t}</button>`).join('');
+  if(type==='lever')return ['Calcul','Poids','Contexte'].map((t,i)=>`<button data-lever="${i}" class="${state.lever===i?'active':''}">${t}</button>`).join('');
+  if(type==='research')return '<button id="prepare-research">Préparer mon hypothèse et mon test ↗</button>';
   if(type==='context')return `<button data-context="0" class="${state.context===0?'active':''}">Avril chante.</button><button data-context="1" class="${state.context===1?'active':''}">En avril, il pleut.</button>`;
   if(type==='bits')return [16,8,4,2].map(b=>`<button data-bits="${b}" class="${state.bits===b?'active':''}">${b} bits</button>`).join('');
   if(type==='cache')return `<label>Tokens présents <select id="cache-size" aria-label="Longueur du contexte">${[512,8192,32768].map(s=>`<option value="${s}" ${s===state.cache?'selected':''}>${number(s,0)}</option>`).join('')}</select></label>`+(slides[state.index].id==='cache-math'?`<button id="heads" class="active">${state.heads} têtes K/V · changer</button>`:'');
@@ -239,28 +275,39 @@
   return (state.audience==='engineer'&&s.engineerBody?s.engineerBody:s.body)||'';
  }
  function resize(){const area=$('#viewport').getBoundingClientRect();document.documentElement.style.setProperty('--scale',Math.min(area.width/1600,area.height/900));}
- function setHash(){history.replaceState(null,'',`#${slides[state.index].id}${state.step?'?step=1':''}`);}
+ function setHash(){history.replaceState(null,'',`#${slides[state.index].id}${state.step?'?step='+state.step:''}`);}
+ function updateStages(){
+  const s=slides[state.index];
+  $('#slide').classList.toggle('revealed',state.step===2||!!s.reading);
+  $('#scene-steps').hidden=!!s.reading;
+  $('#scene-steps').innerHTML=(s.steps||[]).map((label,i)=>`<button data-scene-step="${i}" class="${i===state.step?'current':i<state.step?'done':''}" aria-current="${i===state.step?'step':'false'}"><span>${i+1}</span>${esc(label)}</button>`).join('');
+  $('#journey').innerHTML=['Cadrer','Comprendre','Coûts','Pistes','Enquêter'].map((label,i)=>`<button data-phase="${i+1}" class="${s.phase===i+1?'current':''}" aria-current="${s.phase===i+1?'step':'false'}">${i+1}. ${label}</button>`).join('');
+  $('#progress').style.width=(100*(state.index+(state.step+1)/3)/slides.length)+'%';
+  $('#hint').textContent=s.reading||state.step===2?'→ Scène suivante':`→ Étape ${state.step+2} / 3`;
+  $('#next').disabled=state.index===slides.length-1&&state.step===2;
+  $('#previous').disabled=state.index===0&&state.step===0;
+ }
+ function revealResult(){state.step=2;updateStages();setHash();draw();}
  function render(animate=true){
-  const s=slides[state.index];$('#slide').dataset.scene=s.id;$('#slide').classList.toggle('question',!!s.question);$('#slide').classList.toggle('reference-slide',!!s.reading);$('#slide').classList.toggle('revealed',state.step===1);
+  const s=slides[state.index];if(s.reading)state.step=2;$('#slide').dataset.scene=s.id;$('#slide').classList.toggle('question',!!s.question);$('#slide').classList.toggle('reference-slide',!!s.reading);
   $('#chapter').textContent=s.chapter;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title;$('#lead').textContent=s.lead;$('#body').innerHTML=bodyHTML(s);$('#takeaway').textContent=s.take;
   $('#caption').textContent=s.caption||'';$('#controls').innerHTML=controlHTML(s.control);decorateKeywords();
   $('#audience').textContent=state.audience==='engineer'?'Découverte':'Ingénieur';$('#audience').setAttribute('aria-pressed',String(state.audience==='engineer'));$('#pdf-link').href=state.audience==='engineer'?'engineering.pdf':'course.pdf';
   $('#citations').innerHTML=(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}" data-ref="${id}" target="_blank" rel="noopener">${id}</a>`).join('');
   if(s.id==='pi')$('#citations').insertAdjacentHTML('beforeend','<a href="https://github.com/rolln7drktayau/courses/blob/main/llm-inside/MESURER-SUR-PI.md" target="_blank" rel="noopener">Protocole Pi ↗</a>');
   if(s.detail){const b=document.createElement('button');b.className='detail-link';b.dataset.detail=s.detail;b.textContent='Formule · Ingénieur ↗';$('#citations').append(b);}
-  $('#slide-number').textContent=`${state.index+1} / ${slides.length}`;$('#position').textContent=`${String(state.index+1).padStart(2,'0')} / ${slides.length}`;$('#progress').style.width=(100*(state.index+(state.step?1:.35))/slides.length)+'%';
-  $('#hint').textContent=state.step?'→ Scène suivante':'→ Construire le schéma';$('#previous').disabled=state.index===0&&state.step===0;$('#next').disabled=state.index===slides.length-1&&state.step===1;
-  if(s.question&&state.step){$('#feedback').textContent=s.explanation;$('#body [data-answer="'+s.answer+'"]').classList.add('correct');}
+  $('#slide-number').textContent=`${state.index+1} / ${slides.length}`;$('#position').textContent=`${String(state.index+1).padStart(2,'0')} / ${slides.length}`;updateStages();
+  if(s.question&&state.step===2){$('#feedback').textContent=s.explanation;$('#body [data-answer="'+s.answer+'"]').classList.add('correct');}
   draw();setHash();resize();
   if(animate&&!reduced&&!document.body.classList.contains('print-mode'))$('.copy').animate([{opacity:.25,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:450,easing:'ease-out'});
   $('#announcer').textContent=`Diapositive ${state.index+1}. ${$('#title').textContent}`;
   schedule();
  }
- function schedule(){clearTimeout(timer);if(!state.auto)return;const s=slides[state.index];if(s.question||s.reading||s.id==='end'){pause();return;}timer=setTimeout(next,state.step?10000:6500);}
+ function schedule(){clearTimeout(timer);if(!state.auto)return;const s=slides[state.index];if(s.question||s.reading||s.id==='end'){pause();return;}timer=setTimeout(next,state.step===2?10000:6500);}
  function pause(){state.auto=false;clearTimeout(timer);$('#play').setAttribute('aria-pressed','false');$('#play').textContent='Lecture auto';}
- function next(){if(!state.step){state.step=1;render(false);}else if(state.index<slides.length-1){state.index++;state.step=0;render();}}
- function previous(){if(state.step){state.step=0;render(false);}else if(state.index>0){state.index--;state.step=1;render();}}
- function go(index,revealed=false){pause();state.index=Math.max(0,Math.min(slides.length-1,index));state.step=revealed?1:0;render(false);}
+ function next(){if(state.step<2){state.step++;render(false);}else if(state.index<slides.length-1){state.index++;state.step=0;render();}}
+ function previous(){if(!slides[state.index].reading&&state.step>0){state.step--;render(false);}else if(state.index>0){state.index--;state.step=2;render();}}
+ function go(index,revealed=false){pause();state.index=Math.max(0,Math.min(slides.length-1,index));state.step=revealed?2:0;render(false);}
  function setAudience(audience,keepId){
   let id=keepId||slides[state.index].id;if(audience==='discovery'&&!discoveryIds.includes(id))id=allSlides.find(s=>s.id===id)?.detailOf||'opening';pause();
   if(document.body.classList.contains('reader-mode'))toggleReader();
@@ -297,33 +344,55 @@
   const entries=id?keywords.filter(k=>k.id===id):[...keywords].sort((a,b)=>a.term.localeCompare(b.term,'fr'));
   modal(id?'Un mot, une définition':'Les mots du mini-cours','<p>Les mots soulignés dans les scènes ouvrent ces définitions. Les notions essentielles sont aussi expliquées dans le texte du PDF.</p>'+entries.map(k=>`<article class="reference"><strong>${esc(k.term)}</strong><p>${esc(k.definition)}</p></article>`).join(''));
  }
+ function prepareResearch(){
+  modal('Préparer une enquête','<p>Une hypothèse, pas une promesse. Décrire aussi le résultat qui vous ferait changer d’avis. Cette fiche reste dans votre navigateur ; son téléchargement ne transmet rien.</p><form id="research-form">'+[
+   ['brick','Brique et coût à étudier','Ex. produit matrice-vecteur ; temps ou accès mémoire',true],
+   ['reference','Référence examinée : article, code et version','Quelle solution existante vais-je d’abord comprendre ?',false],
+   ['change','Mon idée de modification','Quel calcul, rangement ou choix différent ?',true],
+   ['mechanism','Pourquoi cela pourrait aider','Quel travail ou transfert éviterait-on ?',true],
+   ['constraints','Limites à respecter','Qualité minimale, RAM, échéance ou énergie…',true],
+   ['protocol','Mon test identique sur PC puis sur cible','Entrées, version, graines, répétitions, unité, contrôle des sorties…',true],
+   ['falsification','Ce qui contredirait mon hypothèse','Quel résultat nul ou défavorable invaliderait l’idée ?',true],
+   ['next','Prochain essai si cela ne marche pas','Une seule modification suivante, à expliquer',false]
+  ].map(([id,label,hint,required])=>`<label class="research-field">${esc(label)}<textarea name="${id}" placeholder="${esc(hint)}" ${required?'required':''} rows="2"></textarea></label>`).join('')+'<button type="button" id="download-research">Télécharger ma fiche JSON</button></form>');
+ }
  function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections du texte de départ</a> · <a href="MESURER-SUR-PI.md">Protocole technique sur Pi</a> · <a href="engineering.pdf">PDF ingénieur complet</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
  function toggleReader(){
   const show=!document.body.classList.contains('reader-mode');pause();document.body.classList.toggle('reader-mode',show);$('#reader-toggle').setAttribute('aria-pressed',String(show));$('#reader-toggle').textContent=show?'Présenter':'Lire';$('#reader').hidden=!show;
   if(show&&!$('#reader').children.length){
    const saved={...state};let content='<h1>Dans la mémoire d’un modèle</h1><p>Roland Cédric TAYO · INEM · '+(state.audience==='engineer'?'Parcours ingénieur complet':'Parcours découverte, environ 20 minutes avec échanges')+'.</p><p>Lecture continue. Les schémas sont pédagogiques ; les comptes mémoire ne sont pas des mesures sur une carte.</p>';
-   slides.forEach((s,i)=>{state.index=i;state.step=1;draw();const svg=$('#art').cloneNode(true);svg.removeAttribute('id');svg.querySelectorAll('[id]').forEach(el=>{const old=el.id;el.id='r'+i+'-'+old;});let art=svg.outerHTML.replace(/url\(#(grid|arrow)\)/g,`url(#r${i}-$1)`);if(s.scene==='none')art='';content+=`<section><div class="eyebrow">${esc(s.chapter)}</div><h2>${s.title}</h2><p>${esc(s.lead)}</p>${s.question?'<p><strong>Question :</strong> '+esc(s.question[s.answer])+'</p><p>'+esc(s.explanation)+'</p>':bodyHTML(s)}<div class="reader-svg">${art}</div><p class="small">${esc(s.caption||'')}</p><p class="reader-note"><strong>À retenir.</strong> ${esc(s.take)}</p><p class="reader-sources">${(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}">${id}</a>`).join(' · ')}</p></section>`;});
+   slides.forEach((s,i)=>{state.index=i;state.step=2;draw();const svg=$('#art').cloneNode(true);svg.removeAttribute('id');svg.querySelectorAll('[id]').forEach(el=>{const old=el.id;el.id='r'+i+'-'+old;});let art=svg.outerHTML.replace(/url\(#(grid|arrow)\)/g,`url(#r${i}-$1)`);if(s.scene==='none')art='';content+=`<section><div class="eyebrow">${esc(s.chapter)}</div><h2>${s.title}</h2><p class="reader-stages">${(s.steps||[]).map((t,j)=>`${j+1}. ${esc(t)}`).join(' → ')}</p><p>${esc(s.lead)}</p>${s.question?'<p><strong>Question :</strong> '+esc(s.question[s.answer])+'</p><p>'+esc(s.explanation)+'</p>':bodyHTML(s)}<div class="reader-svg">${art}</div><p class="small">${esc(s.caption||'')}</p><p class="reader-note"><strong>À retenir.</strong> ${esc(s.take)}</p><p class="reader-sources">${(s.refs||[]).map(id=>`<a href="${refs.find(r=>r.id===id).url}">${id}</a>`).join(' · ')}</p></section>`;});
    $('#reader').innerHTML=content;Object.assign(state,saved);draw();
   }
   resize();
  }
  document.addEventListener('click',e=>{
+  if(e.target.closest('#prepare-research')){prepareResearch();return;}
+  if(e.target.closest('#download-research')){
+   const form=$('#research-form');if(!form.reportValidity())return;
+   const data={kind:'hypothesis_not_results',...Object.fromEntries(new FormData(form)),measurements:'not performed by this worksheet'};
+   const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='hypothese-et-protocole.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);return;
+  }
+  const sceneStep=e.target.closest('[data-scene-step]');if(sceneStep){pause();state.step=+sceneStep.dataset.sceneStep;render(false);return;}
+  const phase=e.target.closest('[data-phase]');if(phase){const i=slides.findIndex(s=>s.phase===+phase.dataset.phase);if(i>=0)go(i);return;}
+  const emb=e.target.closest('[data-embedding]');if(emb){state.embeddingToken=+emb.dataset.embedding;state.step=2;render(false);return;}
+  const lever=e.target.closest('[data-lever]');if(lever){state.lever=+lever.dataset.lever;state.step=2;render(false);return;}
   const word=e.target.closest('[data-term]');if(word){showGlossary(word.dataset.term);return;}
   const detail=e.target.closest('[data-detail]');if(detail){goTo(detail.dataset.detail);return;}
-  const answer=e.target.closest('[data-answer]');if(answer){pause();const s=slides[state.index],i=+answer.dataset.answer;$('#feedback').textContent=(i===s.answer?'Oui. ':'À reconsidérer. ')+s.explanation;$('#body').querySelectorAll('[data-answer]').forEach(b=>b.classList.toggle('correct',+b.dataset.answer===s.answer));answer.classList.toggle('incorrect',i!==s.answer);state.step=1;$('#slide').classList.add('revealed');draw();setHash();return;}
+  const answer=e.target.closest('[data-answer]');if(answer){pause();const s=slides[state.index],i=+answer.dataset.answer;state.step=2;render(false);$('#feedback').textContent=(i===s.answer?'Oui. ':'À reconsidérer. ')+s.explanation;$('#body [data-answer="'+i+'"]').classList.toggle('incorrect',i!==s.answer);return;}
   const ref=e.target.closest('[data-ref]');if(ref){e.preventDefault();showRefs(ref.dataset.ref);return;}
   const jump=e.target.closest('[data-jump]');if(jump){$('#modal').close();go(+jump.dataset.jump);return;}
-  const context=e.target.closest('[data-context]');if(context){state.context=+context.dataset.context;state.step=1;render(false);return;}
-  const bits=e.target.closest('[data-bits]');if(bits){state.bits=+bits.dataset.bits;$('#controls').innerHTML=controlHTML('bits');draw();return;}
-  const q=e.target.closest('[data-quant]');if(q){state.quantBits=+q.dataset.quant;state.step=1;$('#slide').classList.add('revealed');$('#controls').innerHTML=controlHTML('quantize');draw();return;}
-  if(e.target.closest('#heads')){state.heads=state.heads===8?32:8;$('#controls').innerHTML=controlHTML('cache');draw();}
-  if(e.target.closest('#roof-bits')){state.roofBits=state.roofBits===4?16:4;$('#controls').innerHTML=controlHTML('roofline');draw();}
-  if(e.target.closest('#compute')){state.compute=state.compute===2e12?1e11:2e12;$('#controls').innerHTML=controlHTML('roofline');draw();}
-  if(e.target.closest('#budget-cap')){state.budget=state.budget===8?4:8;$('#controls').innerHTML=controlHTML('budget');draw();}
-  if(e.target.closest('#budget-bits')){state.budgetBits=state.budgetBits===4?16:4;$('#controls').innerHTML=controlHTML('budget');draw();}
+  const context=e.target.closest('[data-context]');if(context){state.context=+context.dataset.context;state.step=2;render(false);return;}
+  const bits=e.target.closest('[data-bits]');if(bits){state.bits=+bits.dataset.bits;$('#controls').innerHTML=controlHTML('bits');revealResult();return;}
+  const q=e.target.closest('[data-quant]');if(q){state.quantBits=+q.dataset.quant;state.step=2;render(false);return;}
+  if(e.target.closest('#heads')){state.heads=state.heads===8?32:8;$('#controls').innerHTML=controlHTML('cache');revealResult();}
+  if(e.target.closest('#roof-bits')){state.roofBits=state.roofBits===4?16:4;$('#controls').innerHTML=controlHTML('roofline');revealResult();}
+  if(e.target.closest('#compute')){state.compute=state.compute===2e12?1e11:2e12;$('#controls').innerHTML=controlHTML('roofline');revealResult();}
+  if(e.target.closest('#budget-cap')){state.budget=state.budget===8?4:8;$('#controls').innerHTML=controlHTML('budget');revealResult();}
+  if(e.target.closest('#budget-bits')){state.budgetBits=state.budgetBits===4?16:4;$('#controls').innerHTML=controlHTML('budget');revealResult();}
  });
- document.addEventListener('input',e=>{if(e.target.id==='bandwidth'){state.bandwidth=+e.target.value;$('#bandwidth-value').textContent=state.bandwidth+' Go/s';draw();}});
- document.addEventListener('change',e=>{if(e.target.id==='cache-size'){state.cache=+e.target.value;draw();}});
+ document.addEventListener('input',e=>{if(e.target.id==='bandwidth'){state.bandwidth=+e.target.value;$('#bandwidth-value').textContent=state.bandwidth+' Go/s';revealResult();}});
+ document.addEventListener('change',e=>{if(e.target.id==='cache-size'){state.cache=+e.target.value;revealResult();}});
  $('#next').addEventListener('click',next);$('#previous').addEventListener('click',previous);
  $('#play').addEventListener('click',()=>{if(state.auto){pause();return;}state.auto=true;$('#play').textContent='Pause';$('#play').setAttribute('aria-pressed','true');schedule();});
  $('#toc').addEventListener('click',()=>modal('Le parcours', '<p>'+ (state.audience==='engineer'?'Parcours complet avec formules et recherches.':'15 scènes essentielles, puis 3 pages de sources. Aucun calcul avancé n’est requis.')+' Utiliser → pour construire le schéma, puis avancer. Le bouton Ingénieur ouvre les approfondissements.</p><div class="toc-grid">'+slides.map((s,i)=>`<button data-jump="${i}">${String(i+1).padStart(2,'0')} · ${s.title.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ')}</button>`).join('')+'</div>'));
@@ -334,7 +403,7 @@
  $('#fullscreen').addEventListener('click',fullscreen);
  document.addEventListener('keydown',e=>{if($('#modal').open||e.target.matches('input,select,textarea')||document.body.classList.contains('reader-mode'))return;if(e.target.closest('button,a')&&[' ','Enter'].includes(e.key))return;if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();previous();}if(e.key==='Home'){e.preventDefault();go(0);}if(e.key==='End'){e.preventDefault();go(slides.length-1,true);}if(e.key.toLowerCase()==='f')fullscreen();});
  window.addEventListener('resize',resize);
- const hash=location.hash.slice(1).split('?'),start=slides.findIndex(s=>s.id===hash[0]);if(start>=0)state.index=start;if(hash[1]?.includes('step=1'))state.step=1;
+ const hash=location.hash.slice(1).split('?'),start=slides.findIndex(s=>s.id===hash[0]);if(start>=0)state.index=start;state.step=Math.min(2,+(new URLSearchParams(hash[1]||'').get('step')||0));
  if(new URLSearchParams(location.search).has('print'))document.body.classList.add('print-mode','motion-off');
  window.Deck={go,goTo,setAudience,next,previous,state,slides,allSlides,refs,draw,pause,resize,showRefs,showGlossary,toggleReader};
  render(false);document.documentElement.dataset.ready='true';

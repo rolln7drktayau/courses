@@ -146,6 +146,14 @@ Raspberry Pi. Documentation évolutive. **Documentation officielle.**
 
 Capacités, alimentation et fonctionnement thermique. Les valeurs théoriques du mini-cours ne sont pas des débits mesurés d’un Raspberry Pi.
 
+## R19 — MLPerf Tiny Benchmark
+
+Colby Banbury et al.. 2021. **NeurIPS Datasets and Benchmarks 2021.**
+
+[Source originale](https://arxiv.org/abs/2106.07597)
+
+Évaluer ensemble qualité, latence et, avec instrumentation, énergie. Ce benchmark TinyML n’est pas un résultat mesuré sur notre Pi et ne prouve pas des garanties de temps réel.
+
 ## Inspiration visuelle
 
 Nerdy Kings, [vidéo indiquée par l’enseignant](https://www.youtube.com/watch?v=gYG4J6Do0UU). Référence de rythme ; schémas et code originaux.

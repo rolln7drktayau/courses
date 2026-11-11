@@ -4,7 +4,7 @@ Roland Cédric TAYO · INEM. Mini-cours en français, environ vingt minutes avec
 
 - [Présentation animée](https://rolln7drktayau.github.io/courses/llm-inside/)
 - [PDF découverte](course.pdf) : 15 scènes essentielles et 3 pages de sources, soit 18 pages.
-- [Parcours ingénieur](https://rolln7drktayau.github.io/courses/llm-inside/?audience=engineer) et [PDF complet](engineering.pdf) : 30 pages avec formules et approfondissements.
+- [Parcours ingénieur](https://rolln7drktayau.github.io/courses/llm-inside/?audience=engineer) et [PDF complet](engineering.pdf) : 33 pages avec formules et approfondissements.
 - [Protocole technique sur Pi](MESURER-SUR-PI.md).
 - [Relecture selon trois publics](RELECTURE-PUBLICS.md).
 - [Sources scientifiques](SOURCES.md), accessibles aussi au pied des scènes.
@@ -16,7 +16,7 @@ Roland Cédric TAYO · INEM. Mini-cours en français, environ vingt minutes avec
 
 Ouvrir `index.html`. Aucun compte, aucune installation et aucun appel à un modèle ne sont nécessaires. Le support fonctionne hors ligne une fois ce dossier téléchargé.
 
-Flèches gauche/droite ou espace : revenir, construire un schéma, puis avancer. `F` : plein écran ; `Home` : début ; `End` : dernière page. Le bouton **Ingénieur** ouvre les approfondissements ; **Découverte** revient au parcours accessible. Le lien PDF suit le parcours choisi. Les boutons Plan et Sources ouvrent des panneaux. La lecture automatique est facultative et s’arrête aux questions et à la conclusion. Les curseurs et boutons permettent de varier les hypothèses des calculs. Le bouton **Lire** propose une version continue, plus pratique sur un téléphone. La préférence système de réduction des animations est respectée.
+Chaque schéma possède **trois étapes numérotées** et une étape courante visible. Les étapes sont cliquables ; flèches gauche/droite ou espace : les parcourir, puis changer de scène. Le repère supérieur distingue les cinq parties : cadrer, comprendre, localiser le coût, proposer, enquêter. `F` : plein écran ; `Home` : début ; `End` : dernière page. Le bouton **Ingénieur** ouvre les approfondissements ; **Découverte** revient au parcours accessible. Le lien PDF suit le parcours choisi. Les boutons Plan et Sources ouvrent des panneaux. La lecture automatique est facultative et s’arrête aux questions et à la conclusion. Les curseurs et boutons permettent de varier les hypothèses des calculs. Le bouton **Lire** propose une version continue, plus pratique sur un téléphone. La préférence système de réduction des animations est respectée.
 
 Les mots soulignés sont cliquables : leur définition s’ouvre sans quitter la scène. Le bouton **Lexique** rassemble les définitions. Les mots essentiels et les symboles des équations sont aussi expliqués près de leur introduction pour que le PDF reste compréhensible seul.
 
@@ -40,3 +40,7 @@ python source/audit.py
 ```
 
 Le dossier est publié avec GitHub Pages dans le dépôt `rolln7drktayau/courses`. Aucun corrigé enseignant du TD ni donnée personnelle d’étudiant n’est inclus.
+
+## Sortie attendue du cours
+
+Nommer les contraintes d’une cible, choisir une brique coûteuse, proposer un changement et préparer un test capable de contredire l’hypothèse. Les scènes **Pistes** et **Enquête** donnent des exemples de questions et une fiche JSON à remplir, sans promettre de gain. Les courbes et essais PC puis cible appartiennent à l’enquête à réaliser.

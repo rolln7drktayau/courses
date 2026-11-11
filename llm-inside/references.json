@@ -160,5 +160,14 @@
     "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
     "type": "Documentation officielle",
     "use": "Capacités, alimentation et fonctionnement thermique. Les valeurs théoriques du mini-cours ne sont pas des débits mesurés d’un Raspberry Pi."
+  },
+  {
+    "id": "R19",
+    "title": "MLPerf Tiny Benchmark",
+    "authors": "Colby Banbury et al.",
+    "year": "2021",
+    "url": "https://arxiv.org/abs/2106.07597",
+    "type": "NeurIPS Datasets and Benchmarks 2021",
+    "use": "Évaluer ensemble qualité, latence et, avec instrumentation, énergie. Ce benchmark TinyML n’est pas un résultat mesuré sur notre Pi et ne prouve pas des garanties de temps réel."
   }
 ]

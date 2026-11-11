@@ -39,3 +39,9 @@ Le JSON documenté contient les échantillons `samples_ns` et `samples_ts`. Cons
 Un fichier de résultats indique au minimum configuration, répétition, durée, unité, qualité et température si disponible. Le manifeste relie code, données, modèle et options. Conclure seulement sur la tâche, le contexte et la carte réellement testés.
 
 [Documentation originale de llama-bench](https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench) · [Spécification GGUF](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md)
+
+## Distinguer vitesse moyenne et temps réel
+
+Une exigence de temps réel porte sur une échéance à respecter, pas seulement sur une moyenne ou une médiane agréable. Mesurer gigue, dépassements et comportement en surcharge selon l’usage. Le plus grand temps observé n’est pas, à lui seul, une preuve de borne garantie. Définir également le comportement prévu lorsque l’entrée sort du domaine connu ou qu’un résultat n’est pas assez fiable.
+
+Avant de modifier une brique, examiner sa version de référence : article, code, données et conditions matérielles. Reproduire d’abord ce que l’on peut vérifier, puis documenter une seule modification et l’essai qui pourrait l’invalider.

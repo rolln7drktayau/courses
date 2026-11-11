@@ -1,4 +1,4 @@
-/* Two reading levels share the same drawings and scientific references. */
+/* Course content, explicit teaching stages and references. */
 window.REFERENCES = [
   {
     "id": "R1",
@@ -161,17 +161,26 @@ window.REFERENCES = [
     "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
     "type": "Documentation officielle",
     "use": "Capacités, alimentation et fonctionnement thermique. Les valeurs théoriques du mini-cours ne sont pas des débits mesurés d’un Raspberry Pi."
+  },
+  {
+    "id": "R19",
+    "title": "MLPerf Tiny Benchmark",
+    "authors": "Colby Banbury et al.",
+    "year": "2021",
+    "url": "https://arxiv.org/abs/2106.07597",
+    "type": "NeurIPS Datasets and Benchmarks 2021",
+    "use": "Évaluer ensemble qualité, latence et, avec instrumentation, énergie. Ce benchmark TinyML n’est pas un résultat mesuré sur notre Pi et ne prouve pas des garanties de temps réel."
   }
 ];
 window.SLIDES = [
   {
     "id": "opening",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "1 · Cadrer le besoin",
     "eyebrow": "Une question avant de commencer",
     "title": "Où se cache<br>ce que <em>sait</em> une IA ?",
-    "lead": "Un modèle de langage produit du texte. Imaginons qu’il explique une notice sur un petit ordinateur, sans connexion.",
+    "lead": "Un assistant doit expliquer une notice sur un appareil. Il faut une réponse utile, dans les limites de cet appareil.",
     "body": "<div class=\"points\"><div class=\"point\"><strong>Poids :</strong> réglages numériques appris.</div><div class=\"point\"><strong>Contexte :</strong> texte reçu pour cette réponse.</div><div class=\"point\"><strong>Documents :</strong> extraits qu’un outil peut ajouter au contexte.</div></div>",
-    "take": "Les informations de la réponse peuvent venir de plusieurs endroits.",
+    "take": "Notre objectif : repérer une brique coûteuse, imaginer une amélioration et savoir comment la mettre à l’épreuve.",
     "scene": "memory",
     "caption": "Parcours découverte : aucun prérequis en IA. Les codes R ouvrent les références ; le bouton Ingénieur donne les détails.",
     "refs": [
@@ -180,11 +189,40 @@ window.SLIDES = [
       "R16"
     ],
     "alt": "Le modèle utilise des réglages appris et un contexte, qui peut inclure des extraits documentaires.",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Recevoir la question",
+      "Ajouter des informations",
+      "Produire une réponse"
+    ],
+    "phase": 1
+  },
+  {
+    "id": "embedded-constraints",
+    "chapter": "1 · Cadrer le besoin",
+    "eyebrow": "Le système impose des limites",
+    "title": "Une IA utile.<br><em>Dans quelle boîte ?</em>",
+    "lead": "Un système embarqué est un ordinateur intégré à un appareil pour assurer une tâche. Ses contraintes dépendent de l’usage.",
+    "body": "<div class=\"points\"><div class=\"point\"><strong>Ressources :</strong> calcul, mémoire de travail et stockage.</div><div class=\"point\"><strong>Usage :</strong> délai maximal (échéance), énergie, qualité et fiabilité.</div><div class=\"point\"><strong>Terrain :</strong> capteurs, réseau, confidentialité et mises à jour.</div></div>",
+    "take": "Le cahier des charges fixe ce qu’il faut respecter avant de choisir ou de modifier le modèle.",
+    "scene": "constraints",
+    "caption": "Un Pi Linux n’a pas les mêmes contraintes qu’un microcontrôleur. Les principes valent aussi pour l’IA de vision, de son et de capteurs.",
+    "refs": [
+      "R18",
+      "R19"
+    ],
+    "alt": "Cinq limites encadrent le modèle : mémoire, temps, énergie et chaleur, fiabilité, conditions d’exploitation.",
+    "audience": "all",
+    "steps": [
+      "Choisir une tâche",
+      "Fixer les limites",
+      "Écrire les critères"
+    ],
+    "phase": 1
   },
   {
     "id": "learn",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "Deux moments à ne pas confondre",
     "title": "Apprendre.<br>Puis <em>utiliser</em>.",
     "lead": "Apprendre, c’est modifier les réglages à partir d’exemples. Utiliser le modèle, c’est calculer une réponse avec ces réglages.",
@@ -197,28 +235,41 @@ window.SLIDES = [
     ],
     "alt": "L’apprentissage corrige les poids ; l’inférence lit ces poids et une nouvelle entrée.",
     "engineerBody": "<div class=\"points\"><div class=\"point\"><strong>Pré-entraînement :</strong> premier apprentissage sur un grand ensemble de données.</div><div class=\"point\"><strong>Ajustement fin :</strong> entraînement supplémentaire pour adapter le modèle.</div><div class=\"point\">Les poids, biais et autres réglages appris sont des paramètres ; ils ne changent pas dans l’inférence ordinaire.</div></div>",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Donner des exemples",
+      "Corriger les réglages",
+      "Utiliser le modèle"
+    ],
+    "phase": 2
   },
   {
     "id": "embedding",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "Du texte aux nombres",
-    "title": "Pour la machine,<br>le texte devient <em>des nombres</em>.",
-    "lead": "Le programme découpe le texte en morceaux appelés tokens, puis associe des nombres à chaque morceau.",
-    "body": "<div class=\"points\"><div class=\"point\">Un token peut être un mot, un bout de mot ou un signe.</div><div class=\"point\">La liste de nombres associée au token s’appelle un <strong>vecteur</strong> ; sa représentation apprise, un <strong>embedding</strong>.</div></div>",
-    "take": "Le modèle travaille sur ces nombres, pas sur des mots rangés comme dans un dictionnaire.",
+    "title": "Un token.<br>Un identifiant.<br><em>Une liste de nombres.</em>",
+    "lead": "Un tokenizer découpe le texte en tokens. Chaque numéro de token, appelé identifiant (ID), permet de retrouver une liste apprise de nombres.",
+    "body": "<div class=\"points\"><div class=\"point\">Un <strong>vecteur</strong> est une liste ordonnée de nombres.</div><div class=\"point\">L’<strong>embedding</strong> est cette représentation apprise. Une case n’a pas forcément un sens facile à nommer.</div></div>",
+    "take": "L’exemple montre trois nombres pour rester lisible. Un vrai modèle peut en utiliser beaucoup plus.",
     "scene": "embedding",
-    "caption": "Découpage et nombres illustratifs. Ils ne proviennent pas d’un modèle réel.",
+    "caption": "Découpage, identifiants et nombres fictifs pour expliquer. Choisir un token montre la ligne correspondante ; ce ne sont pas les valeurs d’un LLM réel.",
     "refs": [
       "R1",
       "R3"
     ],
     "alt": "Trois morceaux de phrase sont représentés par trois listes de nombres.",
-    "audience": "all"
+    "audience": "all",
+    "control": "embedding",
+    "steps": [
+      "Découper le texte",
+      "Retrouver la ligne",
+      "Obtenir le vecteur"
+    ],
+    "phase": 2
   },
   {
     "id": "attention",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "Le contexte change l’interprétation",
     "title": "« Avril » :<br><em>qui ou quand ?</em>",
     "lead": "L’attention aide à combiner les informations déjà lues qui comptent pour la position traitée.",
@@ -232,11 +283,17 @@ window.SLIDES = [
     "alt": "Au dernier token, une requête Q est comparée aux clés K du texte déjà lu, puis l’attention combine les valeurs V.",
     "control": "context",
     "detail": "attention-math",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Lire le texte disponible",
+      "Comparer et combiner",
+      "Interpréter ici"
+    ],
+    "phase": 2
   },
   {
     "id": "attention-math",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "Approfondissement ingénieur",
     "title": "Comment calculer<br><em>l’attention</em> ?",
     "lead": "Un Transformer enchaîne des blocs d’attention, qui combinent le contexte, et des transformations de vecteurs.",
@@ -250,11 +307,17 @@ window.SLIDES = [
     "alt": "Au dernier token, une requête Q est comparée aux clés K du texte déjà lu, puis l’attention combine les valeurs V.",
     "control": "context",
     "audience": "engineer",
-    "detailOf": "attention"
+    "detailOf": "attention",
+    "steps": [
+      "Lire le texte disponible",
+      "Comparer et combiner",
+      "Interpréter ici"
+    ],
+    "phase": 2
   },
   {
     "id": "distributed",
-    "chapter": "I · Où est l’information ?",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "Une représentation partagée",
     "title": "Un neurone n’est pas<br>un <em>tiroir à faits</em>.",
     "lead": "Un neurone combine des entrées. Les poids se rangent en matrices, des tableaux de nombres.",
@@ -268,11 +331,17 @@ window.SLIDES = [
       "R4"
     ],
     "alt": "Deux unités partagées participent à trois propriétés ; chaque propriété mobilise les deux unités.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Observer les unités",
+      "Partager les calculs",
+      "Étudier les propriétés"
+    ],
+    "phase": 2
   },
   {
     "id": "q-memory",
-    "chapter": "I · Pause question",
+    "chapter": "2 · Comprendre les calculs",
     "eyebrow": "À vous de prédire",
     "title": "J’ajoute un nom<br>dans <em>mon message</em>.",
     "lead": "Le modèle réutilise ce nom. Quelle explication suffit sans supposer de réentraînement ?",
@@ -290,11 +359,17 @@ window.SLIDES = [
     ],
     "caption": "Une réponse correcte ne suffit pas à identifier le mécanisme de mémorisation.",
     "alt": "Le message alimente le modèle sans flèche de mise à jour des poids.",
-    "audience": "all"
+    "audience": "engineer",
+    "steps": [
+      "Recevoir la question",
+      "Ajouter des informations",
+      "Produire une réponse"
+    ],
+    "phase": 2
   },
   {
     "id": "decode",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Deux phases de l’inférence",
     "title": "Lire le début.<br>Puis <em>continuer</em>.",
     "lead": "D’abord, le modèle traite le texte reçu. Ensuite, il produit la suite.",
@@ -308,11 +383,17 @@ window.SLIDES = [
     ],
     "alt": "Une phrase entre en bloc, puis les tokens de sortie apparaissent successivement.",
     "engineerBody": "<div class=\"points\"><div class=\"point\"><strong>Prefill :</strong> traiter de nombreuses positions avec davantage de réutilisation des poids.</div><div class=\"point\"><strong>Decode à petit lot :</strong> moins de réutilisation ; les transferts peuvent dominer.</div><div class=\"point\">Ce diagnostic n’est pas une loi : caches, taille du lot, architecture et cible peuvent changer le facteur limitant.</div></div>",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Traiter le contexte",
+      "Calculer la suite",
+      "Ajouter des tokens"
+    ],
+    "phase": 3
   },
   {
     "id": "weights",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Premier budget : les poids",
     "title": "Sept milliards<br>de <em>nombres</em>.",
     "lead": "Un bit vaut 0 ou 1. Huit bits font un octet. Moins de bits par réglage réduit son volume de stockage.",
@@ -327,11 +408,17 @@ window.SLIDES = [
     ],
     "alt": "Une barre de poids se réduit de 14 Go à 3,5 Go lorsque la précision passe de 16 à 4 bits.",
     "detail": "weights-math",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Compter les réglages",
+      "Choisir les bits",
+      "Calculer le volume"
+    ],
+    "phase": 3
   },
   {
     "id": "weights-math",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Approfondissement ingénieur",
     "title": "Combien d’octets<br>pour <em>les poids</em> ?",
     "lead": "Un bit vaut 0 ou 1. Huit bits font un octet. La précision choisie change le nombre de bits par poids.",
@@ -346,11 +433,17 @@ window.SLIDES = [
     ],
     "alt": "Une barre de poids se réduit de 14 Go à 3,5 Go lorsque la précision passe de 16 à 4 bits.",
     "audience": "engineer",
-    "detailOf": "weights"
+    "detailOf": "weights",
+    "steps": [
+      "Compter les réglages",
+      "Choisir les bits",
+      "Calculer le volume"
+    ],
+    "phase": 3
   },
   {
     "id": "cache",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Deuxième budget : le contexte",
     "title": "Le cache grandit<br>avec <em>l’histoire</em>.",
     "lead": "Pour continuer une phrase, le modèle réutilise certains calculs sur le texte déjà lu au lieu de tout refaire.",
@@ -364,11 +457,17 @@ window.SLIDES = [
     ],
     "alt": "Des cases de cache s’ajoutent quand le contexte s’allonge ; partager les têtes réduit leur nombre.",
     "detail": "cache-math",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Lire plus de texte",
+      "Garder des calculs",
+      "Compter la mémoire"
+    ],
+    "phase": 3
   },
   {
     "id": "cache-math",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Approfondissement ingénieur",
     "title": "Compter le cache<br><em>sans oublier les têtes</em>.",
     "lead": "Un cache est une mémoire de réutilisation. Celui de l’attention garde les clés K et valeurs V déjà calculées.",
@@ -382,11 +481,17 @@ window.SLIDES = [
     ],
     "alt": "Des cases de cache s’ajoutent quand le contexte s’allonge ; partager les têtes réduit leur nombre.",
     "audience": "engineer",
-    "detailOf": "cache"
+    "detailOf": "cache",
+    "steps": [
+      "Lire plus de texte",
+      "Garder des calculs",
+      "Compter la mémoire"
+    ],
+    "phase": 3
   },
   {
     "id": "memory-total",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Le budget complet",
     "title": "Le fichier tient.<br><em>Et le reste ?</em>",
     "lead": "La RAM est la mémoire de travail. Elle doit aussi accueillir le contexte, les calculs en cours et les logiciels.",
@@ -400,11 +505,17 @@ window.SLIDES = [
       "R17"
     ],
     "alt": "Une barre empile paramètres, cache et autres besoins ; une limite montre la marge ou le dépassement.",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Choisir les hypothèses",
+      "Additionner les besoins",
+      "Comparer au budget"
+    ],
+    "phase": 3
   },
   {
     "id": "roofline",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Le calcul attend parfois les données",
     "title": "Une usine rapide.<br>Une <em>route étroite</em>.",
     "lead": "Imaginons une machine : elle doit lire des données et effectuer des calculs. Le travail le plus lent peut dominer.",
@@ -418,11 +529,17 @@ window.SLIDES = [
     ],
     "alt": "Deux durées sont comparées : transférer les poids et effectuer les opérations.",
     "detail": "roofline-math",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Fixer une machine",
+      "Comparer les deux coûts",
+      "Chercher la limite"
+    ],
+    "phase": 3
   },
   {
     "id": "roofline-math",
-    "chapter": "II · Pourquoi est-ce lourd ?",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Approfondissement ingénieur",
     "title": "Une borne pour<br><em>raisonner sur le coût</em>.",
     "lead": "Le débit mémoire est la quantité de données transférable par seconde. Le calcul peut attendre ces données.",
@@ -436,11 +553,17 @@ window.SLIDES = [
     ],
     "alt": "Deux durées sont comparées : transférer les poids et effectuer les opérations.",
     "audience": "engineer",
-    "detailOf": "roofline"
+    "detailOf": "roofline",
+    "steps": [
+      "Fixer une machine",
+      "Comparer les deux coûts",
+      "Chercher la limite"
+    ],
+    "phase": 3
   },
   {
     "id": "q-bandwidth",
-    "chapter": "II · Pause question",
+    "chapter": "3 · Localiser le coût",
     "eyebrow": "Un diagnostic avant une optimisation",
     "title": "Le calcul prend 7 ms.<br>La lecture, <em>70 ms</em>.",
     "lead": "Dans le modèle idéal, on double seulement la capacité de calcul. Que devient la borne de temps ?",
@@ -458,11 +581,17 @@ window.SLIDES = [
       "R5"
     ],
     "alt": "Une barre mémoire de 70 ms domine une barre de calcul de 7 ms.",
-    "audience": "all"
+    "audience": "engineer",
+    "steps": [
+      "Fixer une machine",
+      "Comparer les deux coûts",
+      "Chercher la limite"
+    ],
+    "phase": 3
   },
   {
     "id": "quantize",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Piste 1 · représenter autrement",
     "title": "Arrondir les poids.<br>Observer <em>la sortie</em>.",
     "lead": "Quantifier, c’est remplacer des valeurs par quelques niveaux. Les arrondis peuvent changer la sortie.",
@@ -476,11 +605,17 @@ window.SLIDES = [
     ],
     "alt": "Quatre poids se rapprochent de niveaux de quantification ; la différence de sortie est calculée.",
     "detail": "quantize-math",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Prendre les mêmes poids",
+      "Arrondir les valeurs",
+      "Comparer la sortie"
+    ],
+    "phase": 4
   },
   {
     "id": "quantize-math",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Approfondissement ingénieur",
     "title": "Quantifier.<br><em>Calculer l’erreur.</em>",
     "lead": "Quantifier : remplacer des valeurs par quelques niveaux.",
@@ -494,11 +629,17 @@ window.SLIDES = [
     ],
     "alt": "Quatre poids se rapprochent de niveaux de quantification ; la différence de sortie est calculée.",
     "audience": "engineer",
-    "detailOf": "quantize"
+    "detailOf": "quantize",
+    "steps": [
+      "Prendre les mêmes poids",
+      "Arrondir les valeurs",
+      "Comparer la sortie"
+    ],
+    "phase": 4
   },
   {
     "id": "flash",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Piste 2 · changer le trajet des données",
     "title": "Même attention.<br>Moins <em>d’allers-retours</em>.",
     "lead": "Un GPU est un processeur qui effectue beaucoup de calculs en parallèle. FlashAttention réorganise ses accès mémoire.",
@@ -510,11 +651,17 @@ window.SLIDES = [
       "R8"
     ],
     "alt": "Des blocs passent entre la mémoire globale et une petite zone rapide où ils sont réutilisés.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Lire les blocs",
+      "Réutiliser au bon endroit",
+      "Limiter les transferts"
+    ],
+    "phase": 4
   },
   {
     "id": "architectures",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Piste 3 · changer la mémoire du modèle",
     "title": "Garder des éléments.<br>Ou <em>résumer le passé</em>.",
     "lead": "Une autre architecture change la manière de conserver et retrouver le passé.",
@@ -527,11 +674,17 @@ window.SLIDES = [
       "R10"
     ],
     "alt": "Une branche sélectionne des cases par hachage ; une autre met à jour un petit état récurrent.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Recevoir le même passé",
+      "Sélectionner ou résumer",
+      "Vérifier ce qui reste"
+    ],
+    "phase": 4
   },
   {
     "id": "q-hash",
-    "chapter": "III · Pause sur le hachage de proximité",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "La question qui évite une fausse conclusion",
     "title": "L’information utile<br>est dans <em>un autre groupe</em>.",
     "lead": "Le hachage de proximité regroupe des vecteurs d’attention. Si on ne consulte que certains groupes, quel risque reste-t-il ?",
@@ -549,11 +702,17 @@ window.SLIDES = [
       "R9"
     ],
     "alt": "La requête consulte un groupe contenant A et C ; un vecteur utile B se trouve hors du groupe.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Chercher une information",
+      "Choisir des groupes",
+      "Repérer un oubli"
+    ],
+    "phase": 4
   },
   {
     "id": "bitnet",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Piste 4 · entraîner pour une autre arithmétique",
     "title": "Et avec des poids<br><em>−1, 0, +1</em> ?",
     "lead": "Ternaire signifie trois valeurs possibles. BitNet b1.58 apprend avec des poids −1, 0 et +1.",
@@ -567,11 +726,17 @@ window.SLIDES = [
       "R15"
     ],
     "alt": "Les produits par des poids ternaires se transforment en soustractions, zéros et additions.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Utiliser des poids ternaires",
+      "Ajouter ou soustraire",
+      "Vérifier la sortie"
+    ],
+    "phase": 4
   },
   {
     "id": "speculative",
-    "chapter": "III · Que peut-on changer ?",
+    "chapter": "4 · Proposer une piste",
     "eyebrow": "Piste 5 · proposer, puis vérifier",
     "title": "Un petit modèle écrit.<br>Le grand <em>contrôle</em>.",
     "lead": "Le modèle brouillon propose une suite. Le modèle cible, celui que l’on veut reproduire, la vérifie.",
@@ -583,11 +748,42 @@ window.SLIDES = [
       "R13"
     ],
     "alt": "Trois tokens sont proposés ; le modèle cible en valide une partie et corrige la suite.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Proposer des tokens",
+      "Vérifier avec la cible",
+      "Accepter ou corriger"
+    ],
+    "phase": 4
+  },
+  {
+    "id": "optimization-levers",
+    "chapter": "4 · Proposer une piste",
+    "eyebrow": "Des briques où chercher",
+    "title": "Quelle opération<br><em>changeriez-vous ?</em>",
+    "lead": "Une brique est une opération ou un bloc du modèle. Partir du coût observé, pas d’une technique à la mode.",
+    "body": "<div class=\"points\"><div class=\"point\">Choisir <strong>une brique</strong> et un coût : temps, mémoire ou énergie.</div><div class=\"point\">Proposer un changement et expliquer <strong>pourquoi</strong> il pourrait aider.</div><div class=\"point\">Nommer aussi ce qu’il pourrait dégrader.</div></div>",
+    "take": "Une idée devient intéressante quand elle produit une prédiction que l’on peut vérifier ou contredire.",
+    "scene": "levers",
+    "control": "lever",
+    "caption": "Pistes d’enquête, pas gains garantis. On peut tester un changement de code, de représentation ou d’architecture.",
+    "refs": [
+      "R5",
+      "R7",
+      "R19"
+    ],
+    "alt": "Une brique choisie mène à une idée de modification, puis à un risque et à un test.",
+    "audience": "all",
+    "steps": [
+      "Choisir la brique",
+      "Proposer un changement",
+      "Définir le test"
+    ],
+    "phase": 4
   },
   {
     "id": "proof",
-    "chapter": "IV · Comment le prouver ?",
+    "chapter": "5 · Enquêter et tester",
     "eyebrow": "Distinguer les niveaux de preuve",
     "title": "Une équation n’est pas<br>un <em>chronomètre</em>.",
     "lead": "Un calcul peut aider à choisir une piste. Il ne démontre pas la qualité d’un modèle ni sa vitesse réelle.",
@@ -600,11 +796,17 @@ window.SLIDES = [
       "R9"
     ],
     "alt": "Trois cases séparent un compte théorique, une hypothèse et une mesure expérimentale.",
-    "audience": "engineer"
+    "audience": "engineer",
+    "steps": [
+      "Faire un calcul",
+      "Écrire une hypothèse",
+      "Demander une mesure"
+    ],
+    "phase": 5
   },
   {
     "id": "measurement-example",
-    "chapter": "IV · Comment le prouver ?",
+    "chapter": "5 · Enquêter et tester",
     "eyebrow": "Exercice de décision · données fictives",
     "title": "Plus rapide.<br>Mais <em>acceptable</em> ?",
     "lead": "Fixons avant l’essai : au moins 47 bonnes réponses sur 50 et une durée médiane d’au plus 150 ms.",
@@ -616,11 +818,17 @@ window.SLIDES = [
       "R17"
     ],
     "alt": "Tableau fictif : référence 4,8 Go, médiane 120 ms, qualité 47 sur 50 ; variante 3,9 Go, médiane 80 ms, qualité 46 sur 50.",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Fixer les critères",
+      "Comparer les résultats",
+      "Accepter ou refuser"
+    ],
+    "phase": 5
   },
   {
     "id": "pi",
-    "chapter": "IV · Comment le prouver ?",
+    "chapter": "5 · Enquêter et tester",
     "eyebrow": "Du PC à la machine visée",
     "title": "Sur le Pi :<br><em>choisir, puis vérifier</em>.",
     "lead": "Un logiciel d’exécution, ou runtime, charge le modèle et fait ses calculs sur la carte.",
@@ -634,21 +842,57 @@ window.SLIDES = [
     ],
     "alt": "Une version de référence et une version modifiée sont testées sur le même Raspberry Pi puis comparées.",
     "engineerBody": "<div class=\"points\"><div class=\"point\">llama.cpp est un logiciel d’exécution ; GGUF est un format de fichier, pas une méthode de quantification.</div><div class=\"point\">Tester aussi contexte, cache pris en charge et nombre de threads, les tâches de calcul simultanées.</div><div class=\"point\">Conserver les mesures brutes en CSV, un tableau en texte. Mesurer premier token, débit, RAM et qualité ; médiane et dispersion ; température contrôlée.</div></div>",
-    "audience": "all"
+    "audience": "engineer",
+    "steps": [
+      "Fixer la référence",
+      "Modifier une brique",
+      "Mesurer sur la cible"
+    ],
+    "phase": 5
+  },
+  {
+    "id": "research",
+    "chapter": "5 · Enquêter et tester",
+    "eyebrow": "Votre prochaine expérience",
+    "title": "Une idée.<br><em>Un test qui tranche.</em>",
+    "lead": "Formuler une question, proposer une hypothèse et chercher ce qui pourrait la contredire.",
+    "body": "<div class=\"points\"><div class=\"point\"><strong>Hypothèse :</strong> « Je pense que ce changement réduit ce coût, parce que… »</div><div class=\"point\"><strong>Référence :</strong> comprendre une solution existante ; comparer à entrées et qualité fixées.</div><div class=\"point\"><strong>Réfutation :</strong> quel résultat montrerait que l’idée ne marche pas ?</div></div>",
+    "take": "Un gain sur PC peut disparaître sur la cible. Garder les courbes et les échecs, puis choisir l’essai suivant.",
+    "scene": "research",
+    "control": "research",
+    "caption": "Expliquer → prédire → mesurer → confronter → recommencer. La fiche prépare un essai ; elle ne contient aucun résultat de carte.",
+    "refs": [
+      "R17",
+      "R19"
+    ],
+    "alt": "Le cycle d’enquête va d’une hypothèse au test PC puis au test sur la cible et revient vers une nouvelle idée.",
+    "audience": "all",
+    "steps": [
+      "Formuler une idée",
+      "Tester sur PC",
+      "Confronter à la cible"
+    ],
+    "phase": 5
   },
   {
     "id": "end",
-    "chapter": "Ce qu’il faut emporter",
+    "chapter": "5 · Enquêter et tester",
     "eyebrow": "Trois réflexes d’ingénieur",
-    "title": "Où est l’information ?<br>Quel est le coût ?<br><em>Quelle est la preuve ?</em>",
-    "lead": "Une optimisation utile respecte le besoin de l’utilisateur et les limites de la machine.",
-    "body": "<div class=\"points\"><div class=\"point\">Les poids portent des régularités apprises ; le contexte et les documents apportent des informations.</div><div class=\"point\">Moins de bits, moins de transferts ou une autre architecture : les compromis doivent être vérifiés.</div></div>",
-    "take": "Trois questions : quelles informations, quel budget, quelle preuve sur la machine visée ?",
+    "title": "Une contrainte.<br>Une idée.<br><em>À vous de tester.</em>",
+    "lead": "Le but est de savoir où chercher, quelle idée essayer et quelles preuves demander.",
+    "body": "<div class=\"points\"><div class=\"point\">Nommer les limites du système avant de chercher un modèle.</div><div class=\"point\">Expliquer l’opération qui coûte, puis proposer une amélioration testable.</div></div>",
+    "take": "Écrivez : ma brique, mon idée, le gain attendu et le test qui pourrait me donner tort.",
     "scene": "end",
-    "caption": "Le parcours Ingénieur complète les schémas par les formules, les architectures de recherche et le protocole de mesure.",
+    "caption": "Les formules et familles de recherche restent dans le parcours Ingénieur. Les sources et le protocole de mesure sont accessibles dans les ressources.",
     "refs": [],
     "alt": "Un triangle relie information, coût et preuve.",
-    "audience": "all"
+    "audience": "all",
+    "steps": [
+      "Nommer une contrainte",
+      "Choisir une brique",
+      "Préparer une enquête"
+    ],
+    "phase": 5
   },
   {
     "id": "sources-memory",
@@ -709,4 +953,4 @@ window.SLIDES = [
     "alt": ""
   }
 ];
-window.DISCOVERY_IDS = ["opening", "learn", "embedding", "attention", "q-memory", "decode", "weights", "cache", "memory-total", "roofline", "q-bandwidth", "quantize", "measurement-example", "pi", "end", "sources-memory", "sources-system", "sources-models"];
+window.DISCOVERY_IDS = ["opening", "embedded-constraints", "learn", "embedding", "attention", "decode", "weights", "cache", "memory-total", "roofline", "quantize", "optimization-levers", "measurement-example", "research", "end", "sources-memory", "sources-system", "sources-models"];

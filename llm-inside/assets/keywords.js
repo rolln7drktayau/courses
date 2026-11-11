@@ -50,5 +50,11 @@ window.KEYWORDS = [
  {id:'fingerprint',term:'Empreinte',aliases:['empreinte'],definition:'Identifiant calculé à partir des octets d’un fichier, par exemple par SHA-256. Il aide à vérifier que l’on utilise bien le même fichier.'},
  {id:'window',term:'Fenêtre de contexte',aliases:['fenêtre de contexte'],first:'cache',definition:'Quantité maximale de texte que le modèle peut prendre en compte dans son contexte. Le texte effectivement présent peut être plus court.'},
  {id:'median',term:'Médiane',aliases:['médiane'],first:'measurement-example',definition:'Valeur du milieu lorsque les mesures sont triées. Elle se lit avec le nombre de répétitions et une indication de dispersion.'},
- {id:'thread',term:'Thread',aliases:['threads','thread'],first:'pi',definition:'Tâche d’exécution du logiciel. Le nombre de threads influence le parallélisme, les accès mémoire et parfois la latence.'}
+ {id:'thread',term:'Thread',aliases:['threads','thread'],first:'pi',definition:'Tâche d’exécution du logiciel. Le nombre de threads influence le parallélisme, les accès mémoire et parfois la latence.'},
+ {id:'embedded',term:'Système embarqué',aliases:['système embarqué','systèmes embarqués'],definition:'Ordinateur intégré à un appareil pour assurer une tâche. Il n’est pas forcément minuscule ou déconnecté ; ses limites viennent du matériel et de l’usage.'},
+ {id:'deadline',term:'Échéance',aliases:['échéance'],definition:'Limite de temps à respecter pour une tâche. Une bonne moyenne ne prouve pas qu’une échéance stricte sera toujours respectée.'},
+ {id:'reliability',term:'Fiabilité',aliases:['fiabilité'],definition:'Capacité attendue du système à assurer sa tâche dans les conditions prévues, y compris quand les entrées ou l’environnement deviennent difficiles.'},
+ {id:'brick',term:'Brique',aliases:['briques','brique'],definition:'Opération ou bloc que l’on peut isoler : par exemple un produit matriciel, une activation ou une partie du traitement du contexte.'},
+ {id:'falsification',term:'Réfutation',aliases:['réfutation'],definition:'Recherche d’une observation qui contredirait l’hypothèse. Une idée scientifique doit pouvoir être mise en défaut par un test.'},
+ {id:'identifier',term:'Identifiant',aliases:['identifiant','ID'],definition:'Numéro qui désigne un élément. Ici, l’identifiant d’un token permet de retrouver sa ligne dans une table de vecteurs apprise.'}
 ];

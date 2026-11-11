@@ -9,6 +9,15 @@
     "audience": "discovery"
   },
   {
+    "id": "embedded-constraints",
+    "copyBottom": 745.640625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "discovery"
+  },
+  {
     "id": "learn",
     "copyBottom": 700.84375,
     "footerTop": 831,
@@ -19,9 +28,9 @@
   },
   {
     "id": "embedding",
-    "copyBottom": 764.890625,
+    "copyBottom": 742.8125,
     "footerTop": 831,
-    "visualBottom": 757.515625,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "discovery"
@@ -31,15 +40,6 @@
     "copyBottom": 631.71875,
     "footerTop": 831,
     "visualBottom": 779.515625,
-    "slideWidth": 1600,
-    "slideHeight": 900,
-    "audience": "discovery"
-  },
-  {
-    "id": "q-memory",
-    "copyBottom": 780.3125,
-    "footerTop": 831,
-    "visualBottom": 737.46875,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "discovery"
@@ -90,17 +90,17 @@
     "audience": "discovery"
   },
   {
-    "id": "q-bandwidth",
-    "copyBottom": 780.3125,
+    "id": "quantize",
+    "copyBottom": 731.640625,
     "footerTop": 831,
-    "visualBottom": 737.46875,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "discovery"
   },
   {
-    "id": "quantize",
-    "copyBottom": 731.640625,
+    "id": "optimization-levers",
+    "copyBottom": 745.640625,
     "footerTop": 831,
     "visualBottom": 779.515625,
     "slideWidth": 1600,
@@ -117,10 +117,10 @@
     "audience": "discovery"
   },
   {
-    "id": "pi",
-    "copyBottom": 738.109375,
+    "id": "research",
+    "copyBottom": 756.3125,
     "footerTop": 831,
-    "visualBottom": 778.515625,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "discovery"
@@ -171,6 +171,15 @@
     "audience": "engineer"
   },
   {
+    "id": "embedded-constraints",
+    "copyBottom": 745.640625,
+    "footerTop": 831,
+    "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
     "id": "learn",
     "copyBottom": 807.234375,
     "footerTop": 831,
@@ -181,9 +190,9 @@
   },
   {
     "id": "embedding",
-    "copyBottom": 764.890625,
+    "copyBottom": 742.8125,
     "footerTop": 831,
-    "visualBottom": 757.515625,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "engineer"
@@ -369,6 +378,15 @@
     "audience": "engineer"
   },
   {
+    "id": "optimization-levers",
+    "copyBottom": 745.640625,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
     "id": "proof",
     "copyBottom": 745.640625,
     "footerTop": 831,
@@ -391,6 +409,15 @@
     "copyBottom": 799.703125,
     "footerTop": 831,
     "visualBottom": 778.515625,
+    "slideWidth": 1600,
+    "slideHeight": 900,
+    "audience": "engineer"
+  },
+  {
+    "id": "research",
+    "copyBottom": 756.3125,
+    "footerTop": 831,
+    "visualBottom": 779.515625,
     "slideWidth": 1600,
     "slideHeight": 900,
     "audience": "engineer"

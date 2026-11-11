@@ -1,4 +1,10 @@
 {
+  "teaching_stages": {
+    "steps_per_diagram": 3,
+    "selected_embedding": "dort",
+    "five_part_path": true,
+    "hypothesis_download": "checked; no measurements claimed"
+  },
   "analytical_examples": {
     "weights16": 14000000000,
     "weights4": 3500000000,
@@ -78,10 +84,10 @@
     ],
     "decision": "variant fails quality threshold"
   },
-  "defined_keywords": 51,
+  "defined_keywords": 57,
   "observed_transition": {
     "before": "matrix(1, 0, 0, 1, 335, 170)",
-    "during": "matrix(1, 0, 0, 1, 338.026, 106.447)",
+    "during": "matrix(1, 0, 0, 1, 338.227, 102.244)",
     "after": "matrix(1, 0, 0, 1, 340, 65)"
   },
   "viewports": {
@@ -101,17 +107,17 @@
   "reduced_motion": "respected",
   "discovery_scenes": 15,
   "discovery_pages": 18,
-  "engineer_pages": 30,
+  "engineer_pages": 33,
   "pdfs": {
     "course.pdf": {
       "pages": 18,
-      "links": 40,
-      "sha256": "e72235e3e235e90a38a03096aecbbf91958274e8a33f22a0dd17bfa26278134b"
+      "links": 42,
+      "sha256": "74d0a97796b9b127aeb9c1b2a67237c4631e5742f67bc755a6331adbc5591fce"
     },
     "engineering.pdf": {
-      "pages": 30,
-      "links": 59,
-      "sha256": "38664683fe279da25edfa48b6fbe802716f5e10610d2312b50e7c9406e06ee75"
+      "pages": 33,
+      "links": 66,
+      "sha256": "0a1c3b44bc649e469437f60b8258109ae34e8d82a7386f7074f2b7ef60aa3798"
     }
   }
 }
