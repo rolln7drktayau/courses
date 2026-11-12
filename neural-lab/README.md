@@ -4,13 +4,31 @@ Roland Cédric TAYO · INEM
 
 Laboratoire interactif accompagnant [Dans la mémoire d’un modèle](../llm-inside/). Ouvrir [le laboratoire](https://rolln7drktayau.github.io/courses/neural-lab/). Aucun compte, aucune installation ni clé d’API requis pour la page publiée. Le calcul reste local ; aucun corpus n’est téléversé. L’hébergeur reçoit les requêtes habituelles de chargement des fichiers.
 
+## Conversation, données et probabilités
+
+Ouvrir [la conversation](https://rolln7drktayau.github.io/courses/neural-lab/#conversation). Le jeu `conversation-data.json` contient quatre questions : `salut`, `merci`, `etat?`, `stop?`. Pour `salut`, sept exemples répondent `bonjour` et trois `salut`. Les autres réponses sont `de rien`, `pret`, `arret`. Les repères `Q:` et `R:` font partie du texte réellement encodé.
+
+Le mini-Transformer de conversation (dimension 8, contexte 12, une tête) apprend à prévoir les caractères de la réponse seulement, y compris le saut de ligne final. Le préfixe connu est fourni à chaque étape (teacher forcing). « Charger les poids entraînés » ouvre le checkpoint réellement produit en 22 000 corrections ; « Entraîner depuis zéro » exécute 6 000 corrections dans un travailleur du navigateur. L’entraînement peut être arrêté et ses mesures exportées. Les conversations peuvent aussi être transférées au parcours d’ingestion, en sélectionnant le premier caractère d’une réponse comme cible.
+
+La réponse n’est pas choisie dans une table de textes préécrits : chaque caractère est calculé par le réseau puis sélectionné, jusqu’au saut de ligne ou à la limite de longueur. Cliquer un caractère montre sa distribution et ses scores softmax. La vue statistique revient ensuite au premier caractère, pour le comparer aux exemples. Le bouton 100 tirages tire réellement dans cette distribution : il ne génère pas 100 réponses complètes. La graine rend les tirages reproductibles.
+
+**Fréquence observée et probabilité apprise sont distinctes.** Les exemples `salut` donnent 70 % de premières lettres `b` et 30 % `s`. Le checkpoint calcule une distribution différente, conservée dans les résultats. Cette surconfiance est affichée, pas remplacée artificiellement par 70/30. On peut discuter calibration, taille du jeu et optimisation. Le bon résultat sur ces quatre questions d’entraînement ne démontre aucune capacité de conversation générale.
+
+Reproduire le checkpoint : `node neural-lab/tests/build_conversation.mjs`, puis `node neural-lab/tests/refine_conversation.mjs`. La première campagne utilise la graine 42, η=0,04, 16 000 corrections. La seconde repart de ces poids : graine 43, η=0,004, 6 000 corrections. Le journal garde les résultats initiaux défavorables et signale une limite de sa première métrique : un sous-échantillon d’un cas sur cinq pouvait manquer des cibles contradictoires. La campagne de finition et le travailleur navigateur évaluent tous les cas. Les mesures sont sur les données d’entraînement, sans test indépendant.
+
+## Plein écran et manipulation
+
+« Simulation » place uniquement la scène et ses commandes en plein écran. « Tout l’espace » ou le bouton d’en-tête ouvre toute la page. Lecture, étapes, zoom, recentrage et sortie restent accessibles dans la scène. Glisser pour tourner ; molette ou boutons pour approcher. Après une manipulation, « Garder ma vue » conserve l’angle entre étapes. Échap quitte le plein écran. Un repli CSS est prévu si l’API native ne peut pas être utilisée.
+
+Les briques du parcours sont arrondies, plus épaisses, avec une face colorée et des côtés plus sombres. Leurs mots et valeurs restent le contenu réel de la trace. Les effets de présentation n’annoncent aucune performance matérielle.
+
 ## Parcours guidé pour découvrir
 
 « Suivre ma phrase » démarre une animation continue : la phrase se déplace vers l’entrée, le tampon se remplit, les caractères deviennent des tokens, puis des identifiants. Les cartes se déplacent réellement dans la scène 3D ; la pause et la tête de lecture arrêtent ou repositionnent ces transformations. La vitesse choisie est celle de l’animation, pas une mesure du temps d’ingestion ou du processeur.
 
 Pour apprendre, coller des données ou ouvrir un fichier `.txt` UTF-8 (100 à 12 000 caractères), puis cliquer « Ingérer mes données ». Un nouveau modèle est initialisé avec le vocabulaire de ce texte. Toute la séquence est reçue et tokenisée avant d’en extraire l’exemple à suivre. À la position i, le contexte contient jusqu’à six caractères précédents et la cible est le caractère i ; il y a N−1 exemples possibles pour N caractères. Le numéro de l’exemple peut être changé. Aucun exemple ni caractère n’est inventé pour compléter les données. Modifier le texte demande de l’ingérer à nouveau.
 
-L’animation montre un groupe de huit tokens à la fois et un extrait mobile du tampon pour les textes longs. Elle parcourt ainsi tout le flux, sans prétendre tout afficher simultanément. Après conversion, la fenêtre de six tokens du mini-modèle est rendue explicite : les tokens hors fenêtre sont barrés. La cible d’apprentissage reste séparée de l’entrée. Le fichier est effectivement lu dans le navigateur ; le trajet visuel est la relecture ralentie des données et des calculs réels, pas un chronométrage d’I/O.
+L’animation montre un groupe de huit tokens à la fois et un extrait mobile du tampon pour les textes longs. Elle parcourt ainsi tout le flux, sans prétendre tout afficher simultanément. Après conversion, la fenêtre du mini-modèle (six tokens dans le parcours de base, douze pour la conversation) est rendue explicite : les tokens hors fenêtre sont barrés. La cible d’apprentissage reste séparée de l’entrée. Le fichier est effectivement lu dans le navigateur ; le trajet visuel est la relecture ralentie des données et des calculs réels, pas un chronométrage d’I/O.
 
 La page s’ouvre sur une seule transformation à la fois : lire le texte, le découper en caractères, attribuer les identifiants, sélectionner les lignes d’embedding, mélanger le contexte, calculer les probabilités, choisir un caractère et continuer.
 
@@ -86,6 +104,8 @@ node neural-lab/tests/engine.test.mjs
 python neural-lab/tests/browser.py
 python neural-lab/tests/journey.py
 python neural-lab/tests/ingestion.py
+node neural-lab/tests/conversation.test.mjs
+python neural-lab/tests/conversation-browser.py
 ```
 
 Les fichiers de `examples/` se régénèrent avec `node neural-lab/tests/build_examples.mjs`.

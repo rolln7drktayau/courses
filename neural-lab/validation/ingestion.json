@@ -1,6 +1,6 @@
 {
-  "executed_utc": "2026-11-12T08:55:20.474054+00:00",
-  "url": "http://127.0.0.1:8767/neural-lab/",
+  "executed_utc": "2026-11-12T10:19:28.724894+00:00",
+  "url": "http://127.0.0.1:8768/neural-lab/",
   "checks": [
     {
       "name": "phrase playback really advances",

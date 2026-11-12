@@ -1,0 +1,154 @@
+{
+  "executed_utc": "2026-11-12T10:21:19.146260+00:00",
+  "url": "http://127.0.0.1:8768/neural-lab/",
+  "checks": [
+    {
+      "name": "conversation anchor opens examples",
+      "passed": true
+    },
+    {
+      "name": "actual repeated exchanges shown",
+      "passed": true
+    },
+    {
+      "name": "70/30 observed frequency shown",
+      "passed": true
+    },
+    {
+      "name": "trained weights and hash verified",
+      "passed": true
+    },
+    {
+      "name": "actual network response salut",
+      "passed": true
+    },
+    {
+      "name": "actual network response merci",
+      "passed": true
+    },
+    {
+      "name": "actual network response etat?",
+      "passed": true
+    },
+    {
+      "name": "actual network response stop?",
+      "passed": true
+    },
+    {
+      "name": "visible character-by-character answer completes",
+      "passed": true
+    },
+    {
+      "name": "statistics return to first letter",
+      "passed": true
+    },
+    {
+      "name": "frequency and model discrepancy explicitly explained",
+      "passed": true
+    },
+    {
+      "name": "first-letter distribution normalized",
+      "passed": true
+    },
+    {
+      "name": "inference keeps weights fixed",
+      "passed": true
+    },
+    {
+      "name": "100 seeded draws displayed",
+      "passed": true
+    },
+    {
+      "name": "conversation model can be exported from workshop",
+      "passed": true
+    },
+    {
+      "name": "3D receives real conversation model",
+      "passed": true
+    },
+    {
+      "name": "native simulation fullscreen",
+      "passed": true
+    },
+    {
+      "name": "fullscreen zoom actually moves camera",
+      "passed": true
+    },
+    {
+      "name": "camera view preserved across steps",
+      "passed": true
+    },
+    {
+      "name": "fullscreen rotation remains interactive",
+      "passed": true
+    },
+    {
+      "name": "whole workspace fullscreen",
+      "passed": true
+    },
+    {
+      "name": "fullscreen fallback works",
+      "passed": true
+    },
+    {
+      "name": "fallback closes with Escape",
+      "passed": true
+    },
+    {
+      "name": "conversation data reach training text",
+      "passed": true
+    },
+    {
+      "name": "first training target belongs to answer",
+      "passed": true
+    },
+    {
+      "name": "6000 real browser training updates",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer salut",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer merci",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer etat?",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer stop?",
+      "passed": true
+    },
+    {
+      "name": "actual training measurements exported",
+      "passed": true
+    },
+    {
+      "name": "conversation fits 390",
+      "passed": true
+    },
+    {
+      "name": "conversation fits 768",
+      "passed": true
+    },
+    {
+      "name": "conversation fits 1280",
+      "passed": true
+    },
+    {
+      "name": "no runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "trained_model_replies": {
+    "salut": "bonjour",
+    "merci": "de rien",
+    "etat?": "pret",
+    "stop?": "arret"
+  },
+  "browser": "157.0.8103.39"
+}

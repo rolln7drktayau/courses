@@ -28,7 +28,7 @@ with sync_playwright() as p:
     page.locator('#j-next').click();page.locator('[data-token="0"]').click()
     check('embedding is selected by actual token ID',page.evaluate('Journey.selected===0') and 'Ligne 4' in page.locator('#j-evidence').inner_text())
     page.locator('#scene').screenshot(path=str(ROOT/'validation/guided-lookup.png'))
-    check('colours have stable roles',page.evaluate("Lab.scene.pickables.some(m=>m.material.color.getHex()===0x7451b8)&&Lab.scene.pickables.some(m=>m.material.color.getHex()===0x2563a6)"))
+    check('colours have stable roles',page.evaluate("Lab.scene.pickables.some(m=>(Array.isArray(m.material)?m.material[0]:m.material).color.getHex()===0x7451b8)&&Lab.scene.pickables.some(m=>(Array.isArray(m.material)?m.material[0]:m.material).color.getHex()===0x2563a6)"))
     page.locator('#j-next').click()
     check('mask and future positions visible','futur masqué' in page.locator('#j-evidence').inner_text())
     page.locator('#j-next').click()

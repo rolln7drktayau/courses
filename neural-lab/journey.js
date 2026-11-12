@@ -50,7 +50,7 @@ function prepareStep(){
   }
 }
 function card(key,title,x,z,role='text',subtitle='',extra={}){return {key,title:String(title),x,z,role,subtitle,...extra};}
-function tokenCards(ids=trace.tokens,z=-2){return ids.map((id,i)=>card('t'+i,source.vocab[id]===' '?'espace':letter(source.vocab[id]),(i-(ids.length-1)/2)*1.8,z,'text','position '+i,{index:i,w:1.35,size:source.vocab[id]===' '?.23:.36,active:i===selected}));}
+function tokenCards(ids=trace.tokens,z=-2){const gap=Math.min(1.8,12/Math.max(1,ids.length));return ids.map((id,i)=>card('t'+i,source.vocab[id]===' '?'espace':letter(source.vocab[id]),(i-(ids.length-1)/2)*gap,z,'text','n°'+i,{index:i,w:Math.min(1.35,gap*.82),size:source.vocab[id]===' '?.21:.34,active:i===selected}));}
 function tokenButtons(){return `<div class="j-tokens">${trace.tokens.map((id,i)=>`<button data-token="${i}" class="${i===selected?'active':''}" aria-pressed="${i===selected}">${esc(letter(source.vocab[id]))}<small>position ${i}</small></button>`).join('')}</div>`;}
 function group(name){return trace.groups.find(g=>g.name===name);}
 function vector(name,row){return group(name).nodes[row].map(i=>trace.tape.v[i]);}
@@ -241,5 +241,5 @@ window.addEventListener('keydown',e=>{if(!guided||e.target.closest('input,textar
 // The original advanced interface remains directly addressable and testable.
 const originalGuide=$('#guide').onclick;
 $('#guide').onclick=()=>{if(guided){index=0;stop();render();$('#j-title').scrollIntoView({block:'nearest',behavior:'smooth'});}else originalGuide();};
-window.Journey={get index(){return index;},get mode(){return mode;},get model(){return model;},get trace(){return trace;},get after(){return after;},get selected(){return selected;},get chosen(){return chosen;},get applied(){return applied;},get progress(){return progress;},get running(){return auto!==null;},get dataAccepted(){return dataAccepted;},get pair(){return trainingPair();},seek:p=>{stop();progress=Math.max(0,Math.min(1,p));render();},switchView,step};
+window.Journey={get index(){return index;},get mode(){return mode;},get model(){return model;},get trace(){return trace;},get after(){return after;},get selected(){return selected;},get chosen(){return chosen;},get applied(){return applied;},get progress(){return progress;},get running(){return auto!==null;},get dataAccepted(){return dataAccepted;},get pair(){return trainingPair();},pause:stop,useTrainingText:(text,name,at=6)=>{stop();setMode('train');$('#j-dataset').value=text;filename=name;dataAccepted=false;$('#j-example').value=at;$('#j-training-data').classList.remove('ingested');datasetInfo();restart();},useInferenceModel:(m,text)=>{stop();model=structuredClone(m);loaded=true;setMode('infer');$('#j-input').value=text;restart();},seek:p=>{stop();progress=Math.max(0,Math.min(1,p));render();},switchView,step};
 restart();switchView(!new URLSearchParams(location.search).has('advanced'));

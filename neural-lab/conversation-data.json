@@ -1,0 +1,11 @@
+{
+  "title": "Un petit assistant de démonstration",
+  "format": "Q:{question}\nR:{answer}\n",
+  "examples": [
+    {"question":"salut","answer":"bonjour","count":7},
+    {"question":"salut","answer":"salut","count":3},
+    {"question":"merci","answer":"de rien","count":10},
+    {"question":"etat?","answer":"pret","count":10},
+    {"question":"stop?","answer":"arret","count":10}
+  ]
+}

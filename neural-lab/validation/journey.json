@@ -1,6 +1,6 @@
 {
-  "executed_utc": "2026-11-12T08:52:07.266561+00:00",
-  "url": "http://127.0.0.1:8767/neural-lab/",
+  "executed_utc": "2026-11-12T10:16:46.928874+00:00",
+  "url": "http://127.0.0.1:8768/neural-lab/",
   "checks": [
     {
       "name": "guided route opens by default",

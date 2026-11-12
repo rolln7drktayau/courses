@@ -4,10 +4,10 @@ Roland Cédric TAYO · INEM
 
 Ce document résume des exécutions conservées, pas des performances promises sur une carte.
 
-Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 30 contrôles réussis. Ingestion animée : 24 contrôles réussis.
+Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 30 contrôles réussis. Ingestion animée : 24 contrôles réussis. Conversation : 19 contrôles du moteur et 35 contrôles navigateur/plein écran.
 
 Exécution du moteur : 2026-11-12T00:54:49.438Z ; v24.14.0 ; AMD Ryzen 5 7535HS with Radeon Graphics         ; win32 x64.
-Exécution du navigateur : 2026-11-12T08:48:57.296953+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
+Exécution du navigateur : 2026-11-12T10:19:18.433626+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
 
 ## Calculs et contrôles
 
@@ -22,6 +22,14 @@ Tokenisation avec espace, identifiants issus du vocabulaire, sélection réelle 
 ## Ingestion animée et données fournies
 
 Le test ingestion.py saisit une phrase entière, contrôle l’avancement et la pause, vérifie le déplacement géométrique de la phrase, parcourt les premiers et derniers tokens, contrôle les identifiants et l’exclusion des tokens hors contexte. Un fichier UTF-8 généré par le test initialise un nouveau modèle ; le texte du modèle est comparé exactement au fichier, le vocabulaire et l’exemple sont vérifiés, puis une vraie correction est exécutée. Les caractères UTF-8 invalides sont rejetés. Ces vérifications sont dans ingestion.json et les captures phrase-in-motion.png et dataset-to-example.png. Il s’agit d’une animation de traces réelles, pas d’une mesure du débit d’ingestion.
+
+## Conversation et plein écran
+
+Un mini-Transformer réellement entraîné produit les quatre réponses de démonstration, par génération caractère après caractère. Le checkpoint a effectué 22 000 corrections ; l’interface peut aussi exécuter 6 000 corrections depuis zéro dans un travailleur navigateur. Ce parcours a été exécuté et les quatre réponses attendues obtenues. Les données et leurs fréquences sont publiques, les probabilités calculées ne sont pas remplacées par ces fréquences. La surconfiance observée est affichée et discutée. Les mesures du travailleur sont sur tous les cas d’entraînement, sans test indépendant.
+
+Le journal conversation-training.json conserve une limite de la première métrique : le sous-échantillonnage d’un cas sur cinq pouvait manquer certains cas contradictoires. La finition et le travailleur évaluent tous les cas. Les résultats initiaux défavorables restent conservés.
+
+Les tests navigateur contrôlent aussi le plein écran natif de la scène et de la page, le repli CSS, la sortie par Échap, la rotation, le zoom et la conservation de la caméra entre étapes. Voir conversation-browser.json et conversation-browser-training.csv. Les rendus montrent des briques arrondies à faces distinctes ; aucun gain matériel n’est annoncé.
 
 ## Entraînement mesuré dans Node.js
 
