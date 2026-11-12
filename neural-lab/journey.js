@@ -7,23 +7,23 @@ const letter=s=>s===' '?'␠':s==='\n'?'↵':s==='\r'?'CR':s==='\t'?'⇥':s;
 const number=v=>Number(v).toFixed(3);
 const root=$('#journey');
 root.innerHTML=`
-  <div class="journey-intro"><div><span class="eyebrow">UN TEXTE ENTRE. QUE SE PASSE-T-IL ?</span><h2>Suivez une prédiction, du début à la fin.</h2><p>Un poids est un nombre que le réseau ajuste en apprenant. Le parcours montre ce que le réseau fait du texte, étape par étape.</p></div><div class="journey-switch" role="group" aria-label="Choisir le parcours"><button id="j-infer" class="active">Faire une prédiction</button><button id="j-train">Apprendre à prédire</button></div></div>
-  <div class="journey-settings"><label id="j-input-label">Le début du texte <input id="j-input" type="text" value="la lampe est allumee" maxlength="160"></label><label id="j-example-label" hidden>Exemple à suivre <input id="j-example" type="number" value="6" min="1" max="239"></label><label id="j-choice-label">Comment choisir la suite ? <select id="j-choice"><option value="max">Le caractère le plus probable</option><option value="sample">Tirer selon les probabilités</option></select></label><button id="j-run" class="primary">▶ Suivre ma phrase</button><button id="j-ready">Charger l’exemple entraîné</button><button id="j-reset">Repartir de poids au hasard</button><span id="j-weights"></span></div>
+  <div class="journey-intro"><div><span class="eyebrow">UN TEXTE ENTRE. QUE SE PASSE-T-IL ?</span><h2>Suivez une prédiction, du début à la fin.</h2><p>Un poids est un nombre que le réseau ajuste en apprenant. Le parcours montre ce que le réseau fait du texte, étape par étape.</p></div><div class="journey-switch" role="group" aria-label="Choisir le parcours"><button id="j-train" class="active">1 · Apprendre</button><button id="j-infer" disabled>2 · Faire une prédiction</button></div></div>
+  <div class="journey-settings"><label id="j-input-label">Le début du texte <textarea id="j-input" rows="2" maxlength="1000">Bonjour ! Comment vas-tu ?</textarea></label><label id="j-example-label" hidden>Exemple à suivre <input id="j-example" type="number" value="6" min="1" max="239"></label><label id="j-choice-label">Comment choisir la suite ? <select id="j-choice"><option value="max">Le caractère le plus probable</option><option value="sample">Tirer selon les probabilités</option></select></label><button id="j-run" class="primary">▶ Suivre ma phrase</button><button id="j-ready">Poids de référence des dialogues</button><button id="j-reset">Repartir de poids au hasard</button><span id="j-weights"></span></div>
   <div id="j-training-data" class="j-dataset-panel" hidden><label>Les données à apprendre — collez votre texte ou ouvrez un fichier .txt<textarea id="j-dataset" rows="3" maxlength="12000"></textarea></label><div class="row"><label class="file-button">Ouvrir un fichier .txt<input id="j-datafile" type="file" accept=".txt,text/plain"></label><button id="j-ingest" class="primary">▶ Ingérer mes données et suivre un exemple</button></div><button id="j-editdata" hidden>Modifier les données</button><p id="j-data-info">100 à 12 000 caractères. Le texte reste dans votre navigateur. L’ingestion initialise un nouveau modèle pour ce texte.</p></div>
   <div class="j-transport"><span id="j-live" role="status">En attente de votre phrase.</span><label>Vitesse <select id="j-speed"><option value="0.5">Lente</option><option value="1" selected>Normale</option><option value="2">Rapide</option></select></label><label class="j-scrubber">Position dans l’étape <input id="j-scrub" type="range" min="0" max="1000" value="0"></label><output id="j-position">0 %</output></div>
   <div id="j-receipt" aria-label="État des données"></div>
   <ol id="j-path" aria-label="Les étapes du parcours"></ol>
   <div class="journey-layout"><div class="journey-board"><div id="j-scene-host"></div><div class="journey-legend"><span class="role-text">Aa · Texte et identifiants</span><span class="role-weight">▦ · Nombres appris</span><span class="role-calculation">= · Résultats calculés</span><span class="role-learning">↺ · Apprentissage et correction</span><span>Contour · élément suivi</span></div><div id="j-evidence"></div></div>
   <article class="journey-explanation"><span id="j-count" class="eyebrow"></span><h2 id="j-title"></h2><p id="j-explain"></p><div id="j-action" class="journey-action"></div><p id="j-take" class="journey-take"></p><div class="journey-navigation"><button id="j-prev">← Avant</button><button id="j-next" class="primary">Étape suivante →</button><button id="j-auto">▶ Lire au ralenti</button><button id="j-flat">Vue 2D</button></div><p class="journey-honesty">Animation ralentie des données et des calculs réels d’un petit modèle. Sa vitesse n’est pas une mesure de performance. Les couleurs indiquent un rôle ; elles ne représentent pas des composants matériels.</p><details><summary>Pourquoi un caractère par token ?</summary><p>Un token est une unité de texte. Ici, nous choisissons un caractère pour voir chaque découpage. D’autres modèles emploient des fragments de mots : ce découpage n’est pas universel.</p><a href="https://aclanthology.org/P16-1162/" target="_blank" rel="noopener">Sennrich, Haddow et Birch, 2016 · sous-unités de mots</a></details></article></div>
-  <p class="journey-scope">Le parcours utilise un mini-Transformer à une tête. L’atelier avancé permet aussi d’examiner un bigramme et un MLP, de quantifier les poids et d’exporter les mesures.</p>`;
+  <p class="journey-scope">Le parcours de dialogues utilise un MLP compact. L’atelier avancé permet aussi d’examiner un bigramme et un mini-Transformer, de quantifier les poids et d’exporter les mesures.</p>`;
 
-$('#j-scene-host').after($('#j-receipt'));
+$('#j-scene-host').after($('#j-receipt'));const liveDialogue=document.createElement('section');liveDialogue.id='j-live-dialogue';liveDialogue.hidden=true;$('#j-scene-host').after(liveDialogue);$('.journey-explanation').insertBefore($('#j-training-data'),$('#j-action'));
 const Lab=window.Lab;
 if(!Lab)throw Error('The laboratory must initialize before the guided journey.');
 const scene=Lab.scene,viewport=$('.viewport-panel'),advancedHost=viewport.parentElement;
-let guided=true,mode='infer',index=0,selected=0,model=createModel({type:'transformer',dim:8,context:6,seed:42,corpus:PRESETS.lamp});
-let source,trace,after=null,chosen=null,applied=false,correction=null,auto=null,flat=!!scene.error,loaded=false,progress=1,lastFrame=null,lastUnit=-1,filename='Texte collé',dataAccepted=false;
-$('#j-dataset').value=PRESETS.lamp.slice(0,240);
+let guided=true,mode='train',index=0,selected=0,model=createModel({type:'mlp',dim:12,context:12,seed:42,corpus:PRESETS.lamp});
+let source,trace,after=null,chosen=null,applied=false,correction=null,auto=null,flat=!!scene.error,loaded=false,progress=1,lastFrame=null,lastUnit=-1,filename='Texte collé',dataAccepted=false,batchTraining=false,referenceChoice=null,cycleNotified=false;
+$('#j-dataset').value=PRESETS.lamp.slice(0,240);const batchLink=document.createElement('button');batchLink.id='j-dialogue-training';batchLink.textContent='Entraîner les dialogues de démonstration';batchLink.onclick=()=>$('#open-conversation')?.click();$('#j-training-data').append(batchLink);
 function trainingPair(){const chars=Array.from(model.corpus),at=Math.min(chars.length-1,Math.max(1,Math.floor(+$('#j-example').value||6)));return {text:chars.slice(Math.max(0,at-model.context),at).join(''),next:chars[at],at,chars};}
 const stages=['Recevoir','Découper','Identifier','Chercher les vecteurs','Relier le contexte','Calculer les chances','Choisir'];
 const originalPick=scene.onPick;
@@ -33,14 +33,14 @@ function stop(){cancelAnimationFrame(auto);auto=null;lastFrame=null;$('#j-auto')
 function input(){return mode==='train'?trainingPair().text:$('#j-input').value;}
 function target(){return encode(model,trainingPair().next)[0];}
 function restart(){
-  stop();progress=1;lastUnit=-1;index=0;after=null;chosen=null;applied=false;correction=null;
+  stop();referenceChoice=null;cycleNotified=false;progress=1;lastUnit=-1;index=0;after=null;chosen=null;applied=false;correction=null;
   source=structuredClone(model);trace=forward(source,encode(source,input()));selected=Math.max(0,trace.tokens.length-1);
   render();
 }
-function setMode(next){mode=next;$('#j-infer').classList.toggle('active',mode==='infer');$('#j-train').classList.toggle('active',mode==='train');$('#j-input-label').hidden=mode==='train';$('#j-example-label').hidden=mode!=='train';$('#j-choice-label').hidden=mode==='train';$('#j-training-data').hidden=mode!=='train';$('#j-run').hidden=mode==='train';$('#j-ready').hidden=mode==='train';restart();}
+function setMode(next){if(next==='train')liveDialogue.hidden=true;if(next==='infer'&&(model.updates===0||batchTraining))return;mode=next;$('#j-infer').classList.toggle('active',mode==='infer');$('#j-train').classList.toggle('active',mode==='train');$('#j-input-label').hidden=mode==='train';$('#j-example-label').hidden=mode!=='train';$('#j-choice-label').hidden=mode==='train';$('#j-training-data').hidden=mode!=='train';$('#j-run').hidden=mode==='train';$('#j-ready').hidden=mode==='train';restart();}
 function names(){return mode==='train'?[...stages,'Comparer à la réponse','Trouver les corrections','Corriger les poids','Refaire le même essai']:[...stages,'Ajouter et recommencer'];}
 function prepareStep(){
-  if(index>=6&&chosen===null){chosen=mode==='train'||$('#j-choice').value==='max'?argmax(trace.probabilities):choose(trace.probabilities,rng(source.seed+source.updates),1);}
+  if(index>=6&&chosen===null){chosen=referenceChoice!==null?referenceChoice:mode==='train'||$('#j-choice').value==='max'?argmax(trace.probabilities):choose(trace.probabilities,rng(source.seed+source.updates),1);}
   if(mode==='train'&&index>=7&&trace.loss===null)attachLoss(trace,target());
   if(mode==='train'&&index>=8&&!trace.gradientComputed)gradients(source,trace);
   if(mode==='train'&&index>=9&&!applied){
@@ -91,10 +91,10 @@ function updateReceipt(force=false){
   else if(index===2)message=`Vocabulaire : ${done} / ${n} tokens convertis en identifiants.`;
   else if(index===3)message=`Lecture des lignes d’embedding pour les ${trace.tokens.length} tokens du contexte.`;
   else message=`${names()[index]} · ${Math.round(progress*100)} % de la relecture de cette étape.`;
-  $('#j-live').textContent=message;
+  $('#j-live').textContent=mode==='train'&&!dataAccepted?'1 · Apprentissage : les dialogues sont prêts à être ingérés.':message;
   if(!force&&unit===lastUnit)return;lastUnit=unit;
   const receipt=$('#j-receipt');
-  if(mode==='train'&&!dataAccepted){receipt.innerHTML='<p>Collez votre texte ou ouvrez un fichier. Les données ne sont pas encore ingérées.</p>';return;}
+  if(mode==='train'&&!dataAccepted){$('#j-position').textContent='Prêt';$('#j-scrub').value=0;receipt.innerHTML='<p>Commencez par lire les dialogues, puis cliquez sur « Ingérer mes données ». La prédiction restera verrouillée jusqu’à une correction ou au chargement de poids entraînés.</p>';return;}
   let html='';
   if(index<=2){
     const from=Math.max(0,unit-60),to=Math.min(n,from+120),ids=encode(source,raw);
@@ -120,7 +120,7 @@ function play(){
     const count=Array.from(pipelineText()).length,batch=Math.min(Math.floor(Math.max(0,count-1)/8),Math.floor(progress*count/8));
     if((index===1||index===2)&&batch!==scene.lessonBatch){scene.lessonBatch=batch;render();}
     scene.setLessonProgress(progress);updateReceipt();
-    if(progress>=1){if(index>=names().length-1){stop();return;}index++;progress=0;lastUnit=-1;scene.lessonBatch=-1;render();}
+    if(progress>=1){if(index>=names().length-1){render();stop();return;}index++;progress=0;lastUnit=-1;scene.lessonBatch=-1;render();}
     auto=requestAnimationFrame(tick);
   };
   auto=requestAnimationFrame(tick);
@@ -128,7 +128,7 @@ function play(){
 function ingestData(){
   stop();const text=$('#j-dataset').value;
   try{
-    const next=createModel({type:'transformer',dim:8,context:6,seed:42,corpus:text});
+    const next=createModel({type:'mlp',dim:12,context:12,seed:42,corpus:text});
     model=next;loaded=false;dataAccepted=true;datasetInfo();restart();progress=0;render();play();
   }catch(e){$('#j-data-info').textContent='Données non ingérées : '+e.message;}
 }
@@ -137,7 +137,13 @@ function description(){
   let cards=[],links=[],title='',text='',action='',take='',evidence='';
   if(index===0){
     title=mode==='train'?'Les données entrent dans une mémoire d’entrée.':'Votre phrase entre dans une mémoire d’entrée.';text=mode==='train'?dataAccepted?`Le jeu de données contient ${Array.from(model.corpus).length} caractères. Nous recevons le texte, puis nous allons le tokeniser et en extraire des exemples. L’exemple suivi sera le n°${trainingPair().at}.`:'Collez votre texte d’apprentissage ou ouvrez un fichier .txt, puis cliquez sur « Ingérer mes données ». Le modèle sera initialisé pour le vocabulaire de ces données.':'Vous donnez un début de texte. Le modèle doit proposer le caractère suivant. Il n’a pas encore ajouté de réponse.';
-    cards=[card('sentence',mode==='train'?(dataAccepted?model.corpus.slice(0,42)+'…':'Vos données .txt ou collées'):input()||'(texte vide)',0,-1,'text',mode==='train'?'Le texte d’apprentissage':'La phrase que vous avez donnée',{w:11,size:.52}),card('question',mode==='train'?'Préparer les exemples':'Quelle est la suite ?',0,2,'calculation','Une prédiction à construire',{w:8,size:.4})];links=[{from:'sentence',to:'question'}];
+    cards=[card('sentence',mode==='train'?(dataAccepted?model.corpus.slice(0,42)+'…':$('#j-dataset').value.slice(0,42)+'…'):input()||'(texte vide)',0,-1,'text',mode==='train'?'Le texte d’apprentissage':'La phrase que vous avez donnée',{w:11,size:.52}),card('question',mode==='train'?'Préparer les exemples':'Quelle est la suite ?',0,2,'calculation','Une prédiction à construire',{w:8,size:.4})];links=[{from:'sentence',to:'question'}];
+    if(mode==='train'){
+      const lines=(dataAccepted?model.corpus:$('#j-dataset').value).split('\n');
+      if(lines[0]?.startsWith('Q:')&&lines[1]?.startsWith('R:')){
+        cards=[card('sentence',lines[0].slice(2),0,-2.5,'text','Personne A · texte fourni',{w:11,size:.37}),card('dataset-reply',lines[1].slice(2),0,0,'text','Personne B · réponse présente dans les données',{w:10,size:.37,reveal:.3,motion:{dx:-5,dz:0,start:.3,end:.95}}),card('question','Préparer les exemples',0,3,'learning','Contexte connu → réponse attendue',{w:8,size:.34})];links=[{from:'sentence',to:'dataset-reply'},{from:'dataset-reply',to:'question'}];
+      }
+    }
     action=mode==='train'?`<div class="j-example"><span>Entrée : <strong>${esc(input())}</strong></span><span>Réponse à apprendre : <strong>${esc(letter(expected))}</strong></span></div>`:`<div class="j-example"><span>Entrée : <strong>${esc(input()||'(vide)')}</strong></span><span>Sortie attendue : <strong>un caractère</strong></span></div>`;
     take=mode==='train'?'Apprendre exige des exemples avec une réponse connue.':source.updates===0?'Ce modèle n’a pas encore appris. Ses nombres ont été tirés au hasard. Chargez l’exemple entraîné pour comparer.':'Prédire utilise les poids déjà présents. Les poids restent fixes.';
   }else if(index===1){
@@ -159,10 +165,14 @@ function description(){
     action=tokenButtons();evidence=`<p><strong>Ligne ${id} réellement lue dans la matrice embedding</strong></p><div class="j-vector">${row.map((v,i)=>`<span><small>composante ${i}</small>${number(v)}</span>`).join('')}</div><p>Le modèle ajoute ensuite un vecteur de position. La même lettre à deux endroits garde le même embedding, mais reçoit une information de position différente. Ces nombres ne sont pas des étiquettes comme « animal » ou « couleur ».</p>`;
     take='Le token ne traverse pas toute la table au hasard : son identifiant sélectionne sa ligne.';
   }else if(index===4){
-    title='L’attention relie les positions autorisées.';text=`Nous regardons la position ${selected}, « ${c} ». À chaque position, le réseau calcule Q (pour comparer), K (pour être comparé) et V (le contenu à mélanger). Les comparaisons donnent les parts ci-dessous. Les positions futures sont masquées ; la position observée reste accessible.`;
-    const ps=vector('attention',selected);cards=tokenCards(trace.tokens,-2.5);cards.push(card('mix',`Mélange pour « ${c} »`,0,2,'calculation','Les parts ci-dessous proviennent du calcul réel',{w:7}));links=ps.map((_,i)=>({from:'t'+i,to:'mix'}));
-    action=tokenButtons();evidence=`<p><strong>Parts d’attention à la position ${selected}</strong> · leur somme vaut 100 % (aux arrondis près).</p>${trace.tokens.map((v,i)=>i<=selected?`<div class="j-prob"><span>${esc(letter(source.vocab[v]))} [${i}]</span><div><i style="width:${ps[i]*100}%"></i></div><strong>${(ps[i]*100).toFixed(1)} %</strong></div>`:`<p class="j-masked">🔒 position ${i} : futur masqué</p>`).join('')}<p>Avant ces comparaisons, les vecteurs sont normalisés : leur moyenne et leur échelle sont ajustées. Après le mélange, le réseau ajoute des corrections et transforme les valeurs. La prédiction finale utilise la dernière position, même si vous en inspectez une autre ici. Une grande part d’attention ne prouve pas qu’un modèle « comprend » un mot.</p>`;
-    take='Le contexte est mélangé selon des parts calculées. Il ne s’agit pas de choisir un seul mot gagnant.';
+    if(source.type==='mlp'){
+      const hidden=vector('hidden',0);title='Les vecteurs entrent dans une couche de neurones.';text=`Les ${source.context} positions du contexte sont assemblées. Chaque neurone multiplie ces valeurs par ses poids, additionne les résultats, ajoute un biais puis applique tanh. Cette fonction ramène le résultat entre −1 et 1.`;
+      cards=tokenCards(trace.tokens,-2.5);cards.push(card('mix',`${hidden.length} neurones cachés`,0,2,'calculation','Assembler → multiplier → additionner → tanh',{w:9}));links=trace.tokens.map((_,i)=>({from:'t'+i,to:'mix'}));
+      evidence=`<p><strong>Valeurs réellement calculées dans la couche cachée</strong></p><div class="j-vector">${hidden.slice(0,12).map((v,i)=>`<span><small>neurone ${i}</small>${number(v)}</span>`).join('')}</div><p>Aperçu des 12 premiers neurones sur ${hidden.length}. Les couches et leurs opérations complètes restent accessibles dans l’atelier.</p>`;take='Les poids appris règlent comment les éléments du contexte se combinent. Ce modèle est un MLP ; il ne contient pas d’attention.';
+    }else{
+      title='L’attention relie les positions autorisées.';text=`Nous regardons la position ${selected}, « ${c} ». À chaque position, le réseau calcule Q (pour comparer), K (pour être comparé) et V (le contenu à mélanger). Les comparaisons donnent les parts ci-dessous. Les positions futures sont masquées ; la position observée reste accessible.`;
+      const ps=vector('attention',selected);cards=tokenCards(trace.tokens,-2.5);cards.push(card('mix',`Mélange pour « ${c} »`,0,2,'calculation','Les parts ci-dessous proviennent du calcul réel',{w:7}));links=ps.map((_,i)=>({from:'t'+i,to:'mix'}));action=tokenButtons();evidence=`<p><strong>Parts d’attention à la position ${selected}</strong> · leur somme vaut 100 %.</p>${trace.tokens.map((v,i)=>i<=selected?`<div class="j-prob"><span>${esc(letter(source.vocab[v]))} [${i}]</span><div><i style="width:${ps[i]*100}%"></i></div><strong>${(ps[i]*100).toFixed(1)} %</strong></div>`:`<p class="j-masked">position ${i} : futur masqué</p>`).join('')}`;take='Le contexte est mélangé selon des parts calculées. Il ne s’agit pas de choisir un seul mot gagnant.';
+    }
   }else if(index===5){
     title='Le réseau donne une chance à chaque caractère.';text='Des multiplications et des additions transforment les vecteurs en scores. Softmax convertit ces scores en probabilités positives dont la somme vaut 100 %. À ce stade, aucun caractère n’a encore été choisi.';
     const best=top.slice(0,5);cards=[card('network','Vecteurs → scores',0,-3,'calculation','Le réseau a combiné ses poids et le contexte',{w:8}),...best.map((r,i)=>card('chance'+r.id,`${letter(source.vocab[r.id])} · ${(r.p*100).toFixed(1)} %`,(i-2)*2.5,1,'calculation','candidat',{w:2.15,size:.29}))];links=best.map(r=>({from:'network',to:'chance'+r.id}));
@@ -208,20 +218,22 @@ function render(){
   $('#j-count').textContent=`${mode==='train'?'APPRENTISSAGE':'INFÉRENCE'}${applied&&index<9?' · RELECTURE AVANT CORRECTION':''} · ÉTAPE ${index+1} / ${steps.length}`;
   $('#j-title').textContent=d.title;$('#j-explain').textContent=d.text;$('#j-action').innerHTML=d.action;$('#j-take').textContent=d.take;$('#j-evidence').innerHTML=d.evidence;
   $('#j-path').innerHTML=steps.map((s,i)=>`<li class="${i===index?'current':i<index?'done':''}"><span>${i+1}</span>${esc(s)}</li>`).join('');
+  $('#j-infer').disabled=model.updates===0||batchTraining;$('#j-infer').title=model.updates===0?'Disponible après une correction ou le chargement de poids déjà entraînés.':'Utiliser les poids obtenus pendant l’apprentissage.';
+  const currentPath=$('#j-path .current');if(currentPath)$('#j-path').scrollLeft=Math.max(0,currentPath.offsetLeft-$('#j-path').offsetLeft-$('#j-path').clientWidth/2);
   $('#j-weights').textContent=`${loaded?'Exemple entraîné':model.updates?'Apprentissage en cours':'Départ au hasard'} · ${model.updates} correction(s)${model.updates===0?' · non entraîné':''}`;
   $('#j-prev').disabled=index===0;$('#j-next').disabled=index===steps.length-1||(mode==='train'&&!dataAccepted);$('#j-next').textContent=index===steps.length-2?'Voir le résultat →':'Étape suivante →';
   const visuals=motionCards(d.cards);scene.lesson(visuals,d.links);scene.setLessonProgress(progress);if(!scene.reduced)$('#j-explain').animate([{transform:'translateY(5px)'},{transform:'translateY(0)'}],{duration:220});$('#canvas').hidden=flat;$('#fallback').hidden=!flat;$('#fallback').innerHTML=`<h3>${esc(d.title)}</h3>${visuals.map(c=>`<div data-reveal="${c.reveal||0}" data-hide="${c.hide??2}" class="j-flat-card role-${c.role}"><strong>${esc(c.title)}</strong><small>${esc(c.subtitle)}</small></div>`).join('')}`;
   root.querySelectorAll('[data-token]').forEach(b=>b.onclick=()=>{selected=+b.dataset.token;render();});
   if($('#j-again'))$('#j-again').onclick=()=>{$('#j-input').value=input()+source.vocab[chosen];restart();};
   if($('#j-repeat'))$('#j-repeat').onclick=restart;
-  updateReceipt(true);
+  updateReceipt(true);if(mode==='infer'&&index===names().length-1&&progress>=1&&!cycleNotified){cycleNotified=true;window.dispatchEvent(new CustomEvent('neural-inference-cycle-complete',{detail:{updates:model.updates,chosen}}));}
 }
 function step(delta){if(mode==='train'&&!dataAccepted){$('#j-data-info').textContent='Cliquez d’abord sur « Ingérer mes données ». ';return;}stop();progress=1;index=Math.max(0,Math.min(names().length-1,index+delta));render();}
-function switchView(toGuided){
+function switchView(toGuided,transfer=true){
   stop();Lab.pause();scene.keepLessonView=false;const keepBox=$('#sim-keep');if(keepBox)keepBox.checked=false;guided=toGuided;document.body.classList.toggle('guided',guided);root.hidden=!guided;
   $('#journey-mode').textContent=guided?'Atelier avancé':'Parcours guidé';$('#guide').textContent=guided?'Revenir au début':'Mode d’emploi';
   if(guided){$('#j-scene-host').append(viewport);scene.renderer?.setClearColor(0xf0f4f5,1);render();}
-  else{advancedHost.prepend(viewport);scene.renderer?.setClearColor(0x0b1728,0);Lab.adopt(structuredClone(model),'Poids du parcours guidé disponibles dans l’atelier.');$('#canvas').hidden=!!scene.error;$('#fallback').hidden=!scene.error;Lab.home();}
+  else{advancedHost.prepend(viewport);scene.renderer?.setClearColor(0x0b1728,0);if(transfer)Lab.adopt(structuredClone(model),'Poids du parcours guidé disponibles dans l’atelier.');$('#canvas').hidden=!!scene.error;$('#fallback').hidden=!scene.error;Lab.home();}
   scene.resize();
 }
 $('#j-prev').onclick=()=>step(-1);$('#j-next').onclick=()=>step(1);
@@ -233,13 +245,13 @@ $('#j-dataset').oninput=()=>{filename='Texte collé';dataAccepted=false;datasetI
 $('#j-datafile').onchange=async e=>{const file=e.target.files[0];if(!file)return;stop();try{if(file.size>100000)throw Error('Fichier trop long pour cette démonstration (100 ko maximum).');const text=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());$('#j-dataset').value=text;filename=file.name;dataAccepted=false;datasetInfo();restart();$('#j-data-info').textContent=`${file.name} lu localement. Cliquez sur « Ingérer mes données » pour suivre son traitement.`;}catch(err){$('#j-data-info').textContent='Lecture impossible : '+err.message;}e.target.value='';};
 $('#j-input').oninput=restart;$('#j-example').onchange=()=>{$('#j-example').value=trainingPair().at;restart();};$('#j-choice').onchange=restart;
 $('#j-flat').onclick=()=>{flat=!flat||!!scene.error;$('#j-flat').textContent=flat?'Vue 3D':'Vue 2D';render();};
-$('#j-reset').onclick=()=>{try{const corpus=mode==='train'?$('#j-dataset').value:PRESETS.lamp;model=createModel({type:'transformer',dim:8,context:6,seed:42,corpus});loaded=false;dataAccepted=mode==='train';datasetInfo();restart();}catch(e){$('#j-data-info').textContent=e.message;}};
-$('#j-ready').onclick=async()=>{stop();$('#j-ready').disabled=true;try{const r=await fetch('examples/transformer.json');if(!r.ok)throw Error('Poids indisponibles');model=await unseal(await r.json());loaded=true;restart();}catch(e){$('#j-explain').textContent='Chargement impossible : '+e.message;}finally{$('#j-ready').disabled=false;}};
+$('#j-reset').onclick=()=>{try{const corpus=$('#j-dataset').value;model=createModel({type:'mlp',dim:12,context:12,seed:42,corpus});loaded=false;dataAccepted=true;setMode('train');datasetInfo();restart();}catch(e){$('#j-data-info').textContent=e.message;}};
+$('#j-ready').onclick=async()=>{stop();$('#j-ready').disabled=true;try{const r=await fetch('examples/conversation.json');if(!r.ok)throw Error('Poids indisponibles');model=await unseal(await r.json());loaded=true;restart();}catch(e){$('#j-explain').textContent='Chargement impossible : '+e.message;}finally{$('#j-ready').disabled=false;}};
 $('#j-auto').onclick=()=>auto?stop():play();
 $('#journey-mode').onclick=()=>{if(Lab.busy)return;switchView(!guided);};
 window.addEventListener('keydown',e=>{if(!guided||e.target.closest('input,textarea,select,button,dialog'))return;if(e.key==='ArrowRight'){e.preventDefault();step(1);}if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}});
 // The original advanced interface remains directly addressable and testable.
 const originalGuide=$('#guide').onclick;
 $('#guide').onclick=()=>{if(guided){index=0;stop();render();$('#j-title').scrollIntoView({block:'nearest',behavior:'smooth'});}else originalGuide();};
-window.Journey={get index(){return index;},get mode(){return mode;},get model(){return model;},get trace(){return trace;},get after(){return after;},get selected(){return selected;},get chosen(){return chosen;},get applied(){return applied;},get progress(){return progress;},get running(){return auto!==null;},get dataAccepted(){return dataAccepted;},get pair(){return trainingPair();},pause:stop,useTrainingText:(text,name,at=6)=>{stop();setMode('train');$('#j-dataset').value=text;filename=name;dataAccepted=false;$('#j-example').value=at;$('#j-training-data').classList.remove('ingested');datasetInfo();restart();},useInferenceModel:(m,text)=>{stop();model=structuredClone(m);loaded=true;setMode('infer');$('#j-input').value=text;restart();},seek:p=>{stop();progress=Math.max(0,Math.min(1,p));render();},switchView,step};
-restart();switchView(!new URLSearchParams(location.search).has('advanced'));
+window.Journey={get index(){return index;},get mode(){return mode;},get model(){return model;},get trace(){return trace;},get after(){return after;},get selected(){return selected;},get chosen(){return chosen;},get applied(){return applied;},get progress(){return progress;},get running(){return auto!==null;},get dataAccepted(){return dataAccepted;},get pair(){return trainingPair();},pause:stop,useTrainingText:(text,name,at=6)=>{stop();model=createModel({type:'mlp',dim:12,context:12,seed:42,corpus:text});loaded=false;setMode('train');$('#j-dataset').value=text;filename=name;dataAccepted=false;$('#j-example').value=at;$('#j-training-data').classList.remove('ingested');datasetInfo();restart();},prepareBatchTraining:(text,at)=>{stop();batchTraining=true;model=createModel({type:'mlp',dim:12,context:12,seed:42,corpus:text});loaded=false;dataAccepted=true;$('#j-dataset').value=text;$('#j-example').value=at;setMode('train');datasetInfo();restart();},batchProgress:p=>{$('#j-weights').textContent=`Apprentissage : ${p.update} / 24 000 corrections · perte ${p.loss.toFixed(4)}`;},cancelBatchTraining:()=>{batchTraining=false;$('#j-infer').disabled=model.updates===0;$('#j-weights').textContent='Apprentissage interrompu. L’inférence automatique attend une fin d’apprentissage.';},showDialogue:(question,answer,status)=>{liveDialogue.hidden=false;liveDialogue.innerHTML=`<h3>2 · Inférence avec les poids appris</h3><p class="live-question"><small>Personne A</small>${esc(question)}</p><p class="live-answer"><small>Personne B · réponse du modèle</small>${esc(answer||'…')}</p><p class="muted">${esc(status)}</p>`;},acceptTrainedModel:(m)=>{stop();batchTraining=false;model=structuredClone(m);loaded=true;dataAccepted=true;$('#j-dataset').value=m.corpus;datasetInfo();restart();},startInference:(m,text,choice=null,rule='max')=>{$('#j-choice').value=rule;stop();batchTraining=false;model=structuredClone(m);loaded=true;setMode('infer');$('#j-input').value=text;restart();referenceChoice=choice;progress=0;render();play();},useInferenceModel:(m,text,choice=null,rule='max')=>{$('#j-choice').value=rule;stop();batchTraining=false;model=structuredClone(m);loaded=true;setMode('infer');$('#j-input').value=text;restart();referenceChoice=choice;},seek:p=>{stop();progress=Math.max(0,Math.min(1,p));render();},switchView,step};
+setMode('train');switchView(!new URLSearchParams(location.search).has('advanced'),false);

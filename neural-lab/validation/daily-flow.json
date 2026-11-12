@@ -1,0 +1,106 @@
+{
+  "executed_utc": "2026-11-12T13:26:47.342379+00:00",
+  "url": "http://127.0.0.1:64545/neural-lab/",
+  "checks": [
+    {
+      "name": "learning is the initial phase",
+      "passed": true
+    },
+    {
+      "name": "inference disabled before learned weights",
+      "passed": true
+    },
+    {
+      "name": "daily-life sentences supplied",
+      "passed": true
+    },
+    {
+      "name": "plain text keeps speaker turns and paragraph breaks",
+      "passed": true
+    },
+    {
+      "name": "complete dialogues displayed",
+      "passed": true
+    },
+    {
+      "name": "original examples distinguished from DailyDialog",
+      "passed": true
+    },
+    {
+      "name": "response form locked before training",
+      "passed": true
+    },
+    {
+      "name": "cancelled run does not launch inference",
+      "passed": true
+    },
+    {
+      "name": "cancellation explicitly stated",
+      "passed": true
+    },
+    {
+      "name": "24000 real corrections completed",
+      "passed": true
+    },
+    {
+      "name": "completion automatically switches to inference",
+      "passed": true
+    },
+    {
+      "name": "3D simulation automatically starts",
+      "passed": true
+    },
+    {
+      "name": "identical learned weights used in inference",
+      "passed": true
+    },
+    {
+      "name": "speaker newline preserved in actual model input",
+      "passed": true
+    },
+    {
+      "name": "inference form unlocked after completion",
+      "passed": true
+    },
+    {
+      "name": "natural answer generated without extra send click",
+      "passed": true
+    },
+    {
+      "name": "answer visible next to simulation",
+      "passed": true
+    },
+    {
+      "name": "3D probabilities exactly match the response calculation",
+      "passed": true
+    },
+    {
+      "name": "full training measurements exported",
+      "passed": true
+    },
+    {
+      "name": "learning-first layout fits 390",
+      "passed": true
+    },
+    {
+      "name": "learning-first layout fits 768",
+      "passed": true
+    },
+    {
+      "name": "learning-first layout fits 1280",
+      "passed": true
+    },
+    {
+      "name": "no runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "automatic_reply": {
+    "question": "Bonjour ! Comment vas-tu ?",
+    "answer": "Je vais bien, merci.",
+    "updates": 24000,
+    "type": "mlp"
+  },
+  "browser": "157.0.8103.39"
+}

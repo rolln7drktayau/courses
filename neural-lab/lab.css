@@ -22,3 +22,13 @@
 #simulation-scrim{position:fixed;inset:0;background:#030e1bba;z-index:9999}.viewport-panel.simulation-spotlight{box-shadow:0 18px 80px #0009}
 
 .guided #sim-page{display:none}
+
+.daily-dialogue{background:#0d1c2e;border:1px solid #385169;border-radius:12px;padding:13px 15px;margin-bottom:16px}.daily-dialogue h4{font-size:15px;color:var(--gold);margin:0 0 12px}.daily-turn{font-size:15px;line-height:1.6;padding:9px 12px;border-radius:9px;max-width:92%;white-space:pre-wrap}.daily-turn small{display:block;font-size:10px;margin-bottom:3px;opacity:.75}.speaker-a{background:#253d58;color:#e4f1ff;margin-right:25px}.speaker-b{background:#18423e;color:#c1f0dd;margin-left:25px}#chat-inference{border:0;padding:0;margin:0;min-width:0}#chat-inference:disabled{opacity:.4}#chat-gate{border-left:3px solid var(--gold);padding:11px 14px;background:#29303a;color:var(--gold);font-size:13px;line-height:1.6}.journey-explanation #j-training-data{padding:12px;margin:16px 0}.journey-explanation #j-training-data>label{font-size:12px}.journey-explanation #j-training-data textarea{font-size:12px}.journey-explanation #j-training-data .row{gap:6px}.journey-explanation #j-training-data button{font-size:11px}.journey-explanation #j-training-data .row .primary{width:100%}
+
+#j-input{min-width:260px;font-size:14px;line-height:1.5;min-height:64px}.journey-settings #j-input-label{flex:1;min-width:270px}@media(max-width:600px){#j-input{min-width:0}}
+
+.journey-explanation #j-training-data.ingested{display:block!important}#j-dialogue-training{margin-top:12px;width:100%;border-color:#70cbb8;color:#8de5cf}
+
+#j-live-dialogue{background:#142c3b;border:1px solid #47778a;border-radius:12px;padding:18px 20px;margin:14px 0}#j-live-dialogue h3{font-size:16px;color:var(--green);margin:0 0 12px}#j-live-dialogue .live-question,#j-live-dialogue .live-answer{font-size:18px;line-height:1.6;padding:12px 15px;border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere}#j-live-dialogue .live-question{background:#233e58;margin-right:28px}#j-live-dialogue .live-answer{background:#155047;color:#c3f7e7;margin-left:28px}#j-live-dialogue small{display:block;font-size:10px;opacity:.8;margin-bottom:3px}
+
+.guided #j-path{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:thin;max-width:100%}.guided #j-path li{flex-shrink:0}

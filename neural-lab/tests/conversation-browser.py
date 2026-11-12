@@ -13,25 +13,26 @@ with sync_playwright() as p:
     page=b.new_page(viewport={'width':1536,'height':1100});page.on('pageerror',lambda e:report['errors'].append(str(e)))
     page.goto(BASE+'#conversation');page.wait_for_function('!!window.Conversation&&!!window.Display')
     check('conversation anchor opens examples',page.locator('#chat-content').is_visible())
-    check('actual repeated exchanges shown',page.locator('.chat-example').count()==5)
+    check('actual repeated exchanges shown',page.locator('.chat-example').count()==7)
     check('70/30 observed frequency shown','70 %' in page.locator('#chat-frequencies').inner_text() and '30 %' in page.locator('#chat-frequencies').inner_text())
-    page.locator('#chat-load').click();page.wait_for_function('Conversation.model!==null')
-    check('trained weights and hash verified',page.evaluate('Conversation.model.updates')==22000)
+    check('inference initially locked',page.locator('#chat-question').is_disabled());page.locator('#chat-load').click();page.wait_for_function('Conversation.model!==null')
+    check('trained weights and hash verified',page.evaluate('Conversation.model.updates')==24000)
+    check('inference unlocked by trained weights',not page.locator('#chat-question').is_disabled());pairs=page.evaluate('Array.from(new Set(Conversation.data.examples.map(e=>e.question))).map(q=>[q,Conversation.data.examples.filter(e=>e.question===q).sort((a,b)=>b.count-a.count)[0].answer])');first_question,first_answer=pairs[0]
     weights=page.evaluate('Conversation.model.weights.slice()')
-    for question,answer in [('salut','bonjour'),('merci','de rien'),('etat?','pret'),('stop?','arret')]:
+    for question,answer in pairs:
         page.locator('#chat-question').fill(question);page.locator('#chat-send').click();page.wait_for_function('expected=>Conversation.result.answer===expected',arg=answer)
         check('actual network response '+question,page.evaluate('Conversation.result.answer')==answer)
-    page.locator('#chat-question').fill('salut');page.locator('#chat-send').click();page.wait_for_timeout(5500)
-    check('visible character-by-character answer completes',page.locator('#chat-answer').inner_text()=='bonjour')
+    page.locator('#chat-question').fill(first_question);page.locator('#chat-send').click();page.wait_for_function('!Conversation.generating',timeout=30000)
+    check('visible character-by-character answer completes',page.locator('#chat-answer').inner_text()==first_answer)
     check('statistics return to first letter',page.evaluate('Conversation.position')==0)
-    check('frequency and model discrepancy explicitly explained','trop confiant' in page.locator('.stats-observation').inner_text());check('first-letter distribution normalized',abs(sum(page.evaluate('Conversation.distribution'))-1)<1e-12)
+    check('frequency and model discrepancy explicitly explained','Le réseau lui attribue' in page.locator('.stats-observation').inner_text());check('first-letter distribution normalized',abs(sum(page.evaluate('Conversation.distribution'))-1)<1e-12)
     check('inference keeps weights fixed',page.evaluate('Conversation.model.weights')==weights)
     page.locator('#chat-draw').click();check('100 seeded draws displayed','100 tirages réels' in page.locator('#chat-draws').inner_text())
     with page.expect_download() as pending:
         # Download is exposed after actual browser training below; test weights by inspector first.
         page.locator('#chat-inspect').click();page.locator('#journey-mode').click();page.locator('#export-model').click()
     check('conversation model can be exported from workshop',pending.value.suggested_filename=='neural-model.json');page.locator('#journey-mode').click()
-    check('3D receives real conversation model',page.evaluate('Journey.model.context')==12)
+    check('3D receives real conversation model',page.evaluate('Journey.model.context')==12 and page.evaluate('Journey.model.type')=='mlp');check('3D keeps speaker line breaks and exact inference probabilities',page.evaluate('JSON.stringify(Journey.trace.probabilities)===JSON.stringify(Conversation.result.trace[Conversation.position].probabilities)'))
     page.locator('#sim-full').click();page.wait_for_function("document.fullscreenElement===document.querySelector('.viewport-panel')")
     check('native simulation fullscreen',page.locator('#canvas').bounding_box()['height']>800)
     distance=page.evaluate('Lab.scene.camera.position.length()');page.locator('#sim-zoom-in').click();check('fullscreen zoom actually moves camera',page.evaluate('Lab.scene.camera.position.length()')<distance)
@@ -46,15 +47,15 @@ with sync_playwright() as p:
     # Explicit fallback when native fullscreen cannot be requested.
     page.evaluate("document.querySelector('.viewport-panel').requestFullscreen=undefined")
     page.locator('#sim-full').click();check('fullscreen fallback works',page.locator('.viewport-panel').evaluate("e=>e.classList.contains('fullscreen-fallback')"));page.keyboard.press('Escape');check('fallback closes with Escape',not page.evaluate('Display.fullscreen'))
-    page.locator('#chat-data').click();check('conversation data reach training text','Q:salut\nR:bonjour' in page.locator('#j-dataset').input_value());check('first training target belongs to answer',page.locator('#j-example').input_value()=='10')
+    page.locator('#chat-data').click();check('conversation data reach training text',first_question in page.locator('#j-dataset').input_value());check('first training target belongs to answer',page.locator('#j-example').input_value()==str(len('Q:'+first_question+'\nR:')))
     page.locator('#chat-train').click();page.wait_for_function("document.querySelector('#chat-stop').disabled",timeout=240000)
-    check('6000 real browser training updates',page.evaluate('Conversation.model.updates')==6000)
+    check('24000 real browser training updates',page.evaluate('Conversation.model.updates')==24000)
     report['trained_model_replies']={}
-    for question,answer in [('salut','bonjour'),('merci','de rien'),('etat?','pret'),('stop?','arret')]:
+    for question,answer in pairs:
         page.locator('#chat-question').fill(question);page.locator('#chat-send').click();page.wait_for_function('expected=>Conversation.result.question===expected',arg=question);actual=page.evaluate('Conversation.result.answer');report['trained_model_replies'][question]=actual;check('browser-trained answer '+question,actual==answer)
     with page.expect_download() as pending:page.locator('#chat-export').click()
-    csv=Path(pending.value.path()).read_text(encoding='utf-8');check('actual training measurements exported','6000,' in csv);(ROOT/'validation/conversation-browser-training.csv').write_text(csv,encoding='utf-8')
-    page.locator('#chat-question').fill('salut');page.locator('#chat-send').click();page.wait_for_timeout(5500)
+    csv=Path(pending.value.path()).read_text(encoding='utf-8');check('actual training measurements exported','24000,' in csv);(ROOT/'validation/conversation-browser-training.csv').write_text(csv,encoding='utf-8')
+    page.locator('#chat-question').fill(first_question);page.locator('#chat-send').click();page.wait_for_function('!Conversation.generating',timeout=30000)
     page.locator('#conversation').screenshot(path=str(ROOT/'validation/conversation-statistics.png'))
     for width in [390,768,1280]:page.set_viewport_size({'width':width,'height':1000});check('conversation fits '+str(width),page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'))
     check('no runtime errors',not report['errors']);report['browser']=b.version;b.close()

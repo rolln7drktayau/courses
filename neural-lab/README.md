@@ -4,17 +4,23 @@ Roland Cédric TAYO · INEM
 
 Laboratoire interactif accompagnant [Dans la mémoire d’un modèle](../llm-inside/). Ouvrir [le laboratoire](https://rolln7drktayau.github.io/courses/neural-lab/). Aucun compte, aucune installation ni clé d’API requis pour la page publiée. Le calcul reste local ; aucun corpus n’est téléversé. L’hébergeur reçoit les requêtes habituelles de chargement des fichiers.
 
-## Conversation, données et probabilités
+## Apprentissage, puis inférence automatique sur des dialogues quotidiens
 
-Ouvrir [la conversation](https://rolln7drktayau.github.io/courses/neural-lab/#conversation). Le jeu `conversation-data.json` contient quatre questions : `salut`, `merci`, `etat?`, `stop?`. Pour `salut`, sept exemples répondent `bonjour` et trois `salut`. Les autres réponses sont `de rien`, `pret`, `arret`. Les repères `Q:` et `R:` font partie du texte réellement encodé.
+L’ouverture présente **1 · Apprendre**. **2 · Faire une prédiction** reste désactivé sans poids appris. Les textes sont des dialogues français originaux sur une pause café, un trajet en train et une promenade. [DailyDialog (Li et al., 2017)](https://aclanthology.org/I17-1099/) sert de référence de format : les textes livrés ici ne sont pas des extraits de son corpus.
 
-Le mini-Transformer de conversation (dimension 8, contexte 12, une tête) apprend à prévoir les caractères de la réponse seulement, y compris le saut de ligne final. Le préfixe connu est fourni à chaque étape (teacher forcing). « Charger les poids entraînés » ouvre le checkpoint réellement produit en 22 000 corrections ; « Entraîner depuis zéro » exécute 6 000 corrections dans un travailleur du navigateur. L’entraînement peut être arrêté et ses mesures exportées. Les conversations peuvent aussi être transférées au parcours d’ingestion, en sélectionnant le premier caractère d’une réponse comme cible.
+Le fichier `conversation-data.json` contient trois dialogues de quatre tours et sept variantes d’exemples question/réponse. Le texte d’entraînement conserve les tours `Q:` / `R:` et les paragraphes. Les occurrences pondérées donnent soixante paires : pour « Bonjour ! Comment vas-tu ? », sept réponses « Je vais bien, merci. » et trois « Très bien, merci. ». Les autres échanges portent notamment sur un café, un rendez-vous à la gare et la météo.
 
-La réponse n’est pas choisie dans une table de textes préécrits : chaque caractère est calculé par le réseau puis sélectionné, jusqu’au saut de ligne ou à la limite de longueur. Cliquer un caractère montre sa distribution et ses scores softmax. La vue statistique revient ensuite au premier caractère, pour le comparer aux exemples. Le bouton 100 tirages tire réellement dans cette distribution : il ne génère pas 100 réponses complètes. La graine rend les tirages reproductibles.
+Le parcours manuel montre une réception des données, une tokenisation par caractères, la préparation du contexte et de sa cible, puis une correction réelle des poids. « Entraîner les dialogues de démonstration » ouvre l’apprentissage complet du jeu. Le MLP de démonstration a une dimension de vecteurs de 12, un contexte de 12 caractères, 24 neurones cachés et 5 182 paramètres. La couche cachée utilise tanh. Le modèle est entraîné sur les caractères des réponses et sur leur saut de ligne final, en fournissant le préfixe déjà connu (teacher forcing).
 
-**Fréquence observée et probabilité apprise sont distinctes.** Les exemples `salut` donnent 70 % de premières lettres `b` et 30 % `s`. Le checkpoint calcule une distribution différente, conservée dans les résultats. Cette surconfiance est affichée, pas remplacée artificiellement par 70/30. On peut discuter calibration, taille du jeu et optimisation. Le bon résultat sur ces quatre questions d’entraînement ne démontre aucune capacité de conversation générale.
+Le bouton « Démarrer l’apprentissage » exécute **24 000 corrections** depuis zéro dans un travailleur du navigateur : graine 42, η=0,04, norme du gradient limitée à 1. À son terme, **la simulation bascule automatiquement vers l’inférence avec les poids obtenus**, suit la première prédiction et poursuit une réponse en phrase complète. L’utilisateur peut accélérer la relecture ou avancer par étapes. La réponse est également visible près de la scène. Un arrêt prématuré laisse l’apprentissage interrompu et ne lance pas cette inférence automatique.
 
-Reproduire le checkpoint : `node neural-lab/tests/build_conversation.mjs`, puis `node neural-lab/tests/refine_conversation.mjs`. La première campagne utilise la graine 42, η=0,04, 16 000 corrections. La seconde repart de ces poids : graine 43, η=0,004, 6 000 corrections. Le journal garde les résultats initiaux défavorables et signale une limite de sa première métrique : un sous-échantillon d’un cas sur cinq pouvait manquer des cibles contradictoires. La campagne de finition et le travailleur navigateur évaluent tous les cas. Les mesures sont sur les données d’entraînement, sans test indépendant.
+« Utiliser un entraînement déjà effectué » charge le checkpoint réellement produit par le même protocole et lance également la démonstration d’inférence ; il ne prétend pas avoir entraîné un modèle instantanément. Le modèle restitue les réponses du petit jeu, par exemple « Je vais bien, merci. » ou « Oui, avec plaisir. ». Cela ne démontre aucune capacité de conversation générale, de mémoire longue ni de généralisation hors de ces exemples. La fenêtre de douze caractères est une limite explicitement affichée.
+
+Une expérience de mini-Transformer (dimension 12, contexte 12, une tête, même objectif et mêmes réglages) a aussi été exécutée. Elle produit ici des réponses dégradées. Les essais et erreurs restent dans `validation/daily-transformer-attempt.json`. Le MLP a été retenu pour ce parcours, sur la base de ces essais limités ; ce n’est pas un classement général des architectures. Le Transformer reste disponible dans l’atelier avancé.
+
+La fréquence observée et la probabilité apprise sont affichées séparément. Cliquer un caractère retrouve sa distribution et ses scores softmax. Le bouton 100 tirages effectue réellement cent choix dans cette distribution ; il ne génère pas cent réponses complètes. Les probabilités du modèle peuvent être trop confiantes. Elles ne sont pas remplacées artificiellement par les fréquences des exemples. Les mesures portent sur tous les cas d’entraînement, sans test indépendant.
+
+Reproduire le checkpoint : `node neural-lab/tests/build_conversation.mjs`. Pour reproduire l’essai Transformer séparé : `node neural-lab/tests/build_conversation.mjs --transformer`. Les résultats initiaux défavorables et les réponses intermédiaires sont conservés. Le parcours `tests/daily-flow.py` exécute aussi une campagne complète dans le navigateur et vérifie le passage automatique, l’identité des poids, la conservation des retours à la ligne et l’absence d’inférence automatique après interruption.
 
 ## Plein écran et manipulation
 
@@ -26,9 +32,9 @@ Les briques du parcours sont arrondies, debout face au lecteur, avec une face co
 
 « Suivre ma phrase » démarre une animation continue : la phrase se déplace vers l’entrée, le tampon se remplit, les caractères deviennent des tokens, puis des identifiants. Les cartes se déplacent réellement dans la scène 3D ; la pause et la tête de lecture arrêtent ou repositionnent ces transformations. La vitesse choisie est celle de l’animation, pas une mesure du temps d’ingestion ou du processeur.
 
-Pour apprendre, coller des données ou ouvrir un fichier `.txt` UTF-8 (100 à 12 000 caractères), puis cliquer « Ingérer mes données ». Un nouveau modèle est initialisé avec le vocabulaire de ce texte. Toute la séquence est reçue et tokenisée avant d’en extraire l’exemple à suivre. À la position i, le contexte contient jusqu’à six caractères précédents et la cible est le caractère i ; il y a N−1 exemples possibles pour N caractères. Le numéro de l’exemple peut être changé. Aucun exemple ni caractère n’est inventé pour compléter les données. Modifier le texte demande de l’ingérer à nouveau.
+Pour apprendre, coller des données ou ouvrir un fichier `.txt` UTF-8 (100 à 12 000 caractères), puis cliquer « Ingérer mes données ». Un nouveau modèle est initialisé avec le vocabulaire de ce texte. Toute la séquence est reçue et tokenisée avant d’en extraire l’exemple à suivre. À la position i, le contexte contient jusqu’à douze caractères précédents et la cible est le caractère i ; il y a N−1 exemples possibles pour N caractères. Le numéro de l’exemple peut être changé. Aucun exemple ni caractère n’est inventé pour compléter les données. Modifier le texte demande de l’ingérer à nouveau.
 
-L’animation montre un groupe de huit tokens à la fois et un extrait mobile du tampon pour les textes longs. Elle parcourt ainsi tout le flux, sans prétendre tout afficher simultanément. Après conversion, la fenêtre du mini-modèle (six tokens dans le parcours de base, douze pour la conversation) est rendue explicite : les tokens hors fenêtre sont barrés. La cible d’apprentissage reste séparée de l’entrée. Le fichier est effectivement lu dans le navigateur ; le trajet visuel est la relecture ralentie des données et des calculs réels, pas un chronométrage d’I/O.
+L’animation montre un groupe de huit tokens à la fois et un extrait mobile du tampon pour les textes longs. Elle parcourt ainsi tout le flux, sans prétendre tout afficher simultanément. Après conversion, la fenêtre du mini-modèle (douze caractères pour les dialogues) est rendue explicite : les tokens hors fenêtre sont barrés. La cible d’apprentissage reste séparée de l’entrée. Le fichier est effectivement lu dans le navigateur ; le trajet visuel est la relecture ralentie des données et des calculs réels, pas un chronométrage d’I/O.
 
 La page s’ouvre sur une seule transformation à la fois : lire le texte, le découper en caractères, attribuer les identifiants, sélectionner les lignes d’embedding, mélanger le contexte, calculer les probabilités, choisir un caractère et continuer.
 
@@ -38,13 +44,13 @@ Les couleurs ont un sens stable : bleu pour texte et identifiants, violet pour n
 
 Un clic sur un token montre la ligne réellement sélectionnée. Les probabilités sont visibles avant le choix. La tokenisation du laboratoire est explicitement une tokenisation par caractères, différente d’une tokenisation par fragments de mots. Voir [Sennrich, Haddow et Birch (2016)](https://aclanthology.org/P16-1162/).
 
-Le mode 2D présente les mêmes cartes sans WebGL. « Atelier avancé » donne accès aux fonctions ci-dessous. Le parcours guidé porte sur le mini-Transformer ; le basculement vers l’atelier y charge ses poids.
+Le mode 2D présente les mêmes cartes sans WebGL. « Atelier avancé » donne accès aux fonctions ci-dessous. Le parcours guidé porte sur le MLP de démonstration ; le basculement vers l’atelier y charge ses poids.
 
 ## Atelier avancé
 
 Les trois modèles peuvent aussi être chargés déjà entraînés sur le corpus public d’Alice (2 000 corrections, graine 42 ; empreinte vérifiée). Il s’agit de démonstrations propres au laboratoire, pas des corrigés des TD.
 
-1. Garder le mini-Transformer et le corpus d’Alice. Initialiser les poids.
+1. Garder les dialogues quotidiens fournis. Initialiser les poids.
 2. Cliquer les quatre étapes : prédiction, perte, gradients, correction. Observer les valeurs avant/après.
 3. Le bouton « 10 corrections au ralenti » exécute les mêmes quatre étapes, avec une pause entre chacune ; il est possible de le suspendre. Ouvrir une brique, une matrice ou une activation. Remonter les opérations jusqu’aux paramètres. Rejouer les opérations d’un résultat.
 4. Entraîner 300 corrections, puis prédire quelques caractères. Une correction utilise une fenêtre ; ce n’est pas une époque.
@@ -106,12 +112,15 @@ python neural-lab/tests/journey.py
 python neural-lab/tests/ingestion.py
 node neural-lab/tests/conversation.test.mjs
 python neural-lab/tests/conversation-browser.py
+python neural-lab/tests/daily-flow.py
 python neural-lab/tests/presentation.py
 ```
 
 Les fichiers de `examples/` se régénèrent avec `node neural-lab/tests/build_examples.mjs`.
 
-Node n’a besoin d’aucun paquet. Les tests navigateur utilisent Python, Playwright et Chrome installés sur la machine de validation ; son chemin Chrome peut être adapté. `validation/results.json`, les CSV et `validation/browser.json` donnent les exécutions enregistrées, leur environnement et leurs limites. Une démonstration qui apprend une suite répétée reste une démonstration, pas un résultat publiable sur un modèle généraliste.
+Node n’a besoin d’aucun paquet. Pour lancer un test avec son propre serveur temporaire : `python neural-lab/tests/run_browser.py daily-flow.py`. Le serveur est arrêté à la fin du contrôle.
+
+Les tests navigateur utilisent Python, Playwright et Chrome installés sur la machine de validation ; son chemin Chrome peut être adapté. `validation/results.json`, les CSV et `validation/browser.json` donnent les exécutions enregistrées, leur environnement et leurs limites. Une démonstration qui apprend une suite répétée reste une démonstration, pas un résultat publiable sur un modèle généraliste.
 
 ## Sources primaires
 

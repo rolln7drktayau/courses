@@ -4,10 +4,10 @@ Roland Cédric TAYO · INEM
 
 Ce document résume des exécutions conservées, pas des performances promises sur une carte.
 
-Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 30 contrôles réussis. Ingestion animée : 24 contrôles réussis. Conversation : 19 contrôles du moteur et 35 contrôles navigateur/plein écran. Présentation frontale et mise en évidence : 24 contrôles réussis.
+Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 29 contrôles réussis. Ingestion animée : 24 contrôles réussis. Conversation : 25 contrôles du moteur et 42 contrôles navigateur/plein écran. Présentation frontale et mise en évidence : 24 contrôles réussis. Apprentissage puis inférence automatique : 23 contrôles réussis.
 
 Exécution du moteur : 2026-11-12T00:54:49.438Z ; v24.14.0 ; AMD Ryzen 5 7535HS with Radeon Graphics         ; win32 x64.
-Exécution du navigateur : 2026-11-12T10:56:38.500771+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
+Exécution du navigateur : 2026-11-12T13:23:20.704873+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
 
 ## Calculs et contrôles
 
@@ -17,7 +17,7 @@ Le parcours navigateur vérifie aussi le chargement des trois modèles, la corre
 
 ## Parcours guidé grand public
 
-Tokenisation avec espace, identifiants issus du vocabulaire, sélection réelle de la ligne d’embedding, masquage du futur, probabilités avant sélection, argmax, poids fixes en inférence, gradient et mise à jour en apprentissage, absence de double correction lors d’une relecture, comparaison avant/après, repli 2D, caractères inconnus et entrée vide. Les captures guided-*.png et journey.json en donnent les traces. Les couleurs portent des rôles explicites ; le parcours ne fait pas circuler des nombres décoratifs.
+Tokenisation avec espace, identifiants issus du vocabulaire, sélection réelle de la ligne d’embedding, couche cachée MLP avec tanh, probabilités avant sélection, argmax, poids fixes en inférence, gradient et mise à jour en apprentissage, absence de double correction lors d’une relecture, comparaison avant/après, repli 2D, caractères inconnus et entrée vide. Les captures guided-*.png et journey.json en donnent les traces. Les couleurs portent des rôles explicites ; le parcours ne fait pas circuler des nombres décoratifs.
 
 ## Ingestion animée et données fournies
 
@@ -25,9 +25,9 @@ Le test ingestion.py saisit une phrase entière, contrôle l’avancement et la 
 
 ## Conversation et plein écran
 
-Un mini-Transformer réellement entraîné produit les quatre réponses de démonstration, par génération caractère après caractère. Le checkpoint a effectué 22 000 corrections ; l’interface peut aussi exécuter 6 000 corrections depuis zéro dans un travailleur navigateur. Ce parcours a été exécuté et les quatre réponses attendues obtenues. Les données et leurs fréquences sont publiques, les probabilités calculées ne sont pas remplacées par ces fréquences. La surconfiance observée est affichée et discutée. Les mesures du travailleur sont sur tous les cas d’entraînement, sans test indépendant.
+Un MLP compact réellement entraîné produit des réponses en phrases complètes sur six questions de dialogues quotidiens originaux. Le checkpoint et le travailleur du navigateur exécutent 24 000 corrections. Le parcours démarre par l’apprentissage, verrouille l’inférence sans poids appris, puis bascule automatiquement vers cette inférence avec les mêmes poids à la fin. Les réponses attendues ont été obtenues sur le petit jeu. Le test daily-flow.py vérifie aussi la fin de toute la première séquence visuelle et la réponse sans clic supplémentaire ; une interruption ne déclenche pas cette inférence. Les données et leurs fréquences sont publiques, les probabilités calculées ne sont pas remplacées par ces fréquences. La surconfiance observée est affichée et discutée. Les mesures du travailleur sont sur tous les cas d’entraînement, sans test indépendant.
 
-Le journal conversation-training.json conserve une limite de la première métrique : le sous-échantillonnage d’un cas sur cinq pouvait manquer certains cas contradictoires. La finition et le travailleur évaluent tous les cas. Les résultats initiaux défavorables restent conservés.
+Les courbes sur les dialogues portent sur tous les cas d’entraînement. Un essai de mini-Transformer sur le même objectif donne ici des réponses dégradées, conservées dans daily-transformer-attempt.json ; le MLP a donc été retenu dans ce protocole limité. Les textes sont des exemples français originaux, DailyDialog servant de référence de format. Cette comparaison ne prétend pas établir une supériorité générale du MLP.
 
 Les tests navigateur contrôlent aussi le plein écran natif de la scène et de la page, le repli CSS, la sortie par Échap, la rotation, le zoom et la conservation de la caméra entre étapes. Voir conversation-browser.json et conversation-browser-training.csv. Les rendus montrent des briques arrondies à faces distinctes ; aucun gain matériel n’est annoncé.
 

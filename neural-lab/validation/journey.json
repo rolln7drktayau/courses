@@ -1,97 +1,105 @@
 {
-  "executed_utc": "2026-11-12T10:54:10.877558+00:00",
-  "url": "http://127.0.0.1:8768/neural-lab/",
+  "executed_utc": "2026-11-12T13:22:16.192476+00:00",
+  "url": "http://127.0.0.1:58602/neural-lab/",
   "checks": [
     {
-      "name": "guided route opens by default",
+      "name": "learning first by default",
       "passed": true
     },
     {
-      "name": "model starts transparently untrained",
+      "name": "inference initially locked",
       "passed": true
     },
     {
-      "name": "actual trained checkpoint loads",
+      "name": "natural text provided",
       "passed": true
     },
     {
-      "name": "tokenization includes space as a token",
+      "name": "daily data are original examples",
       "passed": true
     },
     {
-      "name": "IDs match actual vocabulary",
+      "name": "real ingestion initializes the model",
       "passed": true
     },
     {
-      "name": "embedding is selected by actual token ID",
+      "name": "tokenization visible and controllable",
       "passed": true
     },
     {
-      "name": "colours have stable roles",
+      "name": "vocabulary conversion visible",
       "passed": true
     },
     {
-      "name": "mask and future positions visible",
+      "name": "embedding selection is actual token ID",
       "passed": true
     },
     {
-      "name": "probabilities visible before choosing",
+      "name": "MLP hidden layer explained honestly",
       "passed": true
     },
     {
-      "name": "selection is actual argmax",
+      "name": "probabilities normalized",
       "passed": true
     },
     {
-      "name": "inference leaves weights fixed",
+      "name": "real argmax selected",
       "passed": true
     },
     {
-      "name": "continuation is explicit",
+      "name": "known answer used as target",
       "passed": true
     },
     {
-      "name": "generation loops back to reading",
+      "name": "weights fixed before correction",
       "passed": true
     },
     {
-      "name": "known target used for loss",
+      "name": "gradients calculated",
       "passed": true
     },
     {
-      "name": "weights fixed until correction",
+      "name": "real parameter update",
       "passed": true
     },
     {
-      "name": "gradients really computed",
+      "name": "replay never doubles the update",
       "passed": true
     },
     {
-      "name": "update really executed once",
+      "name": "same-example improvement measured",
       "passed": true
     },
     {
-      "name": "replay does not double-update",
+      "name": "inference unlocked after correction",
       "passed": true
     },
     {
-      "name": "same-example before/after measured",
+      "name": "inference reuses learned weights",
       "passed": true
     },
     {
-      "name": "no arbitrary number ticker",
+      "name": "speaker newline preserved",
       "passed": true
     },
     {
-      "name": "advanced workshop remains reachable",
+      "name": "inference does not change weights",
       "passed": true
     },
     {
-      "name": "2D explanation works",
+      "name": "expected first character predicted",
       "passed": true
     },
     {
-      "name": "unknown characters explicit",
+      "name": "continuation returns to input",
+      "passed": true
+    },
+    {
+      "name": "2D alternative available",
+      "passed": true
+    },
+    {
+      "name": "unknown token explicit",
       "passed": true
     },
     {
@@ -107,27 +115,10 @@
       "passed": true
     },
     {
-      "name": "empty text safe",
-      "passed": true
-    },
-    {
-      "name": "automatic guided fallback without WebGL",
-      "passed": true
-    },
-    {
-      "name": "fallback shows tokenization cards",
-      "passed": true
-    },
-    {
       "name": "no runtime errors",
       "passed": true
     }
   ],
   "errors": [],
-  "manual_update": {
-    "before": 1.8735020457534248,
-    "after": 1.6975821844665844,
-    "updates": 1
-  },
   "browser": "157.0.8103.39"
 }

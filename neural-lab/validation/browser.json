@@ -1,8 +1,8 @@
 {
-  "executed_utc": "2026-11-12T10:56:38.500771+00:00",
+  "executed_utc": "2026-11-12T13:23:20.704873+00:00",
   "load": "not controlled",
   "rendering": "Chrome headless with --enable-unsafe-swiftshader; not a GPU performance test",
-  "url": "http://127.0.0.1:8768/neural-lab/?advanced",
+  "url": "http://127.0.0.1:49674/neural-lab/?advanced",
   "checks": [
     {
       "name": "WebGL initialized",
@@ -179,28 +179,28 @@
   ],
   "errors": [],
   "network_requests": [
-    "http://127.0.0.1:8768/neural-lab/?advanced",
-    "http://127.0.0.1:8768/neural-lab/lab.css",
-    "http://127.0.0.1:8768/neural-lab/app.js",
-    "http://127.0.0.1:8768/neural-lab/journey.js",
-    "http://127.0.0.1:8768/neural-lab/conversation.js",
-    "http://127.0.0.1:8768/neural-lab/display.js",
-    "http://127.0.0.1:8768/neural-lab/engine.js",
-    "http://127.0.0.1:8768/neural-lab/conversation-engine.js",
-    "http://127.0.0.1:8768/neural-lab/scene.js",
-    "http://127.0.0.1:8768/neural-lab/vendor/three.module.js",
-    "http://127.0.0.1:8768/neural-lab/vendor/OrbitControls.js",
-    "http://127.0.0.1:8768/neural-lab/vendor/three.core.js",
-    "http://127.0.0.1:8768/neural-lab/conversation-data.json",
-    "http://127.0.0.1:8768/neural-lab/worker.js",
-    "http://127.0.0.1:8768/neural-lab/engine.js",
-    "http://127.0.0.1:8768/neural-lab/worker.js",
-    "http://127.0.0.1:8768/neural-lab/engine.js",
-    "http://127.0.0.1:8768/neural-lab/worker.js",
-    "http://127.0.0.1:8768/neural-lab/engine.js",
-    "http://127.0.0.1:8768/neural-lab/worker.js",
-    "http://127.0.0.1:8768/neural-lab/engine.js",
-    "http://127.0.0.1:8768/neural-lab/examples/transformer.json"
+    "http://127.0.0.1:49674/neural-lab/?advanced",
+    "http://127.0.0.1:49674/neural-lab/lab.css",
+    "http://127.0.0.1:49674/neural-lab/app.js",
+    "http://127.0.0.1:49674/neural-lab/journey.js",
+    "http://127.0.0.1:49674/neural-lab/conversation.js",
+    "http://127.0.0.1:49674/neural-lab/display.js",
+    "http://127.0.0.1:49674/neural-lab/engine.js",
+    "http://127.0.0.1:49674/neural-lab/scene.js",
+    "http://127.0.0.1:49674/neural-lab/conversation-engine.js",
+    "http://127.0.0.1:49674/neural-lab/vendor/three.module.js",
+    "http://127.0.0.1:49674/neural-lab/vendor/OrbitControls.js",
+    "http://127.0.0.1:49674/neural-lab/vendor/three.core.js",
+    "http://127.0.0.1:49674/neural-lab/conversation-data.json",
+    "http://127.0.0.1:49674/neural-lab/worker.js",
+    "http://127.0.0.1:49674/neural-lab/engine.js",
+    "http://127.0.0.1:49674/neural-lab/worker.js",
+    "http://127.0.0.1:49674/neural-lab/engine.js",
+    "http://127.0.0.1:49674/neural-lab/worker.js",
+    "http://127.0.0.1:49674/neural-lab/engine.js",
+    "http://127.0.0.1:49674/neural-lab/worker.js",
+    "http://127.0.0.1:49674/neural-lab/engine.js",
+    "http://127.0.0.1:49674/neural-lab/examples/transformer.json"
   ],
   "training_history": [
     {
@@ -209,7 +209,7 @@
       "validation_loss": 2.9403207232302377,
       "validation_accuracy": 0.1,
       "n": 20,
-      "elapsed_ms": 40.5,
+      "elapsed_ms": 44,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -220,7 +220,7 @@
       "validation_loss": 2.789011788397132,
       "validation_accuracy": 0.15,
       "n": 20,
-      "elapsed_ms": 99.29999999701977,
+      "elapsed_ms": 119.8999999910593,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -231,7 +231,7 @@
       "validation_loss": 2.688901525537735,
       "validation_accuracy": 0.1,
       "n": 20,
-      "elapsed_ms": 151.79999999701977,
+      "elapsed_ms": 177,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -242,7 +242,7 @@
       "validation_loss": 2.6194489795724216,
       "validation_accuracy": 0.15,
       "n": 20,
-      "elapsed_ms": 217.79999999701977,
+      "elapsed_ms": 247.5,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -253,7 +253,7 @@
       "validation_loss": 2.5003018462954842,
       "validation_accuracy": 0.15,
       "n": 20,
-      "elapsed_ms": 282.5,
+      "elapsed_ms": 319.8999999910593,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -264,7 +264,7 @@
       "validation_loss": 2.441729055143294,
       "validation_accuracy": 0.15,
       "n": 20,
-      "elapsed_ms": 351.20000000298023,
+      "elapsed_ms": 391.09999999403954,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -275,7 +275,7 @@
       "validation_loss": 2.317127308116929,
       "validation_accuracy": 0.3,
       "n": 20,
-      "elapsed_ms": 413.6000000089407,
+      "elapsed_ms": 456,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -286,7 +286,7 @@
       "validation_loss": 2.2099671922336506,
       "validation_accuracy": 0.55,
       "n": 20,
-      "elapsed_ms": 477.70000000298023,
+      "elapsed_ms": 521.7000000029802,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -297,7 +297,7 @@
       "validation_loss": 2.238370926126536,
       "validation_accuracy": 0.55,
       "n": 20,
-      "elapsed_ms": 540.1000000089407,
+      "elapsed_ms": 586.5,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -308,7 +308,7 @@
       "validation_loss": 2.273894978991468,
       "validation_accuracy": 0.4,
       "n": 20,
-      "elapsed_ms": 600.1000000089407,
+      "elapsed_ms": 646.7999999970198,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -319,7 +319,7 @@
       "validation_loss": 2.246571785785971,
       "validation_accuracy": 0.4,
       "n": 20,
-      "elapsed_ms": 669.7000000029802,
+      "elapsed_ms": 714.5,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -330,7 +330,7 @@
       "validation_loss": 2.1196675813470742,
       "validation_accuracy": 0.5,
       "n": 20,
-      "elapsed_ms": 742,
+      "elapsed_ms": 779.5,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -341,7 +341,7 @@
       "validation_loss": 1.864224641026216,
       "validation_accuracy": 0.5,
       "n": 20,
-      "elapsed_ms": 805.5,
+      "elapsed_ms": 844.2999999970198,
       "eta": 0.04,
       "wrong_sign": 0,
       "sampling_seed": 1333
@@ -398,101 +398,101 @@
       "repeat": 0,
       "version": "reference",
       "bits": 32,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 185.5,
-      "ms_per_inference": 0.724609375,
-      "checksum": 17.016950877661703
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 101.40000000596046,
+      "ms_per_inference": 0.7921875000465661,
+      "checksum": 8.782961555777113
     },
     {
       "repeat": 0,
       "version": "quantized",
       "bits": 8,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 177.90000000596046,
-      "ms_per_inference": 0.6949218750232831,
-      "checksum": 17.017131844798435
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 101.40000000596046,
+      "ms_per_inference": 0.7921875000465661,
+      "checksum": 8.7844301154505
     },
     {
       "repeat": 1,
       "version": "quantized",
       "bits": 8,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 175.1000000089407,
-      "ms_per_inference": 0.6839843750349246,
-      "checksum": 17.017131844798435
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 94.09999999403954,
+      "ms_per_inference": 0.7351562499534339,
+      "checksum": 8.7844301154505
     },
     {
       "repeat": 1,
       "version": "reference",
       "bits": 32,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 173.59999999403954,
-      "ms_per_inference": 0.6781249999767169,
-      "checksum": 17.016950877661703
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 90.90000000596046,
+      "ms_per_inference": 0.7101562500465661,
+      "checksum": 8.782961555777113
     },
     {
       "repeat": 2,
       "version": "reference",
       "bits": 32,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 170.70000000298023,
-      "ms_per_inference": 0.6667968750116415,
-      "checksum": 17.016950877661703
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 90.3999999910593,
+      "ms_per_inference": 0.7062499999301508,
+      "checksum": 8.782961555777113
     },
     {
       "repeat": 2,
       "version": "quantized",
       "bits": 8,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 171.19999998807907,
-      "ms_per_inference": 0.6687499999534339,
-      "checksum": 17.017131844798435
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 90.1000000089407,
+      "ms_per_inference": 0.7039062500698492,
+      "checksum": 8.7844301154505
     },
     {
       "repeat": 3,
       "version": "quantized",
       "bits": 8,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 172.40000000596046,
-      "ms_per_inference": 0.6734375000232831,
-      "checksum": 17.017131844798435
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 93.79999999701977,
+      "ms_per_inference": 0.7328124999767169,
+      "checksum": 8.7844301154505
     },
     {
       "repeat": 3,
       "version": "reference",
       "bits": 32,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 176,
-      "ms_per_inference": 0.6875,
-      "checksum": 17.016950877661703
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 99.20000000298023,
+      "ms_per_inference": 0.7750000000232831,
+      "checksum": 8.782961555777113
     },
     {
       "repeat": 4,
       "version": "reference",
       "bits": 32,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 181.70000000298023,
-      "ms_per_inference": 0.7097656250116415,
-      "checksum": 17.016950877661703
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 96.90000000596046,
+      "ms_per_inference": 0.7570312500465661,
+      "checksum": 8.782961555777113
     },
     {
       "repeat": 4,
       "version": "quantized",
       "bits": 8,
-      "k": 256,
-      "calibration_ms": 179.59999999403954,
-      "total_ms": 172.70000000298023,
-      "ms_per_inference": 0.6746093750116415,
-      "checksum": 17.017131844798435
+      "k": 128,
+      "calibration_ms": 103.69999998807907,
+      "total_ms": 92.19999998807907,
+      "ms_per_inference": 0.7203124999068677,
+      "checksum": 8.7844301154505
     }
   ],
   "gradient_check": "8 paramètres actifs vérifiés : écart maximal 3.15e-11. Petit pas : ΔL = 7.820e-3. ALERTE : la perte augmente ; vérifier le signe de correction. Le modèle principal reste inchangé.",

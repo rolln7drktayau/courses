@@ -1,11 +1,75 @@
 {
-  "title": "Un petit assistant de démonstration",
+  "title": "Dialogues du quotidien — exemples pédagogiques originaux",
   "format": "Q:{question}\nR:{answer}\n",
+  "provenance": {
+    "kind": "original educational examples",
+    "note": "Dialogues rédigés pour le laboratoire, dans le style des échanges quotidiens de DailyDialog ; aucun extrait du corpus original.",
+    "reference": "https://aclanthology.org/I17-1099/"
+  },
+  "dialogues": [
+    {
+      "topic": "Une pause entre amis",
+      "turns": [
+        "Bonjour ! Comment vas-tu ?",
+        "Je vais bien, merci.",
+        "Tu veux un café ?",
+        "Oui, avec plaisir."
+      ]
+    },
+    {
+      "topic": "Un trajet en train",
+      "turns": [
+        "À quelle heure part le train ?",
+        "Il part à huit heures.",
+        "On se retrouve à la gare ?",
+        "Oui, à demain."
+      ]
+    },
+    {
+      "topic": "Une promenade",
+      "turns": [
+        "Il pleut dehors ?",
+        "Non, il fait beau.",
+        "On va marcher au parc ?",
+        "Oui, allons-y."
+      ]
+    }
+  ],
   "examples": [
-    {"question":"salut","answer":"bonjour","count":7},
-    {"question":"salut","answer":"salut","count":3},
-    {"question":"merci","answer":"de rien","count":10},
-    {"question":"etat?","answer":"pret","count":10},
-    {"question":"stop?","answer":"arret","count":10}
+    {
+      "question": "Bonjour ! Comment vas-tu ?",
+      "answer": "Je vais bien, merci.",
+      "count": 7
+    },
+    {
+      "question": "Bonjour ! Comment vas-tu ?",
+      "answer": "Très bien, merci.",
+      "count": 3
+    },
+    {
+      "question": "Tu veux un café ?",
+      "answer": "Oui, avec plaisir.",
+      "count": 10
+    },
+    {
+      "question": "À quelle heure part le train ?",
+      "answer": "Il part à huit heures.",
+      "count": 10
+    },
+    {
+      "question": "On se retrouve à la gare ?",
+      "answer": "Oui, à demain.",
+      "count": 10
+    },
+    {
+      "question": "Il pleut dehors ?",
+      "answer": "Non, il fait beau.",
+      "count": 10
+    },
+    {
+      "question": "On va marcher au parc ?",
+      "answer": "Oui, allons-y.",
+      "count": 10
+    }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "executed_utc": "2026-11-12T10:58:15.575697+00:00",
-  "url": "http://127.0.0.1:8768/neural-lab/",
+  "executed_utc": "2026-11-12T13:21:21.026699+00:00",
+  "url": "http://127.0.0.1:59149/neural-lab/",
   "checks": [
     {
       "name": "entire scene visible at entry 1536",

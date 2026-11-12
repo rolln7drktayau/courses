@@ -1,6 +1,6 @@
 {
-  "executed_utc": "2026-11-12T10:54:15.602938+00:00",
-  "url": "http://127.0.0.1:8768/neural-lab/",
+  "executed_utc": "2026-11-12T13:23:10.483929+00:00",
+  "url": "http://127.0.0.1:59349/neural-lab/",
   "checks": [
     {
       "name": "conversation anchor opens examples",
@@ -15,23 +15,39 @@
       "passed": true
     },
     {
+      "name": "inference initially locked",
+      "passed": true
+    },
+    {
       "name": "trained weights and hash verified",
       "passed": true
     },
     {
-      "name": "actual network response salut",
+      "name": "inference unlocked by trained weights",
       "passed": true
     },
     {
-      "name": "actual network response merci",
+      "name": "actual network response Bonjour ! Comment vas-tu ?",
       "passed": true
     },
     {
-      "name": "actual network response etat?",
+      "name": "actual network response Tu veux un café ?",
       "passed": true
     },
     {
-      "name": "actual network response stop?",
+      "name": "actual network response À quelle heure part le train ?",
+      "passed": true
+    },
+    {
+      "name": "actual network response On se retrouve à la gare ?",
+      "passed": true
+    },
+    {
+      "name": "actual network response Il pleut dehors ?",
+      "passed": true
+    },
+    {
+      "name": "actual network response On va marcher au parc ?",
       "passed": true
     },
     {
@@ -64,6 +80,10 @@
     },
     {
       "name": "3D receives real conversation model",
+      "passed": true
+    },
+    {
+      "name": "3D keeps speaker line breaks and exact inference probabilities",
       "passed": true
     },
     {
@@ -103,23 +123,31 @@
       "passed": true
     },
     {
-      "name": "6000 real browser training updates",
+      "name": "24000 real browser training updates",
       "passed": true
     },
     {
-      "name": "browser-trained answer salut",
+      "name": "browser-trained answer Bonjour ! Comment vas-tu ?",
       "passed": true
     },
     {
-      "name": "browser-trained answer merci",
+      "name": "browser-trained answer Tu veux un café ?",
       "passed": true
     },
     {
-      "name": "browser-trained answer etat?",
+      "name": "browser-trained answer À quelle heure part le train ?",
       "passed": true
     },
     {
-      "name": "browser-trained answer stop?",
+      "name": "browser-trained answer On se retrouve à la gare ?",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer Il pleut dehors ?",
+      "passed": true
+    },
+    {
+      "name": "browser-trained answer On va marcher au parc ?",
       "passed": true
     },
     {
@@ -145,10 +173,12 @@
   ],
   "errors": [],
   "trained_model_replies": {
-    "salut": "bonjour",
-    "merci": "de rien",
-    "etat?": "pret",
-    "stop?": "arret"
+    "Bonjour ! Comment vas-tu ?": "Je vais bien, merci.",
+    "Tu veux un café ?": "Oui, avec plaisir.",
+    "À quelle heure part le train ?": "Il part à huit heures.",
+    "On se retrouve à la gare ?": "Oui, à demain.",
+    "Il pleut dehors ?": "Non, il fait beau.",
+    "On va marcher au parc ?": "Oui, allons-y."
   },
   "browser": "157.0.8103.39"
 }

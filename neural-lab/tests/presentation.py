@@ -21,7 +21,7 @@ with sync_playwright() as p:
     check('cards are standing in a vertical plane',page.evaluate('Math.abs(Lab.scene.content.rotation.x-Math.PI/2)<1e-9'))
     check('camera looks straight at fronts',page.evaluate('Math.abs(Lab.scene.camera.position.y-Lab.scene.controls.target.y)<1e-9&&Lab.scene.camera.position.z>0'))
     check('link geometry remains finite',page.evaluate('Lab.scene.lessonLinks.every(l=>l.arrow.position.toArray().every(Number.isFinite))'))
-    page.screenshot(path=str(ROOT/'validation/simulation-entry.png'))
+    page.screenshot(path=str(ROOT/'validation/simulation-entry.png'));page.locator('#j-ingest').click();page.locator('#j-auto').click()
     # A click must not be mistaken for a camera rotation.
     rect=page.locator('#canvas').bounding_box();page.mouse.click(rect['x']+rect['width']/2,rect['y']+rect['height']/2)
     check('selection click does not lock camera',page.evaluate('!Lab.scene.keepLessonView'))

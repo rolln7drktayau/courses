@@ -1,6 +1,6 @@
 {
-  "executed_utc": "2026-11-12T10:51:36.792137+00:00",
-  "url": "http://127.0.0.1:8768/neural-lab/",
+  "executed_utc": "2026-11-12T13:21:26.824410+00:00",
+  "url": "http://127.0.0.1:64440/neural-lab/",
   "checks": [
     {
       "name": "phrase playback really advances",
@@ -105,9 +105,9 @@
     "characters": 224,
     "sha256": "084055df709af04e70136b1f497214c14ee14bce0b5733ac5512fa70ffdf75e3",
     "pair": {
-      "text": "capteu",
-      "next": "r",
-      "at": 6
+      "text": "capteur roug",
+      "next": "e",
+      "at": 12
     }
   },
   "browser": "157.0.8103.39"
