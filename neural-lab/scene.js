@@ -18,7 +18,7 @@ export class LabScene {
   }
   resize(){if(!this.renderer)return;const w=this.canvas.parentElement.clientWidth,h=this.canvas.parentElement.clientHeight;this.renderer.setSize(w,h,false);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();}
   hit(e){if(!this.renderer)return;const r=this.canvas.getBoundingClientRect();this.pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);this.ray.setFromCamera(this.pointer,this.camera);return this.ray.intersectObjects(this.pickables,false)[0];}
-  clear(){if(!this.renderer)return;this.content.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material]){m.map?.dispose();m.dispose();}}});this.content.clear();this.pickables=[];this.paths=[];this.particles=[];}
+  clear(){if(!this.renderer)return;this.content.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material]){m.map?.dispose();m.dispose();}}});this.content.clear();this.lessonCards=[];this.lessonLinks=[];this.pickables=[];this.paths=[];this.particles=[];}
   label(text,x,y,z,size=.34,color='#cfe3f0'){
     const c=document.createElement('canvas');c.width=640;c.height=100;const ctx=c.getContext('2d');ctx.font='600 50px Segoe UI, Arial';ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(text,320,58,620);const texture=new THREE.CanvasTexture(c),material=new THREE.SpriteMaterial({map:texture,transparent:true,depthTest:false}),sprite=new THREE.Sprite(material);texture.colorSpace=THREE.SRGBColorSpace;sprite.position.set(x,y,z);sprite.scale.set(size*19.2,size*3,1);this.content.add(sprite);return sprite;
   }
@@ -50,6 +50,7 @@ export class LabScene {
     const palette={text:0x2563a6,weight:0x7451b8,calculation:0x087f72,learning:0xb86419};
     const objects={};
     for(const card of cards){
+      const firstChild=this.content.children.length;
       const color=palette[card.role]||palette.calculation;
       const box=this.box(card.x,0,card.z,card.w||2.5,.22,card.d||1.2,color,{kind:'lesson',width:card.w||2.5,depth:card.d||1.2,index:card.index,tip:card.tip||card.title});
       box.material.dispose();box.material=new THREE.MeshBasicMaterial({color});
@@ -58,6 +59,7 @@ export class LabScene {
       this.label(card.title,card.x,.35,card.z,card.size||.36,'#ffffff');
       if(card.subtitle)this.label(card.subtitle,card.x,-.04,card.z+.95,.21,'#264357');
       if(card.active){const outline=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry((card.w||2.5)+.15,.3,(card.d||1.2)+.15)),new THREE.LineBasicMaterial({color:0xd78522}));outline.position.copy(box.position);this.content.add(outline);}
+      const container=new THREE.Group();for(const item of this.content.children.slice(firstChild))container.add(item);this.content.add(container);box.userData.lessonContainer=container;this.lessonCards.push({container,card});
     }
     for(const link of links){
       const a=objects[link.from],b=objects[link.to];if(!a||!b)continue;
@@ -66,9 +68,29 @@ export class LabScene {
       const margin=object=>Math.min(Math.abs(direction.x)>.001?object.userData.width/2/Math.abs(direction.x):Infinity,Math.abs(direction.z)>.001?object.userData.depth/2/Math.abs(direction.z):Infinity)+.08;
       start.addScaledVector(direction,margin(a));end.addScaledVector(direction,-margin(b));
       const delta=end.clone().sub(start),length=delta.length();
-      if(length>.05)this.content.add(new THREE.ArrowHelper(delta.normalize(),start,length,0x526e80,Math.min(.28,length*.6),.18));
+      if(length>.05){const arrow=new THREE.ArrowHelper(delta.normalize(),start,length,0x526e80,Math.min(.28,length*.6),.18);this.content.add(arrow);this.lessonLinks.push({arrow,a,b});}
     }
-    this.cameraGoal=null;this.camera.position.set(0,13.2,8.6);this.controls.target.set(0,0,0);this.controls.update();
+    this.setLessonProgress(1);this.cameraGoal=null;this.camera.position.set(0,13.2,8.6);this.controls.target.set(0,0,0);this.controls.update();
+  }
+  setLessonProgress(progress){
+    if(!this.renderer)return;
+    this.lessonProgress=progress;
+    for(const {container,card} of this.lessonCards||[]){
+      container.visible=progress>=(card.reveal||0)&&progress<(card.hide??2);
+      const m=card.motion;if(!m)continue;
+      const u=Math.max(0,Math.min(1,(progress-(m.start||0))/Math.max(.001,(m.end??1)-(m.start||0)))),ease=u*u*(3-2*u);
+      container.position.set((m.dx||0)*(1-ease),0,(m.dz||0)*(1-ease));
+    }
+    for(const {arrow,a,b} of this.lessonLinks||[]){
+      arrow.visible=a.userData.lessonContainer.visible&&b.userData.lessonContainer.visible;
+      if(!arrow.visible)continue;
+      const start=a.getWorldPosition(new THREE.Vector3()),end=b.getWorldPosition(new THREE.Vector3()),d=end.clone().sub(start),length=d.length();
+      if(length<.1){arrow.visible=false;continue;}d.normalize();
+      const margin=o=>Math.min(Math.abs(d.x)>.001?o.userData.width/2/Math.abs(d.x):Infinity,Math.abs(d.z)>.001?o.userData.depth/2/Math.abs(d.z):Infinity)+.08;
+      start.addScaledVector(d,margin(a));end.addScaledVector(d,-margin(b));const remaining=end.clone().sub(start);
+      if(remaining.dot(d)<.05){arrow.visible=false;continue;}
+      arrow.position.copy(start);arrow.setDirection(d);arrow.setLength(remaining.length(),Math.min(.28,remaining.length()*.6),.18);
+    }
   }
   animate(){requestAnimationFrame(()=>this.animate());if(!this.renderer)return;const elapsed=this.clock.getElapsedTime();if(this.cameraGoal){this.camera.position.lerp(this.cameraGoal,.12);this.controls.target.lerp(this.targetGoal,.12);if(this.camera.position.distanceTo(this.cameraGoal)<.02)this.cameraGoal=null;}this.controls.update();if(this.flow)for(const p of this.particles){let alpha=(elapsed*.6+p.offset)%1;if(this.backward)alpha=1-alpha;p.dot.position.lerpVectors(p.path[0],p.path[1],alpha);p.dot.visible=true;p.label.position.copy(p.dot.position);p.label.position.y+=.4;p.label.visible=true;}else for(const p of this.particles){p.dot.visible=false;p.label.visible=false;}this.renderer.render(this.scene,this.camera);}
 }

@@ -1,0 +1,114 @@
+{
+  "executed_utc": "2026-11-12T08:55:20.474054+00:00",
+  "url": "http://127.0.0.1:8767/neural-lab/",
+  "checks": [
+    {
+      "name": "phrase playback really advances",
+      "passed": true
+    },
+    {
+      "name": "pause freezes timeline",
+      "passed": true
+    },
+    {
+      "name": "the phrase physically moves into the scene",
+      "passed": true
+    },
+    {
+      "name": "input buffer reflects actual phrase count",
+      "passed": true
+    },
+    {
+      "name": "tokenization follows the whole phrase, not only its tail",
+      "passed": true
+    },
+    {
+      "name": "token receipt has visibly separate tiles",
+      "passed": true
+    },
+    {
+      "name": "IDs are actual vocabulary lookups",
+      "passed": true
+    },
+    {
+      "name": "context restriction is explicitly visible",
+      "passed": true
+    },
+    {
+      "name": "inference has not modified any weight",
+      "passed": true
+    },
+    {
+      "name": "playback automatically reaches tokenization",
+      "passed": true
+    },
+    {
+      "name": "UTF8 file is actually read",
+      "passed": true
+    },
+    {
+      "name": "new model uses exactly the supplied dataset",
+      "passed": true
+    },
+    {
+      "name": "source filename and sample count recorded",
+      "passed": true
+    },
+    {
+      "name": "training vocabulary comes from these data",
+      "passed": true
+    },
+    {
+      "name": "dataset receipt count is real",
+      "passed": true
+    },
+    {
+      "name": "training tokenizes the entire dataset",
+      "passed": true
+    },
+    {
+      "name": "context and expected answer are visibly separated",
+      "passed": true
+    },
+    {
+      "name": "training sample is extracted without invented examples",
+      "passed": true
+    },
+    {
+      "name": "real update on the supplied data",
+      "passed": true
+    },
+    {
+      "name": "invalid UTF8 rejected without changing the model",
+      "passed": true
+    },
+    {
+      "name": "ingestion controls fit 390",
+      "passed": true
+    },
+    {
+      "name": "ingestion controls fit 768",
+      "passed": true
+    },
+    {
+      "name": "ingestion controls fit 1280",
+      "passed": true
+    },
+    {
+      "name": "no runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "dataset": {
+    "file": "atelier.txt",
+    "characters": 224,
+    "sha256": "084055df709af04e70136b1f497214c14ee14bce0b5733ac5512fa70ffdf75e3",
+    "pair": {
+      "text": "capteu",
+      "next": "r",
+      "at": 6
+    }
+  },
+  "browser": "157.0.8103.39"
+}

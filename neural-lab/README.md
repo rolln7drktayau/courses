@@ -6,6 +6,12 @@ Laboratoire interactif accompagnant [Dans la mémoire d’un modèle](../llm-ins
 
 ## Parcours guidé pour découvrir
 
+« Suivre ma phrase » démarre une animation continue : la phrase se déplace vers l’entrée, le tampon se remplit, les caractères deviennent des tokens, puis des identifiants. Les cartes se déplacent réellement dans la scène 3D ; la pause et la tête de lecture arrêtent ou repositionnent ces transformations. La vitesse choisie est celle de l’animation, pas une mesure du temps d’ingestion ou du processeur.
+
+Pour apprendre, coller des données ou ouvrir un fichier `.txt` UTF-8 (100 à 12 000 caractères), puis cliquer « Ingérer mes données ». Un nouveau modèle est initialisé avec le vocabulaire de ce texte. Toute la séquence est reçue et tokenisée avant d’en extraire l’exemple à suivre. À la position i, le contexte contient jusqu’à six caractères précédents et la cible est le caractère i ; il y a N−1 exemples possibles pour N caractères. Le numéro de l’exemple peut être changé. Aucun exemple ni caractère n’est inventé pour compléter les données. Modifier le texte demande de l’ingérer à nouveau.
+
+L’animation montre un groupe de huit tokens à la fois et un extrait mobile du tampon pour les textes longs. Elle parcourt ainsi tout le flux, sans prétendre tout afficher simultanément. Après conversion, la fenêtre de six tokens du mini-modèle est rendue explicite : les tokens hors fenêtre sont barrés. La cible d’apprentissage reste séparée de l’entrée. Le fichier est effectivement lu dans le navigateur ; le trajet visuel est la relecture ralentie des données et des calculs réels, pas un chronométrage d’I/O.
+
 La page s’ouvre sur une seule transformation à la fois : lire le texte, le découper en caractères, attribuer les identifiants, sélectionner les lignes d’embedding, mélanger le contexte, calculer les probabilités, choisir un caractère et continuer.
 
 « Apprendre à prédire » ajoute la réponse connue, la perte, le gradient, la correction et un nouvel essai sur la même entrée. Revenir sur une étape rejoue la trace ; une correction n’est jamais appliquée deux fois. Le texte « relecture avant correction » distingue le calcul précédent des poids déjà mis à jour.
@@ -79,6 +85,7 @@ Puis `http://localhost:8766/neural-lab/`. Servir les fichiers par HTTP est néce
 node neural-lab/tests/engine.test.mjs
 python neural-lab/tests/browser.py
 python neural-lab/tests/journey.py
+python neural-lab/tests/ingestion.py
 ```
 
 Les fichiers de `examples/` se régénèrent avec `node neural-lab/tests/build_examples.mjs`.
