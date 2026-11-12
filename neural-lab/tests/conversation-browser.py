@@ -41,8 +41,8 @@ with sync_playwright() as p:
     check('fullscreen rotation remains interactive',page.evaluate('Lab.scene.camera.position.toArray()')!=camera)
     page.screenshot(path=str(ROOT/'validation/fullscreen-conversation.png'))
     page.locator('#sim-exit').click();page.wait_for_function('!document.fullscreenElement')
-    page.locator('#workspace-fullscreen').click();page.wait_for_function('document.fullscreenElement===document.documentElement');check('whole workspace fullscreen',page.evaluate('Display.fullscreen'))
-    page.evaluate('Display.leave()');page.wait_for_function('!document.fullscreenElement')
+    page.locator('#journey-mode').click();page.locator('#sim-page').click();page.wait_for_function('document.fullscreenElement===document.documentElement');check('whole workspace fullscreen',page.evaluate('Display.fullscreen'))
+    page.evaluate('Display.leave()');page.wait_for_function('!document.fullscreenElement');page.locator('#journey-mode').click()
     # Explicit fallback when native fullscreen cannot be requested.
     page.evaluate("document.querySelector('.viewport-panel').requestFullscreen=undefined")
     page.locator('#sim-full').click();check('fullscreen fallback works',page.locator('.viewport-panel').evaluate("e=>e.classList.contains('fullscreen-fallback')"));page.keyboard.press('Escape');check('fallback closes with Escape',not page.evaluate('Display.fullscreen'))

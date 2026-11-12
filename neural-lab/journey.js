@@ -218,7 +218,7 @@ function render(){
 }
 function step(delta){if(mode==='train'&&!dataAccepted){$('#j-data-info').textContent='Cliquez d’abord sur « Ingérer mes données ». ';return;}stop();progress=1;index=Math.max(0,Math.min(names().length-1,index+delta));render();}
 function switchView(toGuided){
-  stop();Lab.pause();guided=toGuided;document.body.classList.toggle('guided',guided);root.hidden=!guided;
+  stop();Lab.pause();scene.keepLessonView=false;const keepBox=$('#sim-keep');if(keepBox)keepBox.checked=false;guided=toGuided;document.body.classList.toggle('guided',guided);root.hidden=!guided;
   $('#journey-mode').textContent=guided?'Atelier avancé':'Parcours guidé';$('#guide').textContent=guided?'Revenir au début':'Mode d’emploi';
   if(guided){$('#j-scene-host').append(viewport);scene.renderer?.setClearColor(0xf0f4f5,1);render();}
   else{advancedHost.prepend(viewport);scene.renderer?.setClearColor(0x0b1728,0);Lab.adopt(structuredClone(model),'Poids du parcours guidé disponibles dans l’atelier.');$('#canvas').hidden=!!scene.error;$('#fallback').hidden=!scene.error;Lab.home();}

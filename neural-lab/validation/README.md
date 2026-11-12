@@ -4,10 +4,10 @@ Roland Cédric TAYO · INEM
 
 Ce document résume des exécutions conservées, pas des performances promises sur une carte.
 
-Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 30 contrôles réussis. Ingestion animée : 24 contrôles réussis. Conversation : 19 contrôles du moteur et 35 contrôles navigateur/plein écran.
+Moteur : 68 contrôles réussis. Atelier avancé : 43 contrôles réussis. Parcours guidé : 30 contrôles réussis. Ingestion animée : 24 contrôles réussis. Conversation : 19 contrôles du moteur et 35 contrôles navigateur/plein écran. Présentation frontale et mise en évidence : 24 contrôles réussis.
 
 Exécution du moteur : 2026-11-12T00:54:49.438Z ; v24.14.0 ; AMD Ryzen 5 7535HS with Radeon Graphics         ; win32 x64.
-Exécution du navigateur : 2026-11-12T10:19:18.433626+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
+Exécution du navigateur : 2026-11-12T10:56:38.500771+00:00 ; Chrome 157.0.8103.39. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.
 
 ## Calculs et contrôles
 
@@ -30,6 +30,10 @@ Un mini-Transformer réellement entraîné produit les quatre réponses de démo
 Le journal conversation-training.json conserve une limite de la première métrique : le sous-échantillonnage d’un cas sur cinq pouvait manquer certains cas contradictoires. La finition et le travailleur évaluent tous les cas. Les résultats initiaux défavorables restent conservés.
 
 Les tests navigateur contrôlent aussi le plein écran natif de la scène et de la page, le repli CSS, la sortie par Échap, la rotation, le zoom et la conservation de la caméra entre étapes. Voir conversation-browser.json et conversation-browser-training.csv. Les rendus montrent des briques arrondies à faces distinctes ; aucun gain matériel n’est annoncé.
+
+## Simulation visible et blocs redressés
+
+Le test presentation.py vérifie que la scène complète apparaît dans la première vue pour les écrans de bureau 1280, 1536 et 1920 pixels, qu’elle occupe la colonne principale et que les conversations viennent après. Les blocs du parcours sont placés sur un plan vertical ; la caméra cadre leur face. La vue agrandie isole la scène dans la page avec un fond, puis peut passer au plein écran natif. La rotation, le recentrage frontal, les étapes, Échap et le comportement après un simple clic sont contrôlés. Voir presentation.json, simulation-entry.png et simulation-upright-fullscreen.png.
 
 ## Entraînement mesuré dans Node.js
 

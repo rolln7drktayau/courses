@@ -1,0 +1,104 @@
+{
+  "executed_utc": "2026-11-12T10:58:15.575697+00:00",
+  "url": "http://127.0.0.1:8768/neural-lab/",
+  "checks": [
+    {
+      "name": "entire scene visible at entry 1536",
+      "passed": true
+    },
+    {
+      "name": "simulation is the dominant column 1536",
+      "passed": true
+    },
+    {
+      "name": "entire scene visible at entry 1280",
+      "passed": true
+    },
+    {
+      "name": "simulation is the dominant column 1280",
+      "passed": true
+    },
+    {
+      "name": "entire scene visible at entry 1920",
+      "passed": true
+    },
+    {
+      "name": "simulation is the dominant column 1920",
+      "passed": true
+    },
+    {
+      "name": "conversation no longer precedes simulation",
+      "passed": true
+    },
+    {
+      "name": "cards are standing in a vertical plane",
+      "passed": true
+    },
+    {
+      "name": "camera looks straight at fronts",
+      "passed": true
+    },
+    {
+      "name": "link geometry remains finite",
+      "passed": true
+    },
+    {
+      "name": "selection click does not lock camera",
+      "passed": true
+    },
+    {
+      "name": "header enlarges only simulation",
+      "passed": true
+    },
+    {
+      "name": "spotlight has its own backdrop",
+      "passed": true
+    },
+    {
+      "name": "spotlight occupies viewport",
+      "passed": true
+    },
+    {
+      "name": "steps work in spotlight",
+      "passed": true
+    },
+    {
+      "name": "spotlight transitions to native scene fullscreen",
+      "passed": true
+    },
+    {
+      "name": "rotation works on upright blocks",
+      "passed": true
+    },
+    {
+      "name": "actual manipulation locks viewing angle",
+      "passed": true
+    },
+    {
+      "name": "recenter restores a frontal view",
+      "passed": true
+    },
+    {
+      "name": "Escape leaves spotlight",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1280",
+      "passed": true
+    },
+    {
+      "name": "no runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "browser": "157.0.8103.39"
+}

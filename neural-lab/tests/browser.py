@@ -63,7 +63,7 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':1536,'height':1000});page.locator('#model').select_option('transformer');page.locator('#initialize').click();page.evaluate("Lab.openMatrix('Q')");page.wait_for_timeout(500);page.locator('#scene').screenshot(path=str(ROOT/'validation/matrix.png'))
     page.locator('#load-example').click();page.wait_for_function('!Lab.busy');checked('verified trained example loads',page.evaluate('Lab.model.updates')==2000)
     page.locator('#home').click();page.wait_for_timeout(700)
-    point=page.evaluate('''()=>{const s=Lab.scene,p=s.items[0].position.clone().project(s.camera),r=s.canvas.getBoundingClientRect();return {x:r.x+(p.x+1)*r.width/2,y:r.y+(1-p.y)*r.height/2};}''')
+    point=page.evaluate('''()=>{const s=Lab.scene,p=s.items[0].getWorldPosition(s.camera.position.clone()).project(s.camera),r=s.canvas.getBoundingClientRect();return {x:r.x+(p.x+1)*r.width/2,y:r.y+(1-p.y)*r.height/2};}''')
     page.mouse.move(point['x'],point['y']);checked('real 3D hover tooltip',page.locator('#tooltip').is_visible())
     page.mouse.click(point['x'],point['y']);checked('3D picking selects real block', 'texte devient' in page.locator('#inspector').inner_text().lower())
     page.locator('#scene').screenshot(path=str(ROOT/'validation/network.png'))

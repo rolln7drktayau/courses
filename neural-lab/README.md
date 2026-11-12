@@ -18,9 +18,9 @@ Reproduire le checkpoint : `node neural-lab/tests/build_conversation.mjs`, puis 
 
 ## Plein écran et manipulation
 
-« Simulation » place uniquement la scène et ses commandes en plein écran. « Tout l’espace » ou le bouton d’en-tête ouvre toute la page. Lecture, étapes, zoom, recentrage et sortie restent accessibles dans la scène. Glisser pour tourner ; molette ou boutons pour approcher. Après une manipulation, « Garder ma vue » conserve l’angle entre étapes. Échap quitte le plein écran. Un repli CSS est prévu si l’API native ne peut pas être utilisée.
+La simulation est la zone principale dès l’ouverture ; les conversations sont placées plus bas et accessibles par le bouton « Conversation ». Les blocs sont debout sur un plan vertical, avec une caméra de face et un cadrage automatique. « Agrandir la simulation » l’isole dans la page, sur un fond assombri, sans mettre toute la page en plein écran. « Simulation en plein écran » place uniquement la scène et ses commandes en plein écran natif. L’option « Tout l’espace » reste disponible dans l’atelier avancé. Lecture, étapes, zoom, recentrage et sortie restent accessibles dans la scène. Glisser pour tourner ; molette ou boutons pour approcher. Après une manipulation, « Garder ma vue » conserve l’angle entre étapes. Échap quitte le plein écran. Un repli CSS est prévu si l’API native ne peut pas être utilisée.
 
-Les briques du parcours sont arrondies, plus épaisses, avec une face colorée et des côtés plus sombres. Leurs mots et valeurs restent le contenu réel de la trace. Les effets de présentation n’annoncent aucune performance matérielle.
+Les briques du parcours sont arrondies, debout face au lecteur, avec une face colorée et une épaisseur visible lorsque la caméra tourne. Elles étaient auparavant disposées sur un plan horizontal : cette vue de table a été remplacée. Le bouton de recentrage restaure la vue frontale. Un clic de sélection ne verrouille pas la caméra ; une rotation ou un zoom manuel conserve ensuite la vue choisie entre les étapes. Leurs mots et valeurs restent le contenu réel de la trace. Les effets de présentation n’annoncent aucune performance matérielle.
 
 ## Parcours guidé pour découvrir
 
@@ -106,6 +106,7 @@ python neural-lab/tests/journey.py
 python neural-lab/tests/ingestion.py
 node neural-lab/tests/conversation.test.mjs
 python neural-lab/tests/conversation-browser.py
+python neural-lab/tests/presentation.py
 ```
 
 Les fichiers de `examples/` se régénèrent avec `node neural-lab/tests/build_examples.mjs`.

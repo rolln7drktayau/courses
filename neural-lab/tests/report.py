@@ -6,13 +6,14 @@ data=json.loads((ROOT/'validation/results.json').read_text(encoding='utf-8'))
 browser=json.loads((ROOT/'validation/browser.json').read_text(encoding='utf-8'))
 ingestion=json.loads((ROOT/'validation/ingestion.json').read_text(encoding='utf-8'))
 journey=json.loads((ROOT/'validation/journey.json').read_text(encoding='utf-8'))
+presentation=json.loads((ROOT/'validation/presentation.json').read_text(encoding='utf-8'))
 conversation=json.loads((ROOT/'validation/conversation-tests.json').read_text(encoding='utf-8'))
 conversation_browser=json.loads((ROOT/'validation/conversation-browser.json').read_text(encoding='utf-8'))
 examples=json.loads((ROOT/'validation/examples.json').read_text(encoding='utf-8'))
 lines=['# Validation du laboratoire','',
        'Roland Cédric TAYO · INEM','',
        'Ce document résume des exécutions conservées, pas des performances promises sur une carte.', '',
-       f"Moteur : {len(data['tests'])} contrôles réussis. Atelier avancé : {len(browser['checks'])} contrôles réussis. Parcours guidé : {len(journey['checks'])} contrôles réussis. Ingestion animée : {len(ingestion['checks'])} contrôles réussis. Conversation : {len(conversation['tests'])} contrôles du moteur et {len(conversation_browser['checks'])} contrôles navigateur/plein écran.",'',
+       f"Moteur : {len(data['tests'])} contrôles réussis. Atelier avancé : {len(browser['checks'])} contrôles réussis. Parcours guidé : {len(journey['checks'])} contrôles réussis. Ingestion animée : {len(ingestion['checks'])} contrôles réussis. Conversation : {len(conversation['tests'])} contrôles du moteur et {len(conversation_browser['checks'])} contrôles navigateur/plein écran. Présentation frontale et mise en évidence : {len(presentation['checks'])} contrôles réussis.",'',
        f"Exécution du moteur : {data['executed_utc']} ; {data['runtime']} ; {data['machine']['cpu']} ; {data['machine']['platform']} {data['machine']['arch']}.",
        f"Exécution du navigateur : {browser['executed_utc']} ; Chrome {browser['browser']}. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.",'',
        '## Calculs et contrôles','',
@@ -26,6 +27,8 @@ lines=['# Validation du laboratoire','',
        'Un mini-Transformer réellement entraîné produit les quatre réponses de démonstration, par génération caractère après caractère. Le checkpoint a effectué 22 000 corrections ; l’interface peut aussi exécuter 6 000 corrections depuis zéro dans un travailleur navigateur. Ce parcours a été exécuté et les quatre réponses attendues obtenues. Les données et leurs fréquences sont publiques, les probabilités calculées ne sont pas remplacées par ces fréquences. La surconfiance observée est affichée et discutée. Les mesures du travailleur sont sur tous les cas d’entraînement, sans test indépendant.','',
        'Le journal conversation-training.json conserve une limite de la première métrique : le sous-échantillonnage d’un cas sur cinq pouvait manquer certains cas contradictoires. La finition et le travailleur évaluent tous les cas. Les résultats initiaux défavorables restent conservés.','',
        'Les tests navigateur contrôlent aussi le plein écran natif de la scène et de la page, le repli CSS, la sortie par Échap, la rotation, le zoom et la conservation de la caméra entre étapes. Voir conversation-browser.json et conversation-browser-training.csv. Les rendus montrent des briques arrondies à faces distinctes ; aucun gain matériel n’est annoncé.','',
+       '## Simulation visible et blocs redressés','',
+       'Le test presentation.py vérifie que la scène complète apparaît dans la première vue pour les écrans de bureau 1280, 1536 et 1920 pixels, qu’elle occupe la colonne principale et que les conversations viennent après. Les blocs du parcours sont placés sur un plan vertical ; la caméra cadre leur face. La vue agrandie isole la scène dans la page avec un fond, puis peut passer au plein écran natif. La rotation, le recentrage frontal, les étapes, Échap et le comportement après un simple clic sont contrôlés. Voir presentation.json, simulation-entry.png et simulation-upright-fullscreen.png.','',
        '## Entraînement mesuré dans Node.js','',
        'Corpus répété d’Alice, η = 0,04, norme de gradient limitée à 1. Validation sur 48 fenêtres fixes, sans consultation du test réservé. Les durées ci-dessous couvrent les corrections ; les bilans avant/après sont mesurés séparément. Les courbes de la page portent sur 20 fenêtres ; les exemples livrés sur 48.','',
        '| Modèle | D / contexte | Graine | Corrections | Perte avant → après (nats) | Bonnes réponses avant → après | Durée (ms) |',
