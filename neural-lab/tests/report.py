@@ -4,16 +4,19 @@ import hashlib,json,subprocess
 ROOT=Path(__file__).resolve().parents[1]
 data=json.loads((ROOT/'validation/results.json').read_text(encoding='utf-8'))
 browser=json.loads((ROOT/'validation/browser.json').read_text(encoding='utf-8'))
+journey=json.loads((ROOT/'validation/journey.json').read_text(encoding='utf-8'))
 examples=json.loads((ROOT/'validation/examples.json').read_text(encoding='utf-8'))
 lines=['# Validation du laboratoire','',
        'Roland Cédric TAYO · INEM','',
        'Ce document résume des exécutions conservées, pas des performances promises sur une carte.', '',
-       f"Moteur : {len(data['tests'])} contrôles réussis. Parcours navigateur : {len(browser['checks'])} contrôles réussis.",'',
+       f"Moteur : {len(data['tests'])} contrôles réussis. Atelier avancé : {len(browser['checks'])} contrôles réussis. Parcours guidé : {len(journey['checks'])} contrôles réussis.",'',
        f"Exécution du moteur : {data['executed_utc']} ; {data['runtime']} ; {data['machine']['cpu']} ; {data['machine']['platform']} {data['machine']['arch']}.",
        f"Exécution du navigateur : {browser['executed_utc']} ; Chrome {browser['browser']}. Rendu de test WebGL logiciel (SwiftShader). Charge système non maîtrisée.",'',
        '## Calculs et contrôles','',
        'Dérivées par différences finies, probabilités normalisées, perte différée jusqu’au bouton 2, correction dans le bon ou le mauvais sens, masque causal, cache K/V égal au calcul complet, initialisation et apprentissage reproductibles, arrondi float32 et import/export intègre.', '',
        'Le parcours navigateur vérifie aussi le chargement des trois modèles, la correction manuelle, les courbes, la génération avec cache, le zoom sur matrices et opérations, les survols 3D, les exports CSV, les réglages de campagne figés, la pause du mode lent, trois largeurs d’écran et le repli 2D sans WebGL. Aucune erreur JavaScript observée dans ce parcours. Ce n’est pas une étude auprès d’utilisateurs réels.','',
+       '## Parcours guidé grand public','',
+       'Tokenisation avec espace, identifiants issus du vocabulaire, sélection réelle de la ligne d’embedding, masquage du futur, probabilités avant sélection, argmax, poids fixes en inférence, gradient et mise à jour en apprentissage, absence de double correction lors d’une relecture, comparaison avant/après, repli 2D, caractères inconnus et entrée vide. Les captures guided-*.png et journey.json en donnent les traces. Les couleurs portent des rôles explicites ; le parcours ne fait pas circuler des nombres décoratifs.','',
        '## Entraînement mesuré dans Node.js','',
        'Corpus répété d’Alice, η = 0,04, norme de gradient limitée à 1. Validation sur 48 fenêtres fixes, sans consultation du test réservé. Les durées ci-dessous couvrent les corrections ; les bilans avant/après sont mesurés séparément. Les courbes de la page portent sur 20 fenêtres ; les exemples livrés sur 48.','',
        '| Modèle | D / contexte | Graine | Corrections | Perte avant → après (nats) | Bonnes réponses avant → après | Durée (ms) |',

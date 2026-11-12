@@ -5,7 +5,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 sys.stdout.reconfigure(encoding='utf-8')
 ROOT=Path(__file__).resolve().parents[1]
-BASE=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/neural-lab/'
+BASE=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8766/neural-lab/?advanced'
 report={'executed_utc':datetime.now(timezone.utc).isoformat(),'load':'not controlled','rendering':'Chrome headless with --enable-unsafe-swiftshader; not a GPU performance test','url':BASE,'checks':[],'errors':[],'network_requests':[]}
 def checked(name,condition):
     assert condition,name

@@ -4,7 +4,19 @@ Roland Cédric TAYO · INEM
 
 Laboratoire interactif accompagnant [Dans la mémoire d’un modèle](../llm-inside/). Ouvrir [le laboratoire](https://rolln7drktayau.github.io/courses/neural-lab/). Aucun compte, aucune installation ni clé d’API requis pour la page publiée. Le calcul reste local ; aucun corpus n’est téléversé. L’hébergeur reçoit les requêtes habituelles de chargement des fichiers.
 
-## Parcours conseillé
+## Parcours guidé pour découvrir
+
+La page s’ouvre sur une seule transformation à la fois : lire le texte, le découper en caractères, attribuer les identifiants, sélectionner les lignes d’embedding, mélanger le contexte, calculer les probabilités, choisir un caractère et continuer.
+
+« Apprendre à prédire » ajoute la réponse connue, la perte, le gradient, la correction et un nouvel essai sur la même entrée. Revenir sur une étape rejoue la trace ; une correction n’est jamais appliquée deux fois. Le texte « relecture avant correction » distingue le calcul précédent des poids déjà mis à jour.
+
+Les couleurs ont un sens stable : bleu pour texte et identifiants, violet pour nombres appris, vert pour résultats, orange pour apprentissage. Les libellés donnent la même information ; la couleur n’est pas le seul repère. Le contour marque l’élément examiné. Il n’y a plus de flux de nombres décoratif dans ce parcours.
+
+Un clic sur un token montre la ligne réellement sélectionnée. Les probabilités sont visibles avant le choix. La tokenisation du laboratoire est explicitement une tokenisation par caractères, différente d’une tokenisation par fragments de mots. Voir [Sennrich, Haddow et Birch (2016)](https://aclanthology.org/P16-1162/).
+
+Le mode 2D présente les mêmes cartes sans WebGL. « Atelier avancé » donne accès aux fonctions ci-dessous. Le parcours guidé porte sur le mini-Transformer ; le basculement vers l’atelier y charge ses poids.
+
+## Atelier avancé
 
 Les trois modèles peuvent aussi être chargés déjà entraînés sur le corpus public d’Alice (2 000 corrections, graine 42 ; empreinte vérifiée). Il s’agit de démonstrations propres au laboratoire, pas des corrigés des TD.
 
@@ -58,19 +70,20 @@ Exporter une expérience fournit `protocol.json`, `training.csv`, `quantization.
 Depuis la racine du dépôt :
 
 ```sh
-python -m http.server 8765
+python -m http.server 8766
 ```
 
-Puis `http://localhost:8765/neural-lab/`. Servir les fichiers par HTTP est nécessaire pour les modules et le travailleur ; ne pas ouvrir directement `index.html` en `file://`.
+Puis `http://localhost:8766/neural-lab/`. Servir les fichiers par HTTP est nécessaire pour les modules et le travailleur ; ne pas ouvrir directement `index.html` en `file://`.
 
 ```sh
 node neural-lab/tests/engine.test.mjs
 python neural-lab/tests/browser.py
+python neural-lab/tests/journey.py
 ```
 
 Les fichiers de `examples/` se régénèrent avec `node neural-lab/tests/build_examples.mjs`.
 
-Node n’a besoin d’aucun paquet. Le second test utilise Python, Playwright et Chrome installés sur la machine de validation ; son chemin Chrome peut être adapté. `validation/results.json`, les CSV et `validation/browser.json` donnent les exécutions enregistrées, leur environnement et leurs limites. Une démonstration qui apprend une suite répétée reste une démonstration, pas un résultat publiable sur un modèle généraliste.
+Node n’a besoin d’aucun paquet. Les tests navigateur utilisent Python, Playwright et Chrome installés sur la machine de validation ; son chemin Chrome peut être adapté. `validation/results.json`, les CSV et `validation/browser.json` donnent les exécutions enregistrées, leur environnement et leurs limites. Une démonstration qui apprend une suite répétée reste une démonstration, pas un résultat publiable sur un modèle généraliste.
 
 ## Sources primaires
 

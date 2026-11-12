@@ -1,0 +1,133 @@
+{
+  "executed_utc": "2026-11-12T06:37:18.251834+00:00",
+  "url": "http://127.0.0.1:8766/neural-lab/",
+  "checks": [
+    {
+      "name": "guided route opens by default",
+      "passed": true
+    },
+    {
+      "name": "model starts transparently untrained",
+      "passed": true
+    },
+    {
+      "name": "actual trained checkpoint loads",
+      "passed": true
+    },
+    {
+      "name": "tokenization includes space as a token",
+      "passed": true
+    },
+    {
+      "name": "IDs match actual vocabulary",
+      "passed": true
+    },
+    {
+      "name": "embedding is selected by actual token ID",
+      "passed": true
+    },
+    {
+      "name": "colours have stable roles",
+      "passed": true
+    },
+    {
+      "name": "mask and future positions visible",
+      "passed": true
+    },
+    {
+      "name": "probabilities visible before choosing",
+      "passed": true
+    },
+    {
+      "name": "selection is actual argmax",
+      "passed": true
+    },
+    {
+      "name": "inference leaves weights fixed",
+      "passed": true
+    },
+    {
+      "name": "continuation is explicit",
+      "passed": true
+    },
+    {
+      "name": "generation loops back to reading",
+      "passed": true
+    },
+    {
+      "name": "known target used for loss",
+      "passed": true
+    },
+    {
+      "name": "weights fixed until correction",
+      "passed": true
+    },
+    {
+      "name": "gradients really computed",
+      "passed": true
+    },
+    {
+      "name": "update really executed once",
+      "passed": true
+    },
+    {
+      "name": "replay does not double-update",
+      "passed": true
+    },
+    {
+      "name": "same-example before/after measured",
+      "passed": true
+    },
+    {
+      "name": "no arbitrary number ticker",
+      "passed": true
+    },
+    {
+      "name": "advanced workshop remains reachable",
+      "passed": true
+    },
+    {
+      "name": "2D explanation works",
+      "passed": true
+    },
+    {
+      "name": "unknown characters explicit",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1280",
+      "passed": true
+    },
+    {
+      "name": "empty text safe",
+      "passed": true
+    },
+    {
+      "name": "automatic guided fallback without WebGL",
+      "passed": true
+    },
+    {
+      "name": "fallback shows tokenization cards",
+      "passed": true
+    },
+    {
+      "name": "no runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "manual_update": {
+    "before": 1.8735020457534248,
+    "after": 1.6975821844665844,
+    "updates": 1
+  },
+  "browser": "157.0.8103.39"
+}

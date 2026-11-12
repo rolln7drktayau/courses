@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="Roland Cédric TAYO"><meta name="description" content="Laboratoire 3D de réseaux de neurones : calculs réels, apprentissage, inférence, gradients et quantification. Tout s’exécute dans votre navigateur."><title>À l’intérieur du calcul · Laboratoire IA</title><link rel="stylesheet" href="lab.css"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script></head>
 <body>
-<header><a href="../llm-inside/" class="brand">RCT <span>/ LABORATOIRE IA</span></a><nav><button id="guide">Commencer</button><button id="help">Mode d’emploi & sources</button><a href="../llm-inside/">Retour au cours ↗</a></nav></header>
+<header><a href="../llm-inside/" class="brand">RCT <span>/ LABORATOIRE IA</span></a><nav><button id="journey-mode">Atelier avancé</button><button id="guide">Mode d’emploi</button><button id="help">Mode d’emploi & sources</button><a href="../llm-inside/">Retour au cours ↗</a></nav></header>
 <div class="headline"><div><span class="eyebrow">COMPRENDRE · ESSAYER · MESURER</span><h1>À l’intérieur du calcul.</h1><p>Un petit modèle, de vraies opérations. À vous de prendre les commandes.</p></div><div class="local-badge"><i></i> Calcul local<br><small>Aucun texte envoyé à un serveur</small></div></div>
+<section id="journey" class="journey-shell" aria-label="Parcours guidé"></section>
 <main>
 <aside class="panel setup"><h2><span>01</span> Préparer</h2><label>Le modèle <select id="model"><option value="bigram">Bigramme · le dernier caractère</option><option value="mlp">MLP · un contexte, une couche cachée</option><option value="transformer" selected>Mini-Transformer · attention causale</option></select></label><p id="model-description" class="muted"></p>
 <div class="pair"><label>Dimension <select id="dim"><option>4</option><option selected>8</option><option>12</option></select></label><label>Contexte <select id="context"><option>3</option><option selected>6</option><option>8</option><option>12</option></select></label></div>
@@ -27,4 +28,4 @@
 </main>
 <footer><span>Roland Cédric TAYO · INEM</span><span id="status" role="status">Initialisation…</span><a href="README.md">Méthode, limites et références</a></footer>
 <dialog id="dialog"><div class="dialog-top"><h2 id="dialog-title"></h2><button id="close-dialog" aria-label="Fermer">×</button></div><div id="dialog-content"></div></dialog>
-<script type="module" src="app.js"></script></body></html>
+<script type="module" src="app.js"></script><script type="module" src="journey.js"></script></body></html>
