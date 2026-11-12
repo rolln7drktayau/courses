@@ -258,6 +258,7 @@
   $('#art-title').textContent=slides[state.index].alt||'Schéma pédagogique';
  }
  function controlHTML(type){
+  if(type==='lab')return '<a href="https://rolln7drktayau.github.io/courses/neural-lab/">Ouvrir le laboratoire 3D →</a>';
   if(type==='embedding')return ['Le','chat','dort'].map((t,i)=>`<button data-embedding="${i}" class="${state.embeddingToken===i?'active':''}">${t}</button>`).join('');
   if(type==='lever')return ['Calcul','Poids','Contexte'].map((t,i)=>`<button data-lever="${i}" class="${state.lever===i?'active':''}">${t}</button>`).join('');
   if(type==='research')return '<button id="prepare-research">Préparer mon hypothèse et mon test ↗</button>';
@@ -356,7 +357,7 @@
    ['next','Prochain essai si cela ne marche pas','Une seule modification suivante, à expliquer',false]
   ].map(([id,label,hint,required])=>`<label class="research-field">${esc(label)}<textarea name="${id}" placeholder="${esc(hint)}" ${required?'required':''} rows="2"></textarea></label>`).join('')+'<button type="button" id="download-research">Télécharger ma fiche JSON</button></form>');
  }
- function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections du texte de départ</a> · <a href="MESURER-SUR-PI.md">Protocole technique sur Pi</a> · <a href="engineering.pdf">PDF ingénieur complet</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
+ function showRefs(id){modal('Sources et ressources',`<p>Sources originales des notions présentées. Les chiffres des démonstrations sont calculés dans la page ; ils ne sont pas des benchmarks de LLM.</p><p><a href="../neural-lab/">Laboratoire 3D · calculs réels</a> · <a href="../embedded-ai/">Cours complet d’IA embarquée</a> · <a href="../embedded-ai/perceptron.pdf">TD perceptron</a> · <a href="https://github.com/rolln7drktayau/courses/tree/main/llm-inside">Code source du mini-cours</a> · <a href="CORRECTIONS.md">Corrections du texte de départ</a> · <a href="MESURER-SUR-PI.md">Protocole technique sur Pi</a> · <a href="engineering.pdf">PDF ingénieur complet</a></p>`+refs.map(refHTML).join(''));if(id)setTimeout(()=>$('#ref-'+id).scrollIntoView({block:'start'}),30);}
  function toggleReader(){
   const show=!document.body.classList.contains('reader-mode');pause();document.body.classList.toggle('reader-mode',show);$('#reader-toggle').setAttribute('aria-pressed',String(show));$('#reader-toggle').textContent=show?'Présenter':'Lire';$('#reader').hidden=!show;
   if(show&&!$('#reader').children.length){

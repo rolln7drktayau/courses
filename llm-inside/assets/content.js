@@ -883,7 +883,7 @@ window.SLIDES = [
     "body": "<div class=\"points\"><div class=\"point\">Nommer les limites du système avant de chercher un modèle.</div><div class=\"point\">Expliquer l’opération qui coûte, puis proposer une amélioration testable.</div></div>",
     "take": "Écrivez : ma brique, mon idée, le gain attendu et le test qui pourrait me donner tort.",
     "scene": "end",
-    "caption": "Les formules et familles de recherche restent dans le parcours Ingénieur. Les sources et le protocole de mesure sont accessibles dans les ressources.",
+    "caption": "Prolongez le cours dans le laboratoire : entraînez un petit modèle, ouvrez ses calculs et testez la quantification. Les mesures y sont locales au navigateur.",
     "refs": [],
     "alt": "Un triangle relie information, coût et preuve.",
     "audience": "all",
@@ -892,7 +892,8 @@ window.SLIDES = [
       "Choisir une brique",
       "Préparer une enquête"
     ],
-    "phase": 5
+    "phase": 5,
+    "control": "lab"
   },
   {
     "id": "sources-memory",

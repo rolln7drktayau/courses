@@ -1,0 +1,815 @@
+{
+  "executed_utc": "2026-11-12T00:54:49.438Z",
+  "runtime": "v24.14.0",
+  "machine": {
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+    "logical_cpus": 12
+  },
+  "load": "not controlled",
+  "scope": "CPU Node.js scalar educational engine; no Pi, GPU or energy measurements",
+  "tests": [
+    {
+      "name": "bigram seeded initialization",
+      "passed": true
+    },
+    {
+      "name": "bigram loss really deferred",
+      "passed": true
+    },
+    {
+      "name": "bigram finite differences",
+      "passed": true,
+      "samples": 30,
+      "max_absolute_error": 3.1588703874874113e-11,
+      "max_relative_error": 1.662002061407796e-10
+    },
+    {
+      "name": "bigram normalized probabilities",
+      "passed": true
+    },
+    {
+      "name": "bigram inference keeps weights fixed",
+      "passed": true
+    },
+    {
+      "name": "bigram correct and incorrect update direction",
+      "passed": true
+    },
+    {
+      "name": "bigram independent partitions",
+      "passed": true
+    },
+    {
+      "name": "bigram checkpoint exact roundtrip",
+      "passed": true
+    },
+    {
+      "name": "bigram corrupted checkpoint rejected",
+      "passed": true
+    },
+    {
+      "name": "bigram seeded training reproducible",
+      "passed": true
+    },
+    {
+      "name": "bigram true float32 weight rounding",
+      "passed": true
+    },
+    {
+      "name": "bigram loss decreases after 600 updates",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 32 global",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 8 global",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 4 global",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 2 global",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 32 layer",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 8 layer",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 4 layer",
+      "passed": true
+    },
+    {
+      "name": "bigram quantization finite 2 layer",
+      "passed": true
+    },
+    {
+      "name": "bigram numeric storage count",
+      "passed": true
+    },
+    {
+      "name": "mlp seeded initialization",
+      "passed": true
+    },
+    {
+      "name": "mlp loss really deferred",
+      "passed": true
+    },
+    {
+      "name": "mlp finite differences",
+      "passed": true,
+      "samples": 36,
+      "max_absolute_error": 2.7484963632286308e-11,
+      "max_relative_error": 4.6737216885526895e-8
+    },
+    {
+      "name": "mlp normalized probabilities",
+      "passed": true
+    },
+    {
+      "name": "mlp inference keeps weights fixed",
+      "passed": true
+    },
+    {
+      "name": "mlp correct and incorrect update direction",
+      "passed": true
+    },
+    {
+      "name": "mlp independent partitions",
+      "passed": true
+    },
+    {
+      "name": "mlp checkpoint exact roundtrip",
+      "passed": true
+    },
+    {
+      "name": "mlp corrupted checkpoint rejected",
+      "passed": true
+    },
+    {
+      "name": "mlp seeded training reproducible",
+      "passed": true
+    },
+    {
+      "name": "mlp true float32 weight rounding",
+      "passed": true
+    },
+    {
+      "name": "mlp loss decreases after 600 updates",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 32 global",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 8 global",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 4 global",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 2 global",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 32 layer",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 8 layer",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 4 layer",
+      "passed": true
+    },
+    {
+      "name": "mlp quantization finite 2 layer",
+      "passed": true
+    },
+    {
+      "name": "mlp numeric storage count",
+      "passed": true
+    },
+    {
+      "name": "transformer seeded initialization",
+      "passed": true
+    },
+    {
+      "name": "transformer loss really deferred",
+      "passed": true
+    },
+    {
+      "name": "transformer finite differences",
+      "passed": true,
+      "samples": 37,
+      "max_absolute_error": 1.3472583049178866e-9,
+      "max_relative_error": 1.65645812082965e-9
+    },
+    {
+      "name": "transformer normalized probabilities",
+      "passed": true
+    },
+    {
+      "name": "transformer inference keeps weights fixed",
+      "passed": true
+    },
+    {
+      "name": "transformer correct and incorrect update direction",
+      "passed": true
+    },
+    {
+      "name": "transformer independent partitions",
+      "passed": true
+    },
+    {
+      "name": "causal mask triangular",
+      "passed": true
+    },
+    {
+      "name": "mask bug observable",
+      "passed": true
+    },
+    {
+      "name": "cache exact prefix 1",
+      "passed": true
+    },
+    {
+      "name": "cache exact prefix 2",
+      "passed": true
+    },
+    {
+      "name": "cache exact prefix 3",
+      "passed": true
+    },
+    {
+      "name": "transformer checkpoint exact roundtrip",
+      "passed": true
+    },
+    {
+      "name": "transformer corrupted checkpoint rejected",
+      "passed": true
+    },
+    {
+      "name": "transformer seeded training reproducible",
+      "passed": true
+    },
+    {
+      "name": "transformer true float32 weight rounding",
+      "passed": true
+    },
+    {
+      "name": "transformer loss decreases after 600 updates",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 32 global",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 8 global",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 4 global",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 2 global",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 32 layer",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 8 layer",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 4 layer",
+      "passed": true
+    },
+    {
+      "name": "transformer quantization finite 2 layer",
+      "passed": true
+    },
+    {
+      "name": "transformer numeric storage count",
+      "passed": true
+    }
+  ],
+  "training": [
+    {
+      "type": "bigram",
+      "dim": 4,
+      "context": 3,
+      "seed": 42,
+      "updates": 600,
+      "eta": 0.04,
+      "parameters": 240,
+      "before": {
+        "loss": 2.651238556572921,
+        "accuracy": 0.10416666666666667,
+        "n": 48
+      },
+      "after": {
+        "loss": 1.8338412724177793,
+        "accuracy": 0.4583333333333333,
+        "n": 48
+      },
+      "elapsed_ms": 34.197399999999995
+    },
+    {
+      "type": "mlp",
+      "dim": 4,
+      "context": 3,
+      "seed": 42,
+      "updates": 600,
+      "eta": 0.04,
+      "parameters": 299,
+      "before": {
+        "loss": 2.7175855231214747,
+        "accuracy": 0.125,
+        "n": 48
+      },
+      "after": {
+        "loss": 1.6761378533676894,
+        "accuracy": 0.4375,
+        "n": 48
+      },
+      "elapsed_ms": 54.08330000000001
+    },
+    {
+      "type": "transformer",
+      "dim": 4,
+      "context": 3,
+      "seed": 42,
+      "updates": 600,
+      "eta": 0.04,
+      "parameters": 303,
+      "before": {
+        "loss": 3.0299777022615006,
+        "accuracy": 0.041666666666666664,
+        "n": 48
+      },
+      "after": {
+        "loss": 2.133057003342899,
+        "accuracy": 0.020833333333333332,
+        "n": 48
+      },
+      "elapsed_ms": 114.51499999999999
+    },
+    {
+      "type": "transformer-default",
+      "dim": 8,
+      "context": 6,
+      "seed": 42,
+      "updates": 300,
+      "eta": 0.04,
+      "parameters": 871,
+      "before": {
+        "loss": 2.7903454339762277,
+        "accuracy": 0.22916666666666666,
+        "n": 48
+      },
+      "after": {
+        "loss": 1.5279941793576954,
+        "accuracy": 0.4583333333333333,
+        "n": 48
+      },
+      "elapsed_ms": 238.43409999999994
+    },
+    {
+      "type": "transformer-default",
+      "dim": 8,
+      "context": 6,
+      "seed": 43,
+      "updates": 300,
+      "eta": 0.04,
+      "parameters": 871,
+      "before": {
+        "loss": 3.277807615642507,
+        "accuracy": 0.041666666666666664,
+        "n": 48
+      },
+      "after": {
+        "loss": 2.10382462914839,
+        "accuracy": 0.4583333333333333,
+        "n": 48
+      },
+      "elapsed_ms": 218.39290000000005
+    },
+    {
+      "type": "transformer-default",
+      "dim": 8,
+      "context": 6,
+      "seed": 44,
+      "updates": 300,
+      "eta": 0.04,
+      "parameters": 871,
+      "before": {
+        "loss": 3.0118187788128563,
+        "accuracy": 0.25,
+        "n": 48
+      },
+      "after": {
+        "loss": 1.9158813616430252,
+        "accuracy": 0.3958333333333333,
+        "n": 48
+      },
+      "elapsed_ms": 214.92239999999993
+    }
+  ],
+  "quantization": [
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "global",
+      "loss": 1.8338412772351018,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 960,
+      "scale_bytes": 0
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "global",
+      "loss": 1.8343837929265059,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 285,
+      "scale_bytes": 4
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "global",
+      "loss": 1.8319825692528668,
+      "accuracy": 0.5,
+      "n": 48,
+      "weight_bytes": 173,
+      "scale_bytes": 4
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "global",
+      "loss": 2.027187866624108,
+      "accuracy": 0.3958333333333333,
+      "n": 48,
+      "weight_bytes": 117,
+      "scale_bytes": 4
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 1.8338412772351018,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 960,
+      "scale_bytes": 0
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 1.8343837929265059,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 285,
+      "scale_bytes": 4
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 1.8319825692528668,
+      "accuracy": 0.5,
+      "n": 48,
+      "weight_bytes": 173,
+      "scale_bytes": 4
+    },
+    {
+      "type": "bigram",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 2.027187866624108,
+      "accuracy": 0.3958333333333333,
+      "n": 48,
+      "weight_bytes": 117,
+      "scale_bytes": 4
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "global",
+      "loss": 1.6761378474755606,
+      "accuracy": 0.4375,
+      "n": 48,
+      "weight_bytes": 1196,
+      "scale_bytes": 0
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "global",
+      "loss": 1.676940303280569,
+      "accuracy": 0.4375,
+      "n": 48,
+      "weight_bytes": 368,
+      "scale_bytes": 4
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "global",
+      "loss": 1.6383054952008262,
+      "accuracy": 0.5,
+      "n": 48,
+      "weight_bytes": 230,
+      "scale_bytes": 4
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "global",
+      "loss": 1.7416946675637452,
+      "accuracy": 0.3541666666666667,
+      "n": 48,
+      "weight_bytes": 161,
+      "scale_bytes": 4
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 1.6761378474755606,
+      "accuracy": 0.4375,
+      "n": 48,
+      "weight_bytes": 1196,
+      "scale_bytes": 0
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 1.6776656729761585,
+      "accuracy": 0.4375,
+      "n": 48,
+      "weight_bytes": 368,
+      "scale_bytes": 12
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 1.670490683100504,
+      "accuracy": 0.4375,
+      "n": 48,
+      "weight_bytes": 230,
+      "scale_bytes": 12
+    },
+    {
+      "type": "mlp",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 1.6789566730076266,
+      "accuracy": 0.4166666666666667,
+      "n": 48,
+      "weight_bytes": 161,
+      "scale_bytes": 12
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "global",
+      "loss": 2.1330569858136825,
+      "accuracy": 0.020833333333333332,
+      "n": 48,
+      "weight_bytes": 1212,
+      "scale_bytes": 0
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "global",
+      "loss": 2.1336708300793465,
+      "accuracy": 0.020833333333333332,
+      "n": 48,
+      "weight_bytes": 432,
+      "scale_bytes": 4
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "global",
+      "loss": 2.1957991357900735,
+      "accuracy": 0.125,
+      "n": 48,
+      "weight_bytes": 302,
+      "scale_bytes": 4
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "global",
+      "loss": 3.2095254780691302,
+      "accuracy": 0.0625,
+      "n": 48,
+      "weight_bytes": 237,
+      "scale_bytes": 4
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 2.1330569858136825,
+      "accuracy": 0.020833333333333332,
+      "n": 48,
+      "weight_bytes": 1212,
+      "scale_bytes": 0
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 2.1319632325451825,
+      "accuracy": 0.020833333333333332,
+      "n": 48,
+      "weight_bytes": 432,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 2.163135858475762,
+      "accuracy": 0.16666666666666666,
+      "n": 48,
+      "weight_bytes": 302,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 3.449764261529636,
+      "accuracy": 0.14583333333333334,
+      "n": 48,
+      "weight_bytes": 237,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 42,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 1.52799417919261,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 3484,
+      "scale_bytes": 0
+    },
+    {
+      "type": "transformer-default",
+      "seed": 42,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 1.5237486687729545,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 1084,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 42,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 1.5476592361963386,
+      "accuracy": 0.5625,
+      "n": 48,
+      "weight_bytes": 684,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 42,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 3.6306719895624693,
+      "accuracy": 0.22916666666666666,
+      "n": 48,
+      "weight_bytes": 484,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 43,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 2.1038246293815472,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 3484,
+      "scale_bytes": 0
+    },
+    {
+      "type": "transformer-default",
+      "seed": 43,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 2.109532756399352,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 1084,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 43,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 2.1767550190545095,
+      "accuracy": 0.375,
+      "n": 48,
+      "weight_bytes": 684,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 43,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 3.422144459096501,
+      "accuracy": 0.1875,
+      "n": 48,
+      "weight_bytes": 484,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 44,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 1.9158813674919253,
+      "accuracy": 0.3958333333333333,
+      "n": 48,
+      "weight_bytes": 3484,
+      "scale_bytes": 0
+    },
+    {
+      "type": "transformer-default",
+      "seed": 44,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 1.915143542942361,
+      "accuracy": 0.3958333333333333,
+      "n": 48,
+      "weight_bytes": 1084,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 44,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 1.9578719772941369,
+      "accuracy": 0.3333333333333333,
+      "n": 48,
+      "weight_bytes": 684,
+      "scale_bytes": 36
+    },
+    {
+      "type": "transformer-default",
+      "seed": 44,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 3.021210023873847,
+      "accuracy": 0.16666666666666666,
+      "n": 48,
+      "weight_bytes": 484,
+      "scale_bytes": 36
+    }
+  ]
+}

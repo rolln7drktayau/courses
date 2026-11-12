@@ -1,0 +1,66 @@
+{
+  "executed_utc": "2026-11-12T00:50:53.877Z",
+  "runtime": "v24.14.0",
+  "examples": [
+    {
+      "type": "bigram",
+      "parameters": 240,
+      "seed": 42,
+      "updates": 2000,
+      "eta": 0.04,
+      "sha256": "5500537c6e014298b40063c5e101f293f66ca98d85ed174a102889a12bfc89d9",
+      "validation": {
+        "update": 2000,
+        "train_loss": 1.3396967344422779,
+        "validation_loss": 1.3230945434999464,
+        "validation_accuracy": 0.5,
+        "n": 48,
+        "elapsed_ms": 147.8012,
+        "eta": 0.04,
+        "wrong_sign": 0,
+        "sampling_seed": 1333
+      },
+      "scope": "repeated toy corpus; not a general language model"
+    },
+    {
+      "type": "mlp",
+      "parameters": 1159,
+      "seed": 42,
+      "updates": 2000,
+      "eta": 0.04,
+      "sha256": "5be73b93ec898a0a1455f90e2b91dcbe9442d52efacb22e5c904c3c6f018630b",
+      "validation": {
+        "update": 2000,
+        "train_loss": 0.4825170178796383,
+        "validation_loss": 0.42542102536448584,
+        "validation_accuracy": 0.8541666666666666,
+        "n": 48,
+        "elapsed_ms": 839.2190999999999,
+        "eta": 0.04,
+        "wrong_sign": 0,
+        "sampling_seed": 1333
+      },
+      "scope": "repeated toy corpus; not a general language model"
+    },
+    {
+      "type": "transformer",
+      "parameters": 871,
+      "seed": 42,
+      "updates": 2000,
+      "eta": 0.04,
+      "sha256": "f27dbfab89c716cb8124e695c034fe5cbef23221670462d8c2ad79816c3e9e01",
+      "validation": {
+        "update": 2000,
+        "train_loss": 1.160417096234289,
+        "validation_loss": 0.44539375365534956,
+        "validation_accuracy": 0.8333333333333334,
+        "n": 48,
+        "elapsed_ms": 2127.6369000000004,
+        "eta": 0.04,
+        "wrong_sign": 0,
+        "sampling_seed": 1333
+      },
+      "scope": "repeated toy corpus; not a general language model"
+    }
+  ]
+}

@@ -1,0 +1,495 @@
+{
+  "executed_utc": "2026-11-12T00:59:07.468191+00:00",
+  "load": "not controlled",
+  "rendering": "Chrome headless with --enable-unsafe-swiftshader; not a GPU performance test",
+  "url": "http://127.0.0.1:8765/neural-lab/",
+  "checks": [
+    {
+      "name": "WebGL initialized",
+      "passed": true
+    },
+    {
+      "name": "all three model choices",
+      "passed": true
+    },
+    {
+      "name": "guided start",
+      "passed": true
+    },
+    {
+      "name": "slow real computation can pause",
+      "passed": true
+    },
+    {
+      "name": "no weight change before update",
+      "passed": true
+    },
+    {
+      "name": "manual update changes weights",
+      "passed": true
+    },
+    {
+      "name": "updated trace has no fake zero gradient",
+      "passed": true
+    },
+    {
+      "name": "manual correction values visible",
+      "passed": true
+    },
+    {
+      "name": "manual update trace matches new weights",
+      "passed": true
+    },
+    {
+      "name": "actual 300 updates",
+      "passed": true
+    },
+    {
+      "name": "training/validation curves recorded",
+      "passed": true
+    },
+    {
+      "name": "inference keeps weights fixed",
+      "passed": true
+    },
+    {
+      "name": "cache actually reused",
+      "passed": true
+    },
+    {
+      "name": "quantized inference visible",
+      "passed": true
+    },
+    {
+      "name": "unknown token explicitly shown",
+      "passed": true
+    },
+    {
+      "name": "matrix drill down",
+      "passed": true
+    },
+    {
+      "name": "weight precise value",
+      "passed": true
+    },
+    {
+      "name": "scalar leaf visible",
+      "passed": true
+    },
+    {
+      "name": "operation drill down",
+      "passed": true
+    },
+    {
+      "name": "algorithm replay",
+      "passed": true
+    },
+    {
+      "name": "2D fallback visible",
+      "passed": true
+    },
+    {
+      "name": "2D accessible inspector",
+      "passed": true
+    },
+    {
+      "name": "four precision measurements",
+      "passed": true
+    },
+    {
+      "name": "timing repetitions and calibration",
+      "passed": true
+    },
+    {
+      "name": "all experiment files exported",
+      "passed": true
+    },
+    {
+      "name": "immutable experiment provenance",
+      "passed": true
+    },
+    {
+      "name": "update sign bug detected",
+      "passed": true
+    },
+    {
+      "name": "mask bug detected",
+      "passed": true
+    },
+    {
+      "name": "mask explanation follows actual state",
+      "passed": true
+    },
+    {
+      "name": "weight export import SHA256",
+      "passed": true
+    },
+    {
+      "name": "bigram browser training",
+      "passed": true
+    },
+    {
+      "name": "mlp browser training",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1280",
+      "passed": true
+    },
+    {
+      "name": "verified trained example loads",
+      "passed": true
+    },
+    {
+      "name": "real 3D hover tooltip",
+      "passed": true
+    },
+    {
+      "name": "3D picking selects real block",
+      "passed": true
+    },
+    {
+      "name": "generation pause",
+      "passed": true
+    },
+    {
+      "name": "automatic 2D fallback without WebGL",
+      "passed": true
+    },
+    {
+      "name": "fallback provides actual values",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    },
+    {
+      "name": "no external runtime requests",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "network_requests": [
+    "http://127.0.0.1:8765/neural-lab/",
+    "http://127.0.0.1:8765/neural-lab/lab.css",
+    "http://127.0.0.1:8765/neural-lab/app.js",
+    "http://127.0.0.1:8765/neural-lab/engine.js",
+    "http://127.0.0.1:8765/neural-lab/scene.js",
+    "http://127.0.0.1:8765/neural-lab/vendor/three.module.js",
+    "http://127.0.0.1:8765/neural-lab/vendor/OrbitControls.js",
+    "http://127.0.0.1:8765/neural-lab/vendor/three.core.js",
+    "http://127.0.0.1:8765/neural-lab/worker.js",
+    "http://127.0.0.1:8765/neural-lab/engine.js",
+    "http://127.0.0.1:8765/neural-lab/worker.js",
+    "http://127.0.0.1:8765/neural-lab/engine.js",
+    "http://127.0.0.1:8765/neural-lab/worker.js",
+    "http://127.0.0.1:8765/neural-lab/engine.js",
+    "http://127.0.0.1:8765/neural-lab/worker.js",
+    "http://127.0.0.1:8765/neural-lab/engine.js",
+    "http://127.0.0.1:8765/neural-lab/examples/transformer.json"
+  ],
+  "training_history": [
+    {
+      "update": 0,
+      "train_loss": 2.932415354228628,
+      "validation_loss": 2.9403207232302377,
+      "validation_accuracy": 0.1,
+      "n": 20,
+      "elapsed_ms": 44.29999999701977,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 25,
+      "train_loss": 2.732452010535323,
+      "validation_loss": 2.789011788397132,
+      "validation_accuracy": 0.15,
+      "n": 20,
+      "elapsed_ms": 106.09999999403954,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 50,
+      "train_loss": 2.5916783662541705,
+      "validation_loss": 2.688901525537735,
+      "validation_accuracy": 0.1,
+      "n": 20,
+      "elapsed_ms": 159.5,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 75,
+      "train_loss": 2.424914071863356,
+      "validation_loss": 2.6194489795724216,
+      "validation_accuracy": 0.15,
+      "n": 20,
+      "elapsed_ms": 223.79999999701977,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 100,
+      "train_loss": 2.3195884028717293,
+      "validation_loss": 2.5003018462954842,
+      "validation_accuracy": 0.15,
+      "n": 20,
+      "elapsed_ms": 285.09999999403954,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 125,
+      "train_loss": 2.2324672451044614,
+      "validation_loss": 2.441729055143294,
+      "validation_accuracy": 0.15,
+      "n": 20,
+      "elapsed_ms": 355.29999999701977,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 150,
+      "train_loss": 2.1410225576379576,
+      "validation_loss": 2.317127308116929,
+      "validation_accuracy": 0.3,
+      "n": 20,
+      "elapsed_ms": 416.09999999403954,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 175,
+      "train_loss": 2.079802926427952,
+      "validation_loss": 2.2099671922336506,
+      "validation_accuracy": 0.55,
+      "n": 20,
+      "elapsed_ms": 476.20000000298023,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 200,
+      "train_loss": 2.017893178396771,
+      "validation_loss": 2.238370926126536,
+      "validation_accuracy": 0.55,
+      "n": 20,
+      "elapsed_ms": 537.4000000059605,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 225,
+      "train_loss": 2.0173115770771792,
+      "validation_loss": 2.273894978991468,
+      "validation_accuracy": 0.4,
+      "n": 20,
+      "elapsed_ms": 595.4000000059605,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 250,
+      "train_loss": 1.9441891861071965,
+      "validation_loss": 2.246571785785971,
+      "validation_accuracy": 0.4,
+      "n": 20,
+      "elapsed_ms": 661.5999999940395,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 275,
+      "train_loss": 1.8860620037272269,
+      "validation_loss": 2.1196675813470742,
+      "validation_accuracy": 0.5,
+      "n": 20,
+      "elapsed_ms": 723.2999999970198,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    },
+    {
+      "update": 300,
+      "train_loss": 1.6798906299115697,
+      "validation_loss": 1.864224641026216,
+      "validation_accuracy": 0.5,
+      "n": 20,
+      "elapsed_ms": 783.2000000029802,
+      "eta": 0.04,
+      "wrong_sign": 0,
+      "sampling_seed": 1333
+    }
+  ],
+  "comparison": [
+    {
+      "seed": 42,
+      "updates": 300,
+      "bits": 32,
+      "scale_mode": "layer",
+      "loss": 1.5279941791926104,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 3484,
+      "scale_bytes": 0
+    },
+    {
+      "seed": 42,
+      "updates": 300,
+      "bits": 8,
+      "scale_mode": "layer",
+      "loss": 1.5237486687729536,
+      "accuracy": 0.4583333333333333,
+      "n": 48,
+      "weight_bytes": 1084,
+      "scale_bytes": 36
+    },
+    {
+      "seed": 42,
+      "updates": 300,
+      "bits": 4,
+      "scale_mode": "layer",
+      "loss": 1.5476592361963382,
+      "accuracy": 0.5625,
+      "n": 48,
+      "weight_bytes": 684,
+      "scale_bytes": 36
+    },
+    {
+      "seed": 42,
+      "updates": 300,
+      "bits": 2,
+      "scale_mode": "layer",
+      "loss": 3.630671989562469,
+      "accuracy": 0.22916666666666666,
+      "n": 48,
+      "weight_bytes": 484,
+      "scale_bytes": 36
+    }
+  ],
+  "timing": [
+    {
+      "repeat": 0,
+      "version": "reference",
+      "bits": 32,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 169.5,
+      "ms_per_inference": 0.662109375,
+      "checksum": 17.016950877661703
+    },
+    {
+      "repeat": 0,
+      "version": "quantized",
+      "bits": 8,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 169.3999999910593,
+      "ms_per_inference": 0.6617187499650754,
+      "checksum": 17.017131844798435
+    },
+    {
+      "repeat": 1,
+      "version": "quantized",
+      "bits": 8,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 168.1000000089407,
+      "ms_per_inference": 0.6566406250349246,
+      "checksum": 17.017131844798435
+    },
+    {
+      "repeat": 1,
+      "version": "reference",
+      "bits": 32,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 169.40000000596046,
+      "ms_per_inference": 0.6617187500232831,
+      "checksum": 17.016950877661703
+    },
+    {
+      "repeat": 2,
+      "version": "reference",
+      "bits": 32,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 171.29999999701977,
+      "ms_per_inference": 0.6691406249883585,
+      "checksum": 17.016950877661703
+    },
+    {
+      "repeat": 2,
+      "version": "quantized",
+      "bits": 8,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 170.79999999701977,
+      "ms_per_inference": 0.6671874999883585,
+      "checksum": 17.017131844798435
+    },
+    {
+      "repeat": 3,
+      "version": "quantized",
+      "bits": 8,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 168.20000000298023,
+      "ms_per_inference": 0.6570312500116415,
+      "checksum": 17.017131844798435
+    },
+    {
+      "repeat": 3,
+      "version": "reference",
+      "bits": 32,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 167.90000000596046,
+      "ms_per_inference": 0.6558593750232831,
+      "checksum": 17.016950877661703
+    },
+    {
+      "repeat": 4,
+      "version": "reference",
+      "bits": 32,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 170,
+      "ms_per_inference": 0.6640625,
+      "checksum": 17.016950877661703
+    },
+    {
+      "repeat": 4,
+      "version": "quantized",
+      "bits": 8,
+      "k": 256,
+      "calibration_ms": 193.20000000298023,
+      "total_ms": 167.59999999403954,
+      "ms_per_inference": 0.6546874999767169,
+      "checksum": 17.017131844798435
+    }
+  ],
+  "gradient_check": "8 paramètres actifs vérifiés : écart maximal 3.15e-11. Petit pas : ΔL = 7.820e-3. ALERTE : la perte augmente ; vérifier le signe de correction. Le modèle principal reste inchangé.",
+  "browser": "157.0.8103.39"
+}

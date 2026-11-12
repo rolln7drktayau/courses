@@ -87,7 +87,7 @@
   "defined_keywords": 57,
   "observed_transition": {
     "before": "matrix(1, 0, 0, 1, 335, 170)",
-    "during": "matrix(1, 0, 0, 1, 338.227, 102.244)",
+    "during": "matrix(1, 0, 0, 1, 338.026, 106.454)",
     "after": "matrix(1, 0, 0, 1, 340, 65)"
   },
   "viewports": {
@@ -111,13 +111,13 @@
   "pdfs": {
     "course.pdf": {
       "pages": 18,
-      "links": 42,
-      "sha256": "74d0a97796b9b127aeb9c1b2a67237c4631e5742f67bc755a6331adbc5591fce"
+      "links": 43,
+      "sha256": "95509734328cc57a5c06248b6e5ffef252beb986c91d64ab91339cff948f0b37"
     },
     "engineering.pdf": {
       "pages": 33,
-      "links": 66,
-      "sha256": "0a1c3b44bc649e469437f60b8258109ae34e8d82a7386f7074f2b7ef60aa3798"
+      "links": 67,
+      "sha256": "b86be048a03b4fdad6d530785b528d909192b62662ba4297ea3a54909efc7cad"
     }
   }
 }

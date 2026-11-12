@@ -5,6 +5,7 @@ Roland Cédric TAYO · INEM. Mini-cours en français, environ vingt minutes avec
 - [Présentation animée](https://rolln7drktayau.github.io/courses/llm-inside/)
 - [PDF découverte](course.pdf) : 15 scènes essentielles et 3 pages de sources, soit 18 pages.
 - [Parcours ingénieur](https://rolln7drktayau.github.io/courses/llm-inside/?audience=engineer) et [PDF complet](engineering.pdf) : 33 pages avec formules et approfondissements.
+- [Laboratoire interactif 3D](../neural-lab/) : petits modèles réellement exécutés, entraînement, inférence et quantification simulée.
 - [Protocole technique sur Pi](MESURER-SUR-PI.md).
 - [Relecture selon trois publics](RELECTURE-PUBLICS.md).
 - [Sources scientifiques](SOURCES.md), accessibles aussi au pied des scènes.

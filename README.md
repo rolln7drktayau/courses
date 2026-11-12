@@ -17,3 +17,7 @@ GitHub Pages publie la racine de `main`. Voir `embedded-ai/README.md` pour les c
 ## Mini-cours complémentaire
 
 [Dans la mémoire d’un modèle](https://rolln7drktayau.github.io/courses/llm-inside/) : environ vingt minutes, schémas animés et calculs interactifs sur les modèles de langage, la mémoire et les pistes d’optimisation. [PDF](llm-inside/course.pdf), [sources](llm-inside/SOURCES.md) et [corrections du texte initial](llm-inside/CORRECTIONS.md).
+
+## Interactive neural laboratory
+
+[Open the 3D lab](https://rolln7drktayau.github.io/courses/neural-lab/) — train tiny character models, inspect scalar calculations and compare simulated weight quantization. [Method and validation](neural-lab/README.md).

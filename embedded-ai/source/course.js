@@ -97,7 +97,7 @@
     if (action==='benchmark-csv') exportBenchmark(el.closest('.benchmark-lab'));
     if (action==='sources') {
       openModal('Cours, TD et sources', `<p>Retrouvez ici les documents à lire et les fichiers sources à consulter ou télécharger.</p>
-        <h3>Pour prolonger le cours</h3><ul><li><a href="../llm-inside/" target="_blank" rel="noopener noreferrer">Dans la mémoire d’un modèle · mini-cours animé</a> · <a href="../llm-inside/course.pdf" target="_blank" rel="noopener noreferrer">PDF</a></li></ul>
+        <h3>Pour prolonger le cours</h3><ul><li><a href="../neural-lab/" target="_blank" rel="noopener noreferrer">Laboratoire 3D · entraînement, inférence et exploration des calculs</a></li><li><a href="../llm-inside/" target="_blank" rel="noopener noreferrer">Dans la mémoire d’un modèle · mini-cours animé</a> · <a href="../llm-inside/course.pdf" target="_blank" rel="noopener noreferrer">PDF</a></li></ul>
         <h3>Travaux dirigés</h3><ul>
           <li><a href="perceptron.pdf" target="_blank" rel="noopener noreferrer">Introduction : perceptron · énoncé PDF</a></li>
           <li><a href="day1/student-materials.zip">Jour 1 : données, tests et poids de secours · ZIP</a></li>
