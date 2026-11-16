@@ -2,12 +2,14 @@
   "author": "Roland Cédric TAYO",
   "date": "2026-11-16",
   "chapters": [
-    "Partir du besoin",
-    "Apprendre avec des nombres",
-    "Lire les réseaux actuels",
-    "Comprendre la petite machine",
-    "Optimiser sans se raconter d’histoires",
-    "Déployer, vérifier et chercher"
+    "Le besoin avant le modèle",
+    "Des données pour apprendre",
+    "Le neurone pas à pas",
+    "Les réseaux d’aujourd’hui",
+    "La machine et ses limites",
+    "L’art du compromis",
+    "Du PC à l’objet fiable",
+    "Apprendre à chercher"
   ],
   "lessons": [
     {
@@ -30,7 +32,9 @@
       "deep": "Mode présentation : avancer avec les flèches. Mode lecture : voir tous les chapitres. Les calculs interactifs sont de vrais calculs pédagogiques ; les dessins ne sont pas des mesures.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-1",
+      "lesson": 1
     },
     {
       "ch": 0,
@@ -53,7 +57,9 @@
       "deep": "Prérequis : lire des phrases, additionner et multiplier. On rappelle les signes et les petites opérations au moment de les utiliser. Les encadrés « Aller plus loin » donnent des détails supplémentaires. Aucun logiciel ni matériel n’est requis pour lire ce support.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-2",
+      "lesson": 2
     },
     {
       "ch": 0,
@@ -77,7 +83,9 @@
       "source": [
         "S13"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-3",
+      "lesson": 3
     },
     {
       "ch": 0,
@@ -107,7 +115,9 @@
         "Le besoin est connu et déterministe. Tester d’abord la solution la plus simple évite du calcul et des risques inutiles."
       ],
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-4",
+      "lesson": 4
     },
     {
       "ch": 0,
@@ -129,7 +139,9 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-5",
+      "lesson": 5
     },
     {
       "ch": 0,
@@ -151,7 +163,9 @@
       "deep": "Notre lampe demande une petite classification audio, pas une conversation générale. Une anomalie est un écart inhabituel : elle peut signaler un problème sans en donner la cause.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-6",
+      "lesson": 6
     },
     {
       "ch": 0,
@@ -177,7 +191,9 @@
         "S5",
         "S8"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-7",
+      "lesson": 7
     },
     {
       "ch": 0,
@@ -201,7 +217,36 @@
       "deep": "Dans un robot, agir change les observations suivantes : une boucle se ferme. Un retard ou une mauvaise synchronisation peut alors dégrader le comportement, même si le modèle seul semble correct.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-8",
+      "lesson": 8
+    },
+    {
+      "id": "exigences",
+      "title": "Avant de construire : promettre quoi ?",
+      "lead": "Un besoin humain doit devenir des exigences que l’on peut vérifier.",
+      "steps": [
+        "Le cahier des charges décrit le service attendu et les contraintes obligatoires. Pour Mila : reconnaître certaines commandes, hors ligne, sans envoyer le son.",
+        "Écrire aussi les situations à prendre en charge : voix, distances, bruits et durée d’écoute. Une promesse sans conditions ne se teste pas correctement.",
+        "Définir les critères avant de choisir le modèle : commandes manquées, activations non souhaitées, délai total, mémoire et énergie disponible.",
+        "Si une exigence n’est pas tenue, revoir le besoin, le matériel ou la méthode. Ne pas changer le critère après mesure pour sauver le résultat."
+      ],
+      "flow": [
+        "Besoin humain",
+        "Exigences",
+        "Protocole",
+        "Choix de conception"
+      ],
+      "limit": "Les valeurs limites doivent venir de l’usage et du matériel. Le cours ne leur attribue pas des seuils arbitraires mesurés.",
+      "deep": "Exemple de question vérifiable : une commande lancée depuis la pièce voisine doit-elle fonctionner ? Si oui, il faut représenter cette situation dans les données et les essais. Un résultat moyen ne suffit pas à vérifier tous les cas importants.",
+      "source": [
+        "C2"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 0,
+      "lesson": 8
     },
     {
       "ch": 1,
@@ -223,7 +268,9 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-9",
+      "lesson": 9
     },
     {
       "ch": 1,
@@ -245,7 +292,9 @@
       "deep": "Calcul exact de cet exemple : 16 000 × 16 / 8 = 32 000 octets. Une compression peut réduire un fichier, sans changer automatiquement la taille des données une fois décodées.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-10",
+      "lesson": 10
     },
     {
       "ch": 1,
@@ -267,7 +316,9 @@
       "deep": "L’extraction de fréquences demande elle-même du calcul et de la mémoire. La supprimer du chronométrage peut cacher une grande partie du coût réel.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-11",
+      "lesson": 11
     },
     {
       "ch": 1,
@@ -299,10 +350,12 @@
       "source": [
         "S2"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-12",
+      "lesson": 12
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Un neurone : multiplier, additionner, transformer",
       "lead": "Commençons avec seulement deux nombres. Il n’y a pas de magie cachée.",
       "steps": [
@@ -321,10 +374,12 @@
       "deep": "L’indice ₁ signifie « première entrée », pas une puissance. Le symbole × signifie multiplier. Vous pouvez modifier les deux entrées dans le calcul interactif.",
       "quiz": null,
       "source": [],
-      "widget": "neuron"
+      "widget": "neuron",
+      "id": "etape-13",
+      "lesson": 13
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Pourquoi ajouter une transformation ?",
       "lead": "Sans transformation supplémentaire, empiler des calculs linéaires ne permet pas de séparer tous les groupes d’exemples.",
       "steps": [
@@ -343,10 +398,12 @@
       "deep": "Une alternative, tanh, comprime les valeurs entre −1 et 1. Une sigmoïde donne une valeur entre 0 et 1. Ce sont des formes différentes, avec des propriétés d’apprentissage différentes.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-14",
+      "lesson": 14
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Une couche, puis plusieurs couches",
       "lead": "Plusieurs neurones calculent des sorties différentes à partir d’une même entrée.",
       "steps": [
@@ -365,10 +422,12 @@
       "deep": "Pour une couche dense de n entrées et m sorties : n × m poids et m biais. Chaque symbole représente un nombre entier positif : n compte les entrées, m les sorties.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-15",
+      "lesson": 15
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Une matrice évite de redessiner tous les neurones",
       "lead": "Une matrice est simplement un tableau de nombres organisé en lignes et colonnes.",
       "steps": [
@@ -387,10 +446,12 @@
       "deep": "Une convention fréquente compte un MAC comme deux opérations arithmétiques. Il faut annoncer la convention avant de comparer des chiffres. Un nombre d’opérations ne donne pas directement une durée.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-16",
+      "lesson": 16
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Comment dire au modèle qu’il se trompe ?",
       "lead": "Il faut transformer un écart en un nombre à réduire.",
       "steps": [
@@ -411,10 +472,12 @@
       "source": [
         "S3"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-17",
+      "lesson": 17
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Corriger un poids, pas au hasard",
       "lead": "Le gradient indique comment la perte varie quand on change un paramètre.",
       "steps": [
@@ -436,10 +499,12 @@
       "source": [
         "S3"
       ],
-      "widget": "gradient"
+      "widget": "gradient",
+      "id": "etape-18",
+      "lesson": 18
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "L’entraînement répète ce petit cycle",
       "lead": "Un seul exemple ne suffit généralement pas.",
       "steps": [
@@ -460,10 +525,12 @@
       "deep": "Pendant l’entraînement, il faut aussi mémoriser des valeurs utiles au calcul des gradients. Il peut donc demander bien plus de mémoire que la seule inférence. Une perte d’entraînement basse n’est pas un certificat de réussite en usage réel.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-19",
+      "lesson": 19
     },
     {
-      "ch": 1,
+      "ch": 2,
       "title": "Apprendre les exemples ou apprendre à généraliser ?",
       "lead": "Généraliser, c’est réussir sur de nouveaux cas pertinents.",
       "steps": [
@@ -490,10 +557,40 @@
         "La vitesse ne corrige pas un défaut de reconnaissance. Il faut d’abord comprendre les erreurs."
       ],
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-20",
+      "lesson": 20
     },
     {
+      "id": "evenements-rares",
+      "title": "99 % de réussite peut cacher un échec",
+      "lead": "Une lampe entend beaucoup plus de silence que de commandes.",
+      "steps": [
+        "Exemple fictif : 1 000 fenêtres audio contiennent 990 silences et 10 commandes. Une fenêtre est une courte portion du signal.",
+        "Le programme qui répond toujours « silence » réussit 990 décisions sur 1 000, soit 99 %. Pourtant, il manque les 10 commandes.",
+        "Le rappel d’une classe est la part de ses exemples réellement détectés. Ici, le rappel des commandes vaut 0 sur 10, donc 0 %.",
+        "Séparer les erreurs par catégorie et par situation. Pour un objet qui écoute longtemps, compter aussi les activations non souhaitées par durée d’écoute."
+      ],
+      "flow": [
+        "990 silences + 10 commandes",
+        "Toujours « silence »",
+        "99 % global",
+        "0 % des commandes trouvées"
+      ],
+      "limit": "Ces nombres illustrent un piège de lecture ; ils ne décrivent pas un système testé.",
+      "deep": "Une matrice de confusion croise les catégories attendues et prédites. Elle permet de distinguer les commandes manquées des activations non souhaitées. Le terme « précision » est ambigu : annoncer exactement la métrique et sa formule.",
+      "source": [
+        "C2",
+        "C4"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
       "ch": 2,
+      "lesson": 20
+    },
+    {
+      "ch": 3,
       "title": "Les images : regarder de petites fenêtres",
       "lead": "Une convolution réutilise le même petit ensemble de poids à plusieurs positions.",
       "steps": [
@@ -514,10 +611,12 @@
       "source": [
         "S4"
       ],
-      "widget": "convolution"
+      "widget": "convolution",
+      "id": "etape-21",
+      "lesson": 21
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Réduire une image et séparer les calculs",
       "lead": "Faire moins de calculs peut aider, mais la qualité doit être retestée.",
       "steps": [
@@ -539,10 +638,12 @@
         "S4",
         "S5"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-22",
+      "lesson": 22
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Une série dans le temps",
       "lead": "Un son, une vibration et une température ne sont pas des images fixes : leur ordre compte.",
       "steps": [
@@ -561,10 +662,12 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-23",
+      "lesson": 23
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Le texte entre aussi sous forme de nombres",
       "lead": "Avant un modèle de langage, il faut découper et numéroter.",
       "steps": [
@@ -584,10 +687,12 @@
       "deep": "Une ligne de la table d’embedding est sélectionnée par l’identifiant. Le calculateur utilise une table fixe de caractères : un même caractère garde son identifiant quand la phrase change. Un caractère absent reçoit l’identifiant 0, nommé [INCONNU]. Les modèles emploient leur propre vocabulaire fixé à l’avance ; les numéros de notre exemple ne sont pas universels. Un axe d’embedding ne doit pas être baptisé « intelligence » sans preuve.",
       "quiz": null,
       "source": [],
-      "widget": "tokens"
+      "widget": "tokens",
+      "id": "etape-24",
+      "lesson": 24
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "L’attention : combiner les éléments du contexte",
       "lead": "Pour traiter une suite, on peut calculer quelles positions contribuent à une nouvelle représentation.",
       "steps": [
@@ -610,10 +715,12 @@
       "source": [
         "S6"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-25",
+      "lesson": 25
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Le Transformer n’est pas seulement de l’attention",
       "lead": "Il faut relier plusieurs opérations pour obtenir un réseau utile.",
       "steps": [
@@ -635,10 +742,12 @@
       "source": [
         "S6"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-26",
+      "lesson": 26
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Comment une réponse se construit-elle ?",
       "lead": "Un modèle de langage produit une distribution sur le prochain token, puis recommence.",
       "steps": [
@@ -666,10 +775,12 @@
         "La qualité de rédaction ne démontre pas la vérité. Le système doit vérifier ou limiter ses usages à risque."
       ],
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-27",
+      "lesson": 27
     },
     {
-      "ch": 2,
+      "ch": 3,
       "title": "Le meilleur modèle dépend de la tâche",
       "lead": "Pour la lampe, nous n’avons pas besoin d’un modèle capable de rédiger un roman.",
       "steps": [
@@ -689,10 +800,39 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-28",
+      "lesson": 28
     },
     {
+      "id": "arbre-simple",
+      "title": "Un arbre de décision peut suffire",
+      "lead": "L’IA embarquée ne se limite pas aux réseaux de neurones.",
+      "steps": [
+        "Un arbre de décision enchaîne des questions simples sur les données. Chaque branche mène à une autre question ou à une réponse.",
+        "Exemple écrit pour comprendre : « Une présence est-elle détectée ? » Si non, garder la lumière éteinte ; si oui, vérifier si la pièce est sombre.",
+        "Les questions et leurs seuils peuvent être appris à partir de données. L’arbre de cet exemple est écrit à la main : nous ne prétendons pas l’avoir entraîné.",
+        "Pour des mesures numériques simples, comparer aussi une règle, une régression ou un petit arbre. Un réseau plus gros n’est pas automatiquement meilleur."
+      ],
+      "flow": [
+        "Présence ?",
+        "Non : éteindre",
+        "Oui : pièce sombre ?",
+        "Allumer si nécessaire"
+      ],
+      "limit": "Ce petit arbre ne reconnaît pas le langage. Son intérêt est de montrer une autre organisation de décision.",
+      "deep": "D’autres méthodes classiques existent : voisins proches, forêts d’arbres et machines à vecteurs de support. Elles n’ont pas toutes le même coût d’exécution ni le même besoin de stockage. Les choisir exige une comparaison sur la tâche et la cible.",
+      "source": [
+        "C3"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
       "ch": 3,
+      "lesson": 28
+    },
+    {
+      "ch": 4,
       "title": "Qu’y a-t-il dans la petite machine ?",
       "lead": "Le calcul doit être exécuté par des composants physiques.",
       "steps": [
@@ -713,10 +853,12 @@
       "source": [
         "S16"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-29",
+      "lesson": 29
     },
     {
-      "ch": 3,
+      "ch": 4,
       "title": "Stocker n’est pas travailler",
       "lead": "Un modèle peut tenir dans le stockage et manquer de place pendant son exécution.",
       "steps": [
@@ -735,10 +877,12 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-30",
+      "lesson": 30
     },
     {
-      "ch": 3,
+      "ch": 4,
       "title": "Compter les paramètres et les octets",
       "lead": "Le budget devient concret quand on fait les comptes.",
       "steps": [
@@ -758,10 +902,12 @@
       "deep": "1 kB = 1 000 octets ; 1 KiB = 1 024 octets. Le calculateur donne seulement le budget des paramètres, pas la taille totale de l’application.",
       "quiz": null,
       "source": [],
-      "widget": "memory"
+      "widget": "memory",
+      "id": "etape-31",
+      "lesson": 31
     },
     {
-      "ch": 3,
+      "ch": 4,
       "title": "Le pic mémoire peut arriver au milieu",
       "lead": "Il faut considérer ce qui doit rester vivant au même instant.",
       "steps": [
@@ -782,10 +928,12 @@
       "source": [
         "S8"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-32",
+      "lesson": 32
     },
     {
-      "ch": 3,
+      "ch": 4,
       "title": "Calculer ou déplacer : où part le temps ?",
       "lead": "Réduire des multiplications ne suffit pas toujours.",
       "steps": [
@@ -804,10 +952,40 @@
       "deep": "Un DMA est un mécanisme de transfert de données qui évite au CPU de copier chaque élément lui-même. Son bénéfice dépend des échanges et de leur synchronisation ; il ne supprime pas le coût physique des transferts.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-33",
+      "lesson": 33
     },
     {
-      "ch": 3,
+      "id": "goulet",
+      "title": "Qui attend qui : le calcul ou la mémoire ?",
+      "lead": "Une machine peut manquer de vitesse de calcul, ou attendre ses données.",
+      "steps": [
+        "Un goulet d’étranglement est la ressource qui limite l’exécution. Ajouter des unités de calcul aide peu si les nombres n’arrivent pas assez vite.",
+        "Exemple théorique : transférer 1 000 000 octets avec un débit de 100 000 000 octets par seconde demande au moins 0,01 seconde dans ce modèle idéal.",
+        "Si le calcul idéal demande 0,002 seconde, les échanges peuvent dominer. Réutiliser des données déjà proches peut alors être plus utile que retirer quelques multiplications.",
+        "Un profiler et des expériences ciblées servent à vérifier cette hypothèse. Changer une taille de bloc, mesurer, puis contrôler les sorties."
+      ],
+      "flow": [
+        "Données à transférer",
+        "Débit mémoire",
+        "Calcul disponible",
+        "Ressource limitante"
+      ],
+      "limit": "C’est une borne simplifiée, pas un chronométrage. Les surcoûts, caches et possibilités de recouvrement changent le résultat réel.",
+      "deep": "Le modèle roofline relie le débit de calcul, le débit mémoire et la quantité d’opérations réalisées par octet transféré. Il aide à raisonner, mais ne remplace pas un profilage sur la cible.",
+      "source": [
+        "C1",
+        "C4"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 4,
+      "lesson": 33
+    },
+    {
+      "ch": 4,
       "title": "Répondre assez vite, pas seulement en moyenne",
       "lead": "La latence est le délai entre une entrée définie et la sortie correspondante.",
       "steps": [
@@ -827,10 +1005,12 @@
       "deep": "Le percentile 95 est une valeur en dessous de laquelle se trouvent environ 95 % des durées observées. Il faut préciser la convention de calcul et conserver les mesures brutes.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-34",
+      "lesson": 34
     },
     {
-      "ch": 3,
+      "ch": 4,
       "title": "La batterie paie tout le système",
       "lead": "La puissance et l’énergie sont deux grandeurs différentes.",
       "steps": [
@@ -849,10 +1029,40 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-35",
+      "lesson": 35
     },
     {
-      "ch": 3,
+      "id": "veille",
+      "title": "Écouter sans tout calculer en permanence",
+      "lead": "La lampe doit surtout attendre. L’attente fait partie du budget.",
+      "steps": [
+        "Un fonctionnement toujours actif traite les entrées en continu. Même quand personne ne parle, capteur et programme peuvent consommer.",
+        "Une cascade utilise un premier traitement léger pour décider si un calcul plus coûteux est nécessaire. Par exemple : détecter un signal avant de reconnaître une commande.",
+        "Le rapport cyclique est la part du temps où un composant est actif. Le réduire peut économiser de l’énergie, mais un réveil trop tardif peut manquer le début d’un mot.",
+        "Comparer le système complet : attente, réveil, tampon audio, modèle principal et erreurs supplémentaires. Une optimisation du modèle seul peut manquer le coût dominant."
+      ],
+      "flow": [
+        "Écoute légère",
+        "Événement possible",
+        "Calcul complet",
+        "Retour à l’attente"
+      ],
+      "limit": "Aucun gain d’énergie n’est annoncé ici. Un système en veille continue à consommer et sa mesure doit être définie.",
+      "deep": "Dans le schéma, le calcul complet n’est appelé que si le premier bloc le demande. Il faut choisir ce déclencheur avec soin : bruit et faux réveils peuvent annuler le bénéfice attendu.",
+      "source": [
+        "C2",
+        "C3"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 4,
+      "lesson": 35
+    },
+    {
+      "ch": 4,
       "title": "Choisir local, cloud ou les deux",
       "lead": "La bonne frontière dépend du besoin et des risques.",
       "steps": [
@@ -879,10 +1089,12 @@
         "Le lieu du calcul et le chiffrement sont deux choix différents. Il faut aussi gérer accès, stockage et mises à jour."
       ],
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-36",
+      "lesson": 36
     },
     {
-      "ch": 4,
+      "ch": 5,
       "title": "Optimiser : améliorer quoi, sans perdre quoi ?",
       "lead": "Une amélioration n’a de sens qu’avec une comparaison équitable.",
       "steps": [
@@ -902,10 +1114,12 @@
       "deep": "Un compromis qualité–latence–mémoire n’est pas un seul score universel. Les contraintes de votre application décident quelles solutions sont admissibles.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-37",
+      "lesson": 37
     },
     {
-      "ch": 4,
+      "ch": 5,
       "title": "Quantifier : une règle avec moins de graduations",
       "lead": "On représente les poids avec un nombre plus petit de valeurs possibles.",
       "steps": [
@@ -927,10 +1141,12 @@
       "source": [
         "S7"
       ],
-      "widget": "quantization"
+      "widget": "quantization",
+      "id": "etape-38",
+      "lesson": 38
     },
     {
-      "ch": 4,
+      "ch": 5,
       "title": "Un fichier plus petit n’est pas forcément plus rapide",
       "lead": "Il faut que le programme et le matériel sachent utiliser le format choisi.",
       "steps": [
@@ -961,10 +1177,40 @@
         "S7",
         "S15"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-39",
+      "lesson": 39
     },
     {
-      "ch": 4,
+      "id": "calibration",
+      "title": "Avant d’arrondir : regarder les vraies valeurs",
+      "lead": "Un format réduit doit couvrir les valeurs utiles sans gaspiller ses niveaux.",
+      "steps": [
+        "La calibration observe des exemples représentatifs pour choisir des échelles, notamment celles des activations d’un modèle quantifié.",
+        "Si une échelle couvre une plage énorme, les petits écarts ont peu de graduations. Une plage trop étroite peut au contraire écrêter, c’est-à-dire bloquer des valeurs aux limites.",
+        "Choisir les réglages avec les données prévues pour cela, sans utiliser le test final pour optimiser ces échelles.",
+        "Comparer la qualité après conversion. Si elle baisse trop, enquêter sur les couches sensibles ou utiliser un entraînement qui tient compte de la quantification."
+      ],
+      "flow": [
+        "Exemples représentatifs",
+        "Plages observées",
+        "Échelles choisies",
+        "Qualité à retester"
+      ],
+      "limit": "Une bonne calibration sur des données peu représentatives ne garantit pas le comportement sur de nouvelles situations.",
+      "deep": "Poids seuls et poids plus activations sont deux expériences différentes. Annoncer ce qui est quantifié, les formats, les échelles, les données de calibration et les routines d’exécution.",
+      "source": [
+        "S15",
+        "C1"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 5,
+      "lesson": 39
+    },
+    {
+      "ch": 5,
       "title": "Retirer, simplifier ou transmettre un savoir",
       "lead": "Plusieurs méthodes changent le réseau lui-même.",
       "steps": [
@@ -983,10 +1229,41 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-40",
+      "lesson": 40
     },
     {
-      "ch": 4,
+      "id": "architecture-cible",
+      "title": "Le meilleur réseau dépend aussi de la carte",
+      "lead": "Choisir l’organisation du réseau fait partie de l’optimisation.",
+      "steps": [
+        "Une recherche d’architecture compare plusieurs organisations de modèle : largeur des couches, filtres ou blocs utilisés.",
+        "Une recherche guidée par le matériel prend en compte les limites ou les performances de la cible, au lieu de regarder seulement le nombre d’opérations.",
+        "Deux réseaux de taille proche peuvent avoir des délais différents si les opérations, accès mémoire ou bibliothèques diffèrent.",
+        "Commencer modestement : deux ou trois variantes, même protocole, mêmes données de validation et mesure sur la carte. Garder le test final à l’écart du choix."
+      ],
+      "flow": [
+        "Variantes de réseau",
+        "Qualité de validation",
+        "Mesures sur cible",
+        "Compromis admissible"
+      ],
+      "limit": "Chercher beaucoup de variantes coûte du temps et peut suradapter le choix à la validation. Trois essais ne prouvent pas un optimum global.",
+      "deep": "On parle de co-conception matériel–logiciel lorsque l’on adapte ensemble l’organisation du calcul et son exécution. MCUNet est un exemple de cette démarche pour des contraintes très serrées.",
+      "source": [
+        "S8",
+        "C1",
+        "C3"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 5,
+      "lesson": 40
+    },
+    {
+      "ch": 5,
       "title": "Réorganiser le travail sans changer la réponse",
       "lead": "On peut aussi mieux exécuter les mêmes opérations.",
       "steps": [
@@ -1007,10 +1284,12 @@
       "source": [
         "S9"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-41",
+      "lesson": 41
     },
     {
-      "ch": 4,
+      "ch": 5,
       "title": "Choisir un compromis plutôt qu’un champion unique",
       "lead": "Un modèle peut être meilleur en mémoire et moins bon en qualité.",
       "steps": [
@@ -1030,10 +1309,12 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": "pareto"
+      "widget": "pareto",
+      "id": "etape-42",
+      "lesson": 42
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Passer du PC à la carte",
       "lead": "Le fichier de poids ne suffit pas à faire une application.",
       "steps": [
@@ -1055,10 +1336,12 @@
       "source": [
         "S13"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-43",
+      "lesson": 43
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Choisir un outil qui sait exécuter les opérations",
       "lead": "La compatibilité se vérifie avant de promettre un déploiement.",
       "steps": [
@@ -1082,10 +1365,12 @@
         "S14",
         "S15"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-44",
+      "lesson": 44
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Mesurer proprement sur un Raspberry Pi",
       "lead": "La carte est le juge de ses performances ; le PC aide à préparer et analyser.",
       "steps": [
@@ -1105,10 +1390,12 @@
       "deep": "K est le nombre d’appels. Diviser la durée du groupe par K donne un temps moyen par appel dans ces conditions, pas une latence individuelle. Pour calculer des percentiles de latence, mesurer les appels séparément avec leurs conditions et le coût du chronométrage. Rapporter température, charge, acquisition et nombre de répétitions. L’énergie reste « non mesurée » sans instrument.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-45",
+      "lesson": 45
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Une prédiction correcte peut conduire à une mauvaise action",
       "lead": "Il faut tester la chaîne complète dans son contexte.",
       "steps": [
@@ -1127,10 +1414,12 @@
       "deep": "Un faux positif est une activation non souhaitée ; un faux négatif est une commande manquée. Prévoir un comportement de repli en cas de doute ou de panne. Un score élevé n’est pas à lui seul une confiance fiable.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-46",
+      "lesson": 46
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Quand l’action change les données suivantes",
       "lead": "La lampe et le robot ne posent pas exactement le même problème.",
       "steps": [
@@ -1150,10 +1439,12 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-47",
+      "lesson": 47
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Sécurité et vie privée : prévoir les mauvais jours",
       "lead": "Un objet connecté reste un logiciel qu’il faut protéger et maintenir.",
       "steps": [
@@ -1173,10 +1464,12 @@
       "deep": "",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-48",
+      "lesson": 48
     },
     {
-      "ch": 5,
+      "ch": 6,
       "title": "Garder une trace de ce que l’on a réellement testé",
       "lead": "Une expérience scientifique doit pouvoir être comprise et reprise.",
       "steps": [
@@ -1196,10 +1489,39 @@
       "deep": "Une empreinte SHA-256 aide à identifier le contenu exact d’un fichier. La CI lance automatiquement des contrôles après des changements. DevOps relie développement et exploitation pour livrer et maintenir. Exemple de dépôt : src/, tests/, configs/, experiments/, figures/, deployment/. Ne pas publier d’enregistrements personnels sans base appropriée.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-49",
+      "lesson": 49
     },
     {
-      "ch": 5,
+      "id": "suivi",
+      "title": "Après livraison, la maison peut changer",
+      "lead": "Un autre micro, une autre pièce ou de nouveaux usages peuvent dégrader les résultats.",
+      "steps": [
+        "Une dérive des données est un changement des entrées reçues au fil du temps. Le système peut alors sortir du domaine évalué.",
+        "Prévoir des observations utiles et limitées : défauts du capteur, demandes de confirmation ou erreurs vérifiées. Collecter une conversation entière n’est pas toujours nécessaire ni acceptable.",
+        "Une mise à jour doit repasser les tests de qualité, de ressources et d’intégration. Garder une version connue pour pouvoir revenir en arrière.",
+        "Les MLOps, opérations des systèmes d’apprentissage, organisent ce cycle : données, versions, déploiement, surveillance et maintenance."
+      ],
+      "flow": [
+        "Observer sans surcollecter",
+        "Détecter un problème",
+        "Valider une nouvelle version",
+        "Mettre à jour ou revenir"
+      ],
+      "limit": "Le modèle ne se corrige pas tout seul en usage. Une adaptation automatique demanderait un protocole et des protections supplémentaires.",
+      "deep": "Un changement de distribution n’est pas automatiquement une défaillance. Il faut relier les observations à des critères de service et vérifier les conséquences. Le suivi est une partie du produit, pas seulement un tableau de statistiques.",
+      "source": [
+        "C5"
+      ],
+      "widget": "",
+      "analogy": "",
+      "quiz": null,
+      "ch": 6,
+      "lesson": 49
+    },
+    {
+      "ch": 7,
       "title": "Votre première enquête : combien de bits suffisent ?",
       "lead": "Un petit projet peut déjà apprendre à raisonner comme un chercheur.",
       "steps": [
@@ -1219,10 +1541,12 @@
       "deep": "Ne pas ajouter des données au test pour choisir le meilleur réglage. La comparaison propre doit garder les mêmes entrées pour toutes les variantes. Les graines contrôlent les tirages prévus ; préciser si elles concernent entraînement, bruit ou les deux.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-50",
+      "lesson": 50
     },
     {
-      "ch": 5,
+      "ch": 7,
       "title": "Chercher : une question étroite, une preuve solide",
       "lead": "La recherche commence quand la réponse est réellement à vérifier.",
       "steps": [
@@ -1242,10 +1566,12 @@
       "deep": "Un résultat original modeste peut ouvrir une piste. Une petite étude de classe n’est pas automatiquement publiable : nouveauté, comparaison, rigueur et portée doivent être évaluées.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-51",
+      "lesson": 51
     },
     {
-      "ch": 5,
+      "ch": 7,
       "title": "Où les travaux récents cherchent-ils encore ?",
       "lead": "Il n’existe pas un seul verrou : modèle, mémoire, calcul et usage doivent progresser ensemble.",
       "steps": [
@@ -1270,10 +1596,12 @@
         "S11",
         "S12"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-52",
+      "lesson": 52
     },
     {
-      "ch": 5,
+      "ch": 7,
       "title": "Trois lectures pour passer du nom à la méthode",
       "lead": "Pour chaque article, cherchez le problème avant les performances.",
       "steps": [
@@ -1297,10 +1625,12 @@
         "S9",
         "S17"
       ],
-      "widget": ""
+      "widget": "",
+      "id": "etape-53",
+      "lesson": 53
     },
     {
-      "ch": 5,
+      "ch": 7,
       "title": "Pouvez-vous conseiller Mila maintenant ?",
       "lead": "La lampe doit fonctionner sans réseau et ne pas envoyer les voix.",
       "steps": [
@@ -1329,10 +1659,12 @@
         "L’application doit aussi conserver ses activations, lire le son, produire les bonnes décisions et respecter ses exigences."
       ],
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-54",
+      "lesson": 54
     },
     {
-      "ch": 5,
+      "ch": 7,
       "title": "De la compréhension à l’autonomie",
       "lead": "Une étape est acquise quand vous pouvez la montrer, pas seulement la reconnaître.",
       "steps": [
@@ -1352,7 +1684,9 @@
       "deep": "Défi final : dessiner votre propre objet IA en cinq blocs. Pour chaque bloc, préciser une entrée, une sortie, un coût et un risque. Entourer la première chose à mesurer. Puis expliquer votre dessin à une personne qui ne connaît pas l’IA.",
       "quiz": null,
       "source": [],
-      "widget": ""
+      "widget": "",
+      "id": "etape-55",
+      "lesson": 55
     }
   ],
   "references": {
@@ -1445,6 +1779,31 @@
       "Eclipse Aidge · glossaire de l’IA embarquée",
       "https://pages.eclipse.dev/eclipse/aidge/embedded-ai-glossary/embedded-ai-glossary.fr.pdf",
       "Complément terminologique français ; PDF conservé dans les ressources du cours INEM."
+    ],
+    "C1": [
+      "MIT · 6.5940, TinyML and Efficient AI Computing",
+      "https://hanlab.mit.edu/courses/2026-fall-65940",
+      "Programme public et liste des laboratoires : compression, recherche d’architecture et déploiement."
+    ],
+    "C2": [
+      "Harvard · CS249r, Tiny Machine Learning",
+      "https://sites.google.com/g.harvard.edu/cs249-tinyml-2023",
+      "Chaîne complète, données, mesures, déploiement, opérations et responsabilité."
+    ],
+    "C3": [
+      "ETH Zurich · Machine Learning on Microcontrollers",
+      "https://pbl.ee.ethz.ch/education/mlom.html",
+      "Acquisition, modèles classiques, calcul embarqué et pratique sur matériel."
+    ],
+    "C4": [
+      "Heidelberg · Embedded Machine Learning",
+      "https://hawaii.ziti.uni-heidelberg.de/teaching/eml/",
+      "Interactions entre modèle, matériel, données imparfaites et optimisations."
+    ],
+    "C5": [
+      "Harvard / TinyMLedu · ressources de formation",
+      "https://tinyml.seas.harvard.edu/courses/",
+      "Parcours fondations, applications, déploiement et maintenance ; liens vers les ressources."
     ]
   },
   "glossary": {

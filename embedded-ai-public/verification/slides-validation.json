@@ -1,0 +1,217 @@
+{
+  "executed_utc": "2026-11-16T12:25:05.520529+00:00",
+  "url": "file:///E:/Academy/Cours/embedded-ai-public/index.html",
+  "checks": [
+    {
+      "name": "63 concepts and four activities loaded",
+      "passed": true
+    },
+    {
+      "name": "left/right keyboard controls explanation before changing topic",
+      "passed": true
+    },
+    {
+      "name": "one logical explanation advanced",
+      "passed": true
+    },
+    {
+      "name": "diagram adds elements with the explanation",
+      "passed": true
+    },
+    {
+      "name": "last explanation builds the complete diagram",
+      "passed": true
+    },
+    {
+      "name": "rewinding removes later elements",
+      "passed": true
+    },
+    {
+      "name": "chapter names are visible",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 1440x900",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 1280x720",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 1024x768",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 1920x1080",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 390x844",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 768x1024",
+      "passed": true
+    },
+    {
+      "name": "no page scroll at 844x390",
+      "passed": true
+    },
+    {
+      "name": "every explanation fits its authored area",
+      "passed": true
+    },
+    {
+      "name": "interactive scenes fit at 1440x900",
+      "passed": true
+    },
+    {
+      "name": "interactive scenes fit at 390x844",
+      "passed": true
+    },
+    {
+      "name": "interactive scenes fit at 768x1024",
+      "passed": true
+    },
+    {
+      "name": "interactive scenes fit at 844x390",
+      "passed": true
+    },
+    {
+      "name": "real gradient produces loss .2048",
+      "passed": true
+    },
+    {
+      "name": "weights can be reset",
+      "passed": true
+    },
+    {
+      "name": "neuron control changes the computed score",
+      "passed": true
+    },
+    {
+      "name": "filter movement changes actual dot product",
+      "passed": true
+    },
+    {
+      "name": "character IDs remain fixed between phrases",
+      "passed": true
+    },
+    {
+      "name": "typed text is literal, never HTML",
+      "passed": true
+    },
+    {
+      "name": "835 int8 values occupy ideal 835 bytes",
+      "passed": true
+    },
+    {
+      "name": "simulated 2-bit quantization computes error .175",
+      "passed": true
+    },
+    {
+      "name": "constraint experiment detects no feasible candidate",
+      "passed": true
+    },
+    {
+      "name": "incorrect assembly has explanatory feedback",
+      "passed": true
+    },
+    {
+      "name": "drag-and-drop places the chosen brick",
+      "passed": true
+    },
+    {
+      "name": "correct assembly validated",
+      "passed": true
+    },
+    {
+      "name": "logical data flow reaches the actuator",
+      "passed": true
+    },
+    {
+      "name": "selected component isolates in 3D",
+      "passed": true
+    },
+    {
+      "name": "rotation control changes real 3D transform",
+      "passed": true
+    },
+    {
+      "name": "reassembly and frontal reset work",
+      "passed": true
+    },
+    {
+      "name": "continuous rotation can be activated",
+      "passed": true
+    },
+    {
+      "name": "memory example starts over budget",
+      "passed": true
+    },
+    {
+      "name": "changing temporary memory changes budget to 96 bytes",
+      "passed": true
+    },
+    {
+      "name": "virtual deployment returns actual score and declares unmeasured time",
+      "passed": true
+    },
+    {
+      "name": "quiz explains wrong answer",
+      "passed": true
+    },
+    {
+      "name": "quiz explains right answer",
+      "passed": true
+    },
+    {
+      "name": "plan opens without scrolling",
+      "passed": true
+    },
+    {
+      "name": "lexicon opens without scrolling",
+      "passed": true
+    },
+    {
+      "name": "references opens without scrolling",
+      "passed": true
+    },
+    {
+      "name": "plan glossary and sources fit at 1440x900",
+      "passed": true
+    },
+    {
+      "name": "plan glossary and sources fit at 390x844",
+      "passed": true
+    },
+    {
+      "name": "plan glossary and sources fit at 844x390",
+      "passed": true
+    },
+    {
+      "name": "native fullscreen works",
+      "passed": true
+    },
+    {
+      "name": "construction uses real browser animations",
+      "passed": true
+    },
+    {
+      "name": "pause freezes the timeline",
+      "passed": true
+    },
+    {
+      "name": "3D spin changes the rendered transformation",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "layout_issues": [],
+  "browser": "157.0.8103.39"
+}

@@ -1,0 +1,105 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Comparer les cursus · IA embarquée</title><style>body{max-width:1080px;margin:40px auto;padding:0 24px;font:18px/1.6 "Segoe UI",Arial,sans-serif;color:#18342f;background:#f7f6f1}h1{font-size:40px;line-height:1.2}h2{margin-top:40px}a{color:#087e79}table{width:100%;border-collapse:collapse;font-size:15px;background:#fff}th,td{border:1px solid #cad8ce;padding:13px;text-align:left;vertical-align:top}th{background:#d7eee5}@media(max-width:700px){table{display:block;overflow-x:auto}body{font-size:16px}h1{font-size:30px}}</style><body><a href="./">← Revenir au cours</a><h1>Pourquoi ce parcours ? Comparaison avec des cursus de référence</h1>
+<p>Roland Cédric TAYO · INEM</p>
+<p>L’objectif est un cours progressif accessible au grand public, avec une ouverture vers l’ingénierie. Les cursus ci-dessous ont été choisis pour leurs programmes publics, leur lien avec les ressources limitées et leur place accordée à la pratique. Il ne s’agit pas d’un classement mondial des « meilleurs cours », ni d’une équivalence avec un semestre universitaire.</p>
+<h2>Les quatre points de comparaison</h2>
+<table>
+<thead>
+<tr>
+<th>Cursus et source officielle</th>
+<th>Accent du programme public</th>
+<th>Activités accessibles ou annoncées</th>
+<th>Ce qui est retenu ici</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://hanlab.mit.edu/courses/2026-fall-65940">MIT 6.5940 — TinyML and Efficient AI Computing, 2026</a></td>
+<td>Compression, recherche d’architecture, calcul efficace et modèles génératifs.</td>
+<td>La liste publiée annonce des laboratoires GPU, élagage, recherche d’architecture, quantification et déploiement de modèles de langage. Certains liens Colab consultés demandent une connexion : leur contenu intégral n’a pas été audité.</td>
+<td>Raisonner sur le matériel et vérifier les gains ; ajouter le goulet mémoire/calcul, la calibration et le choix d’architecture.</td>
+</tr>
+<tr>
+<td><a href="https://sites.google.com/g.harvard.edu/cs249-tinyml-2023">Harvard CS249r — Tiny Machine Learning, 2023</a></td>
+<td>Données, chaîne de déploiement, mesures, sécurité, maintenance et responsabilité.</td>
+<td>Projet pratique et revue de publications ; <a href="https://github.com/Harvard-CS249R-Fall2020/assignments">dépôt public historique des assignments 2020</a> avec familles hello_world, wake_words, gesture_recognition, person_detection et responsible_ai. Ce dépôt historique n’est pas présenté comme le sujet courant.</td>
+<td>Suivre une application entière ; ajouter les exigences, les événements rares, la veille et le suivi après livraison.</td>
+</tr>
+<tr>
+<td><a href="https://pbl.ee.ethz.ch/education/mlom.html">ETH Zurich — Machine Learning on Microcontrollers, 2026</a></td>
+<td>Acquisition, caractéristiques utiles, modèles classiques et profonds, optimisation et co-conception.</td>
+<td>Le descriptif annonce classification son/image sur matériel, compression et profilage énergétique. Il ne fournit pas sur cette page tous les énoncés détaillés.</td>
+<td>Garder capteur et prétraitement dans le raisonnement ; présenter l’arbre de décision et le compromis propre à la cible.</td>
+</tr>
+<tr>
+<td><a href="https://hawaii.ziti.uni-heidelberg.de/teaching/eml/">Heidelberg — Embedded Machine Learning, 2026–2027</a></td>
+<td>Interaction modèle–matériel, données imparfaites, réseaux, architectures et optimisations.</td>
+<td>Programme comprenant réseaux construits à partir des bases, différentiation et séances d’exercices annoncées ; détail des exercices non audité ici.</td>
+<td>Relier les opérations aux coûts et séparer équivalence de calcul et modification approximative du modèle.</td>
+</tr>
+</tbody>
+</table>
+<p>Les <a href="https://tinyml.seas.harvard.edu/courses/">ressources TinyMLedu</a> relient également fondations, applications, déploiement et MLOps. Elles permettent de poursuivre avec des supports et du matériel adaptés.</p>
+<h2>Ce qui était déjà présent</h2>
+<p>Le cours initial couvrait données et partitions, neurone et gradient, CNN et attention, mémoire et latence, quantification, déploiement, tests et méthode de recherche. La comparaison ne justifiait pas de recommencer ces bases ni de copier des cours entiers.</p>
+<h2>Les ajouts ciblés</h2>
+<table>
+<thead>
+<tr>
+<th>Lacune ou point trop bref</th>
+<th>Ajout dans le cours</th>
+<th>Question que le lecteur doit pouvoir traiter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Besoin encore peu testable</td>
+<td><strong>Avant de construire : promettre quoi ?</strong></td>
+<td>Quelles conditions et quels critères vérifier ?</td>
+</tr>
+<tr>
+<td>Indicateur global trop facile à surinterpréter</td>
+<td><strong>99 % de réussite peut cacher un échec</strong></td>
+<td>Le système détecte-t-il les événements importants ?</td>
+</tr>
+<tr>
+<td>Vision centrée sur les réseaux</td>
+<td><strong>Un arbre de décision peut suffire</strong></td>
+<td>Faut-il réellement un réseau pour cette tâche ?</td>
+</tr>
+<tr>
+<td>Profilage encore abstrait</td>
+<td><strong>Qui attend qui : le calcul ou la mémoire ?</strong></td>
+<td>Quelle ressource limite le système ?</td>
+</tr>
+<tr>
+<td>Attente et réveil insuffisamment visibles</td>
+<td><strong>Écouter sans tout calculer en permanence</strong></td>
+<td>Que coûte le système quand rien ne se passe ?</td>
+</tr>
+<tr>
+<td>Quantification présentée trop vite comme un arrondi</td>
+<td><strong>Avant d’arrondir : regarder les vraies valeurs</strong></td>
+<td>Les échelles couvrent-elles les données utiles ?</td>
+</tr>
+<tr>
+<td>Architecture et cible peu reliées</td>
+<td><strong>Le meilleur réseau dépend aussi de la carte</strong></td>
+<td>Quel compromis reste valable sur le matériel visé ?</td>
+</tr>
+<tr>
+<td>Fin du projet assimilée à la livraison</td>
+<td><strong>Après livraison, la maison peut changer</strong></td>
+<td>Comment détecter un problème et revenir à une version fiable ?</td>
+</tr>
+</tbody>
+</table>
+<p>Ces explications, schémas et exemples sont originaux. Les exemples chiffrés ajoutés sont explicitement fictifs ou calculés ; aucune mesure sur carte n’est inventée.</p>
+<h2>Ce qui n’est pas ajouté au parcours principal</h2>
+<p>Le calcul distribué de grands entraînements, l’écriture complète de noyaux GPU, les modèles de diffusion et la conception détaillée d’accélérateurs demandent des prérequis et un autre volume de cours. Ils restent des pistes d’approfondissement, sans être nécessaires pour comprendre puis déployer un premier petit modèle embarqué. Le cours conserve la distinction entre PC, ordinateur embarqué sous Linux et microcontrôleur ; il n’impose pas l’achat d’une nouvelle carte.</p>
+<h2>Architecture pédagogique et format</h2>
+<p>Huit chapitres nommés suivent le besoin, les données, le neurone, les réseaux, la machine, les compromis, le déploiement et la recherche. Dans une diapo, les explications et le dessin progressent ensemble. Les éléments futurs ne sont pas tous affichés dès l’arrivée : l’utilisateur construit, interrompt, remonte ou rejoue la scène. Les manipulations numériques restent de vrais petits calculs exécutés dans le navigateur.</p>
+<p>Le format retenu est <strong>HTML, SVG et JavaScript</strong>, avec une maquette 3D CSS. Il permet la publication sur GitHub Pages, le contrôle de la progression et les manipulations au clavier ou à la souris. Une vidéo permet de revoir une explication ; ce format ajoute la manipulation des éléments et le calcul interactif. La version de lecture et le PDF conservent les explications complètes pour réviser.</p>
+<h3>Référence visuelle fournie</h3>
+<p>La <a href="https://www.youtube.com/watch?v=ZLYJXe7V3NU">vidéo de Nerdy Kings indiquée par l’utilisateur</a> est une référence de style, pas une source scientifique du cours. Son titre a été récupéré via les métadonnées publiques YouTube ; le visionnage direct n’a pas été disponible dans l’outil de recherche. Aucune analyse image par image de son montage n’est revendiquée. L’adaptation répond au besoin décrit : composition progressive, liens visibles, pauses et manipulations.</p>
+<h2>Limite de cette comparaison</h2>
+<p>Les pages officielles et les ressources publiques consultables permettent une comparaison de couverture et de démarche. Elles ne permettent pas de certifier la qualité d’un enseignement en classe ni d’inspecter des exercices fermés. Ce cours grand public ne devient pas équivalent à un cursus de master par l’ajout de ses thèmes ; la compétence se vérifie ensuite par des réalisations et des mesures.</p></body></html>

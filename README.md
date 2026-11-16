@@ -24,4 +24,4 @@ GitHub Pages publie la racine de `main`. Voir `embedded-ai/README.md` pour les c
 
 ## Cours grand public
 
-[L’IA dans les objets](https://rolln7drktayau.github.io/courses/embedded-ai-public/) : 55 étapes illustrées, sept manipulations interactives, du besoin humain à la mesure et à la recherche. [PDF](embedded-ai-public/cours-ia-embarquee.pdf), [sources et méthode](embedded-ai-public/README.md), [persona de vérification](embedded-ai-public/persona-verification.pdf).
+[L’IA dans les objets](https://rolln7drktayau.github.io/courses/embedded-ai-public/) : Huit chapitres, 63 notions, schémas à construire et manipulations interactives, du besoin humain à la mesure et à la recherche. [PDF](embedded-ai-public/cours-ia-embarquee.pdf), [sources et méthode](embedded-ai-public/README.md), [persona de vérification](embedded-ai-public/persona-verification.pdf).
