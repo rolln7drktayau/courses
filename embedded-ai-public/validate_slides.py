@@ -30,6 +30,15 @@ with sync_playwright() as p:
     page.locator('#build-position').evaluate('(e)=>{e.value=0;e.dispatchEvent(new Event("input"))}')
     check('rewinding removes later elements',page.evaluate('Composition.stats().visible')==before['visible'])
     check('chapter names are visible','Données' in page.locator('#journey').inner_text() and 'Chercher' in page.locator('#journey').inner_text())
+    expected=[{'person','speech'},{'person','speech','compute','heard'},{'person','speech','compute','heard','lamp'},{'person','speech','compute','heard','lamp','command','offline'}]
+    for phase,objects in enumerate(expected):
+        page.evaluate(f"Course.goId('etape-1',{phase})")
+        actual=page.evaluate('Composition.stats()')
+        check(f'intro phase {phase+1} shows complete intended objects',set(actual['objects'])==objects)
+        page.screenshot(path=str(OUTPUT/f'intro-phase-{phase+1}.png'))
+    audit=page.evaluate('''()=>{const errors=[];let phases=0;for(let i=0;i<Course.total;i++){Course.show(i);if(Course.current.activity)continue;for(let j=0;j<Course.current.steps.length;j++){Course.show(i,j);const s=Composition.stats();phases++;if(s.missing||s.dangling.length)errors.push({id:s.id,phase:j,missing:s.missing,dangling:s.dangling});}const s=Composition.stats();if(s.visible!==s.total)errors.push({id:s.id,reason:'incomplete final diagram'})}return{errors,phases}}''')
+    report['orchestration_audit']=audit
+    check('every scene phase is authored and all connections have endpoints',not audit['errors'])
     for width,height in [(1440,900),(1280,720),(1024,768),(1920,1080),(390,844),(768,1024),(844,390)]:
         page.set_viewport_size({'width':width,'height':height})
         issues=page.evaluate('''()=>{const issues=[];for(let i=0;i<Course.total;i++){Course.show(i);for(let j=0;j<Course.current.steps.length;j++){Course.show(i,j);const c=document.querySelector('.copy');if(c.scrollHeight>c.clientHeight+2)issues.push({i:i+1,j:j+1,type:'copy',height:c.scrollHeight,available:c.clientHeight});}const s=document.querySelector('#slide').getBoundingClientRect(),v=document.querySelector('#viewport').getBoundingClientRect();if(s.left<v.left-2||s.right>v.right+2||s.top<v.top-2||s.bottom>v.bottom+2)issues.push({i:i+1,type:'canvas'});}return issues}''')
@@ -87,6 +96,20 @@ with sync_playwright() as p:
     page.evaluate("Course.goId('etape-39')");page.locator('#question').click()
     page.locator('[data-answer="0"]').click();check('quiz explains wrong answer','À revoir' in page.locator('.feedback').inner_text())
     page.locator('[data-answer="1"]').click();check('quiz explains right answer','Oui.' in page.locator('.feedback').inner_text());page.locator('#close-panel').click()
+    quizzes=page.evaluate('COURSE_DATA.slides.map((s,i)=>({i,id:s.id,q:s.quiz})).filter(s=>s.q)')
+    for width,height in [(1440,900),(390,844),(844,390)]:
+        page.set_viewport_size({'width':width,'height':height})
+        for quiz in quizzes:
+            for answer in [0,1]:
+                page.evaluate(f"Course.show({quiz['i']})");page.locator('#question').click()
+                check(f"{quiz['id']} continue waits for response {width} answer {answer}",page.locator('#quiz-continue').is_disabled())
+                page.locator(f'[data-answer="{answer}"]').click()
+                check(f"{quiz['id']} response enables continue {width} answer {answer}",not page.locator('#quiz-continue').is_disabled())
+                fits=page.evaluate('''()=>{const c=document.querySelector('#panel-content'),b=document.querySelector('#quiz-continue').getBoundingClientRect(),p=document.querySelector('#panel').getBoundingClientRect(),f=document.querySelector('.feedback').getBoundingClientRect();return c.scrollHeight<=c.clientHeight+2&&b.bottom<=p.bottom&&f.bottom<=b.top+2}''')
+                check(f"{quiz['id']} correction and continue fit {width} answer {answer}",fits)
+                page.locator('#quiz-continue').click()
+                check(f"{quiz['id']} continue advances once {width} answer {answer}",page.evaluate('Course.position')==quiz['i']+1 and not page.locator('#panel').evaluate('e=>e.open'))
+    page.set_viewport_size({'width':1440,'height':900})
     for tool in ['plan','lexicon','references']:
         page.locator('#'+tool).click();check(tool+' opens without scrolling',page.locator('#panel').evaluate('e=>e.open&&e.scrollHeight<=e.clientHeight+1'));page.keyboard.press('Escape')
     for width,height in [(1440,900),(390,844),(844,390)]:
@@ -108,6 +131,13 @@ with sync_playwright() as p:
     moving=b.new_page(viewport={'width':1440,'height':900},reduced_motion='no-preference')
     moving.on('pageerror',lambda e:report['errors'].append(str(e)))
     moving.goto(URL);moving.wait_for_function('window.Course&&Course.ready')
+    moving.evaluate("Course.goId('etape-1')");moving.locator('#build-speed').select_option('4');moving.locator('#animate').click()
+    for phase,objects in enumerate(expected):
+        moving.wait_for_function(f'Course.step==={phase}',timeout=12000)
+        check(f'intro autoplay phase {phase+1} follows authored order',set(moving.evaluate('Composition.stats().objects'))==objects)
+        moving.wait_for_timeout(1050)
+        moving.screenshot(path=str(OUTPUT/f'intro-autoplay-{phase+1}.png'))
+    moving.locator('#animate').click()
     moving.evaluate("Course.goId('etape-13')");moving.locator('#next').click()
     check('construction uses real browser animations',moving.evaluate("document.querySelector('#scene').getAnimations({subtree:true}).length>0"))
     moving.locator('#build-speed').select_option('4');moving.locator('#animate').click();moving.wait_for_timeout(250);moving.locator('#animate').click()

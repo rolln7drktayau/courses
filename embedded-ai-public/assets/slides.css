@@ -20,3 +20,5 @@
 .build-element{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}.build-element.is-built{opacity:1;pointer-events:auto}.animating .arrow.is-built{stroke:#087e79}#scene-controls input[type=range]{accent-color:var(--teal);width:125px}.topline{letter-spacing:.035em}#journey{gap:4px}#journey button{font-size:12px;padding:5px 8px}.caption{font-size:14px}@media(max-aspect-ratio:1/1){.topline{font-size:11px}#journey{gap:1px}#journey button{font-size:10px;padding:5px 5px}.visual{height:515px}}
 
 #scene-controls select{font-size:15px;border:1px solid var(--line);border-radius:7px;padding:6px;background:#fffdf6;color:var(--ink)}@media print{#arbre-simple figure svg{max-height:230px}}
+
+.animating [data-connector].is-built .arrow{stroke:#087e79}#quiz-continue{background:#087e79;color:white;font-weight:650;padding:10px 20px}#quiz-continue:hover{background:#086964}#quiz-continue:disabled{background:#dae5de;color:#536b60;opacity:1}

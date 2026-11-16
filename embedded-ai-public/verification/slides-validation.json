@@ -1,5 +1,5 @@
 {
-  "executed_utc": "2026-11-16T12:25:05.520529+00:00",
+  "executed_utc": "2026-11-16T12:43:03.607286+00:00",
   "url": "file:///E:/Academy/Cours/embedded-ai-public/index.html",
   "checks": [
     {
@@ -28,6 +28,26 @@
     },
     {
       "name": "chapter names are visible",
+      "passed": true
+    },
+    {
+      "name": "intro phase 1 shows complete intended objects",
+      "passed": true
+    },
+    {
+      "name": "intro phase 2 shows complete intended objects",
+      "passed": true
+    },
+    {
+      "name": "intro phase 3 shows complete intended objects",
+      "passed": true
+    },
+    {
+      "name": "intro phase 4 shows complete intended objects",
+      "passed": true
+    },
+    {
+      "name": "every scene phase is authored and all connections have endpoints",
       "passed": true
     },
     {
@@ -167,6 +187,678 @@
       "passed": true
     },
     {
+      "name": "etape-4 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 1440 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 1440 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 390 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 390 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-4 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-12 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-20 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-27 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-36 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-39 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 844 answer 0",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue waits for response 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 response enables continue 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 correction and continue fit 844 answer 1",
+      "passed": true
+    },
+    {
+      "name": "etape-54 continue advances once 844 answer 1",
+      "passed": true
+    },
+    {
       "name": "plan opens without scrolling",
       "passed": true
     },
@@ -195,6 +887,22 @@
       "passed": true
     },
     {
+      "name": "intro autoplay phase 1 follows authored order",
+      "passed": true
+    },
+    {
+      "name": "intro autoplay phase 2 follows authored order",
+      "passed": true
+    },
+    {
+      "name": "intro autoplay phase 3 follows authored order",
+      "passed": true
+    },
+    {
+      "name": "intro autoplay phase 4 follows authored order",
+      "passed": true
+    },
+    {
       "name": "construction uses real browser animations",
       "passed": true
     },
@@ -213,5 +921,9 @@
   ],
   "errors": [],
   "layout_issues": [],
+  "orchestration_audit": {
+    "errors": [],
+    "phases": 253
+  },
   "browser": "157.0.8103.39"
 }

@@ -43,6 +43,8 @@ python validate_reader.py
 python validate_slides.py
 ```
 
-build_reader.py conserve les fondations du cours. curriculum.py contient les ajouts retenus après comparaison. build_course.py rassemble le document de lecture, le texte structuré, les références et les scènes. index.html et assets/slides.* définissent la présentation ; assets/composition.js gère la construction contrôlable des schémas.
+build_reader.py conserve les fondations du cours. curriculum.py contient les ajouts retenus après comparaison. build_course.py rassemble le document de lecture, le texte structuré, les références et les scènes. index.html et assets/slides.* définissent la présentation ; orchestration.py définit les groupes et connexions de chaque schéma ; assets/composition.js réalise leur construction contrôlable. Les phases ne sont pas déduites de la proximité des formes.
 
 Les textes et schémas sont originaux. Les publications sont citées pour vérifier et prolonger les notions. Aucun corrigé privé de TD ni donnée d’étudiant n’est inclus. manifest-sha256.json identifie les fichiers livrés.
+
+Après une réponse au quiz, le bouton « Continuer le cours » permet de passer directement à la diapositive suivante. Les corrections restent visibles avant ce choix.

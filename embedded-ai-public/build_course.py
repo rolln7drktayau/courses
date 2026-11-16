@@ -1,9 +1,10 @@
 """Build the no-scroll deck from the existing reviewed course and its illustrations."""
 from pathlib import Path
-import json,runpy
+import json,runpy,hashlib,re
 import markdown
 from bs4 import BeautifulSoup
 from curriculum import CHAPTERS,SHORT_CHAPTERS,COURSE_REFS,ADDITIONS,chapter
+from orchestration import orchestrate
 
 ROOT=Path(__file__).resolve().parent
 helpers=runpy.run_path(str(ROOT/'build_reader.py'))
@@ -72,9 +73,19 @@ extra_style=reader.new_tag('style');extra_style.string='@media print{#arbre-simp
 (ROOT/'reading.html').write_text(str(reader),encoding='utf-8')
 data['lessons']=all_lessons
 (ROOT/'cours-source.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
+for slide in slides:
+ if slide['diagram']:slide['diagram']=orchestrate(slide['diagram'],slide['id'])
 payload={'slides':slides,'chapters':CHAPTERS,'shortChapters':SHORT_CHAPTERS,'references':data['references'],'glossary':data['glossary']}
 (ROOT/'assets/course-data.js').write_text('window.COURSE_DATA='+json.dumps(payload,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
 print(f'{len(slides)} slides; {len(all_lessons)} concepts; {len(activities)} practical scenes; eight named chapters.')
 comparison=markdown.markdown((ROOT/'CURRICULUM-COMPARISON.md').read_text(encoding='utf-8'),extensions=['tables'])
 style='body{max-width:1080px;margin:40px auto;padding:0 24px;font:18px/1.6 "Segoe UI",Arial,sans-serif;color:#18342f;background:#f7f6f1}h1{font-size:40px;line-height:1.2}h2{margin-top:40px}a{color:#087e79}table{width:100%;border-collapse:collapse;font-size:15px;background:#fff}th,td{border:1px solid #cad8ce;padding:13px;text-align:left;vertical-align:top}th{background:#d7eee5}@media(max-width:700px){table{display:block;overflow-x:auto}body{font-size:16px}h1{font-size:30px}}'
 (ROOT/'curriculum-comparison.html').write_text('<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Comparer les cursus · IA embarquée</title><style>'+style+'</style><body><a href="./">← Revenir au cours</a>'+comparison+'</body></html>',encoding='utf-8')
+# Keep the shared page URL while refreshing changed browser assets.
+for asset in (ROOT/'assets').iterdir():
+ if asset.suffix in ['.js','.css']:asset.write_bytes(asset.read_bytes().removeprefix(b'\xef\xbb\xbf').replace(b'\r\n',b'\n'))
+index=ROOT/'index.html'
+def asset_url(match):
+ path=match.group(2);stamp=hashlib.sha256((ROOT/path).read_bytes()).hexdigest()[:12]
+ return match.group(1)+'="'+path+'?v='+stamp+'"'
+index.write_text(re.sub(r'(src|href)="(assets/[^"?]+)(?:\?v=[^"]+)?"',asset_url,index.read_text(encoding='utf-8')),encoding='utf-8')
