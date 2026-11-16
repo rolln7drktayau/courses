@@ -1,0 +1,24 @@
+{
+  "format": "embedded-ai-public-course/1",
+  "author": "Roland Cédric TAYO",
+  "url": "https://rolln7drktayau.github.io/courses/embedded-ai-public/",
+  "sha256": {
+    "build_course.py": "1d3ccba134a20ae5f727717c50c33f85d5d6f01ab8ceb70f833663b5964a022a",
+    "cours-ia-embarquee.pdf": "e9b0b08b21eb44a48b7f000cd4e6e883bf7985e85aa9ae4ec8d2d15edc4dfd58",
+    "cours-source.json": "afe94cf08724aac080dffaed6972fb9057e351d479a378b14217978e7391a6b0",
+    "index.html": "3f16811502d204636fe88dd3421dd09926a0007f9c5342e9b5c9c0aba9d4ba6f",
+    "persona-verification.md": "86735fc0bbc89b53ab4d7edc5dbdac8deb90fe4cc8be3f9458117e05c0138a1d",
+    "persona-verification.pdf": "89356b403a757564ec8255e7d7d4a00c6065fdf69bca2ea17d61d94a01e77994",
+    "README.md": "c493df48a747400646416ce7248f7f1a4b8f2e2f41053cfab9e54cd8c92ad6d7",
+    "validate_course.py": "0d910f0d9fdbf7fd4f097f978f85a8b167e0973c4beec49cb88ca2f9bd8f662c",
+    "verification/01-besoin.png": "9d07849c1407e37168017ea0c152f96ef1fa851ec2eb08fdbc8e7e885793e030",
+    "verification/02-correction-poids.png": "2446b50bea7f80fc4e14c1836f337a09acc649fc124ad6063056298f85d2cce6",
+    "verification/pdf-page-1.png": "80778386c766f4e5948796f277e5751314bfedd1cb9d378724aea23d8a847724",
+    "verification/pdf-page-13.png": "5be8456df6b184622957d9db43a8bd3b27d3ad5f7448fbbe8fbb82a4fbeab1f9",
+    "verification/pdf-page-17.png": "f82407dc60f02df59fa99f8f30c7594943162befb0cade7cee3e8569532a3f7c",
+    "verification/pdf-page-59.png": "0e3d957d8f1a416452f897a1b858682d41668392a0593e3ff4af2d90fc4b70f5",
+    "verification/persona-audit.md": "ceb7995fa41a918c110f9653aeeab4791108e5eff0f470c938d41fb1bcdc84e3",
+    "verification/persona-audit.pdf": "700f1eb7e0c73f7ab6786e459411612f1ea88a30170d081cc61481066a597596",
+    "verification/validation.json": "30ce50a4f2727e12c9026a8097ca5ef6b0a18c589c791f28ec43945bd6e0c54e"
+  }
+}

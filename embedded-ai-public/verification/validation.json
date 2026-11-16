@@ -1,0 +1,255 @@
+{
+  "executed_utc": "2026-11-16T11:45:05.271509+00:00",
+  "checks": [
+    {
+      "name": "55 original lessons loaded",
+      "passed": true
+    },
+    {
+      "name": "one initial lesson visible",
+      "passed": true
+    },
+    {
+      "name": "previous button disabled initially",
+      "passed": true
+    },
+    {
+      "name": "keyboard navigation advances one step",
+      "passed": true
+    },
+    {
+      "name": "direct navigation selects the requested lesson",
+      "passed": true
+    },
+    {
+      "name": "reading mode reveals all lessons",
+      "passed": true
+    },
+    {
+      "name": "paper neuron initial score is -0.3",
+      "passed": true
+    },
+    {
+      "name": "neuron output reacts to actual changed input",
+      "passed": true
+    },
+    {
+      "name": "gradient update computes w=.28,b=.08,loss=.2048",
+      "passed": true
+    },
+    {
+      "name": "repeated real gradient updates reduce loss",
+      "passed": true
+    },
+    {
+      "name": "gradient reset returns original numeric state",
+      "passed": true
+    },
+    {
+      "name": "moving filter computes second local dot product",
+      "passed": true
+    },
+    {
+      "name": "token input is rendered as safe literal text",
+      "passed": true
+    },
+    {
+      "name": "same character keeps the same fixed vocabulary ID",
+      "passed": true
+    },
+    {
+      "name": "space is an explicit character token",
+      "passed": true
+    },
+    {
+      "name": "memory calculator computes 835 one-byte values",
+      "passed": true
+    },
+    {
+      "name": "subbyte ideal storage rounds up",
+      "passed": true
+    },
+    {
+      "name": "invalid parameter count is rejected",
+      "passed": true
+    },
+    {
+      "name": "2-bit symmetric example uses Q=1",
+      "passed": true
+    },
+    {
+      "name": "2-bit simulated rounding error matches arithmetic",
+      "passed": true
+    },
+    {
+      "name": "tradeoff example rejects infeasible choices",
+      "passed": true
+    },
+    {
+      "name": "quiz 1 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 1 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 2 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 2 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 3 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 3 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 4 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 4 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 5 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 5 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 6 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 6 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 7 explains incorrect choice",
+      "passed": true
+    },
+    {
+      "name": "quiz 7 explains correct choice",
+      "passed": true
+    },
+    {
+      "name": "all diagrams have textual accessible titles",
+      "passed": true
+    },
+    {
+      "name": "no outside scripts or fonts needed",
+      "passed": true
+    },
+    {
+      "name": "no page-wide horizontal overflow at 390px",
+      "passed": true
+    },
+    {
+      "name": "no page-wide horizontal overflow at 768px",
+      "passed": true
+    },
+    {
+      "name": "no page-wide horizontal overflow at 1440px",
+      "passed": true
+    },
+    {
+      "name": "no runtime JavaScript errors",
+      "passed": true
+    },
+    {
+      "name": "PDF contains author, sources and glossary",
+      "passed": true
+    },
+    {
+      "name": "every lesson title present in PDF",
+      "passed": true
+    },
+    {
+      "name": "no blank or footer-only PDF pages",
+      "passed": true
+    },
+    {
+      "name": "no text outside PDF pages",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Vérification par logiciel et personas simulés, sans essai auprès d’enfants réels.",
+    "Aucune performance matérielle IA n’est mesurée dans ce cours."
+  ],
+  "browser": "157.0.8103.39",
+  "pdf_pages": 59,
+  "pdf_page_text_lengths": [
+    1253,
+    1106,
+    1198,
+    1286,
+    1119,
+    918,
+    1428,
+    928,
+    1078,
+    1318,
+    1375,
+    1370,
+    1535,
+    1302,
+    1324,
+    1093,
+    1188,
+    1849,
+    1100,
+    1293,
+    1364,
+    1360,
+    1045,
+    1891,
+    1519,
+    1290,
+    1334,
+    942,
+    1246,
+    1168,
+    1226,
+    1408,
+    1201,
+    1293,
+    961,
+    1159,
+    959,
+    1824,
+    1696,
+    1140,
+    1349,
+    1453,
+    1167,
+    1205,
+    1405,
+    1317,
+    1094,
+    1070,
+    1522,
+    1245,
+    1313,
+    1542,
+    1208,
+    1108,
+    1298,
+    1494,
+    1228,
+    1819,
+    1531
+  ],
+  "pdf_short_pages": [],
+  "pdf_overflow": []
+}

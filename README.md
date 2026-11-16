@@ -21,3 +21,7 @@ GitHub Pages publie la racine de `main`. Voir `embedded-ai/README.md` pour les c
 ## Interactive neural laboratory
 
 [Open the 3D lab](https://rolln7drktayau.github.io/courses/neural-lab/) — train tiny character models, inspect scalar calculations and compare simulated weight quantization. [Method and validation](neural-lab/README.md).
+
+## Cours grand public
+
+[L’IA dans les objets](https://rolln7drktayau.github.io/courses/embedded-ai-public/) : 55 étapes illustrées, sept manipulations interactives, du besoin humain à la mesure et à la recherche. [PDF](embedded-ai-public/cours-ia-embarquee.pdf), [sources et méthode](embedded-ai-public/README.md), [persona de vérification](embedded-ai-public/persona-verification.pdf).
